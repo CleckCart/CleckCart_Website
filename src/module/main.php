@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+
     <?php
         echo('testing our project');
         for($i = 0; $i < 10; $i++){
