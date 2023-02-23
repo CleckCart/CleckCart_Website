@@ -1,5 +1,5 @@
 # CleckCart_Website
-Team Project module's project
+Module : Team Project
 Project: CleckCart
 ==================================
 
