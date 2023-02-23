@@ -12,7 +12,7 @@
         for($i = 0; $i < 10; $i++){
             echo($i);
         }
-        echo('not ez');
+        echo('It Works');
     ?>
 </body>
 </html>
