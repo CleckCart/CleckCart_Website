@@ -9,6 +9,9 @@
 <body>
     <?php
         echo('testing our project');
+        for($i = 0; $i < 10; $i++){
+            echo($i);
+        }
     ?>
 </body>
 </html>
