@@ -6,7 +6,7 @@ Project : CleckCart
 Introduction
 ------------
 
-This is a e-commerce website that where trader can apply to sell their goods where each trader must be unique to each other and customer can shop from range of items.
+This is a e-commerce website where traders can apply to sell their goods and each trader must be unique to other. Customers can shop from range of items.
 
 
 Getting Started
