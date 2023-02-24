@@ -16,7 +16,7 @@ Note: This project is accessible to developers only
 1. Clone the starter code
 2. Make changes according to the criteria in project board
 3. Send pull request
-4. Send request to anyone of the developer to review your code
+4. Send request to anyone of the developers to review your code
 5. Your commit will be merged
 
 Tips
