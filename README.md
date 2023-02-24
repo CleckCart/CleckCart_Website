@@ -16,10 +16,12 @@ Note: This project is accessible to developers only
 1. Clone the starter code
 2. Make changes according to the criteria in project board
 3. Send pull request
-4. Your code will be merged if criteria is successfully met
+4. Send request to anyone of the developer to review your code
+5. Your commit will be merged
 
 Tips
 ----
 
-- Always create a new branch while providing code
-- DO NOT ALTER THE PROVIDED TESTS
+- Always create a new branch while for a task
+- Don't resend commit to merged or closed branch
+- DO NOT ALTER THE PROVIDED CODE
