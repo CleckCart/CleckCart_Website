@@ -22,6 +22,6 @@ Note: This project is accessible to developers only
 Tips
 ----
 
-- Always create a new branch while for a task
+- Always create a new branch for a task
 - Don't resend commit to merged or closed branch
 - DO NOT ALTER THE PROVIDED CODE
