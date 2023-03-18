@@ -17,7 +17,7 @@
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
     
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 active" aria-current="page" href="#">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
     
                         <li class="nav-item dropdown me-5"><!---->
@@ -36,7 +36,7 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
@@ -51,7 +51,7 @@
                         </li>
     
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="#">CONTACT</a>
+                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
                     
@@ -126,7 +126,7 @@
                                     </div>
                                     <div class="row">
                                         <label class="form-link-label" for="exampleLink1">
-                                            <a class="fs-6 text-reset" href="#">Sign Up</a>
+                                            <a class="fs-6 text-reset" href="./Register.php">Sign Up</a>
                                         </label>
                                     </div>
                                 </div>
@@ -435,9 +435,9 @@
                                     <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
                             </div>
                             <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                                <a class="nav-link p-5" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                                <a class="nav-link p-5" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                                <a class="nav-link p-5" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
                             </div>
                         </div>
                 </div>

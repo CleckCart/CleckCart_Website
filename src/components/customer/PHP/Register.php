@@ -15,7 +15,7 @@
     <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
     
@@ -26,7 +26,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 active" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
     
                         <li class="nav-item dropdown me-5"><!---->
@@ -34,7 +34,7 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
@@ -49,7 +49,7 @@
                         </li>
     
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="#">CONTACT</a>
+                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
                     
@@ -124,7 +124,7 @@
                                     </div>
                                     <div class="row">
                                         <label class="form-link-label" for="exampleLink1">
-                                            <a class="fs-6 text-reset" href="#">Sign Up</a>
+                                            <a class="fs-6 text-reset" href="./Register.php">Sign Up</a>
                                         </label>
                                     </div>
                                 </div>
@@ -136,6 +136,7 @@
         </div>
     </div>
 
+    <!--form-->
     <div class="container-fluid">
         <div class = "mx-5 ">
             <div class="row">
@@ -146,7 +147,7 @@
                             <img src="./../../../dist/public/logo.png" alt="logo" style = "width:450px; height:450px;">
                             <div class = "row mt-5">
                                 <div class = "col text-center">
-                                    <h1 class = "fs-6">Returning Customer? <a class="text-reset text-decoration-none" href="#">Log In</a></h1>
+                                    <h1 class = "fs-6">Returning Customer? <a class="text-reset text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In</a></h1>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +199,7 @@
                             </div>
                             <div class="mb-3 form-check">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                             </div>
                             <button type="submit" class="btn btn-primary w-100 ">Sign In</button>
                         </div>
@@ -209,6 +210,56 @@
     </div>
 
 
+    <!--footer-->
+    <footer>
+    <div class = "container-fluid bg-secondary">
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                    <h3 class = "mt-5">Cleck Cart</h3>
+                                    <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                            </div>
+                        </div>
+                </div>
+                <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                    <h3 class = "mt-5">Join Us</h3>
+                                    <h5 class = "mt-5">Sell on CleckCart</h5>
+                            </div>
+                        </div>
+                </div>
+                <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                    <h3 class = "mt-5">Help</h3>
+                                    <h5 class = "mt-5">Pick Up Information</h5>
+                                    <h5 class = "mt-2">Lorem ipsum</h5>
+                                    <h5 class = "mt-2">Lorem ipsum</h5>
+                            </div>
+                        </div>
+                </div>
+                <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                    <h3 class = "mt-5">Send Us a message</h3>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+    </div>
 
+    </footer>
 </body>
 </html>
