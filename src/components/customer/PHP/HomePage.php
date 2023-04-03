@@ -236,7 +236,7 @@
         <h1 >OUR PRODUCTS</h1>
     </div>
     <div class = "container-fluid p-5">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <div class="col p-5">
                 <div class="card">
                     <img src="..." class="card-img-top" alt="...">
@@ -352,7 +352,7 @@
     </div>
     <div class = "custom-margin"></div>
     <div class = "container-fluid bg-info">
-            <div class="row row-cols-2 row-cols-md-6 g-4">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-4">
                 <a class="nav-link p-5" href="#">
                     <div class="col mt-5 text-center">
                         <div class= "d-flex justify-content-center">
