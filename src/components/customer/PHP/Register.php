@@ -137,74 +137,72 @@
     </div>
 
     <!--form-->
-    <div class="container-fluid">
-        <div class = "mx-5 ">
-            <div class="row">
-                <div class="col text-center m-5 p-5 ">
-                    <div class="d-flex justify-content-center">
-                        <div class="image-container">
-                            <h1>Welcome to CleckCart</h1>
-                            <img src="./../../../dist/public/logo.png" alt="logo" style = "width:450px; height:450px;">
-                            <div class = "row mt-5">
-                                <div class = "col text-center">
-                                    <h1 class = "fs-6">Returning Customer? <a class="text-reset text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In</a></h1>
-                                </div>
+    <div class="container-fluid p-5">
+        <div class = "row row-cols-1 row-cols-md-2 g-4">
+            <div class="col text-center p-5 ">
+                <div class="d-flex justify-content-center">
+                    <div class="image-container">
+                        <h1>Welcome to CleckCart</h1>
+                        <img src="./../../../dist/public/logo.png" alt="logo" style = "width:450px; height:450px;">
+                        <div class = "row mt-5">
+                            <div class = "col text-center">
+                                <h1 class = "fs-6">Returning Customer? <a class="text-reset text-decoration-none" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In</a></h1>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col m-5">
-                    <form form method = "POST" action = "#"class = "p-5">
-                        <div class="mb-3">
-                            <div class="row mb-3">
-                                <div class="col">
-                                    <label for="exampleInputText1" class="form-label">First Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
-                                </div>
-                                <div class="col">
-                                    <label for="exampleInputText1" class="form-label">Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
-                                </div>
+            </div>
+            <div class="col">
+                <form method = "POST" action = "#">
+                    <div class="mb-3">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="exampleInputText1" class="form-label">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
                             </div>
-    
-                            <div class = "mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address">
+                            <div class="col">
+                                <label for="exampleInputText1" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputText1" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputText1" class="form-label">Address</label>
-                                <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="password">
-                                    <span class = "input-group-text" id="togglePassword">
-                                        <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="password">
-                                    <span class = "input-group-text" id="togglePassword">
-                                        <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100 ">Sign In</button>
                         </div>
-                    </form>
-                </div>
+
+                        <div class = "mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Address</label>
+                            <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="password">
+                                <span class = "input-group-text" id="togglePassword">
+                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="password">
+                                <span class = "input-group-text" id="togglePassword">
+                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 ">Sign In</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
