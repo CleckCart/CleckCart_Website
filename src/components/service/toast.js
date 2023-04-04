@@ -3,6 +3,7 @@ function showToast() {
       positionClass: 'toast-bottom-right',
       closeButton: true,
       progressBar: true,
+      preventDuplicates: true,
       timeOut: '5000',
   });
 }
