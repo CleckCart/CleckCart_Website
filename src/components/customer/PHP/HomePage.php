@@ -47,7 +47,7 @@
                         </li>
     
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="#">ABOUT</a>
+                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
                         </li>
     
                         <li class="nav-item me-5">
@@ -68,6 +68,10 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In Customer</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Manage Profile</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">My Orders</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Log In Trader</a></li>
                                 <li><hr class="dropdown-divider"></li>

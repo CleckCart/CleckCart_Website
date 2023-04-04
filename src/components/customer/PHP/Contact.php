@@ -46,7 +46,7 @@
                         </li>
     
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="#">ABOUT</a>
+                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
                         </li>
     
                         <li class="nav-item me-5">
