@@ -1,11 +1,9 @@
-<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AdminApproveTrader'sItems</title>
+    <title>AdminDashboard</title>
     <!--font awesome CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!--bootstrap CSS-->
@@ -20,7 +18,6 @@
     <!--Custom-->
     <script src="../../service/sidebartoggle.js"></script>
 </head>
-
 <body>
 <!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
@@ -82,70 +79,19 @@
     </li>
   </ul>
 </div>
-        <!-- End vertical navbar -->
-        
-        
-        <!-- Page content holder -->
-        <div class="page-content p-5" id="content">
-          <!-- Toggle button -->
-          <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i></button>
-          
-          <!-- Demo content -->
-          <!--Code -->
-          
-            <div class="container-left mainContainer">
-              <div class="row bg-success headingContainer">
-                <div class="col">
-                  <h1>Approve Products</h1>
-                </div><br />
-                <div class="col mt-5 text-end">
-                </div>
-              </div>
-          
-              <table class="table table-light table-striped text-center">
-                <thead class="table-success">
-                  <tr>
-                    <th>Select</th>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Product Name</th>
-                    <th>Trader Username</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Price</th>
-                    <th>Date</th>
-                    <th colspan=2>Actions</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <?php
-                  for($i = 0; $i < 10; $i++){
-                    echo'
-                      <tr>
-                        <td>
-                          <input type = "checkbox"/>
-                        </td>
-                        <td>1</td>
-                        <td>Ipsum.jpg</td>
-                        <td>lorem</td>
-                        <td>ipsum8</td>
-                        <td>Lorem, Ipsum asd asda sda sd asdasdasdasdasd</td>
-                        <td>Lorem</td>
-                        <td>&pound;100</td>
-                        <td>2023/04/04</td>
-                        <td><a href="#"><i class="fa-sharp fa-solid fa-circle-check" style="color:green;"></i></i></a></td>
-                        <td><a href="#"><i class="fa-solid fa-circle-xmark" style="color:red;"></i></a></td>
-                        <td></td>
-                      </tr>
-                    ';
-                  }
-                ?>
-              </table>
-            </div>
-  
+<!-- End vertical navbar -->
+
+
+<!-- Page content holder -->
+<div class="page-content p-5" id="content">
+  <!-- Toggle button -->
+  <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i></button>
+
+  <!-- Demo content -->
+  <!--Code -->
+
 
 </div>
 <!-- End demo content -->
 </body>
-
 </html>
