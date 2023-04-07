@@ -96,10 +96,10 @@
   <!--Code -->
   <div class="container-left mainContainer">
     <div class="row bg-success headingContainer">
-      <div class="col">
+      <div class="col-6">
         <h1>Manage Traders</h1>
       </div><br />
-      <div class="col mt-5 text-end">
+      <div class="col-6 mt-5 text-end">
         <form method="POST" action="">
           <input type="text" name="searchTrader" placeholder="Search a trader" class="border border-dark" value="<?php
           if (isset($_POST['searchTrader'])) {
