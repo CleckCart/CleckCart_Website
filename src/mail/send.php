@@ -24,12 +24,12 @@
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'promrizal@gmail.com'; //sender's email address
-            $mail->Password = 'jhiqxmqcxhxmghky'; //app password
+            $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+            $mail->Password = 'jqmuadhegtgyetci'; //app password
             $mail->SMTPSecure = 'ssl';
             $mail->Port = '465';
     
-            $mail->setFrom('promrizal@gmal.com'); //sender's email address
+            $mail->setFrom('cleckcart@gmail.com'); //sender's email address
             $mail->addAddress($_POST['recieverEmail']);
             $mail->isHTML(true);
             $mail->Subject = $_POST['senderSubject'];
