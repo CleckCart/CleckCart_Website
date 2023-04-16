@@ -152,24 +152,24 @@
         </div>
         <div class="carousel-inner h-75" >
             <div class="carousel-item active">
-            <img src="./../../../dist/public/1.jpg" class="d-block w-100" alt="...">
+            <img src="./../../../dist/public/vegetable3.jpg" class="d-block w-100 h-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>First slide label</h5>
-                <p>Some representative placeholder content for the first slide.</p>
+                <!-- <h5>First slide label</h5> -->
+                <!-- <p>Some representative placeholder content for the first slide.</p> -->
             </div>
             </div>
             <div class="carousel-item">
-            <img src="./../../../dist/public/2.jpg" class="d-block w-100" alt="...">
+            <img src="./../../../dist/public/vegetable2.jpg" class="d-block w-100 h-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Second slide label</h5>
-                <p>Some representative placeholder content for the second slide.</p>
+                <!-- <h5>Second slide label</h5> -->
+                <!-- <p>Some representative placeholder content for the second slide.</p> -->
             </div>
             </div>
             <div class="carousel-item">
-            <img src="./../../../dist/public/3.jpg" class="d-block w-100" alt="...">
+            <img src="./../../../dist/public/vegetable.jpg" class="d-block w-100 h-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
-                <h5>Third slide label</h5>
-                <p>Some representative placeholder content for the third slide.</p>
+                <!-- <h5>Third slide label</h5> -->
+                <!-- <p>Some representative placeholder content for the third slide.</p> -->
             </div>
             </div>
         </div>
@@ -186,7 +186,7 @@
 
     <!--Images-->
     <div class = "container-fluid">
-            <div class="row row-cols-2 row-cols-md-4 g-4">
+            <div class="row row-cols-2 row-cols-md-4 g-4 pt-5">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
@@ -243,7 +243,7 @@
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -256,7 +256,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -269,7 +269,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -282,7 +282,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -295,7 +295,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -308,7 +308,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -321,7 +321,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -334,7 +334,7 @@
             </div>
             <div class="col p-5">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Card title</h5>
                         <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
