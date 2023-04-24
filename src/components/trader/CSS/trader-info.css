@@ -1,0 +1,448 @@
+.trader-info {
+  max-width: 100vw;
+  min-height: 100vh;
+  position: relative;
+}
+
+.trader-info-cnt {
+  width: 1000px;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+}
+
+.trader-image-cnt {
+  width: 12rem;
+  height: 12rem;
+  background-color: red;
+  border-radius: 50%;
+}
+
+.trader-info-left {
+  background-color: blue;
+  width: 25%;
+  padding: 2rem;
+  align-self: stretch;
+}
+
+.trader-info-right {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-direction: column;
+  align-items: center;
+  background-color: #54b175;
+  width: 75%;
+}
+
+.trader-info-right h2 {
+  align-self: flex-start;
+  font-size: 2rem;
+  padding-left: 2rem;
+}
+
+.trader-info-right-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.trader-info-right-form label {
+  font-size: 1.4rem;
+  color: #22292e;
+}
+
+.trader-info-right-form input {
+  border-radius: 5px;
+  padding: 5px;
+  border: none;
+  align-self: flex-start;
+  width: 35%;
+  height: 1.8rem;
+}
+
+.input-container {
+  margin: 2rem;
+}
+
+#gender {
+  width: 35%;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  outline: none;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #444;
+}
+
+#gender option {
+  font-size: 16px;
+  background-color: #fff;
+  color: #444;
+}
+
+.trader-info-right-form input:focus {
+  outline: none;
+}
+
+.trader-info-right-form label {
+  margin-bottom: 0.3rem;
+}
+
+.trader-info-right-form input:not(:last-child) {
+  margin-bottom: 1.3rem;
+}
+
+.trader-info-right-btns {
+  margin-left: 2rem;
+}
+
+.btn-trader {
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  margin-top: -2rem;
+  background-color: #fe6e4c;
+  color: #22292e;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.btn-trader:hover {
+  cursor: pointer;
+  background-color: #ffece8;
+}
+
+.btn-trader-edit {
+  margin-right: 0.5rem;
+}
+
+.btn-trader-pw {
+}
+
+.modal {
+  display: none; /* Hidden by default */
+
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Black background with opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%; /* Could be more or less, depending on screen size */
+  animation-name: modalopen;
+  animation-duration: 0.5s;
+}
+
+.modal-title {
+  text-align: center;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  width: calc(50% - 1rem);
+}
+
+.input-group label {
+  margin-bottom: 0.5rem;
+}
+
+.input-group input,
+.input-group select {
+  padding: 0.5rem;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.input-group input[type="file"] {
+  /* Hide the default file input button */
+  display: none;
+}
+
+.custom-file-upload {
+  /* Style the custom file upload button */
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #fff;
+  color: #444;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* Style the file name display */
+.file-name {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.update-btn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.update-btn:hover {
+  background-color: #3e8e41;
+}
+
+.trader-menu {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.hamburger-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6rem;
+  height: 100vh;
+  background-color: #333;
+  z-index: 9999;
+}
+
+.hamburger-menu-icon {
+  display: block;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.hamburger-menu-icon span {
+  display: block;
+  height: 2px;
+  width: 2rem;
+  background-color: #fff;
+  margin-bottom: 5px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger-menu-icon span:last-of-type {
+  margin-bottom: 0;
+}
+
+.menu {
+  position: absolute;
+  top: 0;
+  left: -20rem;
+  width: 20rem;
+  height: 100%;
+  padding: 1rem;
+  background-color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 4rem 0 0 0;
+}
+
+.menu li {
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.menu li:hover {
+  background-color: rgb(155, 153, 153);
+}
+
+.menu li:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+
+.menu a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.active {
+  background-color: rgb(155, 153, 153);
+}
+
+.close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.hamburger-menu.open .hamburger-menu-icon span:nth-of-type(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger-menu.open .hamburger-menu-icon span:nth-of-type(2) {
+  opacity: 0;
+}
+
+.hamburger-menu.open .hamburger-menu-icon span:nth-of-type(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hamburger-menu.open .menu {
+  left: 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .trader-info-cnt {
+    flex-direction: column;
+    width: 850px;
+  }
+
+  .trader-info-left {
+    background-color: blue;
+    width: 75%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+  }
+
+  .trader-info-right {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .trader-info {
+    padding: 2rem;
+  }
+
+  .trader-info-cnt {
+    top: 72%;
+    left: 60%;
+    width: 100%;
+    height: auto;
+  }
+
+  .trader-info-left {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .trader-info-right {
+    width: 100%;
+    align-self: stretch;
+  }
+
+  .trader-info-right h2 {
+    margin-left: 4rem;
+  }
+
+  .input-group input {
+    width: 15rem;
+  }
+
+  .btn-trader {
+    margin-bottom: 1rem;
+  }
+
+  .btn-trader {
+    margin-left: 4rem;
+  }
+
+  .btn-trader-edit {
+    margin-top: -2rem;
+  }
+
+  .btn-trader-pw {
+    margin-top: -0.1rem;
+  }
+
+  .trader-info-right h2 {
+    margin-bottom: -1rem;
+  }
+
+  .input-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #profilePicture {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .modal {
+    left: 10%;
+  }
+
+  .modal-input input {
+    width: 13rem;
+  }
+
+  .custom-file-upload {
+    width: 70px !important;
+    padding: 10px 10rem 10px 10px !important;
+    white-space: nowrap;
+  }
+
+  #gender {
+    width: 7rem !important;
+  }
+}
