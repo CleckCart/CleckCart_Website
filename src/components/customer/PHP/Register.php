@@ -153,39 +153,63 @@
                 </div>
             </div>
             <div class="col">
-                <form method = "POST" action = "#">
+                <form method = "POST" action = "RegisterSubmit.php">
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">User Name</label>
-                                <input type="text" class="form-control" placeholder="Enter User Name" aria-label="User name">
+                                <input type="text" class="form-control" placeholder="Enter User Name" aria-label="User name" name="customerUsername" value="<?php
+                                if (isset($_POST['customerUsername'])) {
+                                    echo (trim($_POST['customerUsername']));
+                                 }
+                                ?>">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
+                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="customerFirstname" value="<?php
+                                if (isset($_POST['customerFirstname'])) {
+                                    echo (trim($_POST['customerFirstname']));
+                                 }
+                                ?>">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="customerLastname" value="<?php
+                                if (isset($_POST['customerLastname'])) {
+                                    echo (trim($_POST['customerLastname']));
+                                 }
+                                ?>">
                             </div>
                         </div>
 
                         <div class = "mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="customerEmail" value="<?php
+                                if (isset($_POST['customerEmail'])) {
+                                    echo (trim($_POST['customerEmail']));
+                                 }
+                                ?>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
+                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
+                                if (isset($_POST['customerPhone'])) {
+                                    echo (trim($_POST['customerPhone']));
+                                 }
+                                ?>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Address</label>
-                            <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address">
+                            <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="customerAddress" value="<?php
+                                if (isset($_POST['customerAddress'])) {
+                                    echo (trim($_POST['customerAddress']));
+                                 }
+                                ?>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="password">
+                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="customerPassword">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
                                 </span>
@@ -194,7 +218,7 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="password">
+                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="customerConfirmPassword">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
                                 </span>
@@ -204,7 +228,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <button type="submit" class="btn btn-primary w-100 ">Sign In</button>
+                        <input type="submit" class="btn btn-primary w-100 " name="customerRegisterSubmit" value="Sign In">
                     </div>
                 </form>
             </div>
