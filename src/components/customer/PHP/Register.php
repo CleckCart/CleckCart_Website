@@ -157,6 +157,10 @@
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
+                                <label for="exampleInputText1" class="form-label">User Name</label>
+                                <input type="text" class="form-control" placeholder="Enter User Name" aria-label="User name">
+                            </div>
+                            <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
                                 <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
                             </div>
