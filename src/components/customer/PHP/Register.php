@@ -102,7 +102,7 @@
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder = "Password" id="password" name="customerLoginpassword">
+                                    <input type="password" class="form-control" placeholder = "Password" id="password" name="customerLoginPassword">
                                     <span class = "input-group-text" id="togglePassword">
                                         <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye" onclick = "toggle()"></i>
                                     </span>
