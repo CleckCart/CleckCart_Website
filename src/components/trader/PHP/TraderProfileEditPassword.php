@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!--bootstrap CSS-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../CSS/edit-password.css">
     <!--font awesome CSS-->
     <link rel="stylesheet" href="../CSS/style.css">
     <!--bootstrap JS-->
@@ -78,44 +79,22 @@
   <!--Code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src = "../../service/passwordVisibility.js"></script>
-    <div class = "container p-5">
-        <h1 class = "text-center">Change Password</h1>
-    </div>
-
-    <div class = "container p-5">
-        <div class = "row row-cols-1 row-cols-md-2">
-            <div class = "col">
-                <form method = "POST" action = "#">
-                    <div class = "mb-3">
-                    </div>
-                    <div class="mb-3 ">
-                    <label for="exampleInputPassword1" class="form-label">Enter Current Password </label>
-                        <input type="text" class="form-control" placeholder="Enter Current Password" aria-label="Password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Enter New Password</label>
-                        <input type="text" class="form-control" placeholder="Enter New Password" aria-label="Password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Re-enter Password</label>
-                        <input type="text" class="form-control" placeholder="Re-enter New Password" aria-label="Password">
-                    </div>
-                </form>
-            </div>
-            <div class = "col d-flex align-items-center">
-                <div class = "d-flex flex-column justify-content-center text-center">
-                    <div class="col text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                            <i class="fa-regular fa-user fa-2xl"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mt-4">Update Password</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <form>
+      <div class="container">
+        <h1>Change Password</h1>
+        <div class="logo"></div>
+        <label for="current-password">Current Password</label>
+        <input type="password" id="current-password" name="current-password" placeholder="Enter Current Password">
+        
+        <label for="new-password">New Password</label>
+        <input type="password" id="new-password" name="new-password" placeholder = "Enter New Password">
+        
+        <label for="confirm-new-password">Confirm New Password</label>
+        <input type="password" id="confirm-new-password" name="confirm-new-password" placeholder = "Re-Enter New Password">
+        
+        <input type="submit" value="Update Password">
+      </div>
+    </form>
 </div>
 <!-- End demo content -->
 </body>
