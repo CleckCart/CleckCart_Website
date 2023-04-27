@@ -231,7 +231,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <input type="submit" class="btn btn-primary w-100 " name="customerRegisterSubmit" value="Sign In">
+                        <input type="submit" class="btn btn-primary w-100 " name="customerRegisterSubmit" value="Register">
                     </div>
                 </form>
             </div>
