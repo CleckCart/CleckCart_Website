@@ -132,7 +132,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-100">Log In</button>
+                                <input type="submit" class="btn btn-primary w-100" value="Log In">
                                 <div class="d-flex flex-column text-center mt-5">
                                     <div class="row">
                                         <label for="exampleInputText1" class="form-label">Don't Have an Account?</label>
@@ -324,7 +324,7 @@
                                             </div>
                                             <div class="col">
                                                 <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="120" height="120">
-                                                <button type="button" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh">Update Password</button>
+                                                <input type="submit" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh" value="Update Password">
                                             </div>
                                         </div>
                                     </form>
