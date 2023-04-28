@@ -27,7 +27,7 @@
                                         {
                                             if(filter_input(INPUT_POST, 'customerPhone', FILTER_VALIDATE_INT) == true)
                                                 {
-
+                                                    
                                                     /*Check if password and confirm password matches*/
                                                     if(strcmp($customerPassword,$customerConfirmPassword)==0)
                                                         {
@@ -39,14 +39,13 @@
                                                                 }
                                                             else
                                                                 {
-                                                                     header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
+                                                                    header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
                                                                 }
                                                         }
                                                     else
                                                         {
                                                             header('Location:./Register.php?error=Please make sure password are matched.');;
                                                         }
-                                                }
                                                   
                                                 }
                                             else
