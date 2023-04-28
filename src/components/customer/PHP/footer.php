@@ -17,7 +17,7 @@
 
         
     <!--footer-->
-    <footer>
+    <footer class="page-footer font-small pt-5">
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-5 text-center">
