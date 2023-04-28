@@ -27,31 +27,27 @@
                                         {
                                             if(filter_input(INPUT_POST, 'customerPhone', FILTER_VALIDATE_INT) == true)
                                                 {
-                                                    if(!preg_match($alphabetPattern,$customerAddress))
+
+                                                    /*Check if password and confirm password matches*/
+                                                    if(strcmp($customerPassword,$customerConfirmPassword)==0)
                                                         {
-                                                            /*Check if password and confirm password matches*/
-                                                            if(strcmp($customerPassword,$customerConfirmPassword)==0)
+                                                            $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
+                                                            /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
+                                                            if(preg_match($passwordPattern, $customerPassword))
                                                                 {
-                                                                    $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
-                                                                    /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
-                                                                    if(preg_match($passwordPattern, $customerPassword))
-                                                                        {
-                                                                        /*For inserting into database*/
-                                                                        }
-                                                                    else
-                                                                        {
-                                                                            header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
-                                                                        }
+                                                                /*For inserting into database*/
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./Register.php?error=Please make sure password are matched.');;
+                                                                     header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
                                                                 }
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./Register.php?error=Please use alphabets only in address.');
+                                                            header('Location:./Register.php?error=Please make sure password are matched.');;
                                                         }
+                                                }
+                                                  
                                                 }
                                             else
                                                 {
