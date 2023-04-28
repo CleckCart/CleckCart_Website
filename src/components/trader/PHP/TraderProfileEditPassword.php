@@ -79,20 +79,36 @@
   <!--Code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src = "../../service/passwordVisibility.js"></script>
-    <form>
+    <form method = "POST" action = "./TraderProfileEditPasswordSubmit.php">
       <div class="container">
         <h1>Change Password</h1>
         <div class="logo"></div>
+        <?php
+            if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
         <label for="current-password">Current Password</label>
-        <input type="password" id="current-password" name="current-password" placeholder="Enter Current Password">
+        <input type="password" id="current-password" name="currentPassword" placeholder="Enter Current Password" value="<?php
+          if (isset($_POST['currentPassword'])) {
+              echo (trim($_POST['currentPassword']));
+            }
+        ?>">
         
         <label for="new-password">New Password</label>
-        <input type="password" id="new-password" name="new-password" placeholder = "Enter New Password">
+        <input type="password" id="new-password" name="newPassword" placeholder = "Enter New Password" value="<?php
+          if (isset($_POST['newPassword'])) {
+            echo (trim($_POST['newPassword']));
+          }
+          ?>">
         
         <label for="confirm-new-password">Confirm New Password</label>
-        <input type="password" id="confirm-new-password" name="confirm-new-password" placeholder = "Re-Enter New Password">
+        <input type="password" id="confirm-new-password" name="confirmnewPassword" placeholder = "Re-Enter New Password" value="<?php
+          if (isset($_POST['confirmnewPassword'])) {
+            echo (trim($_POST['confirmnewPassword']));
+          }
+          ?>">
         
-        <input type="submit" value="Update Password">
+        <input type="submit" value="Update Password" name = "TraderProfileEditPasswordSubmit">
       </div>
     </form>
 </div>
