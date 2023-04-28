@@ -80,11 +80,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
-        <?php
-            if(isset($_GET['error'])) {?>
-            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-        <?php }?>
+        </nav>      
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -160,6 +156,10 @@
             </div>
             <div class="col">
                 <form method = "POST" action = "RegisterSubmit.php">
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
