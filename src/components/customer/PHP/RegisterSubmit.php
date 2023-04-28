@@ -44,7 +44,7 @@
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./Register.php?error=Please make sure password are matched.');;
+                                                            header('Location:./Register.php?error=Please make sure password are matched.');
                                                         }
                                                   
                                                 }

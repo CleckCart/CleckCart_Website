@@ -16,10 +16,7 @@
             /*Check if all fields are filled*/ 
             if (empty($_POST['customerLoginUsername']) || empty($_POST['customerLoginPassword']))
                 {
-                    echo("<div class='alert alert-danger text-center' role='alert'>
-                   Please make sure all text fields are not empty.
-                 </div>");
-                 include('Register.php');
+                 header('Location:./Register.php?error=Please make sure all text fields are not empty.');
                 }
 
             else
@@ -36,18 +33,12 @@
                                 }
                             else
                                 {
-                                    echo("<div class='alert alert-danger text-center' role='alert'>
-                                         Please enter a valid password.
-                                         </div>");
-                                          include('Register.php');
+                                    header('Location:./Register.php?error=Please enter a valid password.');
                                 }
                         }
                     else
                         {                          
-                            echo("<div class='alert alert-danger text-center' role='alert'>
-                            Please enter a valid username.
-                          </div>");
-                          include('Register.php');
+                          header('Location:./Register.php?error=Please enter a valid username.');
                         }
                 }
         }
