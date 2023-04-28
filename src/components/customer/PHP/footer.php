@@ -16,15 +16,15 @@
     <script src="../../service/passwordVisibility.js"></script>
 
         
-        <!--footer-->
-        <footer class="page-footer font-small pt-5">
-            <div class="container-fluid bg-secondary">
-                <div class="row row-cols-2 row-cols-md-4 g-4">
-                    <div class="col mt-5 text-center border border-primary">
+    <!--footer-->
+    <footer>
+    <div class = "container-fluid bg-secondary">
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col mt-5 text-center">
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <div class="p-2 bd-highlight">
-                                <h3 class="mt-5">Cleck Cart</h3>
-                                <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
+                                    <h3 class = "mt-5">Cleck Cart</h3>
+                                    <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
                             </div>
                             <div class="d-flex flex-row flex-wrap p-2 align-self-center">
                                 <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
@@ -32,29 +32,29 @@
                                 <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col mt-5 text-center">
+                </div>
+                <div class="col mt-5 text-center">
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <div class="p-2 bd-highlight">
-                                <h3 class="mt-5">Join Us</h3>
-                                <h5 class="mt-5">Sell on CleckCart</h5>
+                                    <h3 class = "mt-5">Join Us</h3>
+                                    <h5 class = "mt-5">Sell on CleckCart</h5>
                             </div>
                         </div>
-                    </div>
-                    <div class="col mt-5 text-center">
+                </div>
+                <div class="col mt-5 text-center">
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <div class="p-2 bd-highlight">
-                                <h3 class="mt-5">Help</h3>
-                                <h5 class="mt-5">Pick Up Information</h5>
-                                <h5 class="mt-2">Lorem ipsum</h5>
-                                <h5 class="mt-2">Lorem ipsum</h5>
+                                    <h3 class = "mt-5">Help</h3>
+                                    <h5 class = "mt-5">Pick Up Information</h5>
+                                    <h5 class = "mt-2">Lorem ipsum</h5>
+                                    <h5 class = "mt-2">Lorem ipsum</h5>
                             </div>
                         </div>
-                    </div>
-                    <div class="col mt-5 text-center">
+                </div>
+                <div class="col mt-5 text-center">
                         <div class="d-flex flex-column bd-highlight mb-3">
                             <div class="p-2 bd-highlight">
-                                <h3 class="mt-5">Send Us a message</h3>
+                                    <h3 class = "mt-5">Send Us a message</h3>
                             </div>
                             <div class="p-2 bd-highlight">
                                 <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
@@ -62,10 +62,11 @@
                                 <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
-        </footer>
+    </div>
+
+    </footer>
 </body>
 
 </html>

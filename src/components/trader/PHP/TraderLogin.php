@@ -147,22 +147,35 @@
                     <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
             </div>
             <div class = "col">
-                <form method = "POST" action = "#">
+                <form method = "POST" action = "./TraderLoginSubmit.php">
                     <div class = "mb-3">
                         <h1 class = "text-center">Welcome to CleckCart</h1>
                     </div>
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
+                            
                     <div class="mb-3 ">
                         <label for="exampleInputText1" class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username">
+                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "traderUsername" value = "<?php
+                            if(isset($_POST['traderUsername'])){
+                                echo(trim($_POST['traderUsername']));
+                            }
+                        ?>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password">
+                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "traderPassword" value = "<?php
+                            if(isset($_POST['traderPassword'])){
+                                echo(trim($_POST['traderPassword']));
+                            }
+                        ?>">
                         <p class = "text-end"><a href = "#">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary w-100 ">Login</button>
+                        <button type="submit" class="btn btn-primary w-100" name = "traderLogin">Login</button>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
