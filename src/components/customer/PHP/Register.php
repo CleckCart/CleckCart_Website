@@ -81,7 +81,10 @@
                 </div>
             </div>
         </nav>
-        
+        <?php
+            if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">

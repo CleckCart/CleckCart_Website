@@ -5,10 +5,7 @@
             if (empty($_POST['customerUsername']) || empty($_POST['customerFirstname']) || empty($_POST['customerLastname']) || empty($_POST['customerEmail']) 
             || empty($_POST['customerPhone']) || empty($_POST['customerAddress']) || empty($_POST['customerPassword']) || empty($_POST['customerConfirmPassword'])) 
                 {
-                    echo("<div class='alert alert-danger text-center' role='alert'>
-                    Please make sure all text fields are not empty.
-                    </div>");
-                    include('Register.php');
+                    header('Location:./Register.php?error=Please make sure all text fields are not empty.');
                 }
             else
                 {
@@ -43,60 +40,39 @@
                                                                         }
                                                                     else
                                                                         {
-                                                                            echo("<div class='alert alert-danger text-center' role='alert'>
-                                                                            Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.
-                                                                            </div>");
-                                                                            include('Register.php');
+                                                                            header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
                                                                         }
                                                                 }
                                                             else
                                                                 {
-                                                                    echo("<div class='alert alert-danger text-center' role='alert'>
-                                                                    Please make sure password are matched.
-                                                                    </div>");
-                                                                    include('Register.php');
+                                                                    header('Location:./Register.php?error=Please make sure password are matched.');;
                                                                 }
                                                         }
                                                     else
                                                         {
-                                                            echo("<div class='alert alert-danger text-center' role='alert'>
-                                                            Please use alphabets only in address.
-                                                            </div>");
-                                                            include('Register.php');
+                                                            header('Location:./Register.php?error=Please use alphabets only in address.');
                                                         }
                                                 }
                                             else
                                                 {
-                                                    echo("<div class='alert alert-danger text-center' role='alert'>
-                                                            Please type integer numbers in phone number.
-                                                            </div>");
-                                                            include('Register.php');
+                                                    header('Location:./Register.php?error=Please type integer numbers in phone number.');
                                                 }
                                         }
                                     else
                                         {
-                                            echo("<div class='alert alert-danger text-center' role='alert'>
-                                            Please use alphabets only in lastname.
-                                            </div>");
-                                            include('Register.php');
+                                            header('Location:./Register.php?error=Please use alphabets only in lastname.');
                                         }        
                                 }   
                                 
                             else
                                 {
-                                    echo("<div class='alert alert-danger text-center' role='alert'>
-                                            Please use alphabets only in firstname.
-                                            </div>");
-                                    include('Register.php');
+                                    header('Location:./Register.php?error=Please use alphabets only in firstname.');
                                 }
                             
                         }
                     else
-                        {                          
-                            echo("<div class='alert alert-danger text-center' role='alert'>
-                            Please make sure username is 5 - 10 characters.
-                          </div>");
-                          include('Register.php');
+                        {   
+                            header('Location:./Register.php?error=Please make sure username is 5 - 10 characters.');                   
                         }
                 }
             }
