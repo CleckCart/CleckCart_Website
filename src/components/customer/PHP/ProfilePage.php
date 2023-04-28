@@ -9,6 +9,12 @@
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/contactpage.css">
+    <style>
+        .error_msg {
+            color: red;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
@@ -100,7 +106,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form method="POST" action="#">
+                        <form method="POST" action="LoginSubmit.php">
                             <div class="mb-3">
                                 <label for="exampleInputText1" class="form-label">Username</label>
                                 <input type="text" class="form-control" placeholder="Username" aria-label="Username">
@@ -187,7 +193,35 @@
             </fieldset>
         </form>
     </div>
+    <?php
+    $firstname_error = $lastname_error = $phone_error = $address_error = "";
+    // $firstname = $lastname = $email = $phone = $address = $gender = "";
 
+    if (isset($_POST['update'])) {
+        $firstname = $_POST['first_name'];
+        $lastname = $_POST['last_name'];
+        $email = $_POST['Email'];
+        $phone = $_POST['phone'];
+        $address = $_POST['Address'];
+        $gender = $_POST['gend'];
+        $photo = $_POST['photo'];
+
+        $alphabetPattern = "/[^a-zA-Z]/";
+
+        if (!preg_match($alphabetPattern, $firstname)) {
+            $firstname_error = "Please use alphabets only in First Name";
+        } if (!preg_match($alphabetPattern, $lastname)) {
+            $lastname_error = "Please use alphabets only in Last Name";
+        } if (!preg_match('/[0-9]{10}/', $phone)) {
+            $phone_error = "Enter a valid phone number";
+        } if (!preg_match('/[a-z][A-Z][A-za-z][A-za-z0-9]/', $address)) {
+            $address_error = "Enter a valid address";
+        } 
+        // else {
+        //     $sql = ""; //database update here
+        // }
+    }
+    ?>
     <div class="container" style="margin-top:3vh">
         <div class="row">
             <div class="col"></div>
@@ -201,49 +235,70 @@
                 <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
-                            <div class="modal-header text-center">
-                                <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Edit Profile</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header ">
+                                <div class="container ">
+                                    <div class="row text-center">
+                                        <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Edit Profile</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                                    </div>
+                                    <div class="row">
+                                        <span class="error_msg">
+                                            <?php
+                                                echo $firstname_error;
+                                                echo $lastname_error;
+                                                echo $phone_error;
+                                                echo $address_error;
+                                            ?>
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="modal-body">
 
                                 <div class="container">
-                                    <form>
+                                    <form method="POST">
                                         <div class="row">
                                             <div class="col">
                                                 <label for="firstname">First Name</label>
-                                                <input type="text" id="firstname" class="form-control form-control-sm" placeholder="First name">
+
+                                                <input type="text" id="firstname" class="form-control form-control-sm" name="first_name" placeholder="First name">
+
                                                 <label for="email" style="margin-top:1.5vh">Email</label>
-                                                <input type="text" id="email" class="form-control form-control-sm" placeholder="Email Address">
+                                                <input type="text" id="email" class="form-control form-control-sm" name="Email" placeholder="Email Address">
                                                 <label for="address" style="margin-top:1.5vh">Address</label>
-                                                <input type="text" id="address" class="form-control form-control-sm" placeholder="Address">
+
+                                                <input type="text" id="address" class="form-control form-control-sm" name="Address" placeholder="Address">
                                                 <label for="photo" style="margin-top:3vh">Profile Picture</label>
-                                                <input type="file" id="photo" class="form-control form-control-sm">
+                                                <input type="file" id="photo" class="form-control form-control-sm" name="photo">
                                             </div>
                                             <div class="col">
                                                 <label for="lastname">Last Name</label>
-                                                <input type="text" id="lastname" class="form-control form-control-sm" placeholder="Last name">
+
+                                                <input type="text" id="lastname" class="form-control form-control-sm" name="last_name" placeholder="Last name">
                                                 <label for="phoneno" style="margin-top:1.5vh">Phone Number</label>
-                                                <input type="text" id="phoneno" class="form-control form-control-sm" placeholder="Phone Number">
+
+                                                <input type="text" id="phoneno" class="form-control form-control-sm" name="phone" placeholder="Phone Number">
                                                 <label for="gender" style="margin-top:1.5vh">Gender</label>
-                                                <input type="text" id="gender" class="form-control form-control-sm" placeholder="Gender">
+                                                <input type="text" id="gender" class="form-control form-control-sm" name="gend" placeholder="Gender">
                                             </div>
                                         </div>
-                                    </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
 
-                                <button type="button" class="w-100 btn btn-primary">Update</button>
+                                <input type="submit" class="w-100 btn btn-primary" name="update" value="Update">
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
 
                 <!-- Button trigger modal to change password-->
+                <input type="submit" class="btn btn-primary" name="password" data-bs-toggle="modal" data-bs-target="#staticBackdrop" value="Change Password">
 
-                <button type="button" class="btn btn-primary " data-bs-toggle="modal" data-bs-target="#staticBackdrop">Change Password</button>
 
                 <!-- Modal for editing password -->
 
@@ -265,18 +320,18 @@
                                                 <input type="password" id="new-password" class="form-control form-control-sm" placeholder="New Password">
                                                 <label for="re-enter-new-password" style="margin-top:3vh">Re-Enter New Password</label>
                                                 <input type="text" id="re-enter-new-password" class="form-control form-control-sm" placeholder="New Password" style="margin-bottom:3vh">
-                                                
+
                                             </div>
                                             <div class="col">
-                                            <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="120" height="120">
-                                            <button type="button" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh">Update Password</button>
+                                                <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="120" height="120">
+                                                <button type="button" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh">Update Password</button>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <!-- <div class="modal-footer"> -->
-                                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                            <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                             <!-- </div> -->
                         </div>
                     </div>
@@ -291,7 +346,7 @@
 
 
 
-<!-- <footer> -->
+    <!-- <footer> -->
     <footer class="page-footer font-small pt-5">
 
         <div class="container-fluid bg-secondary">
