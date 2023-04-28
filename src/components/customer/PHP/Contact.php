@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-100">Log In</button>
+                                <input type="submit" class="btn btn-primary w-100" value="Log In">
                                 <div class="d-flex flex-column text-center mt-5">
                                     <div class="row">
                                         <label for="exampleInputText1" class="form-label">Don't Have an Account?</label>
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                     <div class = "custom-margin"></div>
-                    <button type="submit" class="btn btn-primary w-25 ">Send Message</button>
+                    <input type="submit" class="btn btn-primary w-25 " value="Send Message">
                 </div>
             </form>
             </div>
