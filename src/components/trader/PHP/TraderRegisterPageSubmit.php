@@ -23,7 +23,7 @@
                     /*Check if username is of 5-10 characters*/
                     if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 10)
                         {      
-                            $alphabetPattern = "/[^a-zA-Z]/";
+                            $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$TraderFirstName))
                                 {
                                     if(!preg_match($alphabetPattern,$TraderLastName))
