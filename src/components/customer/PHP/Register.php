@@ -90,6 +90,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div id="message" class="alert alert-danger text-center"></div>
                         <form method = "POST" action = "LoginSubmit.php">
                             <div class="mb-3">
                                 <label for="exampleInputText1" class="form-label">Username</label>
@@ -291,6 +292,10 @@
                 </div>
             </div>
     </div>
+    <script>
+        var message = document.getElementById("message");
+        message.innerHTML = "Invalid username or password. Please try again.";
+    </script>
 
     </footer>
 </body>
