@@ -67,15 +67,15 @@
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In Customer</a></li>
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Manage Profile</a></li>
+                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">My Orders</a></li>
+                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Log In Trader</a></li>
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Trader</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./Register.php">Sign In</a></li>
+                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
@@ -387,9 +387,9 @@
                                     <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
                             </div>
                             <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                                <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
+                                <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
+                                <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
                             </div>
                         </div>
                 </div>
