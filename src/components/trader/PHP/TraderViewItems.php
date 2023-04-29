@@ -146,73 +146,7 @@
         </table>
       </div>
     </div>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Products</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="#">
-              <div class="mb-3">
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name">
-                  </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" rows="5"></textarea>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="Address">
-                  </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
-                  </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
-                  </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File">
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <input type="submit" class="form-control btn btn-primary w-100" value="Update"></button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-
+    
     <!-- Delete Modal -->
     <div class="modal fade" id="exampleModalDelete" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered">
