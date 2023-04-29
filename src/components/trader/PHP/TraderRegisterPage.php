@@ -153,34 +153,42 @@
                 </div>
             </div>
             <div class = "col bg-success p-5">
-            <form method = "POST" action = "#">
+            <form method = "POST" action = "./TraderRegisterPageSubmit.php">
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
+                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="FirstName" >
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="LastName" >
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Username</label>
-                            <input type="text" class="form-control" placeholder="Enter Username" aria-label="Last name">
+                            <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="UserName">
                         </div>
 
                         <div class = "mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address">
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="Email" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
+                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="PhoneNumber" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Enter Address" aria-label="Shop Name" name="Address">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="Gender" >
                                 <option value="1" selected>Male</option>
                                 <option value="2">Female</option>
                                 <option value="3">Custom</option>
@@ -188,16 +196,13 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Shop Category</label>
-                            <select class="form-select" aria-label="Default select example">
-                                <option value="1" selected>1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
+                            <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="ShopCategory">
+
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="password">
+                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="Password">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
                                 </span>
@@ -206,7 +211,7 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="password">
+                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="ConfirmPassword">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
                                 </span>
@@ -216,7 +221,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <input type="submit" class="btn btn-primary w-100 " value="Register">
+                        <input type="submit" class="btn btn-primary w-100 " value = "Register" name = "traderRegisterSubmit" >
                     </div>
                 </form>
             </div>
