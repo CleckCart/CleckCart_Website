@@ -176,8 +176,7 @@
                             <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number">
                             <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
                             <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address">
-                            <label for="disabledTextInput-bd" class="form-label" style="margin-top:1.5vh">Birthday</label>
-                            <input type="text" id="disabledTextInput-bd" class="form-control" placeholder="Birthday">
+
                         </div>
                     </div>
                     <div class="col">
@@ -195,7 +194,7 @@
     </div>
     <?php
     $firstname_error = $lastname_error = $phone_error = $address_error = "";
-    // $firstname = $lastname = $email = $phone = $address = $gender = "";
+
 
     if (isset($_POST['update'])) {
         $firstname = $_POST['first_name'];
@@ -207,16 +206,21 @@
         $photo = $_POST['photo'];
 
         $alphabetPattern = "/[^a-zA-Z]/";
+        // $pass="/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w\d\s:])([^\s]){8,}$/";
+        if (preg_match($alphabetPattern, $firstname)) {
+            $firstname_error = "**Please use alphabets only in First Name";
+        }
+        if (preg_match($alphabetPattern, $lastname)) {
+            $lastname_error = "**Please use alphabets only in Last Name";
+        }
+        if (!preg_match('/^[0-9]{10}$/', $phone)) {
+            $phone_error = "**Enter a valid phone number";
+        }
 
-        if (!preg_match($alphabetPattern, $firstname)) {
-            $firstname_error = "Please use alphabets only in First Name";
-        } if (!preg_match($alphabetPattern, $lastname)) {
-            $lastname_error = "Please use alphabets only in Last Name";
-        } if (!preg_match('/[0-9]{10}/', $phone)) {
-            $phone_error = "Enter a valid phone number";
-        } if (!preg_match('/[a-z][A-Z][A-za-z][A-za-z0-9]/', $address)) {
-            $address_error = "Enter a valid address";
-        } 
+
+        // if (!preg_match('/[a-z][A-Z][A-za-z][A-za-z0-9]/', $address)) {
+        //     $address_error = "Enter a valid address";
+        // } 
         // else {
         //     $sql = ""; //database update here
         // }
@@ -233,26 +237,13 @@
 
                 <!-- Modal for Edit Profile-->
                 <div class="modal fade" id="editProfile" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header ">
-                                <div class="container ">
-                                    <div class="row text-center">
-                                        <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Edit Profile</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content ">
+                            <div class="modal-header text-center">
 
-                                    </div>
-                                    <div class="row">
-                                        <span class="error_msg">
-                                            <?php
-                                                echo $firstname_error;
-                                                echo $lastname_error;
-                                                echo $phone_error;
-                                                echo $address_error;
-                                            ?>
-                                        </span>
-                                    </div>
-                                </div>
+                                <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Edit Profile</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
 
                             </div>
                             <div class="modal-body">
@@ -262,7 +253,7 @@
                                         <div class="row">
                                             <div class="col">
                                                 <label for="firstname">First Name</label>
-
+                                                <span class="error_msg"><?php echo $firstname_error; ?></span>
                                                 <input type="text" id="firstname" class="form-control form-control-sm" name="first_name" placeholder="First name">
 
                                                 <label for="email" style="margin-top:1.5vh">Email</label>
@@ -275,9 +266,11 @@
                                             </div>
                                             <div class="col">
                                                 <label for="lastname">Last Name</label>
+                                                <span class="error_msg"><?php echo $lastname_error; ?></span>
 
                                                 <input type="text" id="lastname" class="form-control form-control-sm" name="last_name" placeholder="Last name">
                                                 <label for="phoneno" style="margin-top:1.5vh">Phone Number</label>
+                                                <span class="error_msg"><?php echo $phone_error;?></span>
 
                                                 <input type="text" id="phoneno" class="form-control form-control-sm" name="phone" placeholder="Phone Number">
                                                 <label for="gender" style="margin-top:1.5vh">Gender</label>
@@ -346,58 +339,58 @@
 
 
 
-    <!-- <footer> -->
-    <footer class="page-footer font-small pt-5">
+    <footer>
+        <footer class="page-footer font-small pt-5">
 
-        <div class="container-fluid bg-secondary">
-            <div class="row row-cols-2 row-cols-md-4 g-4">
-                <div class="col mt-5 text-center">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <h3 class="mt-5">Cleck Cart</h3>
-                            <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
-                        </div>
-                        <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                            <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                            <a class="nav-link p-3" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                            <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col mt-5 text-center">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <h3 class="mt-5">Join Us</h3>
-                            <h5 class="mt-5">Sell on CleckCart</h5>
+            <div class="container-fluid bg-secondary">
+                <div class="row row-cols-2 row-cols-md-4 g-4">
+                    <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <h3 class="mt-5">Cleck Cart</h3>
+                                <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
+                            </div>
+                            <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
+                                <a class="nav-link p-3" href="#"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col mt-5 text-center">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <h3 class="mt-5">Help</h3>
-                            <h5 class="mt-5">Pick Up Information</h5>
-                            <h5 class="mt-2">Lorem ipsum</h5>
-                            <h5 class="mt-2">Lorem ipsum</h5>
+                    <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <h3 class="mt-5">Join Us</h3>
+                                <h5 class="mt-5">Sell on CleckCart</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col mt-5 text-center">
-                    <div class="d-flex flex-column bd-highlight mb-3">
-                        <div class="p-2 bd-highlight">
-                            <h3 class="mt-5">Send Us a message</h3>
+                    <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <h3 class="mt-5">Help</h3>
+                                <h5 class="mt-5">Pick Up Information</h5>
+                                <h5 class="mt-2">Lorem ipsum</h5>
+                                <h5 class="mt-2">Lorem ipsum</h5>
+                            </div>
                         </div>
-                        <div class="p-2 bd-highlight">
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                    </div>
+                    <div class="col mt-5 text-center">
+                        <div class="d-flex flex-column bd-highlight mb-3">
+                            <div class="p-2 bd-highlight">
+                                <h3 class="mt-5">Send Us a message</h3>
+                            </div>
+                            <div class="p-2 bd-highlight">
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
+                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </footer>
+        </footer>
 
 </body>
 
