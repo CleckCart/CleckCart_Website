@@ -137,9 +137,9 @@
               <td>2023/04/04</td>
               <td>
               <!-- Edit Button trigger modal -->
-              <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
+              <a href = "./AdminViewTrader\'sShopEdit.php" class="btn">
                 <img src="./../../../dist/public/edit.svg" alt="person">
-              </button>
+              </a>
               </td>
               <td>
               <!-- Delete Button trigger modal -->
