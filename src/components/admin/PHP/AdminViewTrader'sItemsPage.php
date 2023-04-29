@@ -102,10 +102,10 @@
           <div class="mt-2">
             <form class="d-flex" role="search" method="POST" action="">
               <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
-                                                                                                                                    if (isset($_POST['searchProduct'])) {
-                                                                                                                                      echo (trim($_POST['searchProduct']));
-                                                                                                                                    }
-                                                                                                                                    ?>">
+                if (isset($_POST['searchProduct'])) {
+                  echo (trim($_POST['searchProduct']));
+                }
+                ?>">
               <input type="submit" name="searchProductSubmit" value="Search" class="btn btn-light">
             </form>
           </div>
@@ -145,9 +145,9 @@
               <td>200</td>
               <td>
                 <!-- Edit Button trigger modal -->
-                <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalEdit">
+                <a href = "./AdminViewTrader\'sItemsPageEdit.php" class="btn">
                   <img src="./../../../dist/public/edit.svg" alt="person">
-                </button>
+                </a>
               </td>
               <td>
                 <!-- Delete Button trigger modal -->

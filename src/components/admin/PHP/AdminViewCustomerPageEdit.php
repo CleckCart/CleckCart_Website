@@ -93,73 +93,57 @@
 
     <!-- Demo content -->
     <!--Code -->
-    <div class="container-fluid">
-      <div class="row row-cols-1 row-cols-md-2 bg-success">
-        <div class="col p-5">
-          <h1>Manage Customers</h1>
+        <div class="container bg-light">
+        <div class="modal-header text-center">
+            <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Customer</h5>
         </div>
-        <div class="col p-5 text-end">
-          <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchCustomer" placeholder="Search a customer" class="form-control border border-dark" value="<?php
-                                                                                                                                      if (isset($_POST['searchCustomer'])) {
-                                                                                                                                        echo (trim($_POST['searchCustomer']));
-                                                                                                                                      }
-                                                                                                                                      ?>">
-              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-            </form>
-          </div>
+        <div class="modal-body">
+            <form method="POST" action="#">
+            <div class="mb-3">
+                <div class="row mb-3">
+                <div class="col">
+                    <label for="exampleInputText1" class="form-label">First Name</label>
+                    <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
+                </div>
+                <div class="col">
+                    <label for="exampleInputText1" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
+                </div>
+                </div>
+                <div class="row mb-3">
+                <div class="col">
+                    <label for="exampleInputText1" class="form-label">Username</label>
+                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username">
+                </div>
+                <div class="col">
+                    <label for="exampleInputEmail1" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                </div>
+                </div>
+
+                <div class="row mb-3">
+                <div class="col">
+                    <label for="exampleInputText1" class="form-label">Address</label>
+                    <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address">
+                </div>
+                <div class="col">
+                    <label for="exampleInputText1" class="form-label">Phone</label>
+                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
+                </div>
+                </div>
+                <div class="row mb-3">
+                <div class="col">
+                    <label for="file" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="file" aria-label="File">
+                </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="row table-responsive">
-        <table class="table table-light table-striped text-center">
-          <thead class="table-success">
-            <tr>
-              <th>ID</th>
-              <th>Image</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Username</th>
-              <th>Address</th>
-              <th>Phone</th>
-              <th>Date</th>
-              <th colspan=2>Actions</th>
-              <th></th>
-            </tr>
-          </thead>
-          <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-              <tr>
-                <td>1</td>
-                <td>lorem.jpg</td>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>lorem@ipsum.com</td>
-                <td>ipsum8</td>
-                <td>Lorem, Ipsum</td>
-                <td>123456789</td>
-                <td>2023/04/04</td>
-                <td>
-                  <!-- Edit Button trigger modal -->
-                  <a href = "./AdminViewCustomerPageEdit.php" class="btn">
-                    <img src="./../../../dist/public/edit.svg" alt="person">
-                  </>
-                </td>
-                <td>
-                  <!-- Delete Button trigger modal -->
-                  <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                    <img src="./../../../dist/public/delete.svg" alt="person">
-                  </button>
-                </td>
-                <td></td>
-                </tr>
-                ';
-          }
-          ?>
-        </table>
-      </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary w-100 " value="Update">
+        </div>
+        </form>
+        </div>
     </div>
 
     <!-- Delete Modal -->
