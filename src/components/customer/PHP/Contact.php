@@ -68,9 +68,9 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#myModal">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Log In Trader</a></li>
+                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./Register.php">Sign In</a></li>
+                                <li><a class="dropdown-item" href="./Register.php">Sign Up</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
@@ -95,7 +95,7 @@
                         <form method = "POST" action = "#">
                             <div class="mb-3">
                                 <label for="exampleInputText1" class="form-label">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username">
+                                <input type="text" class="form-control" placeholder="Username" aria-label="Username" name="ContactUsername>
                             </div>
                             <div class="mb-3">
                                 <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -200,35 +200,39 @@
             <div class="col-md-7 rounded bg-secondary p-5">
             <form method = "POST" action = "ContactSubmit.php" class = "p-5">
                 <h1>Send Message</h1>
+                <?php
+                if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                <?php }?>
                 <div class="mb-3">
                     <div class="row mb-3">
                         <div class="col">
-                            <label for="exampleInputText1" class="form-label">First Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" aria-label="First name" name="Firstname">
+                            <label for="exampleInputText1" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Fullname" aria-label="Full name" name="ContactFullname">
                         </div>
                         <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="Emailaddress">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="ContactEmail">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Phone Number" name="Phonenumber">
+                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Phone Number" name="ContactPhone">
                         </div>
                         <div class="col">
                             <label for="exampleInputText1" class="form-label">Subject</label>
-                            <input type="text" class="form-control" placeholder="Subject" aria-label="Subject" name="Subject">
+                            <input type="text" class="form-control" placeholder="Subject" aria-label="Subject" name="ContactSubject">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="floatingTextarea2" class="form-label">Message</label>
-                            <textarea class="form-control" placeholder="Message" style="height: 100px"></textarea>
+                            <textarea class="form-control" placeholder="Message" style="height: 100px" name="ContactMessage"></textarea>
                         </div>
                     </div>
                     <div class = "custom-margin"></div>
-                    <input type="submit" class="btn btn-primary w-25 " value = "send message" name = "SendMessage" >
+                    <input type="submit" class="btn btn-primary w-25 " value = "Send Message" name = "ContactSendMessage" >
                 </div>
             </form>
             </div>
