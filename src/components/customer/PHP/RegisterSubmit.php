@@ -20,7 +20,7 @@
                     /*Check if username is of 5-10 characters*/
                     if(strlen($customerUsername) >= 5 && strlen($customerUsername) <= 10)
                         {      
-                            $alphabetPattern = "/[^a-zA-Z]/";
+                            $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$customerFirstname))
                                 {
                                     if(!preg_match($alphabetPattern,$customerLastname))
