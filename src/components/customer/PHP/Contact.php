@@ -118,7 +118,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="submit" class="btn btn-primary w-100" value="Log In">
+                                <button type="submit" class="btn btn-primary w-100">Log In</button>
                                 <div class="d-flex flex-column text-center mt-5">
                                     <div class="row">
                                         <label for="exampleInputText1" class="form-label">Don't Have an Account?</label>
@@ -198,27 +198,27 @@
             </div>
             </div>
             <div class="col-md-7 rounded bg-secondary p-5">
-            <form method = "POST" action = "#"class = "p-5">
+            <form method = "POST" action = "ContactSubmit.php" class = "p-5">
                 <h1>Send Message</h1>
                 <div class="mb-3">
                     <div class="row mb-3">
                         <div class="col">
                             <label for="exampleInputText1" class="form-label">First Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Name" aria-label="First name">
+                            <input type="text" class="form-control" placeholder="Enter Name" aria-label="First name" name="Firstname">
                         </div>
                         <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="Emailaddress">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Last name">
+                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Phone Number" name="Phonenumber">
                         </div>
                         <div class="col">
                             <label for="exampleInputText1" class="form-label">Subject</label>
-                            <input type="text" class="form-control" placeholder="Subject" aria-label="Last name">
+                            <input type="text" class="form-control" placeholder="Subject" aria-label="Subject" name="Subject">
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -228,7 +228,7 @@
                         </div>
                     </div>
                     <div class = "custom-margin"></div>
-                    <input type="submit" class="btn btn-primary w-25 " value="Send Message">
+                    <input type="submit" class="btn btn-primary w-25 " value = "send message" name = "SendMessage" >
                 </div>
             </form>
             </div>
