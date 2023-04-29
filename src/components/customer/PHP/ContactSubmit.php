@@ -27,7 +27,7 @@
                                                                         }
                                                                     else
                                                                         {
-                                                                            header('Location:./Contact.php?error=Please use alphabets only in message.');
+                                                                            header('Location:./Contact.php?error=Please use alphabets only in message field.');
                                                                         }
                                                                 }
                                                             else
