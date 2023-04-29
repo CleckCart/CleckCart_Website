@@ -158,24 +158,24 @@
                             
                     <div class="mb-3 ">
                         <label for="exampleInputText1" class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "traderUsername" value = "<?php
-                            if(isset($_POST['traderUsername'])){
-                                echo(trim($_POST['traderUsername']));
+                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "TraderLoginUsername" value = "<?php
+                            if(isset($_POST['TraderLoginUsername'])){
+                                echo(trim($_POST['TraderLoginUsername']));
                             }
                         ?>">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "traderPassword" value = "<?php
-                            if(isset($_POST['traderPassword'])){
-                                echo(trim($_POST['traderPassword']));
+                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "TraderLoginPassword" value = "<?php
+                            if(isset($_POST['TraderLoginPassword'])){
+                                echo(trim($_POST['TraderLoginPassword']));
                             }
                         ?>">
                         <p class = "text-end"><a href = "#">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-primary w-100" name = "traderLogin" value="Login">
+                        <input type="submit" class="btn btn-primary w-100" name = "TraderLoginSubmit" value="Login">
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">

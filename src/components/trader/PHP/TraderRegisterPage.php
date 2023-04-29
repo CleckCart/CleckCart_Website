@@ -88,58 +88,6 @@
             </div>
         </nav>
         
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method = "POST" action = "#">
-                            <div class="mb-3">
-                                <label for="exampleInputText1" class="form-label">Username</label>
-                                <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-                            </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder = "Password" id="password" name="password">
-                                    <span class = "input-group-text" id="togglePassword">
-                                        <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye" onclick = "toggle()"></i>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <div class="row">
-                                    <div class="col">
-                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                                    </div>
-                                    <div class="col text-end">
-                                        <label class="form-link-label" for="exampleLink1"><a class="text-reset" href="#">Forgot Password?</a></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <button type="submit" class="btn btn-primary w-100">Log In</button>
-                                <div class="d-flex flex-column text-center mt-5">
-                                    <div class="row">
-                                        <label for="exampleInputText1" class="form-label">Don't Have an Account?</label>
-                                    </div>
-                                    <div class="row">
-                                        <label class="form-link-label" for="exampleLink1">
-                                            <a class="fs-6 text-reset" href="./Register.php">Sign Up</a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
 
@@ -162,47 +110,47 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="FirstName" >
+                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderFirstName" >
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="LastName" >
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderLastName" >
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Username</label>
-                            <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="UserName">
+                            <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
                         </div>
 
                         <div class = "mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="Email" >
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="TraderEmail" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="PhoneNumber" >
+                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderPhoneNumber" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Address</label>
-                            <input type="text" class="form-control" placeholder="Enter Address" aria-label="Shop Name" name="Address">
+                            <input type="text" class="form-control" placeholder="Enter Address" aria-label="Shop Name" name="TraderAddress">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default select example" name="Gender" >
+                            <select class="form-select" aria-label="Default select example" name="TraderGender" >
                                 <option value="1" selected>Male</option>
                                 <option value="2">Female</option>
-                                <option value="3">Custom</option>
+                                <option value="3">Other</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Shop Category</label>
-                            <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="ShopCategory">
+                            <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="TraderShopCategory">
 
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="Password">
+                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="TraderPassword">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
                                 </span>
@@ -211,7 +159,7 @@
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
                             <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="ConfirmPassword">
+                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="TraderConfirmPassword">
                                 <span class = "input-group-text" id="togglePassword">
                                     <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
                                 </span>
@@ -221,7 +169,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <input type="submit" class="btn btn-primary w-100 " value = "Register" name = "traderRegisterSubmit" >
+                        <input type="submit" class="btn btn-primary w-100 " value = "Register" name = "TraderRegisterSubmit" >
                     </div>
                 </form>
             </div>
