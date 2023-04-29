@@ -147,22 +147,22 @@
                     <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
             </div>
             <div class = "col">
-                <form method = "POST" action = "#">
+                <form method = "POST" action = "TraderLoginValidation.php">
                     <div class = "mb-3">
                         <h1 class = "text-center">Welcome to CleckCart</h1>
                     </div>
                     <div class="mb-3 ">
                         <label for="exampleInputText1" class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username">
+                        <input type="text" class="form-control" placeholder="Enter Username" name="traderUsername" aria-label="Username">
                     </div>
                     <div class="mb-3">
                         <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password">
+                        <input type="text" class="form-control" placeholder="Enter Password" name="traderPassword" aria-label="Password">
                         <p class = "text-end"><a href = "#">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary w-100 ">Login</button>
+                        <input type="submit" class="btn btn-primary w-100 " value="Login" name="traderSubmit">
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
