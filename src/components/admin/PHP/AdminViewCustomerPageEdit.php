@@ -98,49 +98,53 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Customer</h5>
         </div>
         <div class="modal-body">
-            <form method="POST" action="#">
+            <form method="POST" action="AdminViewCustomerPageEditSubmit.php">
+            <?php
+                if(isset($_GET['error'])) {?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
             <div class="mb-3">
                 <div class="row mb-3">
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">First Name</label>
-                    <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name">
+                    <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="CustomerEditFirstname">
                 </div>
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name">
+                    <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="CustomerEditLastname">
                 </div>
                 </div>
                 <div class="row mb-3">
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Username</label>
-                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username">
+                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username" name="CustomerEditUsername">
                 </div>
                 <div class="col">
                     <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address">
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="CustomerEditEmail">
                 </div>
                 </div>
 
                 <div class="row mb-3">
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Address</label>
-                    <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address">
+                    <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="CustomerEditAddress">
                 </div>
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Phone</label>
-                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber">
+                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone">
                 </div>
                 </div>
                 <div class="row mb-3">
                 <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="CustomerEditImage">
                 </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary w-100 " value="Update">
+            <input type="submit" class="btn btn-primary w-100 " value="Update" name="CustomerEdit">
         </div>
         </form>
         </div>
