@@ -98,33 +98,33 @@
               <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Shops</h5>
             </div>
             <div class="modal-body">
-              <form method="POST" action="#">
+              <form method="POST" action="AdminViewTrader'sShopEditSubmit.php">
+              <?php
+                if(isset($_GET['error'])) {?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+              <?php }?>
                 <div class="mb-3">
                   <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Name</label>
-                      <input type="text" class="form-control" aria-label="Name">
+                      <input type="text" class="form-control" aria-label="Name" name="TraderShopName" placeholder="Shop name">
                     </div>
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Category</label>
-                      <select class="form-select" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                      <input type="text" class="form-control" aria-label="Category" name="TraderShopCategory" placeholder="Shop category">
                       </select>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Description</label>
-                      <textarea class="form-control" placeholder="Leave a comment here" rows="5"></textarea>
+                      <textarea class="form-control" placeholder="Leave a comment here" rows="5" name="TraderShopDescription"></textarea>
                     </div>
                   </div>
                 </div>
             </div>
             <div class="modal-footer">
-              <input type="submit" class="form-control btn btn-primary w-100" value="Update"></button>
+              <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
             </div>
             </form>
           </div>
