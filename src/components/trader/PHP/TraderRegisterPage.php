@@ -117,9 +117,17 @@
                                 <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderLastName" >
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Username</label>
-                            <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
+                        <div class= "mb-3">
+                            <div class= "row mb-3">
+                                <div class="col">
+                                    <label for="exampleInputText1" class="form-label">Username</label>
+                                    <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
+                                </div>
+                                <div class="col">
+                                    <label for="date" class="form-label">Date of Birth:</label>
+                                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderBirthDate">
+                                </div>
+                            </div>
                         </div>
 
                         <div class = "mb-3">
@@ -137,15 +145,14 @@
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Gender</label>
                             <select class="form-select" aria-label="Default select example" name="TraderGender" >
-                                <option value="1" selected>Male</option>
-                                <option value="2">Female</option>
-                                <option value="3">Other</option>
+                                <option value="Male" selected>Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Shop Category</label>
                             <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="TraderShopCategory">
-
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>

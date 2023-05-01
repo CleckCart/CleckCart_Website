@@ -1,5 +1,5 @@
 <?php
-include('../../../connection/Connect.php');
+include('../../trader/PHP/connect.php');
 /*Check if form is submitted*/
 if (isset($_POST['ContactSendMessage'])) {
     /*Check if all fields are filled*/ 
@@ -24,7 +24,7 @@ if (isset($_POST['ContactSendMessage'])) {
                                                         {
                                                             if(!preg_match($alphabetPattern,$ContactMessage))
                                                                 {
-                                                                    $query = "INSERT INTO CONTACT_US (CONTACT_ID, NAME, EMAIL, PHONE_NUMBER, SUBJECT, MESSAGE) VALUES (CONTACT_ID_S.NEXTVAL, :ContactFullname, :ContactEmail, :ContactPhone, :ContactSubject, :ContactMessage)";
+                                                                    $query = "INSERT INTO CONTACT_US (CONTACT_ID, NAME, EMAIL, PHONE_NUMBER, SUBJECT, MESSAGE) VALUES (CONTACT_US_S.NEXTVAL, :ContactFullname, :ContactEmail, :ContactPhone, :ContactSubject, :ContactMessage)";
 
                                                                     $result = oci_parse($conn, $query);
 
