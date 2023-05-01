@@ -1,5 +1,5 @@
 <?php
-include('../../trader/PHP/connect.php');
+include('../../../connection/Connect.php');
 /*Check if form is submitted*/
 if (isset($_POST['ContactSendMessage'])) {
     /*Check if all fields are filled*/ 
