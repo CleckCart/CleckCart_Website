@@ -105,6 +105,10 @@
                         if(isset($_GET['error'])) {?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
                     <?php }?>
+                    <?php
+                        if(isset($_GET['success'])) {?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                    <?php }?>
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
@@ -132,14 +136,23 @@
                                 ?>">
                             </div>
                         </div>
-
-                        <div class = "mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="customerEmail" value="<?php
-                                if (isset($_POST['customerEmail'])) {
-                                    echo (trim($_POST['customerEmail']));
-                                 }
-                                ?>">
+                        
+                        <div class="mb-3">
+                            <div class="row mb-3">
+                                <div class = "col">
+                                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="customerEmail" value="<?php
+                                        if (isset($_POST['customerEmail'])) {
+                                            echo (trim($_POST['customerEmail']));
+                                        }
+                                        ?>">
+                                </div>
+                                <div class = "col">
+                                    <label for="exampleInputEmail1" class="form-label">Date of Birth:</label>
+                                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="dateHelp" name="customerBirthDate">
+                                </div>
+                            </div>
+                        </div>
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>

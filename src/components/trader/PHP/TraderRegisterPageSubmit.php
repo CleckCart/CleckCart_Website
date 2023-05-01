@@ -24,6 +24,7 @@
                     $TraderPassword = trim(filter_input(INPUT_POST, 'TraderPassword', FILTER_SANITIZE_STRING));
                     $TraderConfirmPassword = trim(filter_input(INPUT_POST, 'TraderConfirmPassword', FILTER_SANITIZE_STRING));
                     $TraderRole = 'Trader';
+                    
                     /*Check if username is of 5-10 characters*/
                     if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 10)
                         {      
@@ -45,18 +46,19 @@
                                                                         {
                                                                         /*For inserting into database*/
                                                                             $query = "INSERT INTO USER_TABLE (USER_ID, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                                    VALUES(USER_S.NEXTVAL, :TraderUserName, :TraderRole, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderConfirmPassword, ':TraderBirthDate', ':TraderAddress' , ':TraderPhoneNumber')";
+                                                                                    VALUES(USER_S.NEXTVAL, :TraderUserName, :TraderRole, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderConfirmPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                                                                             $result = oci_parse($conn, $query);
                                                                             oci_bind_by_name($result, ':TraderUserName', $TraderUserName);
                                                                             oci_bind_by_name($result, ':TraderRole', $TraderRole);
                                                                             oci_bind_by_name($result, ':TraderFirstName', $TraderFirstName);
                                                                             oci_bind_by_name($result, ':TraderLastName', $TraderLastName);
                                                                             oci_bind_by_name($result, ':TraderEmail', $TraderEmail);
-                                                                            oci_bind_by_name($result, ':TraderConfirmPassword', md5($TraderConfirmPassword));
+                                                                            oci_bind_by_name($result, ':TraderConfirmPassword', $TraderConfirmPassword);
                                                                             oci_bind_by_name($result, ':TraderBirthDate', $TraderBirthDate);
                                                                             oci_bind_by_name($result, ':TraderAddress', $TraderAddress);
                                                                             oci_bind_by_name($result, ':TraderPhoneNumber', $TraderPhoneNumber);
                                                                             oci_execute($result);
+                                                                            header('Location:./TraderRegisterPage.php?success=Form submitted successfully.');
                                                                         }
                                                                     else
                                                                         {
