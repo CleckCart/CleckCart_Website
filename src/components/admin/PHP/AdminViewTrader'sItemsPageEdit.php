@@ -98,57 +98,57 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="#">
+            <form method="POST" action="AdminViewTrader'sItemsPageEditSubmit.php">
+            <?php
+                if(isset($_GET['error'])) {?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
               <div class="mb-3">
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name">
+                    <input type="text" class="form-control" aria-label="Name" name="TraderEditItemName" placeholder="Product name">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
+                    <input type="text" class="form-control" aria-label="Category" name="TraderEditItemCategory" placeholder="Product category">
                     </select>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave a comment here" rows="5"></textarea>
+                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="TraderEditItemDescription"></textarea>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="Address">
+                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderEditItemDate">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemStock" placeholder="Product stock">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemPrice" placeholder="Product price">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemDiscount" placeholder="Product discount">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditItemImage">
                   </div>
                 </div>
               </div>
           </div>
           <div class="modal-footer">
-            <input type="submit" class="form-control btn btn-primary w-100" value="Update"></button>
+            <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderEditItemSubmit">
           </div>
           </form>
         </div>
