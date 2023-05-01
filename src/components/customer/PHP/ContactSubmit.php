@@ -1,5 +1,5 @@
 <?php
-include('../../../connection/Connect.php');
+include('../../trader/PHP/connect.php');
 /*Check if form is submitted*/
 if (isset($_POST['ContactSendMessage'])) {
     /*Check if all fields are filled*/ 
@@ -35,6 +35,7 @@ if (isset($_POST['ContactSendMessage'])) {
                                                                     oci_bind_by_name($result, ':ContactMessage', $ContactMessage);
 
                                                                     oci_execute($result);
+                                                                    header('Location:./Contact.php?success=Form submitted successfully.');
                                                                 }
                                                             else
                                                                 {
