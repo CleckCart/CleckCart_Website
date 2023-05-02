@@ -15,6 +15,7 @@
                     $TraderEditEmail = trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL));
                     $TraderEditPhone = trim(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_SANITIZE_NUMBER_INT));
                     $TraderEditAddress = trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING));
+                    $TraderEditDate = $_POST['TraderEditDate'];
                     /*Check if username is of 5-10 characters*/
                     if(strlen($TraderEditUserName) >= 5 && strlen($TraderEditUserName) <= 10)
                         {      
@@ -25,7 +26,15 @@
                                         {
                                             if(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_VALIDATE_INT) == true)
                                                 {
-                                                    
+                                                    if (!empty($_POST['TraderEditDate']))
+                                                        {
+
+                                                        }
+
+                                                    else
+                                                        {
+                                                            header('Location:./AdminViewTraderEdit.php?error=Please pick the date for date of birth.');
+                                                        }
                                                 }
                                             else
                                                 {

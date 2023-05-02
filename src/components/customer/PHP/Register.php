@@ -148,7 +148,7 @@
                                         ?>">
                                 </div>
                                 <div class = "col">
-                                    <label for="exampleInputEmail1" class="form-label">Date of Birth:</label>
+                                    <label for="exampleInputEmail1" class="form-label">Date of Birth</label>
                                     <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="dateHelp" name="customerBirthDate">
                                 </div>
                             </div>

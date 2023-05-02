@@ -134,12 +134,18 @@
                     <label for="exampleInputText1" class="form-label">Phone</label>
                     <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone">
                 </div>
-                </div>
-                <div class="row mb-3">
-                <div class="col">
-                    <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="CustomerEditImage">
-                </div>
+                </div>                 
+                  <div class="mb-3">
+                    <div class="row mb-3">
+                      <div class="col">
+                        <label for="file" class="form-label">Image</label>
+                        <input type="file" class="form-control" id="file" aria-label="File" name="CustomerEditImage">
+                      </div>
+                      <div class="col">
+                        <label for="date" class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate">
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>
