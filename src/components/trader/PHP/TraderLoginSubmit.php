@@ -17,20 +17,25 @@ include('./connect.php');
                 if(preg_match($passwordPattern, $TraderLoginPassword))
                     {
                         //Gather detail submitted from POST and store 
-                        $query = "SELECT * FROM USER_TABLE WHERE ROLE =:TraderRole AND USERNAME =:TraderLoginUsername AND PASSWORD =:TraderLoginPassword";
-                        $result = oci_parse($conn, $query);
-                        oci_bind_by_name($result, ':TraderLoginUsername', $TraderLoginUsername);
-                        oci_bind_by_name($result, ':TraderRole', $TraderRole);
-                        oci_bind_by_name($result, ':TraderLoginPassword', $TraderPassword);
-                        oci_execute($result);
-                        if(oci_num_rows($result) > 0){
-                            $_SESSION['user'] = $TraderLoginUsername;
-                        }else{
-                            $_SESSION['error'] = "User not recognised";
+                        if (!$conn) {
+                            $error_message = "Unable to connect to the database.";
+                        } else {
+                            $encryptedPassword = md5($TraderLoginPassword);
+                            $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='$TraderRole'";
+                            $result = oci_parse($conn, $query);
+                            oci_execute($result);
+                            // Fetch the result
+                            $row = oci_fetch_array($result, OCI_ASSOC);
+                            if ($row) {
+                                // If the user is found, create a session
+                                $_SESSION['username'] = $TraderLoginUsername;
+                                // Redirect to the dashboard
+                                header('Location:./TraderDashboard.php');
+                            } else {
+                                // If the user is not found, show an error message
+                                header('Location:./TraderLogin.php?error=Invalid Credentials');
+                            }
                         }
-                        
-                        header('Location:./Sessions.php');
-
                     }
                 else
                     {
