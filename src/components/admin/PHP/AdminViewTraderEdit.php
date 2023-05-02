@@ -141,6 +141,10 @@
                       <label for="file" class="form-label">Image</label>
                       <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditImage">
                     </div>
+                    <div class="col">
+                      <label for="date" class="form-label">Date of birth</label>
+                      <input type="date" class="form-control" id="date" aria-label="Date" name="TraderEditDate">
+                    </div>
                   </div>
                 </div>
             </div>

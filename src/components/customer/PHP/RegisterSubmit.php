@@ -26,33 +26,43 @@
                                 {
                                     if(!preg_match($alphabetPattern,$customerLastname))
                                         {
-                                            if(filter_input(INPUT_POST, 'customerPhone', FILTER_VALIDATE_INT) == true)
+                                            if (!empty($_POST['customerBirthDate']))
                                                 {
-                                                    
-                                                    /*Check if password and confirm password matches*/
-                                                    if(strcmp($customerPassword,$customerConfirmPassword)==0)
+                                                    if(filter_input(INPUT_POST, 'customerPhone', FILTER_VALIDATE_INT) == true)
                                                         {
-                                                            $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
-                                                            /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
-                                                            if(preg_match($passwordPattern, $customerPassword))
+                                                            
+                                                            /*Check if password and confirm password matches*/
+                                                            if(strcmp($customerPassword,$customerConfirmPassword)==0)
                                                                 {
-                                                                /*For inserting into database*/
+                                                                    $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
+                                                                    /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
+                                                                    if(preg_match($passwordPattern, $customerPassword))
+                                                                        {
+                                                                        /*For inserting into database*/
+                                                                        }
+                                                                    else
+                                                                        {
+                                                                            header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
+                                                                        }
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./Register.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
+                                                                    header('Location:./Register.php?error=Please make sure password are matched.');
                                                                 }
+                                                        
                                                         }
+
                                                     else
                                                         {
-                                                            header('Location:./Register.php?error=Please make sure password are matched.');
+                                                            header('Location:./Register.php?error=Please type integer numbers in phone number.');
                                                         }
-                                                  
                                                 }
+
                                             else
                                                 {
-                                                    header('Location:./Register.php?error=Please type integer numbers in phone number.');
+                                                    header('Location:./Register.php?error=Please pick the date for date of birth.');
                                                 }
+                                            
                                         }
                                     else
                                         {

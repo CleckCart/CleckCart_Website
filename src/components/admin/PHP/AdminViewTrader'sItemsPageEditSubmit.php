@@ -23,28 +23,36 @@
                                 {
                                     if(!preg_match($alphabetPattern,$TraderEditItemDescription))
                                         {
-                                            if(filter_input(INPUT_POST, 'TraderEditItemStock', FILTER_VALIDATE_INT) == true)
+                                            if (!empty($_POST['TraderEditItemDate']))
                                                 {
-                                                    if(filter_input(INPUT_POST, 'TraderEditItemPrice', FILTER_VALIDATE_FLOAT) == true)
+                                                    if(filter_input(INPUT_POST, 'TraderEditItemStock', FILTER_VALIDATE_INT) == true)
                                                         {
-                                                            if(filter_input(INPUT_POST, 'TraderEditItemDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                            if(filter_input(INPUT_POST, 'TraderEditItemPrice', FILTER_VALIDATE_FLOAT) == true)
                                                                 {
-                                                                    
+                                                                    if(filter_input(INPUT_POST, 'TraderEditItemDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                                        {
+                                                                            
+                                                                        }
+                                                                    else
+                                                                        {
+                                                                            header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type decimal numbers in product discount.');
+                                                                        }
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type decimal numbers in product discount.');
+                                                                    header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type decimal numbers in product price.');
                                                                 }
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type decimal numbers in product price.');
+                                                            header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type integer numbers in product stock.');
                                                         }
                                                 }
                                             else
                                                 {
-                                                    header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please type integer numbers in product stock.');
+                                                    header('Location:./AdminViewTrader\'sItemsPageEdit.php?error=Please pick the added date of the product.');
                                                 }
+                                          
                                         }
                                     else
                                         {

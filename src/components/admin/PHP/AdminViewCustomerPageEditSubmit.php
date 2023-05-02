@@ -26,7 +26,15 @@
                                         {
                                             if(filter_input(INPUT_POST, 'CustomerEditPhone', FILTER_VALIDATE_INT) == true)
                                                 {
-                                                    //Insert into database
+                                                    if (!empty($_POST['CustomerEditDate']))
+                                                        {
+
+                                                        }
+
+                                                    else
+                                                        {
+                                                            header('Location:./AdminViewCustomerPageEdit.php?error=Please pick the added date of the product.');
+                                                        }
                                                 }
                                             else
                                                 {
