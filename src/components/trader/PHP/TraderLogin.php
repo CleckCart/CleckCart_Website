@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <input type="submit" class="btn btn-primary w-100" value="Log In"</button">
+                                <input type="submit" class="btn btn-primary w-100" value="Log In">
                                 <div class="d-flex flex-column text-center mt-5">
                                     <div class="row">
                                         <label for="exampleInputText1" class="form-label">Don't Have an Account?</label>
