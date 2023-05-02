@@ -105,6 +105,10 @@
                         if(isset($_GET['error'])) {?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
                     <?php }?>
+                    <?php
+                        if(isset($_GET['success'])) {?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                    <?php }?>
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
@@ -146,6 +150,14 @@
                             <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
                                 if (isset($_POST['customerPhone'])) {
                                     echo (trim($_POST['customerPhone']));
+                                 }
+                                ?>">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Date of Birth</label>
+                            <input type="date" class="form-control" style="color:gray" aria-label="dob" name="date" value="<?php
+                                if (isset($_POST['date'])) {
+                                    echo (trim($_POST['date']));
                                  }
                                 ?>">
                         </div>
