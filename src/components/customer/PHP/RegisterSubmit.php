@@ -1,6 +1,7 @@
 <?php
         /*Check if form is submitted*/
         if (isset($_POST['customerRegisterSubmit'])) {
+            include('../../trader/PHP/connect.php');
             /*Check if all fields are filled*/ 
             if (empty($_POST['customerUsername']) || empty($_POST['customerFirstname']) || empty($_POST['customerLastname']) || empty($_POST['customerEmail']) 
             || empty($_POST['customerPhone']) || empty($_POST['customerAddress']) || empty($_POST['customerPassword']) || empty($_POST['customerConfirmPassword'])) 
@@ -41,19 +42,10 @@
                                                                         /*For inserting into database*/
                                                                             $customer_role = 'Customer';
                                                                             $customer_password = md5($customerPassword);
-                                                                            $customerBirthDate = $_POST['date'];
-                                                                            // change date format to match with oracle 
-                                                                            $timestamp = strtotime($customerBirthDate);
                                             
-                                                                            // // format the timestamp as a string in dd-mm-yyyy format
-                                                                            $formatted_date = date('d-m-Y', $timestamp);
-                                            
-                                            
-                                                                            // require('connection.php');
-                                                                            $conn = oci_connect('PROJECT', 'Iwbctkgopsmdl99', '//localhost/xe');
-                                            
-                                                                            $sql = "INSERT INTO USER_TABLE(USERNAME,ROLE,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD,DATE_OF_BIRTH,ADDRESS,PHONE_NUMBER)VALUES(:customerUsername,:customer_role,:customerFirstname,:customerLastname,:customerEmail,:customer_password,TO_DATE(:formatted_date, 'DD-MM-YYYY'),:customerAddress,:customerPhone)";
-                                                                            // $sql = "INSERT INTO contacts (name, email, phone) VALUES (:name, :email, :phone)";
+                                                                            $sql = "INSERT INTO USER_TABLE(USERNAME,ROLE,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD,DATE_OF_BIRTH,ADDRESS,PHONE_NUMBER)
+                                                                            VALUES(:customerUsername,:customer_role,:customerFirstname,:customerLastname,:customerEmail,:customer_password,:customerBirthDate,:customerAddress,:customerPhone)";
+                                                                            
                                                                             $check = oci_parse($conn, $sql);
                                             
                                                                             // bind parameters to statement
@@ -63,7 +55,7 @@
                                                                             oci_bind_by_name($check, ':customerLastname', $customerLastname);
                                                                             oci_bind_by_name($check, ':customerEmail', $customerEmail);
                                                                             oci_bind_by_name($check, ':customer_password', $customer_password);
-                                                                            oci_bind_by_name($check, ':formatted_date', $formatted_date);
+                                                                            oci_bind_by_name($check, ':customerBirthDate', $customerBirthDate);
                                                                             oci_bind_by_name($check, ':customerAddress', $customerAddress);
                                                                             oci_bind_by_name($check, ':customerPhone', $customerPhone);
                                             
@@ -76,7 +68,7 @@
                                                                                 header('Location:./Register.php?error=Error');
                                                                                 
                                                                             }
-                                                                            // include("Register.php");
+
                                                                         }
                                                                     else
                                                                         {

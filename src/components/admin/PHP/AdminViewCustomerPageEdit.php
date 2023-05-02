@@ -117,7 +117,7 @@
                 <div class="row mb-3">
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Username</label>
-                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username" name="CustomerEditUsername">
+                    <input type="tel" class="form-control" placeholder="Enter User name" aria-label="Username" name="CustomerEditUsername">
                 </div>
                 <div class="col">
                     <label for="exampleInputEmail1" class="form-label">Email</label>

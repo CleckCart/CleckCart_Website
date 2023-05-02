@@ -148,13 +148,13 @@
             </div>
             <div class = "col">
                 <form method = "POST" action = "./TraderLoginSubmit.php">
-                    <div class = "mb-3">
-                        <h1 class = "text-center">Welcome to CleckCart</h1>
-                    </div>
                     <?php
                         if(isset($_GET['error'])) {?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
                     <?php }?>
+                    <div class = "mb-3">
+                        <h1 class = "text-center">Welcome to CleckCart</h1>
+                    </div>
                             
                     <div class="mb-3 ">
                         <label for="exampleInputText1" class="form-label">Username</label>

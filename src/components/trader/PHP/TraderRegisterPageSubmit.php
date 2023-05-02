@@ -39,21 +39,22 @@
                                                         {
                                                             /*Check if password and confirm password matches*/
                                                             if(strcmp($TraderPassword,$TraderConfirmPassword)==0)
-                                                                {
+                                                                {                                                                
                                                                     $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
                                                                     /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
                                                                     if(preg_match($passwordPattern, $TraderPassword))
                                                                         {
+                                                                            $TraderEncryptedPassword = md5($TraderPassword);
                                                                         /*For inserting into database*/
                                                                             $query = "INSERT INTO USER_TABLE (USER_ID, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                                    VALUES(USER_S.NEXTVAL, :TraderUserName, :TraderRole, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderConfirmPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                                                                                    VALUES(USER_S.NEXTVAL, :TraderUserName, :TraderRole, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                                                                             $result = oci_parse($conn, $query);
                                                                             oci_bind_by_name($result, ':TraderUserName', $TraderUserName);
                                                                             oci_bind_by_name($result, ':TraderRole', $TraderRole);
                                                                             oci_bind_by_name($result, ':TraderFirstName', $TraderFirstName);
                                                                             oci_bind_by_name($result, ':TraderLastName', $TraderLastName);
                                                                             oci_bind_by_name($result, ':TraderEmail', $TraderEmail);
-                                                                            oci_bind_by_name($result, ':TraderConfirmPassword', $TraderConfirmPassword);
+                                                                            oci_bind_by_name($result, ':TraderEncryptedPassword', $TraderEncryptedPassword);
                                                                             oci_bind_by_name($result, ':TraderBirthDate', $TraderBirthDate);
                                                                             oci_bind_by_name($result, ':TraderAddress', $TraderAddress);
                                                                             oci_bind_by_name($result, ':TraderPhoneNumber', $TraderPhoneNumber);
