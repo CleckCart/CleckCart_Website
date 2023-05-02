@@ -9,6 +9,7 @@ include('./connect.php');
     else{
         $TraderLoginUsername = trim(filter_input(INPUT_POST, 'TraderLoginUsername', FILTER_SANITIZE_STRING));
         $TraderLoginPassword = trim(filter_input(INPUT_POST, 'TraderLoginPassword', FILTER_SANITIZE_STRING));
+        $TraderRole="Trader";
         /*Check if username is of 5-10 characters*/
         if(strlen($TraderLoginUsername) >= 5 && strlen($TraderLoginUsername) <= 10){
                 $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
@@ -16,17 +17,20 @@ include('./connect.php');
                 if(preg_match($passwordPattern, $TraderLoginPassword))
                     {
                         //Gather detail submitted from POST and store 
-                        $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'Trader' AND USERNAME = '$TraderLoginUsername' AND PASSWORD = '$TraderLoginPassword'";
+                        $query = "SELECT * FROM USER_TABLE WHERE ROLE =:TraderRole AND USERNAME =:TraderLoginUsername AND PASSWORD =:TraderLoginPassword";
                         $result = oci_parse($conn, $query);
+                        oci_bind_by_name($result, ':TraderLoginUsername', $TraderLoginUsername);
+                        oci_bind_by_name($result, ':TraderRole', $TraderRole);
+                        oci_bind_by_name($result, ':TraderLoginPassword', $TraderPassword);
                         oci_execute($result);
-
                         if(oci_num_rows($result) > 0){
                             $_SESSION['user'] = $TraderLoginUsername;
                         }else{
                             $_SESSION['error'] = "User not recognised";
                         }
+                        
                         header('Location:./Sessions.php');
-                    /*For inserting into database*/
+
                     }
                 else
                     {

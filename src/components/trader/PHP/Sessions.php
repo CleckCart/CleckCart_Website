@@ -6,10 +6,8 @@
 
     }else{
         include('./TraderLogin.php');
-        echo("<br>");
         if(isset($_SESSION['error'])){
-            echo("<br>" .$_SESSION['error']);   
-            echo("<br>Please Login");
-        }
+            echo("<br>" .$_SESSION['error']);          
+        }      
     }
 ?>
