@@ -1,4 +1,5 @@
 <?php
+include('./connect.php');
  /*Check if form is submitted*/
  if(isset($_POST['TraderLoginSubmit'])){
     /*Check if all fields are filled*/ 
@@ -14,6 +15,17 @@
                 /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
                 if(preg_match($passwordPattern, $TraderLoginPassword))
                     {
+                        //Gather detail submitted from POST and store 
+                        $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'Trader' AND USERNAME = '$TraderLoginUsername' AND PASSWORD = '$TraderLoginPassword'";
+                        $result = oci_parse($conn, $query);
+                        oci_execute($result);
+
+                        if(oci_num_rows($result) > 0){
+                            $_SESSION['user'] = $TraderLoginUsername;
+                        }else{
+                            $_SESSION['error'] = "User not recognised";
+                        }
+                        header('Location:./Sessions.php');
                     /*For inserting into database*/
                     }
                 else
