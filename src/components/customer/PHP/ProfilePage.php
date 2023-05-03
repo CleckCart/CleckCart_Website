@@ -132,7 +132,8 @@
                             <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username">
                             <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
                             <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address">
-                            
+                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Date of birth</label>
+                            <input type="date" id="disabledTextInput-ln" class="form-control">
                         </div>
                     </div>
                     <div class="col">
@@ -143,8 +144,10 @@
                             <input type="text" id="disabledTextInput-email" class="form-control" placeholder="Email Address">
                             <label for="disabledTextInput-pn" class="form-label" style="margin-top:1.5vh">Phone Number</label>
                             <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number">
-                        </div>
-                    </div>
+                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Gender</label>
+                            <select id="disabledTextInput-ln" class="form-control"></select>
+                        </div>                       
+                    </div>                   
             </fieldset>
         </form>
     </div>

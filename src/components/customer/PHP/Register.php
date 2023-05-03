@@ -110,15 +110,7 @@
                         <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
                     <?php }?>
                     <div class="mb-3">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="exampleInputText1" class="form-label">User Name</label>
-                                <input type="text" class="form-control" placeholder="Enter User Name" aria-label="User name" name="customerUsername" value="<?php
-                                if (isset($_POST['customerUsername'])) {
-                                    echo (trim($_POST['customerUsername']));
-                                 }
-                                ?>">
-                            </div>
+                        <div class="row mb-3">                            
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
                                 <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="customerFirstname" value="<?php
@@ -139,6 +131,14 @@
                         
                         <div class="mb-3">
                             <div class="row mb-3">
+                                <div class="col">
+                                    <label for="exampleInputText1" class="form-label">User Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter User Name" aria-label="User name" name="customerUsername" value="<?php
+                                    if (isset($_POST['customerUsername'])) {
+                                        echo (trim($_POST['customerUsername']));
+                                    }
+                                    ?>">
+                                </div>
                                 <div class = "col">
                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="customerEmail" value="<?php
@@ -146,30 +146,44 @@
                                             echo (trim($_POST['customerEmail']));
                                         }
                                         ?>">
-                                </div>
-                                <div class = "col">
-                                    <label for="exampleInputEmail1" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="dateHelp" name="customerBirthDate">
-                                </div>
+                                </div>                               
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class = "col">
+                                <label for="exampleInputEmail1" class="form-label">Date of Birth</label>
+                                <input type="date" class="form-control" id="exampleInputEmail1" aria-describedby="dateHelp" name="customerBirthDate">
+                            </div>
+                            <div class= "col">
+                                <label for="exampleInputText1" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
+                                    if (isset($_POST['customerPhone'])) {
+                                        echo (trim($_POST['customerPhone']));
+                                    }
+                                    ?>">
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
-                                if (isset($_POST['customerPhone'])) {
-                                    echo (trim($_POST['customerPhone']));
-                                 }
-                                ?>">
+                    
+                        
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="exampleInputText1" class="form-label">Address</label>
+                                <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="customerAddress" value="<?php
+                                    if (isset($_POST['customerAddress'])) {
+                                        echo (trim($_POST['customerAddress']));
+                                    }
+                                    ?>">
+                            </div>
+                            <div class="col">
+                                    <label for="exampleInputText1" class="form-label">Gender</label>
+                                    <select class="form-select" aria-label="Default select example" name="customerGender" >
+                                        <option value="Male" selected>Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Address</label>
-                            <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="customerAddress" value="<?php
-                                if (isset($_POST['customerAddress'])) {
-                                    echo (trim($_POST['customerAddress']));
-                                 }
-                                ?>">
-                        </div>
+                    </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <div class="input-group">
