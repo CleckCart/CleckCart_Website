@@ -113,7 +113,7 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
                 <div class="text-center">
-                    <h5>Update Customer</h5>
+                    <h5>Update Profile</h5>
                 </div>
                 <hr>
                 <form method="POST" action="ProfileUpdateSubmit.php">
@@ -135,18 +135,11 @@
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
                                 <input type="text" class="form-control" placeholder="Last Name" aria-label="Last name" name="CustomerEditLastname">
                             </div>
-                        </div>
-                        <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Username</label>
                                 <input type="tel" class="form-control" placeholder="Username" aria-label="Username" name="CustomerEditUsername">
                             </div>
-                            <div class="col">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" name="CustomerEditEmail">
-                            </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Address</label>
@@ -155,6 +148,10 @@
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
                                 <input type="tel" class="form-control" placeholder="Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone">
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" name="CustomerEditEmail">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -167,12 +164,21 @@
                                     <label for="date" class="form-label">Date of Birth</label>
                                     <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate">
                                 </div>
+                                <div class="col">
+                                    <label for="exampleInputText1" class="form-label">Gender</label>
+                                    <select class="form-select" aria-label="Default select example" name="CustomerEditGender" >
+                                        <option value="Male" selected>Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
+                        <div class="mb-3 w-50" style="margin-top:4vh">
+                            <input type="submit" class="btn btn-primary w-50 " value="Update" name="CustomerEdit">
+                        </div>
                     </div>
-                    <div class="col-sm-8" style="margin-top:4vh">
-                        <input type="submit" class="btn btn-primary w-50 " value="Update" name="CustomerEdit">
-                    </div>
+                    
                 </form>
             </div>
             <div class="col-sm-1"></div>
