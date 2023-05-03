@@ -93,77 +93,65 @@
 
     <!-- Demo content -->
     <!--Code -->
-    <div class="container-fluid">
-      <div class="row row-cols-1 row-cols-md-2 bg-success">
-        <div class="col p-5">
-          <h1>Manage Products</h1>
-        </div>
-        <div class="col p-5 text-end">
-          <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
-                if (isset($_POST['searchProduct'])) {
-                  echo (trim($_POST['searchProduct']));
-                }
-                ?>">
-              <input type="submit" name="searchProductSubmit" value="Search" class="btn btn-light">
-              <a href = "./AdminViewTrader'sItemsPageAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
-            </form>
+        <div class="container bg-light">
+          <div class="modal-header text-center">
+            <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
+          <div class="modal-body">
+            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php">
+            <?php
+                if(isset($_GET['error'])) {?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
+              <div class="mb-3">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Name</label>
+                    <input type="text" class="form-control" aria-label="Name" name="TraderAddItemName" placeholder="Product name">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Category</label>
+                    <input type="text" class="form-control" aria-label="Category" name="TraderAddItemCategory" placeholder="Product category">
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Description</label>
+                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="TraderAddItemDescription"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="date" class="form-label">Date</label>
+                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderAddItemDate">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Stock</label>
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemStock" placeholder="Product stock">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Price</label>
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemPrice" placeholder="Product price">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Discount</label>
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemDiscount" placeholder="Product discount">
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="file" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderAddItemImage">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="TraderAddItemSubmit">
+          </div>
+          </form>
         </div>
-      </div>
-      <div class="row table-responsive">
-        <table class="table table-light table-striped text-center">
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>ID</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Category</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th>Date</th>
-              <th>Discount</th>
-              <th colspan=2>Actions</th>
-              <th></th>
-            </tr>
-          </thead>
-          <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-            <tr>
-              <td><input type = "checkbox"/></td>
-              <td>0</td>
-              <td>lorem.jpg</td>
-              <td>Lorem</td>
-              <td>Lorem ipsum asdjlkasjdlkajsdlk jalsdnlaks jdla</td>
-              <td>Lorem</td>
-              <td>&pound;100</td>
-              <td>50</td>
-              <td>2023/04/04</td>
-              <td>200</td>
-              <td>
-                <!-- Edit Button trigger modal -->
-                <a href = "./AdminViewTrader\'sItemsPageEdit.php" class="btn">
-                  <img src="./../../../dist/public/edit.svg" alt="person">
-                </a>
-              </td>
-              <td>
-                <!-- Delete Button trigger modal -->
-                <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                  <img src="./../../../dist/public/delete.svg" alt="person">
-                </button>
-              </td>
-              <td></td>
-            </tr>
-          ';
-          }
-          ?>
-        </table>
-      </div>
-    </div>
 
     <!-- Delete Modal -->
     <div class="modal fade" id="exampleModalDelete" tabindex="-1">
