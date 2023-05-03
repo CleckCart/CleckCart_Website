@@ -1,7 +1,8 @@
 <?php
-include('./connect.php');
+
  /*Check if form is submitted*/
  if(isset($_POST['TraderLoginSubmit'])){
+    include('./connectSession.php');
     /*Check if all fields are filled*/ 
     if (empty($_POST['TraderLoginUsername']) || empty($_POST['TraderLoginPassword'])){
         header('Location:./TraderLogin.php?error=Please make sure all text fields are not empty.');
@@ -29,12 +30,13 @@ include('./connect.php');
                             if ($row) {
                                 // If the user is found, create a session
                                 $_SESSION['username'] = $TraderLoginUsername;
-                                // Redirect to the dashboard
-                                header('Location:./TraderDashboard.php');
-                            } else {
-                                // If the user is not found, show an error message
-                                header('Location:./TraderLogin.php?error=Invalid Credentials');
-                            }
+                            } 
+
+                            else 
+                                {
+                                    $_SESSION['error'] = 'Invalid Credentials!';
+                                }
+                            header('Location:Session.php');
                         }
                     }
                 else

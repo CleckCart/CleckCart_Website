@@ -57,7 +57,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
+      <a href="Logout.php" class="nav-link text-dark">
         <i class="fa-solid fa-power-off m-3"></i></i>
                 Log Out
             </a>
