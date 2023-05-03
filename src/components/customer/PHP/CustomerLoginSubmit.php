@@ -28,11 +28,12 @@
                             if ($row) {
                                 // If the user is found, create a session
                                 $_SESSION['username'] = $CustomerLoginUsername;
+                                $_SESSION['UserRole'] = $CustomerRole;
                             }
                             else{
                                     $_SESSION['error'] = 'Invalid Credentials!';
                             }
-                            header('Location:./Session.php');
+                            header('Location:./CustomerSession.php');
                         }
                     }
                 else
