@@ -18,7 +18,7 @@
                     $TraderBirthDate = $_POST['TraderBirthDate'];
                     $TraderEmail = trim(filter_input(INPUT_POST, 'TraderEmail', FILTER_SANITIZE_EMAIL));
                     $TraderPhoneNumber = trim(filter_input(INPUT_POST, 'TraderPhoneNumber', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderGender = trim(filter_input(INPUT_POST, 'TraderGender', FILTER_SANITIZE_NUMBER_INT));
+                    $TraderGender = $_POST['TraderGender'];
                     $TraderShopName = trim(filter_input(INPUT_POST, 'TraderShopName', FILTER_SANITIZE_NUMBER_INT));
                     $TraderShopCategory = trim(filter_input(INPUT_POST, 'TraderShopCategory', FILTER_SANITIZE_NUMBER_INT));
                     $TraderPassword = trim(filter_input(INPUT_POST, 'TraderPassword', FILTER_SANITIZE_STRING));

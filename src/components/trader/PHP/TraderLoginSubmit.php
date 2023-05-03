@@ -10,7 +10,7 @@
     else{
         $TraderLoginUsername = trim(filter_input(INPUT_POST, 'TraderLoginUsername', FILTER_SANITIZE_STRING));
         $TraderLoginPassword = trim(filter_input(INPUT_POST, 'TraderLoginPassword', FILTER_SANITIZE_STRING));
-        $TraderRole="Trader";
+        $UserRole = $_POST['UserRole'];
         /*Check if username is of 5-10 characters*/
         if(strlen($TraderLoginUsername) >= 5 && strlen($TraderLoginUsername) <= 10){
                 $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
@@ -21,22 +21,42 @@
                         if (!$conn) {
                             $error_message = "Unable to connect to the database.";
                         } else {
-                            $encryptedPassword = md5($TraderLoginPassword);
-                            $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='$TraderRole'";
-                            $result = oci_parse($conn, $query);
-                            oci_execute($result);
-                            // Fetch the result
-                            $row = oci_fetch_array($result, OCI_ASSOC);
-                            if ($row) {
-                                // If the user is found, create a session
-                                $_SESSION['username'] = $TraderLoginUsername;
-                            } 
-
-                            else 
-                                {
-                                    $_SESSION['error'] = 'Invalid Credentials!';
+                            if($UserRole == "Admin"){
+                                $encryptedPassword = md5($TraderLoginPassword);
+                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='Admin'";
+                                $result = oci_parse($conn, $query);
+                                oci_execute($result);
+                                // Fetch the result
+                                $row = oci_fetch_array($result, OCI_ASSOC);
+                                if ($row) {
+                                    // If the user is found, create a session
+                                    $_SESSION['username'] = $TraderLoginUsername;
+                                    $_SESSION['UserRole'] = $UserRole;
+                                    
                                 }
-                            header('Location:Session.php');
+                                else {
+                                        $_SESSION['error'] = 'Invalid Credentials!';
+                                    }
+                                header('Location:../../admin/PHP/AdminSession.php');
+                            }
+                            else if($UserRole == "Trader"){
+                                $encryptedPassword = md5($TraderLoginPassword);
+                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='Trader'";
+                                $result = oci_parse($conn, $query);
+                                oci_execute($result);
+                                // Fetch the result
+                                $row = oci_fetch_array($result, OCI_ASSOC);
+                                if ($row) {
+                                    // If the user is found, create a session
+                                    $_SESSION['username'] = $TraderLoginUsername;
+                                    $_SESSION['UserRole'] = $UserRole;
+                                    echo($_SESSION['UserRole']);
+                                }
+                                else {
+                                        $_SESSION['error'] = 'Invalid Credentials!';
+                                    }
+                                header('Location:./TraderSession.php');
+                            }
                         }
                     }
                 else
