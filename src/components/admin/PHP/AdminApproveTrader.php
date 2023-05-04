@@ -97,7 +97,7 @@
     <div class="container">
       <div class="row bg-success">
         <div class="col-12 p-5">
-          <h1>Approve Products</h1>
+          <h1>Approve Trader</h1>
         </div><br />
         <div class="col mt-5 text-end">
         </div>
@@ -129,21 +129,21 @@
                                
           
           while($row = oci_fetch_array($result, OCI_ASSOC)){
-            // echo('<tr><td><input type = "checkbox"/></td>');
-            // echo("<td>$row[APPLY_ID]</td>");
-            // echo("<td>$row[USERNAME]</td>");
-            // echo("<td>$row[FIRST_NAME]</td>");
-            // echo("<td>$row[LAST_NAME]</td>");
-            // echo("<td>$row[EMAIL]</td>");     
-            // echo("<td>$row[SHOP_CATEGORY]</td>");
-            // echo("<td>$row[GENDER]</td>");
-            // echo("<td>$row[DATE_OF_BIRTH]</td>");
-            // echo("<td>$row[ADDRESS]</td>");
-            // echo("<td>$row[PHONE_NUMBER]</td>");
-            // echo("<td><a href='#'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            // echo("<td><a href='#'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
-            // echo("<td></td>");
-            // echo("</tr>");
+            echo('<tr><td><input type = "checkbox"/></td>');
+            echo("<td>$row[APPLY_ID]</td>");
+            echo("<td>$row[USERNAME]</td>");
+            echo("<td>$row[FIRST_NAME]</td>");
+            echo("<td>$row[LAST_NAME]</td>");
+            echo("<td>$row[EMAIL]</td>");     
+            echo("<td>$row[SHOP_CATEGORY]</td>");
+            echo("<td>$row[GENDER]</td>");
+            echo("<td>$row[DATE_OF_BIRTH]</td>");
+            echo("<td>$row[ADDRESS]</td>");
+            echo("<td>$row[PHONE_NUMBER]</td>");
+            echo("<td><a href='#'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo("<td><a href='#'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            echo("<td></td>");
+            echo("</tr>");
           }
           ?>
         </table>

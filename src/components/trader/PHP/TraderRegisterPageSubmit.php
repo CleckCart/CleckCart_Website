@@ -45,14 +45,14 @@
                                                                         {
                                                                             $TraderEncryptedPassword = md5($TraderPassword);
                                                                         /*For inserting into database*/
-                                                                            $query = "INSERT INTO USER_TABLE (USER_ID, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                                    VALUES(USER_S.NEXTVAL, :TraderUserName, :TraderRole, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                                                                            $query = "INSERT INTO APPLY_TRADER (APPLY_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL, SHOP_CATEGORY, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                                                                                    VALUES(APPLY_TRADER_S.NEXTVAL, :TraderUserName, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderShopCategory, :TraderGender, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                                                                             $result = oci_parse($conn, $query);
-                                                                            oci_bind_by_name($result, ':TraderUserName', $TraderUserName);
-                                                                            oci_bind_by_name($result, ':TraderRole', $TraderRole);
+                                                                            oci_bind_by_name($result, ':TraderUserName', $TraderUserName);                           
                                                                             oci_bind_by_name($result, ':TraderFirstName', $TraderFirstName);
                                                                             oci_bind_by_name($result, ':TraderLastName', $TraderLastName);
                                                                             oci_bind_by_name($result, ':TraderEmail', $TraderEmail);
+                                                                            oci_bind_by_name($result, ':TraderShopCategory', $TraderShopCategory);
                                                                             oci_bind_by_name($result, ':TraderGender', $TraderGender);
                                                                             oci_bind_by_name($result, ':TraderEncryptedPassword', $TraderEncryptedPassword);
                                                                             oci_bind_by_name($result, ':TraderBirthDate', $TraderBirthDate);
