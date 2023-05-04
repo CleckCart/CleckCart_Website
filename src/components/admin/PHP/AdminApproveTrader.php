@@ -104,6 +104,10 @@
       </div>
       <div class="row table-responsive">
         <table class="table table-light table-striped text-center">
+        <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
           <thead class="table-success">
             <tr>
               <th>Select</th>
@@ -129,6 +133,7 @@
                                
           
           while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $id=$row['APPLY_ID'];
             echo('<tr><td><input type = "checkbox"/></td>');
             echo("<td>$row[APPLY_ID]</td>");
             echo("<td>$row[USERNAME]</td>");
@@ -140,8 +145,8 @@
             echo("<td>$row[DATE_OF_BIRTH]</td>");
             echo("<td>$row[ADDRESS]</td>");
             echo("<td>$row[PHONE_NUMBER]</td>");
-            echo("<td><a href='#'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            echo("<td><a href='#'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            echo("<td><a href='Approved.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo("<td><a href='Refused.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
             echo("<td></td>");
             echo("</tr>");
           }
