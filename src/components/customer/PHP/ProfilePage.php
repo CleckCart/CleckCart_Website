@@ -163,15 +163,13 @@
         </form>
     </div>
 
-    <div class="container" style="margin-top:5vh;margin-bottom:2vh;">
+    <div class="container mt-5 mb-2">
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
                 <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
             </div>
-            <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php?id=$id&action=edit" role="button">Update Password</a>
-            </div>     
+           
         </div>
     </div>
 
