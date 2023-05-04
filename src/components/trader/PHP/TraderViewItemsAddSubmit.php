@@ -4,7 +4,7 @@
             include('./connect.php');
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderItemAddName']) || empty($_POST['TraderItemAddCategory']) || empty($_POST['TraderItemAddDescription']) || empty($_POST['TraderItemAddStock']) 
-            || empty($_POST['TraderItemAddPrice']) || empty($_POST['TraderItemAddImage']) || empty($_POST['TraderItemAddDiscount']))
+            || empty($_POST['TraderItemAddPrice']) || empty($_POST['TraderItemAddDiscount']))
                 {
                     header('Location:./TraderViewItemsAdd.php?error=Please make sure all text fields are not empty.');
                 }
@@ -19,7 +19,7 @@
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
                     $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
-                    $TraderItemAddImageLocation = "../../dist/TraderItemImages/" . $TraderItemImage;
+                    $TraderItemAddImageLocation = "../../dist/TraderItemImages/" . $TraderItemAddImage;
                     if(!preg_match($alphabetPattern,$TraderItemAddName))
                         {                               
                             if(!preg_match($alphabetPattern,$TraderItemAddCategory))
@@ -34,29 +34,24 @@
                                                                 {
                                                                     if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                                         {
-                                            
-                                                                            $sql = "INSERT INTO PRODUCT(PRODUCT_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME ,PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
-                                                                            VALUES(PRODUCT_S.NEXTVAL ,:TraderItemAddCategory, :TraderItemAddImage, :TraderItemAddName, :TraderItemAddDescription, :TraderItemAddPrice, :TraderItemAddStock)";
+                                                                            $TraderItemAddCategoryID=1;
+                                                                            $TraderItemAddShopID=1;
+                                                                            $TraderItemAddCategory='Meat';
+                                                                            $query = "INSERT INTO PRODUCT(PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME ,PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                            VALUES(PRODUCT_S.NEXTVAL, :CATEGORY_ID, :SHOP_ID, :TraderItemAddCategory, :TraderItemAddImage, :TraderItemAddName, :TraderItemAddDescription, :TraderItemAddPrice, :TraderItemAddStock)";
                                                                             
-                                                                            $check = oci_parse($conn, $sql);
+                                                                            $result = oci_parse($conn, $query);
                                             
-                                                                            // bind parameters to statement
-                                                                            oci_bind_by_name($check, ':TraderItemAddCategory', $TraderItemAddCategory);
-                                                                            oci_bind_by_name($check, ':TraderItemAddImage',  $TraderItemAddImage);
-                                                                            oci_bind_by_name($check, ':TraderItemAddName', $TraderItemAddName);
-                                                                            oci_bind_by_name($check, ':TraderItemAddDescription', $TraderItemAddDescription);
-                                                                            oci_bind_by_name($check, ':TraderItemAddPrice', $TraderItemAddPrice);
-                                                                            oci_bind_by_name($check, ':TraderItemAddStock', $TraderItemAddStock);
-
-                                                                            // execute statement
-                                                                            $result = oci_execute($check);
-                                                                            if ($result) {
-                                                                                header('Location:./TraderViewItemsAdd.php?success=Registration Success!');
-                                                                                
-                                                                            } else {
-                                                                                header('Location:./TraderViewItemsAdd.php?error=Error');
-                                                                                
-                                                                            }
+                                                                            // bind parameters to statements
+                                                                            oci_bind_by_name($result, ':CATEGORY_ID', $TraderItemAddCategoryID);
+                                                                            oci_bind_by_name($result, ':SHOP_ID', $TraderItemAddShopID);
+                                                                            oci_bind_by_name($result, ':TraderItemAddCategory', $TraderItemAddCategory);
+                                                                            oci_bind_by_name($result, ':TraderItemAddImage',  $TraderItemAddImage);
+                                                                            oci_bind_by_name($result, ':TraderItemAddName', $TraderItemAddName);
+                                                                            oci_bind_by_name($result, ':TraderItemAddDescription', $TraderItemAddDescription);
+                                                                            oci_bind_by_name($result, ':TraderItemAddPrice', $TraderItemAddPrice);
+                                                                            oci_bind_by_name($result, ':TraderItemAddStock', $TraderItemAddStock);
+                                                                            oci_execute($result);
                                                                         }
                                                                     else
                                                                         {
