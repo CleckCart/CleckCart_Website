@@ -33,7 +33,7 @@
                             else{
                                     $_SESSION['error'] = 'Invalid Credentials!';
                             }
-                            header('Location:./CustomerSession.php');
+                            header('Location:../../customer/PHP/CustomerSession.php');
                         }
                     }
                 else

@@ -1,22 +1,22 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CleckCart</title>
-    <!--WebPage Icon-->
-    <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
+    <title>Contact</title>
+    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/about.css">
+    <link rel="stylesheet" href="../CSS/contactpage.css">
 </head>
-
 <body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src = "../../service/passwordVisibility.js"></script>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePageSession.php">
+                <a class="navbar-brand" href="./HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePageSession.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -66,11 +66,10 @@
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
+                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -80,8 +79,113 @@
                 </div>
             </div>
         </nav>
+        </div>
+
+    <div class="container-fluid mt-5 bg-secondary">
+        <div class="d-flex flex-column bd-highlight mb-3 text-center">
+            <div class = "custom-margin"></div>
+            <div class="p-2 bd-highlight">
+                <h1 class = "custom-font-heading">Get In Touch</h1>
+            </div>
+            <div class="p-2 bd-highlight">
+                Lorem, ipsum dolor sit amet consectetur
+            </div>
+            <div class = "custom-margin"></div>
+        </div>
     </div>
-        
+
+    <div class = "custom-margin"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-5 text-center p-5">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                <div class="p-2 bd-highlight">
+                    <div class="row bg-secondary align-items-center rounded">
+                        <div class="col-md-1">
+                            <div class="ellipse p-3">
+                                <img  src="../../../dist/public/call.svg" alt="call">
+                            </div>
+                        </div>
+                        <div class="col-md-11 text-center">
+                            <h6>Phone Number</h6>
+                            <p>000-000-000</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <div class="row bg-secondary align-items-center rounded">
+                        <div class="col-md-1">
+                            <div class="ellipse p-3">
+                                <img  src="../../../dist/public/message.svg" alt="call">
+                            </div>
+                        </div>
+                        <div class="col-md-11">
+                            <h6>Email-Address</h6>
+                            <p>cleckcart@gmail.com</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <div class="row bg-secondary align-items-center rounded">
+                        <div class="col-md-1">
+                            <div class="ellipse p-3">
+                                <img  src="../../../dist/public/location.svg" alt="call">
+                            </div>
+                        </div>
+                        <div class="col-md-11">
+                            <h6>Location</h6>
+                            <p>lorem ipsum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-md-7 rounded bg-secondary p-5">
+            <form method = "POST" action = "ContactSubmit.php" class = "p-5">
+                <h1>Send Message</h1>
+                <?php
+                if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                <?php }?>
+                <?php
+                    if(isset($_GET['success'])) {?>
+                    <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                <?php }?>
+                <div class="mb-3">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="exampleInputText1" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter Fullname" aria-label="Full name" name="ContactFullname">
+                        </div>
+                        <div class="col">
+                                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="ContactEmail">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="exampleInputText1" class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Phone Number" name="ContactPhone">
+                        </div>
+                        <div class="col">
+                            <label for="exampleInputText1" class="form-label">Subject</label>
+                            <input type="text" class="form-control" placeholder="Subject" aria-label="Subject" name="ContactSubject">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label for="floatingTextarea2" class="form-label">Message</label>
+                            <textarea class="form-control" placeholder="Message" style="height: 100px" name="ContactMessage"></textarea>
+                        </div>
+                    </div>
+                    <div class = "custom-margin"></div>
+                    <input type="submit" class="btn btn-primary w-25 " value = "Send Message" name = "ContactSendMessage" >
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class = "custom-margin"></div>
 
 
     <!--footer-->
@@ -133,6 +237,8 @@
                 </div>
             </div>
     </div>
+
     </footer>
+
 </body>
 </html>
