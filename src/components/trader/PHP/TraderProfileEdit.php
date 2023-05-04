@@ -83,7 +83,7 @@
                     <h5>Update Your Profile</h5>
                 </div>
                 <hr>
-                <form method="POST" action="./TraderProfileEditSubmit.php">
+                <form method="POST" action="./TraderProfileEditSubmit.php" enctype="multipart/form-data">
                     <?php
                     if (isset($_GET['error'])) { ?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>

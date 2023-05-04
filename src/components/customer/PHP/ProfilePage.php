@@ -105,7 +105,7 @@
             $row = oci_fetch_array($result, OCI_ASSOC);
             $id = $row['USER_ID'];
         ?>
-        <form m>
+        <form enctype="multipart/form-data">
             <fieldset disabled>
                 <div class="row">
                     <?php

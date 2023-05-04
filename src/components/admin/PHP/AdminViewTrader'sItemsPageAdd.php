@@ -98,7 +98,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php">
+            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php" enctype="multipart/form-data">
             <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
