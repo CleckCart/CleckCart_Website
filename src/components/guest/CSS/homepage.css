@@ -1,0 +1,30 @@
+.ellipse{
+    width: 170px;
+    height:170px;
+    border-radius:50%;
+    background-color: #54B175;
+    text-align: center;
+}
+.custom-margin {
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.btn-size {
+    padding: 24px 150px;
+    font-size: 18px;
+  }
+
+
+.btn-productsize {
+    padding: 10px 10px;
+  }
+
+  .btn-primary {
+    background-color: #54B175;
+  }
+
+.btn-outline-primary{
+    outline-color: #54B175;
+    color:white;
+}

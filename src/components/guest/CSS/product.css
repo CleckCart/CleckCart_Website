@@ -1,0 +1,61 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.product_page {
+  padding: 2rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.product_page--title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+#category-select {
+  font-size: 16px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #444;
+  width: 200px;
+  margin-bottom: 4rem;
+}
+
+#category-select option {
+  font-size: 16px;
+  background-color: #fff;
+  color: #444;
+}
+
+.card {
+  /* height: 20rem; */
+}
+
+.product_image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-size {
+  padding: 24px 150px;
+  font-size: 18px;
+}
+
+.btn-productsize {
+  padding: 10px 10px;
+}
+
+.btn-primary {
+  background-color: #54b175;
+}
+
+.btn-outline-primary {
+  outline-color: #54b175;
+  color: white;
+}
