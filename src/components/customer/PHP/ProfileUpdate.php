@@ -99,7 +99,7 @@
                     <h5>Update Profile</h5>
                 </div>
                 <hr>
-                <form method="POST" action="ProfileUpdateSubmit.php">
+                <form method="POST" action="ProfileUpdateSubmit.php" enctype="multipart/form-data">
                     <?php
                     if (isset($_GET['error'])) { ?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
