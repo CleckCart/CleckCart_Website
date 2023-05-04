@@ -108,6 +108,10 @@
             if(isset($_GET['error'])) {?>
                 <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
         <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
           <thead class="table-success">
             <tr>
               <th>Select</th>
