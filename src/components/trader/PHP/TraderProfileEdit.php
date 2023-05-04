@@ -132,10 +132,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
-                                    <select class="form-select" aria-label="Default select example" name="TraderGender">
-                                        <option value="Select" selected>Select</option>
+                                    <select class="form-select" aria-label="Default select example" name="TraderEditGender">
                                         <option value="Male">Male</option>
-
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
                                     </select>
