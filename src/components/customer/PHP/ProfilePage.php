@@ -9,23 +9,17 @@
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/contactpage.css">
-    <style>
-        .error_msg {
-            color: red;
-            font-size: 13px;
-        }
-    </style>
 </head>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../../service/passwordVisibility.js"></script>
     <!--NavBar-->
-    <div class="topbar">
+    <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePage.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width="70" height="70" alt="logo">
+                <a class="navbar-brand" href="./HomePageSession.php">
+                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +29,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./HomePageSession.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -74,27 +68,11 @@
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
                                 <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+                                <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Trader</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -104,7 +82,6 @@
                 </div>
             </div>
         </nav>
-
     </div>
 
     <div class="container">
@@ -119,7 +96,7 @@
     </div>
     <div class="container">
         <?php
-            include('connectSession.php');
+        require('../../trader/PHP/connectSession.php');
             $username = $_SESSION['username'];
             $query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
         
@@ -128,37 +105,46 @@
             $row = oci_fetch_array($result, OCI_ASSOC);
             $id = $row['USER_ID'];
         ?>
-        <form>
+        <form m>
             <fieldset disabled>
-                <div class="row ">
+                <div class="row">
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
                     <div class="col">
                         <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="disabledTextInput-fn" class="form-label">First Name</label>
-                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php
-                            $row['USERNAME']?>">
+                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php $row['FIRST_NAME']?>"/>
+
                             <label for="disabledTextInput-g" class="form-label" style="margin-top:1.5vh">Username</label>
-                            <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username">
+                            <input type="text" id="disabledTextInput-g" class="form-control" placeholder="<?php $row['USERNAME']?>"/>
+
                             <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
-                            <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address">
+                            <input type="text" id="disabledTextInput-add" class="form-control" placeholder="<?php $row['ADDRESS']?>"/>
+
                             <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Date of birth</label>
-                            <input type="date" id="disabledTextInput-ln" class="form-control">
+                            <input type="date" id="disabledTextInput-ln" class="form-control" placeholder="<?php $row['DATE_OF_BIRTH']?>"/>
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="disabledTextInput-ln" class="form-label">Last Name</label>
-                            <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="Last Name">
+                            <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php $row['LAST_NAME']?>"/>
+
                             <label for="disabledTextInput-email" class="form-label" style="margin-top:1.5vh">Email Address</label>
-                            <input type="text" id="disabledTextInput-email" class="form-control" placeholder="Email Address">
+                            <input type="text" id="disabledTextInput-email" class="form-control" placeholder="<?php $row['EMAIL']?>"/>
+
                             <label for="disabledTextInput-pn" class="form-label" style="margin-top:1.5vh">Phone Number</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number">
-                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Gender</label>
+                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php $row['PHONE_NUMBER']?>"/>
+
+                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh" >Gender</label>
                             <select id="disabledTextInput-ln" class="form-control"></select>
-                        </div>                       
-                    </div>                   
+                        </div>
+                    </div>
             </fieldset>
         </form>
     </div>
@@ -168,6 +154,9 @@
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
                 <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
+            </div>
+            <div class="col-sm-2">
+                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php?id=$id&action=edit" role="button">Update Password</a>
             </div>
            
         </div>
