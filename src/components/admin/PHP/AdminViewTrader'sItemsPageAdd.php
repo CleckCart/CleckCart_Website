@@ -107,48 +107,44 @@
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name" name="TraderAddItemName" placeholder="Product name">
+                    <input type="text" class="form-control" aria-label="Name" name="AdminAddItemName" placeholder="Product name">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
-                    <input type="text" class="form-control" aria-label="Category" name="TraderAddItemCategory" placeholder="Product category">
+                    <input type="text" class="form-control" aria-label="Category" name="AdminAddItemCategory" placeholder="Product category">
                     </select>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="TraderAddItemDescription"></textarea>
+                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="AdminAddItemDescription"></textarea>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderAddItemDate">
-                  </div>
+                <div class="row mb-3">                 
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemStock" placeholder="Product stock">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemStock" placeholder="Product stock">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemPrice" placeholder="Product price">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemPrice" placeholder="Product price">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderAddItemDiscount" placeholder="Product discount">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemDiscount" placeholder="Product discount">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderAddItemImage">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="AdminAddItemImage">
                   </div>
                 </div>
               </div>
           </div>
           <div class="modal-footer">
-            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="TraderAddItemSubmit">
+            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="AdminAddItemSubmit">
           </div>
           </form>
         </div>
