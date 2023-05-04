@@ -118,6 +118,16 @@
 
     </div>
     <div class="container">
+        <?php
+            include('connectSession.php');
+            $username = $_SESSION['username'];
+            $query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
+        
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+            $row = oci_fetch_array($result, OCI_ASSOC);
+            $id = $row['USER_ID'];
+        ?>
         <form>
             <fieldset disabled>
                 <div class="row ">
@@ -127,12 +137,14 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="disabledTextInput-fn" class="form-label">First Name</label>
-                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="First Name">
+                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php
+                            $row['USERNAME']?>">
                             <label for="disabledTextInput-g" class="form-label" style="margin-top:1.5vh">Username</label>
                             <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username">
                             <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
                             <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address">
-                            
+                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Date of birth</label>
+                            <input type="date" id="disabledTextInput-ln" class="form-control">
                         </div>
                     </div>
                     <div class="col">
@@ -143,8 +155,10 @@
                             <input type="text" id="disabledTextInput-email" class="form-control" placeholder="Email Address">
                             <label for="disabledTextInput-pn" class="form-label" style="margin-top:1.5vh">Phone Number</label>
                             <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number">
-                        </div>
-                    </div>
+                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Gender</label>
+                            <select id="disabledTextInput-ln" class="form-control"></select>
+                        </div>                       
+                    </div>                   
             </fieldset>
         </form>
     </div>
@@ -153,14 +167,9 @@
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php" role="button">Edit Profile</a>
+                <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
             </div>
-            <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php" role="button">Update Password</a>
-            </div>
-            <div class="col-sm-4"></div>
-
-            
+           
         </div>
     </div>
 

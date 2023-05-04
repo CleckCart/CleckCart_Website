@@ -15,6 +15,7 @@
                     $customerLastname = trim(filter_input(INPUT_POST, 'customerLastname', FILTER_SANITIZE_STRING));
                     $customerBirthDate = $_POST['customerBirthDate'];
                     $customerEmail = trim(filter_input(INPUT_POST, 'customerEmail', FILTER_SANITIZE_EMAIL));
+                    $customerGender = $_POST['customerGender'];
                     $customerPhone = trim(filter_input(INPUT_POST, 'customerPhone', FILTER_SANITIZE_NUMBER_INT));
                     $customerAddress = trim(filter_input(INPUT_POST, 'customerAddress', FILTER_SANITIZE_STRING));
                     $customerPassword = trim(filter_input(INPUT_POST, 'customerPassword', FILTER_SANITIZE_STRING));
@@ -43,8 +44,8 @@
                                                                             $customer_role = 'Customer';
                                                                             $customer_password = md5($customerPassword);
                                             
-                                                                            $sql = "INSERT INTO USER_TABLE(USERNAME,ROLE,FIRST_NAME,LAST_NAME,EMAIL,PASSWORD,DATE_OF_BIRTH,ADDRESS,PHONE_NUMBER)
-                                                                            VALUES(:customerUsername,:customer_role,:customerFirstname,:customerLastname,:customerEmail,:customer_password,:customerBirthDate,:customerAddress,:customerPhone)";
+                                                                            $sql = "INSERT INTO USER_TABLE(USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                                                                            VALUES(:customerUsername, :customer_role, :customerFirstname, :customerLastname, :customerEmail, :customerGender, :customer_password, :customerBirthDate, :customerAddress, :customerPhone)";
                                                                             
                                                                             $check = oci_parse($conn, $sql);
                                             
@@ -54,6 +55,7 @@
                                                                             oci_bind_by_name($check, ':customerFirstname', $customerFirstname);
                                                                             oci_bind_by_name($check, ':customerLastname', $customerLastname);
                                                                             oci_bind_by_name($check, ':customerEmail', $customerEmail);
+                                                                            oci_bind_by_name($check, ':customerGender', $customerGender);
                                                                             oci_bind_by_name($check, ':customer_password', $customer_password);
                                                                             oci_bind_by_name($check, ':customerBirthDate', $customerBirthDate);
                                                                             oci_bind_by_name($check, ':customerAddress', $customerAddress);

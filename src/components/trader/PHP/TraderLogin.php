@@ -171,6 +171,13 @@
                                 echo(trim($_POST['TraderLoginPassword']));
                             }
                         ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputText1" class="form-label">Role</label>
+                        <select class="form-select" aria-label="Default select example" name="UserRole" >
+                            <option value="Trader">Trader</option>
+                            <option value="Admin">Admin</option>
+                        </select>
                         <p class = "text-end"><a href = "#">Forgot Password?</a></p>
                     </div>
 
