@@ -17,7 +17,7 @@
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePageSession.php">
+                <a class="navbar-brand" href="./CustomerSession.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePageSession.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->

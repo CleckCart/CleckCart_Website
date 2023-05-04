@@ -16,7 +16,7 @@
     <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePage.php">
+                <a class="navbar-brand" href="../../guest/PHP/HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="../../guest/PHP/HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -35,7 +35,7 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
+                                <li><a class="dropdown-item" href="../../guest/PHP/Categories.php">Category</a></li>
                                 <li><a class="dropdown-item" href="#">Another action</a></li>
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
@@ -46,11 +46,11 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <a class="nav-link mr-3" href="../../guest/PHP/About.php">ABOUT</a>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <a class="nav-link mr-3" href="=../../guest/PHP/Contact.php">CONTACT</a>
                         </li>
                     </ul>
 
