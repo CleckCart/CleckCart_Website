@@ -81,7 +81,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="TraderViewItemsAddSubmit.php">
+            <form method="POST" action="./TraderViewItemsAddSubmit.php" enctype="multipart/form-data">
             <?php
                 if(isset($_GET['error'])) {?>
                   <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -104,10 +104,6 @@
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <div class="col">
-                    <label for="date" class="form-label">Added Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="date" name="TraderItemAddDate">
-                  </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
                     <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemAddStock">
