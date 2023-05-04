@@ -118,6 +118,16 @@
 
     </div>
     <div class="container">
+        <?php
+            include('connectSession.php');
+            $username = $_SESSION['username'];
+            $query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
+        
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+            $row = oci_fetch_array($result, OCI_ASSOC);
+            $id = $row['USER_ID'];
+        ?>
         <form>
             <fieldset disabled>
                 <div class="row ">
@@ -127,7 +137,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="disabledTextInput-fn" class="form-label">First Name</label>
-                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="First Name">
+                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php
+                            $row['USERNAME']?>">
                             <label for="disabledTextInput-g" class="form-label" style="margin-top:1.5vh">Username</label>
                             <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username">
                             <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
@@ -156,50 +167,11 @@
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php" role="button">Edit Profile</a>
+                <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
             </div>
             <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php" role="button">Update Password</a>
-            </div>
-            <div class="col-sm-4"></div>
-
-
-
-            <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Change Password</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="current-password">Enter Current Password</label>
-                                            <input type="password" id="current-password" class="form-control form-control-sm" placeholder="Current Password">
-                                            <label for="new-password" style="margin-top:3vh">Enter New Password</label>
-                                            <input type="password" id="new-password" class="form-control form-control-sm" placeholder="New Password">
-                                            <label for="re-enter-new-password" style="margin-top:3vh">Re-Enter New Password</label>
-                                            <input type="text" id="re-enter-new-password" class="form-control form-control-sm" placeholder="New Password" style="margin-bottom:3vh">
-
-                                        </div>
-                                        <div class="col">
-                                            <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="120" height="120">
-                                            <input type="submit" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh" value="Update Password">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- <div class="modal-footer"> -->
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                        <!-- </div> -->
-                    </div>
-                </div>
-            </div>
-            
+                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php?id=$id&action=edit" role="button">Update Password</a>
+            </div>     
         </div>
     </div>
 
