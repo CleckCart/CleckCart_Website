@@ -8,8 +8,18 @@
                     $TraderEditEmail = trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL));
                     $TraderEditPhone = trim(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_SANITIZE_NUMBER_INT));
                     $TraderEditAddress = trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING));
+                    $TraderEditGender = $_POST['TraderEditGender'];
+                    $TraderEditImage = ($_FILES["TraderEditImage"]["name"]);
+                    $TraderEditImageType = ($_FILES["TraderEditImage"]["type"]);
+                    $TraderEditImageTmpName = ($_FILES["TraderEditImage"]["tmp_name"]);
+                    $TraderEditImageLocation = "TraderImages/" . $TraderEditImage;
 
                     /*Check if username is of 5-10 characters*/
+                    if (empty($_POST['TraderEditFirstname']) || empty($_POST['TraderEditLastname']) || empty($_POST['TraderEditUsername']) || empty($_POST['TraderEditEmail']) 
+                    || empty($_POST['TraderEditPhone']) || empty($_POST['TraderEditGender']) || empty($_POST['TraderEditImage']) || empty($_POST['TraderEditAddress'])) 
+                        {
+                            
+                        }
                     if(strlen($TraderEditUsername) >= 5 && strlen($TraderEditUsername) <= 10)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
@@ -21,7 +31,13 @@
                                                 {
                                                     if (!empty($_POST['TraderEditDate']))
                                                         {
-
+                                                            if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
+                                                                {
+                                                                }
+                                                            else
+                                                                {
+                                                                    header('Location:./TraderProfileEdit.php?error=Please choose an image.');
+                                                                }
                                                         }
 
                                                     else
