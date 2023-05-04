@@ -149,7 +149,7 @@
         </form>
     </div>
 
-    <div class="container" style="margin-top:5vh;margin-bottom:2vh;">
+    <div class="container mt-5 mb-2">
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
@@ -160,42 +160,6 @@
             </div>
             <div class="col-sm-4"></div>
 
-
-
-            <div class="modal fade " id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h1 class="modal-title fs-5 w-100" id="staticBackdropLabel">Change Password</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container">
-                                <form>
-                                    <div class="row">
-                                        <div class="col">
-                                            <label for="current-password">Enter Current Password</label>
-                                            <input type="password" id="current-password" class="form-control form-control-sm" placeholder="Current Password">
-                                            <label for="new-password" style="margin-top:3vh">Enter New Password</label>
-                                            <input type="password" id="new-password" class="form-control form-control-sm" placeholder="New Password">
-                                            <label for="re-enter-new-password" style="margin-top:3vh">Re-Enter New Password</label>
-                                            <input type="text" id="re-enter-new-password" class="form-control form-control-sm" placeholder="New Password" style="margin-bottom:3vh">
-
-                                        </div>
-                                        <div class="col">
-                                            <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="120" height="120">
-                                            <input type="submit" class=" w-100 btn btn-primary btn-sm" style="margin-top:6.5vh" value="Update Password">
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <!-- <div class="modal-footer"> -->
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                        <!-- </div> -->
-                    </div>
-                </div>
-            </div>
             
         </div>
     </div>
