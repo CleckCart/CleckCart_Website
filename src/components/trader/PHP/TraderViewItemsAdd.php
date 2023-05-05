@@ -83,6 +83,10 @@
           <div class="modal-body">
             <form method="POST" action="./TraderViewItemsAddSubmit.php" enctype="multipart/form-data">
             <?php
+                if(isset($_GET['success'])) {?>
+                  <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+            <?php }?>
+            <?php
                 if(isset($_GET['error'])) {?>
                   <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
             <?php }?>
