@@ -22,7 +22,13 @@ $id = $row['USER_ID'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
-
+    <link rel="stylesheet" href="../CSS/profilepage.css">
+    <style>
+        .error_msg {
+            color: red;
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,13 +40,12 @@ $id = $row['USER_ID'];
     <script src="../../service/passwordVisibility.js"></script>
     <!-- <script src="../../service/test.js"></script> -->
 
-
-    <!--NavBar-->
-    <div class = "topbar">
+<!--NavBar-->
+<div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePageSession.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
+                <a class="navbar-brand" href="./HomePage.php">
+                    <img src="./../../../dist/public/logo.png" class="img-fluid" width="70" height="70" alt="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +55,7 @@ $id = $row['USER_ID'];
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePageSession.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -89,11 +94,27 @@ $id = $row['USER_ID'];
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Trader</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -103,6 +124,7 @@ $id = $row['USER_ID'];
                 </div>
             </div>
         </nav>
+
     </div>
     <?php
     // echo $id;
@@ -115,11 +137,11 @@ $id = $row['USER_ID'];
         if (($CustomerProfileImageType == "image/jpeg" || $CustomerProfileImageType == "image/jpg" || $CustomerProfileImageType == "image/png")) {
 
             $ProfileQuery = "UPDATE USER_TABLE SET IMAGE=:images WHERE USER_ID=:USER_ID";
-                                                                                
+
             $ProfileRunQuery = oci_parse($conn, $ProfileQuery);
-       
+
             oci_bind_by_name($ProfileRunQuery, ':images', $CustomerProfileImage);
-    
+
             oci_execute($ProfileRunQuery);
         }
 
@@ -131,7 +153,7 @@ $id = $row['USER_ID'];
         //     header('Location:./ProfilePage.php?error=Error. Please Try Again');
         // }
 
-      
+
     }
 
     ?>
@@ -148,6 +170,90 @@ $id = $row['USER_ID'];
 
     <div class="container">
 
+        <div class="row ">
+            <div class="col-sm-4 d-flex justify-content-center ">
+                <?php
+                if (isset($_GET['error'])) { ?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
+                <?php } ?>
+                <?php
+                if (isset($_GET['success'])) { ?>
+                    <div class='alert alert-success text-center' role='alert'><?php echo ($_GET['success']); ?></div>
+                <?php } ?>
+                <div class="profile-img-container">
+                    <form method="POST" id="form1">
+
+                        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img-thumbnail img-circle img-responsive" />
+                        <i class="fa fa-upload fa-5x"></i>
+                        <!-- <input type="file" name="test"> -->
+                        <input type='file' id='uploadfile' name="CustomerProfileImage" class="image-input" onchange="toggleSubmitButton()">
+                        <script>
+                            $('.profile-img-container img').click(function() {
+                                $('#uploadfile').click();
+                            });
+
+                            function toggleSubmitButton() {
+                                var inputFile = document.querySelector('.image-input');
+                                var submitButton = document.querySelector('#image-button');
+                                var imageName = document.getElementById('image-name');
+                                if (inputFile.files.length > 0) {
+                                    imageName.textContent = inputFile.files[0].name;
+                                    submitButton.style.display = 'block';
+                                } else {
+                                    imageName.textContent = '';
+                                    submitButton.style.display = 'none';
+                                }
+                            }
+                        </script>
+                        <span id="image-name"></span>
+                        <input type="submit" class="btn btn-primary w-50 " id="image-button" value="Upload" name="profileimagesubmit">
+
+                    </form>
+                </div>
+
+            </div>
+            <div class="col-sm-8">
+                <form>
+                    <fieldset disabled>
+                        <div class="row">
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="disabledTextInput-fn" class="form-label mt-2">First Name</label>
+                                    <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['FIRST_NAME'] ?>">
+                                    <label for="disabledTextInput-g" class="form-label mt-2">Username</label>
+                                    <input type="text" id="disabledTextInput-g" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['USERNAME'] ?>">
+                                    <label for="disabledTextInput-add" class="form-label mt-2">Address</label>
+                                    <input type="text" id="disabledTextInput-add" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['ADDRESS'] ?>">
+                                    <label for="disabledTextInput-ln" class="form-label mt-2">Date of birth</label>
+                                    <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['DATE_OF_BIRTH'] ?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+
+                                <div class="form-group">
+                                    <label for="disabledTextInput-ln" class="form-label mt-2">Last Name</label>
+                                    <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['LAST_NAME'] ?>">
+                                    <label for="disabledTextInput-email" class="form-label mt-2">Email Address</label>
+                                    <input type="text" id="disabledTextInput-email" class="form-control" placeholder="<?php echo
+                                                                                                                        $row['EMAIL'] ?>">
+                                    <label for="disabledTextInput-pn" class="form-label mt-2">Phone Number</label>
+                                    <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['PHONE_NUMBER'] ?>">
+                                    <label for="disabledTextInput-ln" class="form-label mt-2">Gender</label>
+                                    <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['GENDER'] ?>">
+                                </div>
+                            </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
     <!-- <div class="col">
                     </div> -->
