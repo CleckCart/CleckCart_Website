@@ -20,52 +20,52 @@
 <script src="../../service/sidebartoggle.js"></script>
 
 <body>
-    <!-- Vertical navbar -->
-    <div class="vertical-nav bg-white border" id="sidebar">
-        <div class="py-4 px-3 mb-4 bg-light">
-            <div class="media d-flex align-items-center">
-                <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
-                <div class="media-body">
-                    <h4 class="m-0">Lorem ipsum</h4>
-                </div>
-            </div>
-        </div>
-
-        <ul class="nav flex-column bg-white mb-0">
-            <li class="nav-item">
-                <a href="./TraderDashboard.php" class="nav-link text-dark">
-                    <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="./TraderViewItemsPage.php" class="nav-link text-dark">
-                    <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="./TraderManageProfile.php" class="nav-link text-dark">
-                    <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-dark">
-                    <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="../../customer/PHP/HomePage.php" class="nav-link text-dark">
-                    <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-dark">
-                    <i class="fa-solid fa-power-off m-3"></i></i>
-                    Log Out
-                </a>
-            </li>
-        </ul>
+        <!-- Vertical navbar -->
+        <div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Lorem ipsum</h4>
+      </div>
     </div>
-    <!-- End vertical navbar -->
+  </div>
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="./TraderDashboard.php" class="nav-link text-dark">
+        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./TraderViewItems.php" class="nav-link text-dark">
+        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./TraderManageProfile.php" class="nav-link text-dark">
+      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
+        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./TraderLogout.php" class="nav-link text-dark">
+        <i class="fa-solid fa-power-off m-3"></i></i>
+                Log Out
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
 
 
     <!-- Page content holder -->
@@ -83,7 +83,7 @@
                     <h5>Update Your Profile</h5>
                 </div>
                 <hr>
-                <form method="POST" action="./TraderProfileEditSubmit.php">
+                <form method="POST" action="./TraderProfileEditSubmit.php" enctype="multipart/form-data">
                     <?php
                     if (isset($_GET['error'])) { ?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
@@ -132,10 +132,8 @@
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
-                                    <select class="form-select" aria-label="Default select example" name="TraderGender">
-                                        <option value="Select" selected>Select</option>
+                                    <select class="form-select" aria-label="Default select example" name="TraderEditGender">
                                         <option value="Male">Male</option>
-
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
                                     </select>

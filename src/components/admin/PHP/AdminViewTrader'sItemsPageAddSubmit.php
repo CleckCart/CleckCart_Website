@@ -1,59 +1,66 @@
 <?php
         /*Check if form is submitted*/
-        if (isset($_POST['TraderAddItemSubmit'])) {
+        if (isset($_POST['AdminAddItemSubmit'])) {
             /*Check if all fields are filled*/ 
-            if (empty($_POST['TraderAddItemName']) || empty($_POST['TraderAddItemCategory']) || empty($_POST['TraderAddItemDescription']) || empty($_POST['TraderAddItemStock']) 
-            || empty($_POST['TraderAddItemPrice']) || empty($_POST['TraderAddItemDiscount'])) 
+            if (empty($_POST['AdminAddItemName']) || empty($_POST['AdminAddItemCategory']) || empty($_POST['AdminAddItemDescription']) || empty($_POST['AdminAddItemStock']) 
+            || empty($_POST['AdminAddItemPrice']) || empty($_POST['AdminAddItemImage'])) 
                 {
                     header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please make sure all text fields are not empty.');
                 }
             else
                 {
-                    $TraderAddItemName = trim(filter_input(INPUT_POST, 'TraderAddItemName', FILTER_SANITIZE_STRING));
-                    $TraderAddItemCategory = trim(filter_input(INPUT_POST, 'TraderAddItemCategory', FILTER_SANITIZE_STRING));
-                    $TraderAddItemDescription = trim(filter_input(INPUT_POST, 'TraderAddItemDescription', FILTER_SANITIZE_STRING));
-                    $TraderAddItemDate = $_POST['TraderAddItemDate'];
-                    $TraderAddItemStock = trim(filter_input(INPUT_POST, 'TraderAddItemStock', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderAddItemPrice = trim(filter_input(INPUT_POST, 'TraderAddItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $TraderAddItemDiscount = trim(filter_input(INPUT_POST, 'TraderAddItemDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
+                    $AdminAddItemName = trim(filter_input(INPUT_POST, 'AdminAddItemName', FILTER_SANITIZE_STRING));
+                    $AdminAddItemCategory = trim(filter_input(INPUT_POST, 'AdminAddItemCategory', FILTER_SANITIZE_STRING));
+                    $AdminAddItemDescription = trim(filter_input(INPUT_POST, 'AdminAddItemDescription', FILTER_SANITIZE_STRING));
+                    $AdminAddItemDate = $_POST['AdminAddItemDate'];
+                    $AdminAddItemStock = trim(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_SANITIZE_NUMBER_INT));
+                    $AdminAddItemPrice = trim(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));
+                    $AdminAddItemDiscount = trim(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
-                    if(!preg_match($alphabetPattern,$TraderAddItemName))
+                    $AdminAddItemImage = ($_FILES["AdminAddItemImage"]["name"]);
+                    $AdminAddItemImageType = ($_FILES["AdminAddItemImage"]["type"]);
+                    $AdminAddItemImageTmpName = ($_FILES["AdminAddItemImage"]["tmp_name"]);
+                    $AdminAddItemImageLocation = "AdminAddItemImages/" . $AdminAddItemImage;
+                    if(!preg_match($alphabetPattern,$AdminAddItemName))
                         {                               
-                            if(!preg_match($alphabetPattern,$TraderAddItemCategory))
+                            if(!preg_match($alphabetPattern,$AdminAddItemCategory))
                                 {
-                                    if(!preg_match($alphabetPattern,$TraderAddItemDescription))
+                                    if(!preg_match($alphabetPattern,$AdminAddItemDescription))
                                         {
-                                            if (!empty($_POST['TraderAddItemDate']))
+                                            if(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_VALIDATE_INT) == true)
                                                 {
-                                                    if(filter_input(INPUT_POST, 'TraderAddItemStock', FILTER_VALIDATE_INT) == true)
+                                                    if(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
                                                         {
-                                                            if(filter_input(INPUT_POST, 'TraderAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
+                                                            if(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_VALIDATE_FLOAT) == true)
                                                                 {
-                                                                    if(filter_input(INPUT_POST, 'TraderAddItemDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                                    if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
                                                                         {
-                                                                            
                                                                         }
+
                                                                     else
                                                                         {
-                                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product discount.');
+                                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
                                                                         }
                                                                 }
+
                                                             else
                                                                 {
-                                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product price.');
+                                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product discount.');
                                                                 }
                                                         }
+
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type integer numbers in product stock.');
+                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product price.');
                                                         }
                                                 }
+
                                             else
                                                 {
-                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please pick the added date of the product.');
+                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type integer numbers in product stock.');
                                                 }
-                                          
                                         }
+                                          
                                     else
                                         {
                                             header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please use alphabets only in product description.');
@@ -66,6 +73,7 @@
                                 }
                             
                         }
+
                     else
                         {   
                             header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please use alphabets only in product name.');                   

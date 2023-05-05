@@ -1,75 +1,120 @@
 <?php
-        /*Check if form is submitted*/
-        if (isset($_POST['TraderItemAddSubmit'])) {
-            /*Check if all fields are filled*/ 
-            if (empty($_POST['TraderItemAddName']) || empty($_POST['TraderItemAddCategory']) || empty($_POST['TraderItemAddDescription']) || empty($_POST['TraderItemAddStock']) 
-            || empty($_POST['TraderItemAddPrice']) || empty($_POST['TraderItemAddDiscount'])) 
-                {
-                    header('Location:./TraderViewItemsEdit.php?error=Please make sure all text fields are not empty.');
-                }
-            else
-                {
-                    $TraderItemAddName = trim(filter_input(INPUT_POST, 'TraderItemAddName', FILTER_SANITIZE_STRING));
-                    $TraderItemAddCategory = trim(filter_input(INPUT_POST, 'TraderItemAddCategory', FILTER_SANITIZE_STRING));
-                    $TraderItemAddDescription = trim(filter_input(INPUT_POST, 'TraderItemAddDescription', FILTER_SANITIZE_STRING));
-                    $TraderItemAddDate = $_POST['TraderItemAddDate'];
-                    $TraderItemAddStock = trim(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderItemAddPrice = trim(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $TraderItemAddDiscount = trim(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $alphabetPattern = "/[^a-zA-Z\s]/";
-                    if(!preg_match($alphabetPattern,$TraderItemAddName))
-                        {                               
-                            if(!preg_match($alphabetPattern,$TraderItemAddCategory))
+/*Check if form is submitted*/
+if (isset($_POST['TraderItemAddSubmit'])) {
+    include('./connect.php');
+    /*Check if all fields are filled*/ 
+    if (empty($_POST['TraderItemAddName']) || empty($_POST['TraderItemAddCategory']) || empty($_POST['TraderItemAddDescription']) || empty($_POST['TraderItemAddStock']) 
+    || empty($_POST['TraderItemAddPrice']) || empty($_POST['TraderItemAddDiscount']))
+        {
+            header('Location:./TraderViewItemsAdd.php?error=Please make sure all text fields are not empty.');
+        }
+    else
+        {
+            $TraderItemAddName = trim(filter_input(INPUT_POST, 'TraderItemAddName', FILTER_SANITIZE_STRING));
+            $TraderItemAddCategory = trim(filter_input(INPUT_POST, 'TraderItemAddCategory', FILTER_SANITIZE_STRING));
+            $TraderItemAddDescription = trim(filter_input(INPUT_POST, 'TraderItemAddDescription', FILTER_SANITIZE_STRING));
+            $TraderItemAddStock = trim(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_SANITIZE_NUMBER_INT));
+            $TraderItemAddPrice = trim(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_SANITIZE_NUMBER_FLOAT));
+            $TraderItemAddDiscount = trim(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
+            $alphabetPattern = "/[^a-zA-Z\s]/";
+            $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
+            $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
+            $TraderItemAddImageLocation = "../../dist/TraderItemImages/" . $TraderItemAddImage;
+            if(!preg_match($alphabetPattern,$TraderItemAddName))
+                {                               
+                    if(!preg_match($alphabetPattern,$TraderItemAddCategory))
+                        {
+                            if(!preg_match($alphabetPattern,$TraderItemAddDescription))
                                 {
-                                    if(!preg_match($alphabetPattern,$TraderItemAddDescription))
+                                    if(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_VALIDATE_INT) == true)
                                         {
-                                            if (!empty($_POST['TraderItemAddDate'])) 
+                                            if(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_VALIDATE_FLOAT) == true)
                                                 {
-                                                    if(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_VALIDATE_INT) == true)
+                                                    if(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_VALIDATE_FLOAT) == true)
                                                         {
-                                                            if(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_VALIDATE_FLOAT) == true)
+                                                            if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                                 {
-                                                                    if(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_VALIDATE_FLOAT) == true)
-                                                                        {
+                                                                    $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemAddCategory'";
+                                                                    $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                                    oci_execute($runCheckCategoryQuery);
+
+                                                                    $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                                        if($row['CATEGORY_NAME']==$TraderItemAddCategory)
+                                                                            {
+                                                                                $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$TraderItemAddCategory'";
+                                                                                $result2 = oci_parse($conn, $query2);
+                                                                                oci_execute($result2);
+                                                                                $row1 = oci_fetch_array($result2, OCI_ASSOC);
+                                                                                $TraderItemAddCategoryID=$row1['CATEGORY_ID'];
+                                                                                $TraderItemAddCategoryName=$row1['CATEGORY_NAME'];
+    
+                                                                                $query3="SELECT * FROM SHOP WHERE SHOP_NAME ='$TraderItemAddCategory'";
+                                                                                $result3 = oci_parse($conn, $query3);
+                                                                                oci_execute($result3);
+                                                                                $row2 = oci_fetch_array($result3, OCI_ASSOC);
+                                                                                $TraderItemAddShopID=$row2['SHOP_ID'];
+                                                                                $TraderItemAddShopName=$row2['SHOP_NAME'];
+                                                                                echo($TraderItemAddShopID); 
+
+                                                                                $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                                VALUES(PRODUCT_S.NEXTVAL , :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
+                                                                                $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $TraderItemAddCategoryID);   
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                         
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategoryName);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $$TraderItemAddImage);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $TraderItemAddName);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $TraderItemAddDescription);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $TraderItemAddStock);
+                                                                                oci_execute($ProductRunInsertionQuery);
+                                                                                header('Location:./TraderViewItemsAdd.php?success=Product Listing Requested.');
+                                                                            }
+
+                                                                        else 
+                                                                            {
+                                                                                header('Location:./TraderViewItemsAdd.php?error=Please enter a valid category.');
+                                                                            }
                                                                             
-                                                                        }
-                                                                    else
-                                                                        {
-                                                                            header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product discount.');
-                                                                        }
+                                                                    
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product price.');
+                                                                    header('Location:./TraderViewItemsAdd.php?error=Please choose an image.');
                                                                 }
                                                         }
-
                                                     else
                                                         {
-                                                            header('Location:./TraderViewItemsEdit.php?error=Please type integer numbers in product stock.');
+                                                            header('Location:./TraderViewItemsAdd.php?error=Please type decimal numbers in product discount.');
                                                         }
                                                 }
                                             else
                                                 {
-                                                    header('Location:./TraderViewItemsEdit.php?error=Please pick the added date of the product.');
-                                                }                                           
+                                                    header('Location:./TraderViewItemsAdd.php?error=Please type decimal numbers in product price.');
+                                                }
                                         }
+
                                     else
                                         {
-                                            header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product description.');
-                                        }        
-                                }   
-                                
+                                            header('Location:./TraderViewItemsAdd.php?error=Please type integer numbers in product stock.');
+                                        }                                          
+                                }
                             else
                                 {
-                                    header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product category.');
-                                }
-                            
-                        }
+                                    header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product description.');
+                                }        
+                        }   
+                        
                     else
-                        {   
-                            header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product name.');                   
+                        {
+                            header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product category.');
                         }
+                    
                 }
-            }
+            else
+                {   
+                    header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product name.');                   
+                }
+        }
+    }
     ?>

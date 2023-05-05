@@ -37,7 +37,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderViewItemsPage.php" class="nav-link text-dark">
+      <a href="./TraderViewItems.php" class="nav-link text-dark">
         <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
@@ -52,7 +52,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="../../customer/PHP/HomePage.php" class="nav-link text-dark">
+      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
         <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
       </a>
     </li>

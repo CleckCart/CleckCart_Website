@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminViewTraders</title>
+  <title>AdminApproveTrader'sItems</title>
   <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
   <!--font awesome CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,8 +23,7 @@
 </head>
 
 <body>
-
-   <!-- Vertical navbar -->
+<!-- Vertical navbar -->
 <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
@@ -91,6 +90,7 @@
 </div>
 <!-- End vertical navbar -->
 
+
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
     <!-- Toggle button -->
@@ -98,66 +98,73 @@
 
     <!-- Demo content -->
     <!--Code -->
-          <div class="container bg-light">
-            <div class="modal-header text-center">
-              <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Trader</h5>
-            </div>
-            <div class="modal-body">
-              <form method="POST" action="AdminViewTraderEditSubmit.php">
-              <?php
-                if(isset($_GET['error'])) {?>
-                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-              <?php }?>
-                <div class="mb-3">
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">First Name</label>
-                      <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderEditFirstName">
-                    </div>
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Last Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderEditLastName">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Username</label>
-                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username" name="TraderEditUserName">
-                    </div>
-                    <div class="col">
-                      <label for="exampleInputEmail1" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="TraderEditEmail">
-                    </div>
-                  </div>
 
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Address</label>
-                      <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="TraderEditAddress">
-                    </div>
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Phone</label>
-                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderEditPhone">
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="file" class="form-label">Image</label>
-                      <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditImage">
-                    </div>
-                    <div class="col">
-                      <label for="date" class="form-label">Date of birth</label>
-                      <input type="date" class="form-control" id="date" aria-label="Date" name="TraderEditDate">
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <input type="submit" class="btn btn-primary w-100 " value="Update" name="TraderEditSubmit">
-            </div>
-            </form>
-          </div>
-    <!-- End demo content -->
+    <div class="container">
+      <div class="row bg-success">
+        <div class="col-12 p-5">
+          <h1>Approve Trader</h1>
+        </div>
+      </div>
+      <div class="row table-responsive">
+        <table class="table table-light table-striped text-center">
+        <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
+          <thead class="table-success">
+            <tr>
+              <th>Select</th>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Firstame</th>
+              <th>Lastname</th>
+              <th>Email</th>
+              <th>Category</th>
+              <th>Gender</th>
+              <th>Date of birth</th>
+              <th>Address</th>
+              <th>Phonenumber</th>
+              <th colspan=2>Actions</th>
+              <th></th>
+            </tr>
+          </thead>
+          <?php
+          include('connect.php');
+          $query = "SELECT * FROM APPLY_TRADER ORDER BY APPLY_ID";
+          $result = oci_parse($conn, $query);
+          oci_execute($result);
+                               
+          
+          while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $id=$row['APPLY_ID'];
+            echo('<tr><td><input type = "checkbox"/></td>');
+            echo("<td>$row[APPLY_ID]</td>");
+            echo("<td>$row[USERNAME]</td>");
+            echo("<td>$row[FIRST_NAME]</td>");
+            echo("<td>$row[LAST_NAME]</td>");
+            echo("<td>$row[EMAIL]</td>");     
+            echo("<td>$row[SHOP_CATEGORY]</td>");
+            echo("<td>$row[GENDER]</td>");
+            echo("<td>$row[DATE_OF_BIRTH]</td>");
+            echo("<td>$row[ADDRESS]</td>");
+            echo("<td>$row[PHONE_NUMBER]</td>");
+            echo("<td><a href='Approved.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo("<td><a href='Refused.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            echo("<td></td>");
+            echo("</tr>");
+          }
+          ?>
+        </table>
+      </div>
+    </div>
+
+
+  </div>
+  <!-- End demo content -->
 </body>
 
 </html>

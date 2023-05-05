@@ -24,66 +24,71 @@
 
 <body>
   <!-- Vertical navbar -->
-  <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4 bg-light">
-      <div class="media d-flex align-items-center">
-        <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
-        <div class="media-body">
-          <h4 class="m-0">Admin</h4>
-        </div>
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Admin</h4>
       </div>
     </div>
-
-    <ul class="nav flex-column bg-white mb-0">
-      <li class="nav-item">
-        <a href="./AdminDashboard.php" class="nav-link text-dark">
-          <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
-          <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
-          <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark">
-          <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="../../customer/PHP/HomePage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-square-check m-3"></i>Approve Products
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark">
-          <i class="fa-solid fa-power-off m-3"></i></i>
-          Log Out
-        </a>
-      </li>
-    </ul>
   </div>
-  <!-- End vertical navbar -->
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="./AdminDashboard.php" class="nav-link text-dark">
+        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
+        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
+      <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
+        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminApproveTrader.php" class="nav-link text-dark">
+      <i class="fa-solid fa-users m-3"></i>Approve Traders
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-square-check m-3"></i>Approve Products
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminLogout.php" class="nav-link text-dark">
+        <i class="fa-solid fa-power-off m-3"></i></i>
+                Log Out
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
 
 
   <!-- Page content holder -->
@@ -98,8 +103,6 @@
       <div class="row bg-success">
         <div class="col-12 p-5">
           <h1>Approve Products</h1>
-        </div><br />
-        <div class="col mt-5 text-end">
         </div>
       </div>
       <div class="row table-responsive">
@@ -108,37 +111,42 @@
             <tr>
               <th>Select</th>
               <th>ID</th>
-              <th>Image</th>
-              <th>Product Name</th>
-              <th>Trader Username</th>
-              <th>Description</th>
+              <th>Username</th>
+              <th>Firstame</th>
+              <th>Lastname</th>
+              <th>Email</th>
               <th>Category</th>
-              <th>Price</th>
-              <th>Date</th>
+              <th>Gender</th>
+              <th>Date of birth</th>
+              <th>Address</th>
+              <th>Phonenumber</th>
               <th colspan=2>Actions</th>
               <th></th>
             </tr>
           </thead>
           <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-                      <tr>
-                        <td>
-                          <input type = "checkbox"/>
-                        </td>
-                        <td>1</td>
-                        <td>Ipsum.jpg</td>
-                        <td>lorem</td>
-                        <td>ipsum8</td>
-                        <td>Lorem, Ipsum asd asda sda sd asdasdasdasdasd</td>
-                        <td>Lorem</td>
-                        <td>&pound;100</td>
-                        <td>2023/04/04</td>
-                        <td><a href="#"><i class="fa-sharp fa-solid fa-circle-check" style="color:green;"></i></i></a></td>
-                        <td><a href="#"><i class="fa-solid fa-circle-xmark" style="color:red;"></i></a></td>
-                        <td></td>
-                      </tr>
-                    ';
+          include('connect.php');
+          $query = "SELECT * FROM APPLY_TRADER ORDER BY APPLY_ID";
+          $result = oci_parse($conn, $query);
+          oci_execute($result);
+                               
+          
+          while($row = oci_fetch_array($result, OCI_ASSOC)){
+            // echo('<tr><td><input type = "checkbox"/></td>');
+            // echo("<td>$row[APPLY_ID]</td>");
+            // echo("<td>$row[USERNAME]</td>");
+            // echo("<td>$row[FIRST_NAME]</td>");
+            // echo("<td>$row[LAST_NAME]</td>");
+            // echo("<td>$row[EMAIL]</td>");     
+            // echo("<td>$row[SHOP_CATEGORY]</td>");
+            // echo("<td>$row[GENDER]</td>");
+            // echo("<td>$row[DATE_OF_BIRTH]</td>");
+            // echo("<td>$row[ADDRESS]</td>");
+            // echo("<td>$row[PHONE_NUMBER]</td>");
+            // echo("<td><a href='#'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            // echo("<td><a href='#'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            // echo("<td></td>");
+            // echo("</tr>");
           }
           ?>
         </table>

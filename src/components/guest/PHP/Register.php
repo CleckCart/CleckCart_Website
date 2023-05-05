@@ -18,17 +18,17 @@
                 <a class="navbar-brand" href="./HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
                             <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
-    
+
                         <li class="nav-item dropdown me-5"><!---->
                             <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
@@ -39,20 +39,20 @@
                                 <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
-    
+
                         <li class="nav-item me-5">
                             <a class="nav-link" href="#">SALE</a>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="../About.php">ABOUT</a>
+                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
                         </li>
-    
+
                         <li class="nav-item me-5">
                             <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
-                    
+
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
@@ -69,9 +69,6 @@
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -80,8 +77,8 @@
                     </ul>
                 </div>
             </div>
-        </nav>      
-    </div>
+        </nav>
+        </div>
 
     <!--form-->
     <div class="container-fluid p-5">
