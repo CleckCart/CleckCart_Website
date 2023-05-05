@@ -23,6 +23,7 @@ $id = $row['USER_ID'];
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/profilepage.css">
+
 </head>
 
 <body>
@@ -34,13 +35,12 @@ $id = $row['USER_ID'];
     <script src="../../service/passwordVisibility.js"></script>
     <!-- <script src="../../service/test.js"></script> -->
 
-
-    <!--NavBar-->
-    <div class = "topbar">
+<!--NavBar-->
+<div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
+
                 </a>
     
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,11 +89,27 @@ $id = $row['USER_ID'];
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Trader</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -103,7 +119,7 @@ $id = $row['USER_ID'];
                 </div>
             </div>
         </nav>
-        
+
     </div>
     <?php
     // echo $id;
@@ -116,11 +132,11 @@ $id = $row['USER_ID'];
         if (($CustomerProfileImageType == "image/jpeg" || $CustomerProfileImageType == "image/jpg" || $CustomerProfileImageType == "image/png")) {
 
             $ProfileQuery = "UPDATE USER_TABLE SET IMAGE=:images WHERE USER_ID=:USER_ID";
-                                                                                
+
             $ProfileRunQuery = oci_parse($conn, $ProfileQuery);
-       
+
             oci_bind_by_name($ProfileRunQuery, ':images', $CustomerProfileImage);
-    
+
             oci_execute($ProfileRunQuery);
         }
 
@@ -132,7 +148,7 @@ $id = $row['USER_ID'];
         //     header('Location:./ProfilePage.php?error=Error. Please Try Again');
         // }
 
-      
+
     }
 
     ?>
