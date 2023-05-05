@@ -1,4 +1,6 @@
 <?php
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
     include('connect.php');
     $refusedId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
@@ -38,25 +40,47 @@
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderPhoneNumber', $PhoneNumber);
                     oci_execute($TraderRunInsertionQuery);
 
+                
+                    require '../../../mail/phpmailer/src/Exception.php';
+                    require '../../../mail/phpmailer/src/PHPMailer.php';
+                    require '../../../mail/phpmailer/src/SMTP.php';
+
+                    $mail = new PHPMailer(true);
+            
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                    $mail->Password = 'jqmuadhegtgyetci'; //app password
+                    $mail->SMTPSecure = 'ssl';
+                    $mail->Port = '465';
+            
+                    $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                    $mail->addAddress($Email); //reciever's email
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
+                    $mail->Body = 'Dear, '. $Firstname .' you have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
+                    $mail->send();
+
                     $CategoryInsertionQuery = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) VALUES(CATEGORY_S.NEXTVAL,:TraderCategory)";
                     $RunCategoryInsertionQuery = oci_parse($conn, $CategoryInsertionQuery);
                     oci_bind_by_name($RunCategoryInsertionQuery, ':TraderCategory', $Category);
-                    oci_execute($RunCategoryInsertionQuery); 
-                    
+                    oci_execute($RunCategoryInsertionQuery);
+
+
+
                     $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_OWNER) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderUsername)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderShopName', $Category);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUsername', $Username);    
                     oci_execute($RunShopInsertionQuery); 
-                    
+
                     $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
                     $RunDeleteQuery = oci_parse($conn, $DeleteAfterApproveQuery);
                     oci_execute($RunDeleteQuery);
                     header("Location:AdminApproveTrader.php?success=Trader has been approved.");
                     }
-                  
                 }
         }
-   
 ?>
