@@ -107,46 +107,53 @@
       </div>
       <div class="row table-responsive">
         <table class="table table-light table-striped text-center">
+        <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
           <thead class="table-success">
             <tr>
               <th>Select</th>
-              <th>ID</th>
-              <th>Username</th>
-              <th>Firstame</th>
-              <th>Lastname</th>
-              <th>Email</th>
-              <th>Category</th>
-              <th>Gender</th>
-              <th>Date of birth</th>
-              <th>Address</th>
-              <th>Phonenumber</th>
+              <th>Product Id</th>
+              <th>Category Id</th>
+              <th>Shop Id</th>
+              <th>Category Name</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Stock</th>
               <th colspan=2>Actions</th>
               <th></th>
             </tr>
           </thead>
           <?php
           include('connect.php');
-          $query = "SELECT * FROM APPLY_TRADER ORDER BY APPLY_ID";
+          $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
                                
           
           while($row = oci_fetch_array($result, OCI_ASSOC)){
-            // echo('<tr><td><input type = "checkbox"/></td>');
-            // echo("<td>$row[APPLY_ID]</td>");
-            // echo("<td>$row[USERNAME]</td>");
-            // echo("<td>$row[FIRST_NAME]</td>");
-            // echo("<td>$row[LAST_NAME]</td>");
-            // echo("<td>$row[EMAIL]</td>");     
-            // echo("<td>$row[SHOP_CATEGORY]</td>");
-            // echo("<td>$row[GENDER]</td>");
-            // echo("<td>$row[DATE_OF_BIRTH]</td>");
-            // echo("<td>$row[ADDRESS]</td>");
-            // echo("<td>$row[PHONE_NUMBER]</td>");
-            // echo("<td><a href='#'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            // echo("<td><a href='#'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
-            // echo("<td></td>");
-            // echo("</tr>");
+            $id=$row['PRODUCT_ID'];
+            echo('<tr><td><input type = "checkbox"/></td>');
+            echo("<td>$row[PRODUCT_ID]</td>");
+            echo("<td>$row[CATEGORY_ID]</td>");
+            echo("<td>$row[SHOP_ID]</td>");
+            echo("<td>$row[CATEGORY_NAME]</td>");
+            echo("<td>$row[PRODUCT_IMAGE]</td>");     
+            echo("<td>$row[PRODUCT_NAME]</td>");
+            echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
+            echo("<td>$row[PRODUCT_PRICE]</td>");
+            echo("<td>$row[PRODUCT_STOCK]</td>");
+            echo("<td><a href='ApprovedProducts.php?id=$id&action=approved''><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo("<td><a href='RefusedProducts.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            echo("<td></td>");
+            echo("</tr>");
           }
           ?>
         </table>

@@ -2,10 +2,10 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     include('connect.php');
-    $refusedId = $_GET['id'];
+    $approvedTraderId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {
-            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
+            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
             $RunFetchQuery = oci_parse($conn, $FetchTraderQuery);
             oci_execute($RunFetchQuery);
             if($RunFetchQuery)
@@ -76,7 +76,7 @@
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUsername', $Username);    
                     oci_execute($RunShopInsertionQuery); 
 
-                    $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
+                    $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
                     $RunDeleteQuery = oci_parse($conn, $DeleteAfterApproveQuery);
                     oci_execute($RunDeleteQuery);
                     header("Location:AdminApproveTrader.php?success=Trader has been approved.");

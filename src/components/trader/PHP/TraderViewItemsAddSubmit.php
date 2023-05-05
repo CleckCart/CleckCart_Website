@@ -4,7 +4,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
     include('./connect.php');
     /*Check if all fields are filled*/ 
     if (empty($_POST['TraderItemAddName']) || empty($_POST['TraderItemAddCategory']) || empty($_POST['TraderItemAddDescription']) || empty($_POST['TraderItemAddStock']) 
-    || empty($_POST['TraderItemAddPrice']) || empty($_POST['TraderItemAddDiscount']))
+    || empty($_POST['TraderItemAddPrice']))
         {
             header('Location:./TraderViewItemsAdd.php?error=Please make sure all text fields are not empty.');
         }
@@ -24,7 +24,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                 {                               
                     if(!preg_match($alphabetPattern,$TraderItemAddCategory))
                         {
-                            if(!preg_match($alphabetPattern,$TraderItemAddDescription))
+                            if(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_VALIDATE_FLOAT) == true)
                                 {
                                     if(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_VALIDATE_INT) == true)
                                         {
@@ -62,7 +62,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $TraderItemAddCategoryID);   
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                         
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategoryName);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $$TraderItemAddImage);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $TraderItemAddImage);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $TraderItemAddName);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $TraderItemAddDescription);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
@@ -99,10 +99,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                             header('Location:./TraderViewItemsAdd.php?error=Please type integer numbers in product stock.');
                                         }                                          
                                 }
-                            else
-                                {
-                                    header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product description.');
-                                }        
+       
                         }   
                         
                     else

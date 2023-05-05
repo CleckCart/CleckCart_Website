@@ -25,47 +25,40 @@
                         {                               
                             if(!preg_match($alphabetPattern,$AdminAddItemCategory))
                                 {
-                                    if(!preg_match($alphabetPattern,$AdminAddItemDescription))
-                                        {
-                                            if(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_VALIDATE_INT) == true)
-                                                {
-                                                    if(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
-                                                        {
-                                                            if(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_VALIDATE_FLOAT) == true)
-                                                                {
-                                                                    if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
-                                                                        {
-                                                                        }
 
-                                                                    else
-                                                                        {
-                                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
-                                                                        }
+                                    if(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_VALIDATE_INT) == true)
+                                        {
+                                            if(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
+                                                {
+                                                    if(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                        {
+                                                            if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
+                                                                {
                                                                 }
 
                                                             else
                                                                 {
-                                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product discount.');
+                                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
                                                                 }
                                                         }
 
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product price.');
+                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product discount.');
                                                         }
                                                 }
 
                                             else
                                                 {
-                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type integer numbers in product stock.');
+                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product price.');
                                                 }
                                         }
-                                          
+
                                     else
                                         {
-                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please use alphabets only in product description.');
-                                        }        
-                                }   
+                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type integer numbers in product stock.');
+                                        }
+                                }                                                                                                                   
                                 
                             else
                                 {
