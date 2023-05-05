@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include('connectSession.php');
+$username = $_SESSION['username'];
+// echo $username;
+$query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
+
+$result = oci_parse($conn, $query);
+oci_execute($result);
+$row = oci_fetch_array($result, OCI_ASSOC);
+$id = $row['USER_ID'];
+
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -7,13 +19,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleckCart</title>
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/contactpage.css">
+
 </head>
 
 <body>
+
+    <script src="/jquery/jquery-3.6.0.min.js"></script>
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" /> -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../../service/passwordVisibility.js"></script>
+    <!-- <script src="../../service/test.js"></script> -->
+
+
     <!--NavBar-->
     <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -83,71 +104,53 @@
             </div>
         </nav>
     </div>
+    <?php
+    // echo $id;
+    include("../../trader/PHP/connect.php");
+    if (isset($_POST['profileimagesubmit'])) {
+        $CustomerProfileImage = ($_FILES["CustomerProfileImage"]["name"]);
+        $CustomerProfileImageType = ($_FILES["CustomerProfileImage"]["type"]);
+        $CustomerProfileImageLocation = "../../dist/CustomerProfileImages/" . $CustomerProfileImage;
 
+        if (($CustomerProfileImageType == "image/jpeg" || $CustomerProfileImageType == "image/jpg" || $CustomerProfileImageType == "image/png")) {
+
+            $ProfileQuery = "UPDATE USER_TABLE SET IMAGE=:images WHERE USER_ID=:USER_ID";
+                                                                                
+            $ProfileRunQuery = oci_parse($conn, $ProfileQuery);
+       
+            oci_bind_by_name($ProfileRunQuery, ':images', $CustomerProfileImage);
+    
+            oci_execute($ProfileRunQuery);
+        }
+
+
+
+        // if ($result) {
+        //     header('Location:./ProfilePage.php?success=Image Uploaded!');
+        // } else {
+        //     header('Location:./ProfilePage.php?error=Error. Please Try Again');
+        // }
+
+      
+    }
+
+    ?>
     <div class="container">
         <div class="row">
             <div class="col"></div>
             <div class="col">
-                <h2 style="margin-bottom:3vh;margin-top:3vh">Your Information</h2>
+                <h2 class="mb-3 mt-3">Your Information</h2>
             </div>
             <div class="col "></div>
         </div>
 
     </div>
+
     <div class="container">
-        <?php
-        require('../../trader/PHP/connectSession.php');
-            $username = $_SESSION['username'];
-            $query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
-        
-            $result = oci_parse($conn, $query);
-            oci_execute($result);
-            $row = oci_fetch_array($result, OCI_ASSOC);
-            $id = $row['USER_ID'];
-        ?>
-        <form enctype="multipart/form-data">
-            <fieldset disabled>
-                <div class="row">
-                    <?php
-                        if(isset($_GET['error'])) {?>
-                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-                    <?php }?>
-                    <div class="col">
-                        <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="disabledTextInput-fn" class="form-label">First Name</label>
-                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php $row['FIRST_NAME']?>"/>
 
-                            <label for="disabledTextInput-g" class="form-label" style="margin-top:1.5vh">Username</label>
-                            <input type="text" id="disabledTextInput-g" class="form-control" placeholder="<?php $row['USERNAME']?>"/>
-
-                            <label for="disabledTextInput-add" class="form-label" style="margin-top:1.5vh">Address</label>
-                            <input type="text" id="disabledTextInput-add" class="form-control" placeholder="<?php $row['ADDRESS']?>"/>
-
-                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh">Date of birth</label>
-                            <input type="date" id="disabledTextInput-ln" class="form-control" placeholder="<?php $row['DATE_OF_BIRTH']?>"/>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="disabledTextInput-ln" class="form-label">Last Name</label>
-                            <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php $row['LAST_NAME']?>"/>
-
-                            <label for="disabledTextInput-email" class="form-label" style="margin-top:1.5vh">Email Address</label>
-                            <input type="text" id="disabledTextInput-email" class="form-control" placeholder="<?php $row['EMAIL']?>"/>
-
-                            <label for="disabledTextInput-pn" class="form-label" style="margin-top:1.5vh">Phone Number</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php $row['PHONE_NUMBER']?>"/>
-
-                            <label for="disabledTextInput-ln" class="form-label" style="margin-top:1.5vh" >Gender</label>
-                            <select id="disabledTextInput-ln" class="form-control"></select>
-                        </div>
-                    </div>
-            </fieldset>
-        </form>
     </div>
+    <!-- <div class="col">
+                    </div> -->
 
     <div class="container mt-5 mb-2">
         <div class="row ">
@@ -155,67 +158,68 @@
             <div class="col-sm-2">
                 <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
             </div>
-            <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="PasswordUpdate.php?id=$id&action=edit" role="button">Update Password</a>
-            </div>
-           
+
         </div>
     </div>
 
 
-<!-- <footer> -->
-<footer class="page-footer font-small pt-5">
+    <!-- <footer> -->
+    <footer class="page-footer font-small pt-5">
 
-    <div class="container-fluid bg-secondary">
-        <div class="row row-cols-2 row-cols-md-4 g-4">
-            <div class="col mt-5 text-center">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <div class="p-2 bd-highlight">
-                        <h3 class="mt-5">Cleck Cart</h3>
-                        <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                        <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                        <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                        <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col mt-5 text-center">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <div class="p-2 bd-highlight">
-                        <h3 class="mt-5">Join Us</h3>
-                        <h5 class="mt-5">Sell on CleckCart</h5>
+        <div class="container-fluid bg-secondary">
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col mt-5 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Cleck Cart</h3>
+                            <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
+                        </div>
+                        <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
+                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
+                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col mt-5 text-center">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <div class="p-2 bd-highlight">
-                        <h3 class="mt-5">Help</h3>
-                        <h5 class="mt-5">Pick Up Information</h5>
-                        <h5 class="mt-2">Lorem ipsum</h5>
-                        <h5 class="mt-2">Lorem ipsum</h5>
+                <div class="col mt-5 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Join Us</h3>
+                            <h5 class="mt-5">Sell on CleckCart</h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col mt-5 text-center">
-                <div class="d-flex flex-column bd-highlight mb-3">
-                    <div class="p-2 bd-highlight">
-                        <h3 class="mt-5">Send Us a message</h3>
+                <div class="col mt-5 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Help</h3>
+                            <h5 class="mt-5">Pick Up Information</h5>
+                            <h5 class="mt-2">Lorem ipsum</h5>
+                            <h5 class="mt-2">Lorem ipsum</h5>
+                        </div>
                     </div>
-                    <div class="p-2 bd-highlight">
-                        <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
-                        <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
-                        <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                </div>
+                <div class="col mt-5 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Send Us a message</h3>
+                        </div>
+                        <div class="p-2 bd-highlight">
+                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
+                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
+                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</footer>
-
+    </footer>
+    <!-- <script>
+        $('.profile-img-container img').click(function() {
+            $('#uploadfile').click();
+        });
+    </script> -->
 </body>
 
 </html>
