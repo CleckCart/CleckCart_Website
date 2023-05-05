@@ -45,31 +45,30 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                                 $result2 = oci_parse($conn, $query2);
                                                                                 oci_execute($result2);
                                                                                 $row1 = oci_fetch_array($result2, OCI_ASSOC);
-                                                                                $TraderItemAddCategory=$row1['CATEGORY_NAME'];
                                                                                 $TraderItemAddCategoryID=$row1['CATEGORY_ID'];
+                                                                                $TraderItemAddCategoryName=$row1['CATEGORY_NAME'];
     
                                                                                 $query3="SELECT * FROM SHOP WHERE SHOP_NAME ='$TraderItemAddCategory'";
                                                                                 $result3 = oci_parse($conn, $query3);
                                                                                 oci_execute($result3);
                                                                                 $row2 = oci_fetch_array($result3, OCI_ASSOC);
                                                                                 $TraderItemAddShopID=$row2['SHOP_ID'];
+                                                                                $TraderItemAddShopName=$row2['SHOP_NAME'];
                                                                                 echo($TraderItemAddShopID); 
 
-                                                                                $ProductInsertionQuery = "INSERT INTO USER_TABLE (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRICE, PRICE_STOCK)
-                                                                                VALUES(:ProductIdm :CategoryId, ShopId, CategoryName, ProductImage, Pridc)";
+                                                                                $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                                VALUES(PRODUCT_S.NEXTVAL , :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
                                                                                 $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderId', $Id);   
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderUserName', $Username);   
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderRole', $Role);                         
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderFirstName', $Firstname);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderLastName', $Lastname);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderEmail', $Email);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderGender', $Gender);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderPassword', $Password);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderBirthDate', $BirthDate);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderAddress', $Address);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':TraderPhoneNumber', $PhoneNumber);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $TraderItemAddCategoryID);   
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                         
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategoryName);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $$TraderItemAddImage);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $TraderItemAddName);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $TraderItemAddDescription);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $TraderItemAddStock);
                                                                                 oci_execute($ProductRunInsertionQuery);
+                                                                                header('Location:./TraderViewItemsAdd.php?success=Product Listing Requested.');
                                                                             }
 
                                                                         else 
