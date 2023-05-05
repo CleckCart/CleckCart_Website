@@ -23,67 +23,72 @@
 </head>
 
 <body>
-  <!-- Vertical navbar -->
-  <div class="vertical-nav bg-white" id="sidebar">
-    <div class="py-4 px-3 mb-4 bg-light">
-      <div class="media d-flex align-items-center">
-        <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
-        <div class="media-body">
-          <h4 class="m-0">Admin</h4>
-        </div>
+<!-- Vertical navbar -->
+<div class="vertical-nav bg-white" id="sidebar">
+  <div class="py-4 px-3 mb-4 bg-light">
+    <div class="media d-flex align-items-center">
+      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+      <div class="media-body">
+        <h4 class="m-0">Admin</h4>
       </div>
     </div>
-
-    <ul class="nav flex-column bg-white mb-0">
-      <li class="nav-item">
-        <a href="./AdminDashboard.php" class="nav-link text-dark">
-          <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
-          <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
-          <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark">
-          <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="../../customer/PHP/HomePage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
-          <i class="fa-solid fa-square-check m-3"></i>Approve Products
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="#" class="nav-link text-dark">
-          <i class="fa-solid fa-power-off m-3"></i></i>
-          Log Out
-        </a>
-      </li>
-    </ul>
   </div>
-  <!-- End vertical navbar -->
+
+  <ul class="nav flex-column bg-white mb-0">
+    <li class="nav-item">
+      <a href="./AdminDashboard.php" class="nav-link text-dark">
+        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
+        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
+      <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link text-dark">
+        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
+        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminApproveTrader.php" class="nav-link text-dark">
+      <i class="fa-solid fa-users m-3"></i>Approve Traders
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
+      <i class="fa-solid fa-square-check m-3"></i>Approve Products
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminLogout.php" class="nav-link text-dark">
+        <i class="fa-solid fa-power-off m-3"></i></i>
+                Log Out
+            </a>
+    </li>
+  </ul>
+</div>
+<!-- End vertical navbar -->
 
 
   <!-- Page content holder -->
@@ -98,8 +103,6 @@
       <div class="row bg-success">
         <div class="col-12 p-5">
           <h1>Approve Trader</h1>
-        </div><br />
-        <div class="col mt-5 text-end">
         </div>
       </div>
       <div class="row table-responsive">
