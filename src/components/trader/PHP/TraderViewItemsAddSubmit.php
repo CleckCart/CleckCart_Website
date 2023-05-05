@@ -34,24 +34,29 @@
                                                                 {
                                                                     if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                                         {
-                                                                            $TraderItemAddCategoryID=1;
-                                                                            $TraderItemAddShopID=1;
-                                                                            $TraderItemAddCategory='Meat';
-                                                                            $query = "INSERT INTO PRODUCT(PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME ,PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
-                                                                            VALUES(PRODUCT_S.NEXTVAL, :CATEGORY_ID, :SHOP_ID, :TraderItemAddCategory, :TraderItemAddImage, :TraderItemAddName, :TraderItemAddDescription, :TraderItemAddPrice, :TraderItemAddStock)";
+                                                                            $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$TraderItemAddCategory'";
+                                                                            $result2 = oci_parse($conn, $query2);
+                                                                            oci_execute($result2);
+                                                                            $row = oci_fetch_array($result2, OCI_ASSOC);
+                                                                            $row['CATEGORY_NAME'];
+                                                                            $row['CATEGORY_ID'];
+                                                                            echo($row['CATEGORY_ID'].$row['CATEGORY_NAME']);
+
+                                                                            // $query = "INSERT INTO PRODUCT(PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME ,PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                            // VALUES(PRODUCT_S.NEXTVAL, :CATEGORY_ID, :SHOP_ID, :TraderItemAddCategory, :TraderItemAddImage, :TraderItemAddName, :TraderItemAddDescription, :TraderItemAddPrice, :TraderItemAddStock)";
                                                                             
-                                                                            $result = oci_parse($conn, $query);
+                                                                            // $result = oci_parse($conn, $query);
                                             
-                                                                            // bind parameters to statements
-                                                                            oci_bind_by_name($result, ':CATEGORY_ID', $TraderItemAddCategoryID);
-                                                                            oci_bind_by_name($result, ':SHOP_ID', $TraderItemAddShopID);
-                                                                            oci_bind_by_name($result, ':TraderItemAddCategory', $TraderItemAddCategory);
-                                                                            oci_bind_by_name($result, ':TraderItemAddImage',  $TraderItemAddImage);
-                                                                            oci_bind_by_name($result, ':TraderItemAddName', $TraderItemAddName);
-                                                                            oci_bind_by_name($result, ':TraderItemAddDescription', $TraderItemAddDescription);
-                                                                            oci_bind_by_name($result, ':TraderItemAddPrice', $TraderItemAddPrice);
-                                                                            oci_bind_by_name($result, ':TraderItemAddStock', $TraderItemAddStock);
-                                                                            oci_execute($result);
+                                                                            // // bind parameters to statements
+                                                                            // oci_bind_by_name($result, ':CATEGORY_ID', $TraderItemAddCategoryID);
+                                                                            // oci_bind_by_name($result, ':SHOP_ID', $TraderItemAddShopID);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddCategory', $TraderItemAddCategory);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddImage',  $TraderItemAddImage);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddName', $TraderItemAddName);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddDescription', $TraderItemAddDescription);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddPrice', $TraderItemAddPrice);
+                                                                            // oci_bind_by_name($result, ':TraderItemAddStock', $TraderItemAddStock);
+                                                                            // oci_execute($result);
                                                                         }
                                                                     else
                                                                         {
