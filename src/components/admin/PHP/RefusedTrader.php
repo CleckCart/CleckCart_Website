@@ -2,10 +2,10 @@
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     include('connect.php');
-    $refusedId = $_GET['id'];
+    $refusedTraderId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {
-            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
+            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $refusedTraderId";     
             $RunFetchQuery = oci_parse($conn, $FetchTraderQuery);
             oci_execute($RunFetchQuery);
 
@@ -15,7 +15,7 @@
             $Firstname=$row['FIRST_NAME'];
 
 
-            $sql = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
+            $sql = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $refusedTraderId";     
             $DeleteQuery = oci_parse($conn, $sql);
             oci_execute($DeleteQuery);
             if($DeleteQuery)

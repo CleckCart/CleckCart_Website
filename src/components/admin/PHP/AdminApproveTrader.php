@@ -152,8 +152,8 @@
             echo("<td>$row[DATE_OF_BIRTH]</td>");
             echo("<td>$row[ADDRESS]</td>");
             echo("<td>$row[PHONE_NUMBER]</td>");
-            echo("<td><a href='Approved.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            echo("<td><a href='Refused.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+            echo("<td><a href='ApprovedTrader.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo("<td><a href='RefusedTrader.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
             echo("<td></td>");
             echo("</tr>");
           }

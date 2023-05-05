@@ -21,44 +21,38 @@
                         {                               
                             if(!preg_match($alphabetPattern,$TraderItemEditCategory))
                                 {
-                                    if(!preg_match($alphabetPattern,$TraderItemEditDescription))
+                                    
+                                    if (!empty($_POST['TraderItemEditDate'])) 
                                         {
-                                            if (!empty($_POST['TraderItemEditDate'])) 
+                                            if(filter_input(INPUT_POST, 'TraderItemEditStock', FILTER_VALIDATE_INT) == true)
                                                 {
-                                                    if(filter_input(INPUT_POST, 'TraderItemEditStock', FILTER_VALIDATE_INT) == true)
+                                                    if(filter_input(INPUT_POST, 'TraderItemEditPrice', FILTER_VALIDATE_FLOAT) == true)
                                                         {
-                                                            if(filter_input(INPUT_POST, 'TraderItemEditPrice', FILTER_VALIDATE_FLOAT) == true)
+                                                            if(filter_input(INPUT_POST, 'TraderItemEditDiscount', FILTER_VALIDATE_FLOAT) == true)
                                                                 {
-                                                                    if(filter_input(INPUT_POST, 'TraderItemEditDiscount', FILTER_VALIDATE_FLOAT) == true)
-                                                                        {
-                                                                            
-                                                                        }
-                                                                    else
-                                                                        {
-                                                                            header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product discount.');
-                                                                        }
+                                                                    
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product price.');
+                                                                    header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product discount.');
                                                                 }
                                                         }
-
                                                     else
                                                         {
-                                                            header('Location:./TraderViewItemsEdit.php?error=Please type integer numbers in product stock.');
+                                                            header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product price.');
                                                         }
                                                 }
+
                                             else
                                                 {
-                                                    header('Location:./TraderViewItemsEdit.php?error=Please pick the added date of the product.');
-                                                }                                           
+                                                    header('Location:./TraderViewItemsEdit.php?error=Please type integer numbers in product stock.');
+                                                }
                                         }
                                     else
                                         {
-                                            header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product description.');
-                                        }        
-                                }   
+                                            header('Location:./TraderViewItemsEdit.php?error=Please pick the added date of the product.');
+                                        }                                           
+                                }                                          
                                 
                             else
                                 {

@@ -16,21 +16,15 @@
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$TraderShopName))
                                 {
-                                    if(!preg_match($alphabetPattern,$TraderShopDescription))
+                                    if(!preg_match($alphabetPattern,$TraderShopCategory))
                                         {
-                                            if(!preg_match($alphabetPattern,$TraderShopCategory))
-                                                {
-                                                    //Insert into database
-                                                }
-                                            else
-                                                {
-                                                    header('Location:./AdminViewTrader\'sShopEdit.php?error=Please use alphabets only in shop category.');
-                                                }
+                                            //Insert into database
                                         }
                                     else
                                         {
-                                            header('Location:./AdminViewTrader\'sShopEdit.php?error=Please use alphabets only in description.');
+                                            header('Location:./AdminViewTrader\'sShopEdit.php?error=Please use alphabets only in shop category.');
                                         }
+                                                                          
                                 }
                             else
                                 {
