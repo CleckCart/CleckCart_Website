@@ -5,10 +5,20 @@
     $refusedId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {
+            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
+            $RunFetchQuery = oci_parse($conn, $FetchTraderQuery);
+            oci_execute($RunFetchQuery);
+
+            $row = oci_fetch_array($RunFetchQuery, OCI_ASSOC);
+            $Email=$row['EMAIL'];
+            $Username=$row['USERNAME'];
+            $Firstname=$row['FIRST_NAME'];
+
+
             $sql = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $refusedId";     
-            $qry = oci_parse($conn, $sql);
-            oci_execute($qry);
-            if($qry)
+            $DeleteQuery = oci_parse($conn, $sql);
+            oci_execute($DeleteQuery);
+            if($DeleteQuery)
                 {
                     require '../../../mail/phpmailer/src/Exception.php';
                     require '../../../mail/phpmailer/src/PHPMailer.php';
@@ -27,8 +37,8 @@
                     $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
-                    $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $Firstname .' you have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
+                    $mail->Subject = 'Sorry ' . $Firstname .', You have been refused.'; //subject of the email for reciever
+                    $mail->Body = 'Dear, '. $Firstname .'<br>We regret to inform you that your request has been denied to be a trader in CleckCart.'; //message for the reciever
                     $mail->send();
                     header("Location:AdminApproveTrader.php?error=Trader has been refused.");
                 }
