@@ -34,29 +34,35 @@
                                                                 {
                                                                     if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                                         {
-                                                                            $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$TraderItemAddCategory'";
-                                                                            $result2 = oci_parse($conn, $query2);
-                                                                            oci_execute($result2);
-                                                                            $row = oci_fetch_array($result2, OCI_ASSOC);
-                                                                            $row['CATEGORY_NAME'];
-                                                                            $row['CATEGORY_ID'];
-                                                                            echo($row['CATEGORY_ID'].$row['CATEGORY_NAME']);
+                                                                            $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemAddCategory'";
+                                                                            $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                                            oci_execute($runCheckCategoryQuery);                                                                          
 
-                                                                            // $query = "INSERT INTO PRODUCT(PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME ,PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
-                                                                            // VALUES(PRODUCT_S.NEXTVAL, :CATEGORY_ID, :SHOP_ID, :TraderItemAddCategory, :TraderItemAddImage, :TraderItemAddName, :TraderItemAddDescription, :TraderItemAddPrice, :TraderItemAddStock)";
-                                                                            
-                                                                            // $result = oci_parse($conn, $query);
-                                            
-                                                                            // // bind parameters to statements
-                                                                            // oci_bind_by_name($result, ':CATEGORY_ID', $TraderItemAddCategoryID);
-                                                                            // oci_bind_by_name($result, ':SHOP_ID', $TraderItemAddShopID);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddCategory', $TraderItemAddCategory);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddImage',  $TraderItemAddImage);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddName', $TraderItemAddName);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddDescription', $TraderItemAddDescription);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddPrice', $TraderItemAddPrice);
-                                                                            // oci_bind_by_name($result, ':TraderItemAddStock', $TraderItemAddStock);
-                                                                            // oci_execute($result);
+                                                                            $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                                                    if($row['CATEGORY_NAME']==$TraderItemAddCategory)
+                                                                                        {
+                                                                                            $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$TraderItemAddCategory'";
+                                                                                            $result2 = oci_parse($conn, $query2);
+                                                                                            oci_execute($result2);
+                                                                                            $row1 = oci_fetch_array($result2, OCI_ASSOC);
+                                                                                            $TraderItemAddCategory=$row1['CATEGORY_NAME'];
+                                                                                            $TraderItemAddCategoryID=$row1['CATEGORY_ID'];
+                
+                                                                                            $query3="SELECT * FROM SHOP WHERE SHOP_NAME ='$TraderItemAddCategory'";
+                                                                                            $result3 = oci_parse($conn, $query3);
+                                                                                            oci_execute($result3);
+                                                                                            $row2 = oci_fetch_array($result3, OCI_ASSOC);
+                                                                                            $TraderItemAddShopID=$row2['SHOP_ID'];
+                                                                                            echo($TraderItemAddShopID);               
+                                                                                            
+                                                                                        }
+
+                                                                                    else 
+                                                                                        {
+                                                                                            header('Location:./TraderViewItemsAdd.php?error=Please enter a valid category.');
+                                                                                        }
+                                                                                   
+                                                                           
                                                                         }
                                                                     else
                                                                         {
