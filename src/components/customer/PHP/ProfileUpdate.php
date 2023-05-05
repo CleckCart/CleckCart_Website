@@ -1,5 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include('connectSession.php');
+$username = $_SESSION['username'];
+// echo $username;
+$query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
+
+$result = oci_parse($conn, $query);
+oci_execute($result);
+$row = oci_fetch_array($result, OCI_ASSOC);
+$id = $row['USER_ID'];
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -21,11 +32,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="../../service/passwordVisibility.js"></script>
     <!--NavBar-->
-    <div class = "topbar">
+    <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePageSession.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
+                    <img src="./../../../dist/public/logo.png" class="img-fluid" width="70" height="70" alt="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,9 +86,13 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
@@ -105,36 +120,37 @@
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
                     <?php } ?>
                     <?php
-                        if(isset($_GET['success'])) {?>
-                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-                    <?php }?>
+                    if (isset($_GET['success'])) { ?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo ($_GET['success']); ?></div>
+                    <?php } ?>
                     <div class="mb-3">
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="First Name" aria-label="First name" name="CustomerEditFirstname">
+                                <input type="text" class="form-control" placeholder="<?php echo $row['FIRST_NAME'] ?>" aria-label="First name" name="CustomerEditFirstname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Last Name" aria-label="Last name" name="CustomerEditLastname">
+                                <input type="text" class="form-control" placeholder="<?php echo
+                                                                                                                    $row['LAST_NAME'] ?>" aria-label="Last name" name="CustomerEditLastname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Username</label>
-                                <input type="tel" class="form-control" placeholder="Username" aria-label="Username" name="CustomerEditUsername">
+                                <input type="tel" class="form-control" placeholder="<?php echo $row['USERNAME'] ?>" aria-label="Username" name="CustomerEditUsername">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Address</label>
-                                <input type="tel" class="form-control" placeholder="Address" aria-label="Address" name="CustomerEditAddress">
+                                <input type="tel" class="form-control" placeholder="<?php echo $row['ADDRESS'] ?>" aria-label="Address" name="CustomerEditAddress">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone">
+                                <input type="tel" class="form-control" placeholder="<?php echo $row['PHONE_NUMBER'] ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
                             </div>
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email Address" name="CustomerEditEmail">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?php echo $row['EMAIL'] ?>" name="CustomerEditEmail">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -145,23 +161,24 @@
                                 </div>
                                 <div class="col">
                                     <label for="date" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate">
+                                    <input type="text" class="form-control" id="date" aria-label="date" name="CustomerEditDate" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="<?php echo$row['DATE_OF_BIRTH'] ?>">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
-                                    <select class="form-select" aria-label="Default select example" name="CustomerEditGender" >
-                                        <option value="Male" selected>Male</option>
+                                    <select class="form-select" aria-label="Default select example" name="CustomerEditGender">
+                                        <option value="User" selected><?php echo$row['GENDER'] ?></option>
+                                        <option value="Male">Male</option>
                                         <option value="Female">Female</option>
                                         <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 w-50" style="margin-top:4vh">
+                        <div class="mb-3 w-50 mt-4" ">
                             <input type="submit" class="btn btn-primary w-50 " value="Update" name="CustomerEdit">
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
             <div class="col-sm-1"></div>

@@ -1,4 +1,5 @@
 <?php
+
         /*Check if form is submitted*/
         if (isset($_POST['CustomerEdit'])) {
            
