@@ -59,7 +59,7 @@
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
                     $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $Firstname .' you have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
+                    $mail->Body = 'Dear, '. $Firstname .'<br>You have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
                     $mail->send();
 
                     $CategoryInsertionQuery = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) VALUES(CATEGORY_S.NEXTVAL,:TraderCategory)";
