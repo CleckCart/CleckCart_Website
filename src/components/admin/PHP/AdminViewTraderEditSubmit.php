@@ -17,7 +17,7 @@
                     $TraderEditAddress = trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING));
                     $TraderEditDate = $_POST['TraderEditDate'];
                     /*Check if username is of 5-10 characters*/
-                    if(strlen($TraderEditUserName) >= 5 && strlen($TraderEditUserName) <= 10)
+                    if(strlen($TraderEditUserName) >= 5 && strlen($TraderEditUserName) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$TraderEditFirstName))
@@ -55,7 +55,7 @@
                         }
                     else
                         {   
-                            header('Location:./AdminViewTraderEdit.php?error=Please make sure username is 5 - 10 characters.');                   
+                            header('Location:./AdminViewTraderEdit.php?error=Please make sure username is 5 - 30 characters.');                   
                         }
                 }
             }

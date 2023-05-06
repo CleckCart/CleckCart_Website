@@ -20,7 +20,7 @@
                         {
                             
                         }
-                    if(strlen($TraderEditUsername) >= 5 && strlen($TraderEditUsername) <= 10)
+                    if(strlen($TraderEditUsername) >= 5 && strlen($TraderEditUsername) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$TraderEditFirstname))
@@ -64,7 +64,7 @@
                         }
                     else
                         {   
-                            header('Location:./TraderProfileEdit.php?error=Please make sure username is 5 - 10 characters.');                   
+                            header('Location:./TraderProfileEdit.php?error=Please make sure username is 5 - 30 characters.');                   
                         }
                 }
             

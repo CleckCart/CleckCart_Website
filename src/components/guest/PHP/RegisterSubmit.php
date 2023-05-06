@@ -20,8 +20,8 @@
                     $customerAddress = trim(filter_input(INPUT_POST, 'customerAddress', FILTER_SANITIZE_STRING));
                     $customerPassword = trim(filter_input(INPUT_POST, 'customerPassword', FILTER_SANITIZE_STRING));
                     $customerConfirmPassword = trim(filter_input(INPUT_POST, 'customerConfirmPassword', FILTER_SANITIZE_STRING));
-                    /*Check if username is of 5-10 characters*/
-                    if(strlen($customerUsername) >= 5 && strlen($customerUsername) <= 10)
+                    /*Check if username is of 5-30 characters*/
+                    if(strlen($customerUsername) >= 5 && strlen($customerUsername) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$customerFirstname))
@@ -110,7 +110,7 @@
                         }
                     else
                         {   
-                            header('Location:./Register.php?error=Please make sure username is 5 - 10 characters.');                   
+                            header('Location:./Register.php?error=Please make sure username is 5 - 30 characters.');                   
                         }
                 }
             }

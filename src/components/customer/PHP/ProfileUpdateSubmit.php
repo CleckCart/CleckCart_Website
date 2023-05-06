@@ -11,7 +11,7 @@
                     $CustomerEditAddress = trim(filter_input(INPUT_POST, 'CustomerEditAddress', FILTER_SANITIZE_STRING));
 
                     /*Check if username is of 5-10 characters*/
-                    if(strlen($CustomerEditUsername) >= 5 && strlen($CustomerEditUsername) <= 10)
+                    if(strlen($CustomerEditUsername) >= 5 && strlen($CustomerEditUsername) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$CustomerEditFirstname))
@@ -49,7 +49,7 @@
                         }
                     else
                         {   
-                            header('Location:./ProfileUpdate.php?error=Please make sure username is 5 - 10 characters.');                   
+                            header('Location:./ProfileUpdate.php?error=Please make sure username is 5 - 30 characters.');                   
                         }
                 }
             

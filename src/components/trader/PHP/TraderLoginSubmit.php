@@ -12,7 +12,7 @@
         $TraderLoginPassword = trim(filter_input(INPUT_POST, 'TraderLoginPassword', FILTER_SANITIZE_STRING));
         $UserRole = $_POST['UserRole'];
         /*Check if username is of 5-10 characters*/
-        if(strlen($TraderLoginUsername) >= 5 && strlen($TraderLoginUsername) <= 10){
+        if(strlen($TraderLoginUsername) >= 5 && strlen($TraderLoginUsername) <= 30){
                 $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
                 /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
                 if(preg_match($passwordPattern, $TraderLoginPassword))
