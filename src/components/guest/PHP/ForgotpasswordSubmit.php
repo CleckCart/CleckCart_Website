@@ -47,9 +47,32 @@ if (isset($_POST['CustomerEmailSubmit'])) {
             $mail->addAddress($CustomerRegisteredEmail); //reciever's email
             $mail->isHTML(true);
             $mail->Subject = 'CleckCart Password Reset'; //subject of the email for reciever
-            $mail->Body = 'Your OTP: '.$otp; //message for the reciever
+            $mail->Body='<html>
+            <head>
+                <style>
+                    .container{padding: 5vh;}
+                    .heading{text-align: center;color: rgb(129, 127, 127);}
+                    .line{border: 1px solid rgb(68, 68, 68);}
+                </style>
+            </head>
+            <body>
+                <div class="container">
+                    <div class="heading">
+                        <h1>One Time Password</h1>
+                    </div>
+                    <hr class="line">
+                    <div class="content">
+                        <p>Dear User, Please use OTP:</p>
+                        <h2>'.$otp.'</h2>
+                        <br>Warm regards,<br>CleckCart
+                    </div>
+                </div>
+            </body>
+            </html>';
+            // $mail->Body = 'Your OTP: '.$otp; //message for the reciever
             $mail->send();
-            header('Location:./Forgotpasswordmail.php');
+            header('Location:./Forgotpasswordmail.php?success=Mail Sent');
+            // header('Location:./Forgotpasswordmail.php');
             $_SESSION['email'] = $CustomerRegisteredEmail;
             // header('Location:./Forgotpassword.php?success=');
         } else {
