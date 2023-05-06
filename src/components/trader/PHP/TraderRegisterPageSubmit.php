@@ -24,8 +24,8 @@
                     $TraderConfirmPassword = trim(filter_input(INPUT_POST, 'TraderConfirmPassword', FILTER_SANITIZE_STRING));
                     $TraderRole = 'Trader';
                     
-                    /*Check if username is of 5-10 characters*/
-                    if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 10)
+                    /*Check if username is of 5-30 characters*/
+                    if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$TraderFirstName))
@@ -95,7 +95,7 @@
                         }
                     else
                         {   
-                            header('Location:./TraderRegisterPage.php?error=Please make sure username is 5 - 10 characters.');                   
+                            header('Location:./TraderRegisterPage.php?error=Please make sure username is 5 - 30 characters.');                   
                         }
                 }
             }
