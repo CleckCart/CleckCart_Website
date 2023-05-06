@@ -15,7 +15,6 @@
                     $AdminAddItemDate = $_POST['AdminAddItemDate'];
                     $AdminAddItemStock = trim(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_SANITIZE_NUMBER_INT));
                     $AdminAddItemPrice = trim(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $AdminAddItemDiscount = trim(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     $AdminAddItemImage = ($_FILES["AdminAddItemImage"]["name"]);
                     $AdminAddItemImageType = ($_FILES["AdminAddItemImage"]["type"]);
@@ -30,22 +29,16 @@
                                         {
                                             if(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
                                                 {
-                                                    if(filter_input(INPUT_POST, 'AdminAddItemDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                    
+                                                    if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
                                                         {
-                                                            if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
-                                                                {
-                                                                }
-
-                                                            else
-                                                                {
-                                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
-                                                                }
                                                         }
 
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product discount.');
+                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
                                                         }
+                                                                                                          
                                                 }
 
                                             else

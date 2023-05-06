@@ -116,10 +116,6 @@
                     <label for="exampleInputText1" class="form-label">Price</label>
                     <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemAddPrice">
                   </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemAddDiscount">
-                  </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
