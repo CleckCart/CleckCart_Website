@@ -108,16 +108,16 @@
           <thead class="table-success">
             <tr>
               <th>Select</th>
-              <th>ID</th>
+              <th>Product Id</th>
+              <th>Category Id</th>
+              <th>Shop Id</th>
+              <th>Category Name</th>
               <th>Image</th>
               <th>Name</th>
               <th>Description</th>
-              <th>Category</th>
               <th>Price</th>
               <th>Stock</th>
-              <th>Discount</th>
-              <th colspan=2>Actions</th>
-              <th></th>
+              <th colspan=2>Actions</th>            
             </tr>
           </thead>
           <?php
@@ -137,8 +137,8 @@
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
-            echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            echo('<td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete"><img src="./../../../dist/public/delete.svg" alt="person"></button></td></tr>');
+            echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=edit'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><a hreg='TraderViewItemsDelete.php?id=$id&action=delete'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>
         </table>

@@ -40,7 +40,7 @@
                     oci_bind_by_name($RunInsertionQuery, ':CategoryId', $CategoryId);   
                     oci_bind_by_name($RunInsertionQuery, ':ShopId', $ShopId);                         
                     oci_bind_by_name($RunInsertionQuery, ':ProductCategoryName', $CategoryName);
-                    oci_bind_by_name($RunInsertionQuery, ':ProductImage', $ProductId);   
+                    oci_bind_by_name($RunInsertionQuery, ':ProductImage', $ProductImage);   
                     oci_bind_by_name($RunInsertionQuery, ':ProductName', $ProductName);   
                     oci_bind_by_name($RunInsertionQuery, ':ProductDescription', $ProductDescription);                         
                     oci_bind_by_name($RunInsertionQuery, ':ProductPrice', $ProductPrice);
