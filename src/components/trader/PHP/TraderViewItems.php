@@ -138,7 +138,7 @@
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=edit'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><a hreg='TraderViewItemsDelete.php?id=$id&action=delete'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+            echo("<td><a hreg='TraderViewItemsDelete.php?id=$id&action=delete'><img src='./../../../dist/public/delete.svg' alt='delete'></a></td></tr>");
           }
           ?>
         </table>
