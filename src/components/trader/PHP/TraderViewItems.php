@@ -138,7 +138,7 @@
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=edit'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><a hreg='TraderViewItemsDelete.php?id=$id&action=delete'><img src='./../../../dist/public/delete.svg' alt='delete'></a></td></tr>");
+            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>
         </table>
@@ -159,7 +159,7 @@
           </div>
           <div class="modal-footer text-center">
             <?php
-              echo("<a href = './TraderViewItemsDelete.php?id=$id&action=approved' class ='btn btn-danger mx-auto w-100'>Delete</a>")
+              echo("<a href ='./TraderViewItemsDelete.php?id=$id&action=delete' class ='btn btn-danger mx-auto w-100'>Delete</a>")
             ?>
             <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
           </div>
