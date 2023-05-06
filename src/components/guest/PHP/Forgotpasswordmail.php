@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php 
+session_start();
+$otp = $_SESSION['otp'];
+// echo $otp; 
+?>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +13,7 @@
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="../../../dist/CSS/bootstrap.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
 
@@ -82,55 +87,51 @@
         </div>
 
     <div class = "container">
-        <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
-            <div class = "col bg-success">
-                    <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
+        <div class = "row m-4 p-4 g-4 text-center ">
+            <div class="row ">
+                <h1>Forgot Your Password?</h1>
             </div>
-            <div class = "col">
-                <form method = "POST" action = "./CustomerLoginSubmit.php">
-                    <div class = "mb-3">
-                        <h1 class = "text-center">Welcome to CleckCart</h1>
-                    </div>
-                    <?php
-                        if(isset($_GET['error'])) {?>
-                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-                    <?php }?>
-                            
-                    <div class="mb-3 ">
-                        <label for="exampleInputText1" class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "CustomerLoginUsername" value = "<?php
-                            if(isset($_POST['CustomerLoginUsername'])){
-                                echo(trim($_POST['CustomerLoginUsername']));
-                            }
-                        ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "CustomerLoginPassword" value = "<?php
-                            if(isset($_POST['CustomerLoginPassword'])){
-                                echo(trim($_POST['CustomerLoginPassword']));
-                            }
-                        ?>">
-                        <p class = "text-end"><a href = "Forgotpassword.php">Forgot Password?</a></p>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-primary w-100" name = "CustomerLoginSubmit" value="Login">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                    </div>
-                    <div class = "mb-3">
-                        <p>New Here? <a href = "./Register.php">Create an account</a></p>
-                    </div>
-                    </div>
-                </form>
+            <div class="row p-3 ">
+                <h6 class="text-muted">Please check you email and enter the OTP provided</h6>
             </div>
         </div>
+            <div class = "row row-cols-3 ">
+                <div class="col-sm-4 "></div>
+                <div class="col-sm-4">
+                    <form method = "POST" action = "./ForgotpasswordmailSubmit.php">
+                        <?php
+                            if(isset($_GET['error'])) {?>
+                            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                        <?php }?>
+                        <?php
+                            if(isset($_GET['success'])) {?>
+                            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                        <?php }?>
+                        
+                            <div class="mb-3 col">
+                                <label for="exampleInputText1" class="form-label">Enter the OTP</label>
+                                <input type="text" class="form-control" placeholder="OTP" aria-label="OTP" name = "CustomerOTP">
+                            </div>
+                        
+                        
+                            <div class="mb-3 col mt-4">
+                                <input type="submit" class="btn btn-primary w-100" name = "CustomerOTPsubmit" value="Reset Password">
+                            </div>
+                       
+                        
+                            <div class="mb-3 col mt-3">
+                            <p class = "text-muted mb-5">Back to Login? <a href = "./CustomerLogin.php" class="link-dark">Login</a></p>
+                            </div>  
+                    </form>
+                </div>
+                <div class="col-sm-4"></div>
+
+            </div>
+           
+        
     </div>
 
-    <footer>
+    <footer class="mt-auto">
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-5 text-center">
