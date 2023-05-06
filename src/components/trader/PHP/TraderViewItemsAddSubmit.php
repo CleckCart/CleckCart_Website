@@ -15,7 +15,6 @@ if (isset($_POST['TraderItemAddSubmit'])) {
             $TraderItemAddDescription = trim(filter_input(INPUT_POST, 'TraderItemAddDescription', FILTER_SANITIZE_STRING));
             $TraderItemAddStock = trim(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_SANITIZE_NUMBER_INT));
             $TraderItemAddPrice = trim(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-            $TraderItemAddDiscount = trim(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
             $alphabetPattern = "/[^a-zA-Z\s]/";
             $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
             $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
@@ -23,17 +22,22 @@ if (isset($_POST['TraderItemAddSubmit'])) {
             if(!preg_match($alphabetPattern,$TraderItemAddName))
                 {                               
                     if(!preg_match($alphabetPattern,$TraderItemAddCategory))
-                        {
-                            if(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_VALIDATE_FLOAT) == true)
-                                {
+                        {                         
                                     if(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_VALIDATE_INT) == true)
                                         {
                                             if(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_VALIDATE_FLOAT) == true)
                                                 {
-                                                    if(filter_input(INPUT_POST, 'TraderItemAddDiscount', FILTER_VALIDATE_FLOAT) == true)
+                                                    
+                                                    if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                         {
-                                                            if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
-                                                                {
+                                                            $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemAddCategory'";
+                                                            $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                            oci_execute($runCheckCategoryQuery);
+
+                                                            $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                            if($row['CATEGORY_NAME']==$TraderItemAddCategory)
+                                                                {                                                              
+
                                                                     $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemAddCategory'";
                                                                     $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
                                                                     oci_execute($runCheckCategoryQuery);
@@ -54,14 +58,11 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                                 $row2 = oci_fetch_array($result3, OCI_ASSOC);
                                                                                 $TraderItemAddShopID=$row2['SHOP_ID'];
                                                                                 $TraderItemAddShopName=$row2['SHOP_NAME'];
-                                                                                echo($TraderItemAddShopID); 
 
-                                                                                $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
-                                                                                VALUES(PRODUCT_S.NEXTVAL , :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
-                                                                                $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $TraderItemAddCategoryID);   
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                         
-                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategoryName);
+                                                                                $ProductInsertionQuery = "INSERT INTO APPLY_PRODUCT (APPLY_PRODUCT_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                                VALUES(APPLY_PRODUCT_S.NEXTVAL, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
+                                                                                $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);                     
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategory);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $TraderItemAddImage);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $TraderItemAddName);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $TraderItemAddDescription);
@@ -75,18 +76,16 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                             {
                                                                                 header('Location:./TraderViewItemsAdd.php?error=Please enter a valid category.');
                                                                             }
-                                                                            
+                                                                }
                                                                     
-                                                                }
-                                                            else
-                                                                {
-                                                                    header('Location:./TraderViewItemsAdd.php?error=Please choose an image.');
-                                                                }
+                                                            
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./TraderViewItemsAdd.php?error=Please type decimal numbers in product discount.');
+                                                            header('Location:./TraderViewItemsAdd.php?error=Please choose an image.');
+                                                                
                                                         }
+                                                   
                                                 }
                                             else
                                                 {
@@ -99,9 +98,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                             header('Location:./TraderViewItemsAdd.php?error=Please type integer numbers in product stock.');
                                         }                                          
                                 }
-       
-                        }   
-                        
+                           
                     else
                         {
                             header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product category.');

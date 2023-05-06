@@ -118,8 +118,6 @@
           <thead class="table-success">
             <tr>
               <th>Select</th>
-              <th>Product Id</th>
-              <th>Category Id</th>
               <th>Shop Id</th>
               <th>Category Name</th>
               <th>Image</th>
@@ -133,17 +131,15 @@
           </thead>
           <?php
           include('connect.php');
-          $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
+          $query = "SELECT * FROM APPLY_PRODUCT ORDER BY APPLY_PRODUCT_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
                                
           
           while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $id=$row['PRODUCT_ID'];
+            $id=$row['APPLY_PRODUCT_ID'];
             echo('<tr><td><input type = "checkbox"/></td>');
-            echo("<td>$row[PRODUCT_ID]</td>");
-            echo("<td>$row[CATEGORY_ID]</td>");
-            echo("<td>$row[SHOP_ID]</td>");
+            echo("<td>$row[APPLY_PRODUCT_ID]</td>");
             echo("<td>$row[CATEGORY_NAME]</td>");
             echo("<td>$row[PRODUCT_IMAGE]</td>");     
             echo("<td>$row[PRODUCT_NAME]</td>");

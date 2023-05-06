@@ -5,14 +5,15 @@
     $refusedProductId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {
-            $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID=$refusedProductId";     
+            $FetchProductQuery = "SELECT * FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID=$refusedProductId";     
             $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
             oci_execute($RunFetchProductQuery);
             $ProductRow = oci_fetch_array($RunFetchProductQuery, OCI_ASSOC);
-            $ShopId = $ProductRow['SHOP_ID'];
+            $CategoryName = $ProductRow['CATEGORY_NAME'];
 
-            $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_ID=$ShopId";     
+            $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME=:CategoryName";  
             $RunFetchShopQuery = oci_parse($conn, $FetchShopQuery);
+            oci_bind_by_name($RunFetchShopQuery, ':CategoryName', $CategoryName);   
             oci_execute($RunFetchShopQuery);
             $ShopRow = oci_fetch_array($RunFetchShopQuery, OCI_ASSOC);
             $ShopOwnerUsername= $ShopRow['SHOP_OWNER'];
@@ -24,7 +25,7 @@
             $EmailRow = oci_fetch_array($RunFetchEmailQuery, OCI_ASSOC);
             $Email= $EmailRow['EMAIL'];
 
-            $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = $refusedProductId";     
+            $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $refusedProductId";     
             $DeleteQuery = oci_parse($conn, $sql);
             oci_execute($DeleteQuery);
             if($DeleteQuery)
@@ -47,7 +48,7 @@
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
                     $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been refused.'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been denied to be a listed in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
+                    $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been denied to be listed in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
                     $mail->send();
                     header("Location:AdminApproveTrader'sItemPage.php?error=Product has been refused.");
                 }
