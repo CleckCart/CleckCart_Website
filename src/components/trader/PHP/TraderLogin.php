@@ -120,7 +120,7 @@
                             <option value="Trader">Trader</option>
                             <option value="Admin">Admin</option>
                         </select>
-                        <p class = "text-end"><a href = "#">Forgot Password?</a></p>
+                        <p class = "text-end"><a href = "../../guest/PHP/Forgotpassword.php">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
