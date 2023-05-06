@@ -97,6 +97,14 @@
       </div>
       <div class="row table-responsive">
         <table class="table table-light table-striped text-center">
+        <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
           <thead class="table-success">
             <tr>
               <th>Select</th>
@@ -107,41 +115,30 @@
               <th>Category</th>
               <th>Price</th>
               <th>Stock</th>
-              <th>Date</th>
               <th>Discount</th>
               <th colspan=2>Actions</th>
               <th></th>
             </tr>
           </thead>
           <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-            <tr>
-              <td><input type = "checkbox"/></td>
-              <td>0</td>
-              <td>lorem.jpg</td>
-              <td>Lorem</td>
-              <td>Lorem ipsum asdjlkasjdlkajsdlk jalsdnlaks jdla</td>
-              <td>Lorem</td>
-              <td>&pound;100</td>
-              <td>50</td>
-              <td>2023/04/04</td>
-              <td>200</td>
-              <td>
-                <!-- Edit Button trigger modal -->
-                <a href = "./TraderViewItemsEdit.php" class="btn">
-                  <img src="./../../../dist/public/edit.svg" alt="person">
-                </a>
-              </td>
-              <td>
-                <!-- Delete Button trigger modal -->
-                <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                  <img src="./../../../dist/public/delete.svg" alt="person">
-                </button>
-              </td>
-              <td></td>
-            </tr>
-          ';
+          include('connect.php');
+          $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
+          $result = oci_parse($conn, $query);
+          oci_execute($result);
+          while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $id=$row['PRODUCT_ID'];
+            echo("<tr><td><input type = 'checkbox'/></td>");
+            echo("<td>$row[PRODUCT_ID]</td>");
+            echo("<td>$row[CATEGORY_ID]</td>");
+            echo("<td>$row[SHOP_ID]</td>");
+            echo("<td>$row[CATEGORY_NAME]</td>");
+            echo("<td>$row[PRODUCT_IMAGE]</td>");     
+            echo("<td>$row[PRODUCT_NAME]</td>");
+            echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
+            echo("<td>$row[PRODUCT_PRICE]</td>");
+            echo("<td>$row[PRODUCT_STOCK]</td>");
+            echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+            echo('<td><button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete"><img src="./../../../dist/public/delete.svg" alt="person"></button></td></tr>');
           }
           ?>
         </table>
@@ -161,7 +158,9 @@
             <p>You are about to delete item(s). This process cannot be undone</p>
           </div>
           <div class="modal-footer text-center">
-            <button type="button" class="btn btn-danger mx-auto w-100">Delete</button>
+            <?php
+              echo("<a href = './TraderViewItemsDelete.php?id=$id&action=approved' class ='btn btn-danger mx-auto w-100'>Delete</a>")
+            ?>
             <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
           </div>
         </div>
