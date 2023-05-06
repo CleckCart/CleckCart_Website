@@ -42,6 +42,9 @@ if (isset($_POST['UserUpdatepasswordSubmit'])) {
                 } else {
                     header('Location:./Updatepassword.php?error=New password cannot be same as old password');
                 }
+            }else{
+            header('Location:./Updatepassword.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
+
             }
         } else {
             header('Location:./Updatepassword.php?error=Passwords donot match');
