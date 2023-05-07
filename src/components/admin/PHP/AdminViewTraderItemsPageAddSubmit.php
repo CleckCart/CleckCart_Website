@@ -5,7 +5,7 @@
             if (empty($_POST['AdminAddItemName']) || empty($_POST['AdminAddItemCategory']) || empty($_POST['AdminAddItemDescription']) || empty($_POST['AdminAddItemStock']) 
             || empty($_POST['AdminAddItemPrice']) || empty($_POST['AdminAddItemImage'])) 
                 {
-                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please make sure all text fields are not empty.');
+                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Please make sure all text fields are not empty.');
                 }
             else
                 {
@@ -36,33 +36,33 @@
 
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please choose an image.');
+                                                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please choose an image.');
                                                         }
                                                                                                           
                                                 }
 
                                             else
                                                 {
-                                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type decimal numbers in product price.');
+                                                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Please type decimal numbers in product price.');
                                                 }
                                         }
 
                                     else
                                         {
-                                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please type integer numbers in product stock.');
+                                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please type integer numbers in product stock.');
                                         }
                                 }                                                                                                                   
                                 
                             else
                                 {
-                                    header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please use alphabets only in product category.');
+                                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Please use alphabets only in product category.');
                                 }
                             
                         }
 
                     else
                         {   
-                            header('Location:./AdminViewTrader\'sItemsPageAdd.php?error=Please use alphabets only in product name.');                   
+                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please use alphabets only in product name.');                   
                         }
                 }
             }

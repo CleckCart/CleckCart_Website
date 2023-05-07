@@ -45,8 +45,8 @@
                     oci_bind_by_name($RunCategoryInsertionQuery, ':TraderCategory', $Category);
                     oci_execute($RunCategoryInsertionQuery);
 
-                    
-                    $ShopDescription = "Welcome to ". $Username ."'s shop!<br>We offer a wide range of high-quality, ". $Category . " products that are both affordable and fresh.";
+                    $changeCase = strtolower($Category);
+                    $ShopDescription = "Welcome to ". $Username ."'s shop!\nWe offer a wide range of high-quality ". $changeCase . " products that are both affordable and fresh.";
                     $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderUsername, :ShopDescription)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);

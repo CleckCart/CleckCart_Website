@@ -91,7 +91,7 @@
                     $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
                     $DeleteQuery = oci_parse($conn, $sql);
                     oci_execute($DeleteQuery);
-                    header("Location:AdminApproveTrader'sItemPage.php?success=Product has been approved.");
+                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");
                     }
                 }
         }

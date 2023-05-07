@@ -2,33 +2,33 @@
     /*Check if form is submitted*/
     if (isset($_POST['TraderShopEditSubmit'])) 
         {
+            include('connect.php');
             /*Check if all fields are filled*/ 
-            if (empty($_POST['TraderShopName']) || empty($_POST['TraderShopDescription']) || empty($_POST['TraderShopCategory'])) 
+            if (empty($_POST['TraderShopName']) || empty($_POST['TraderShopDescription'])) 
                 {
-                    header('Location:./AdminViewTrader\'sShopEdit.php?error=Please make sure all text fields are not empty.');
+                    header('Location:./AdminViewTraderShopEdit.php?error=Please make sure all text fields are not empty.');
                 }
 
             else
                 {
-                    $TraderShopName = trim(filter_input(INPUT_POST, 'TraderShopName', FILTER_SANITIZE_STRING));
-                    $TraderShopDescription = trim(filter_input(INPUT_POST, 'TraderShopDescription', FILTER_SANITIZE_STRING));
-                    $TraderShopCategory = trim(filter_input(INPUT_POST, 'TraderShopCategory', FILTER_SANITIZE_STRING));
+                    $EditShopId = $_POST['EditShopId'];
+                    $EditTraderShopName = trim(filter_input(INPUT_POST, 'TraderShopName', FILTER_SANITIZE_STRING));
+                    $EditTraderShopDescription = trim(filter_input(INPUT_POST, 'TraderShopDescription', FILTER_SANITIZE_STRING));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
-                            if(!preg_match($alphabetPattern,$TraderShopName))
+                            if(!preg_match($alphabetPattern,$EditTraderShopName))
                                 {
-                                    if(!preg_match($alphabetPattern,$TraderShopCategory))
-                                        {
-                                            //Insert into database
-                                        }
-                                    else
-                                        {
-                                            header('Location:./AdminViewTrader\'sShopEdit.php?error=Please use alphabets only in shop category.');
-                                        }
-                                                                          
+                                    
+                                    $UpdateShopQuery = "UPDATE SHOP SET SHOP_NAME=:ShopName, SHOP_DESCRIPTION=:ShopDescription WHERE SHOP_ID=$EditShopId"; 
+                                    $RunUpdateShopQuery = oci_parse($conn, $UpdateShopQuery);
+                                    oci_bind_by_name($RunUpdateShopQuery, ':ShopName', $EditTraderShopName);
+                                    oci_bind_by_name($RunUpdateShopQuery, ':ShopDescription', $EditTraderShopDescription);
+                                    oci_execute($RunUpdateShopQuery); 
+
+                                    header('Location:./AdminViewTraderShop Page.php?success=Details successfully updated.');                                     
                                 }
                             else
                                 {
-                                    header('Location:./AdminViewTrader\'sShopEdit.php?error=Please use alphabets only in shop name.');
+                                    header('Location:./AdminViewTraderShopEdit.php?error=Please use alphabets only in shop name.');
                                 }
                 }
         }

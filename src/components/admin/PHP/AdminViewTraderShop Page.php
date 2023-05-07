@@ -146,7 +146,6 @@
           oci_execute($result);
           while($row = oci_fetch_array($result, OCI_ASSOC)){
             $id = $row['SHOP_ID'];
-            $name = $row['SHOP_NAME'];
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
             echo("<td>$row[USER_ID]</td>");
