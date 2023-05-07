@@ -24,8 +24,8 @@
 
 <body>
 
-   <!-- Vertical navbar -->
-<div class="vertical-nav bg-white" id="sidebar">
+ <!-- Vertical navbar -->
+ <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
@@ -42,7 +42,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
         <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
@@ -52,7 +52,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderShop Page.php" class="nav-link text-dark">
       <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
       </a>
     </li>
@@ -77,7 +77,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
+      <a href="./AdminApproveTraderItemPage.php" class="nav-link text-dark">
       <i class="fa-solid fa-square-check m-3"></i>Approve Products
       </a>
     </li>
@@ -90,6 +90,8 @@
   </ul>
 </div>
 <!-- End vertical navbar -->
+
+
 
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
