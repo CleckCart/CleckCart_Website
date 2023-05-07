@@ -51,7 +51,7 @@
       $mail->Subject = 'Notice Of Termination!!! '; //subject of the email for reciever
       $mail->Body = 'Dear, '. $deleteTraderName .'<br>You have been removed from CleckCart as a Trader.<br> Thank you for your time and contribution!'; //message for the reciever
       $mail->send();
-      //header("Location:./AdminViewTraderPage.php?success= Trader has been deleted.");
+      header("Location:./AdminViewTraderPage.php?success= Trader has been deleted.");
     }
 
     else{
