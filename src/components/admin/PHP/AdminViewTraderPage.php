@@ -102,65 +102,71 @@
       <div class="row row-cols-1 row-cols-md-2 bg-success">
         <div class="col p-5">
           <h1>Manage Traders</h1>
-        </div><br />
+        </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
             <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchTrader" placeholder="Search a trader" class="form-control border border-dark" value="<?php
-                                                                                                                                  if (isset($_POST['searchTrader'])) {
-                                                                                                                                    echo (trim($_POST['searchTrader']));
-                                                                                                                                  }
-                                                                                                                                  ?>">
-              <input type="submit" name="searchTraderSubmit" value="Search" class="btn btn-light">
+              <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
+              if (isset($_POST['searchProduct'])) {
+                   echo (trim($_POST['searchProduct']));
+                }
+              ?>">
+              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
+              <a href = "./TraderViewItemsAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
             </form>
           </div>
         </div>
       </div>
       <div class="row table-responsive">
         <table class="table table-light table-striped text-center">
+        <?php
+        if(isset($_GET['error'])) {?>
+          <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+        if(isset($_GET['success'])) {?>
+          <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
           <thead class="table-success">
             <tr>
-              <th>ID</th>
+              <th>Select</th>
+              <th>User Id</th>
               <th>Image</th>
+              <th>Username</th>
+              <th>Role</th>
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Username</th>
+              <th>Gender</th>
+              <th>Date Of Birth</th>
               <th>Address</th>
-              <th>Phone</th>
-              <th>Date</th>
-              <th colspan=2>Actions</th>
-              <th></th>
+              <th>Phone Number</th>
+              <th colspan=2>Actions</th>            
             </tr>
           </thead>
           <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-          <tr>
-            <td>0</td>
-            <td>lorem.jpg</td>
-            <td>Lorem</td>
-            <td>Ipsum</td>
-            <td>lorem@ipsum.com</td>
-            <td>ipsum8</td>
-            <td>Lorem, Ipsum</td>
-            <td>123456789</td>
-            <td>2023/04/04</td>
-            <td>
-            <!-- Edit Button trigger modal -->
-            <a href = "./AdminViewTraderEdit.php" class="btn">
-              <img src="./../../../dist/public/edit.svg" alt="person">
-            </a>
-            </td>
-            <td>
-            <!-- Delete Button trigger modal -->
-            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-              <img src="./../../../dist/public/delete.svg" alt="person">
-            </button>
-            </td>
-            <td></td>
-          <tr>
-          ';
+          include('connect.php');
+          $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'Trader' ORDER BY USER_ID";
+          $result = oci_parse($conn, $query);
+          oci_execute($result);
+          while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $id = $row['USER_ID'];
+            $name = $row['USERNAME'];
+            $email = $row['EMAIL'];
+            echo("<tr><td><input type='checkbox'/></td>");
+            echo("<td>$id</td>");
+            echo("<td>$row[IMAGE]</td>");
+            echo("<td>$row[USERNAME]</td>");
+            echo("<td>$row[ROLE]</td>");
+            echo("<td>$row[FIRST_NAME]</td>");
+            echo("<td>$row[LAST_NAME]</td>");
+            echo("<td>$row[EMAIL]</td>");
+            echo("<td>$row[GENDER]</td>");
+            echo("<td>$row[DATE_OF_BIRTH]</td>");
+            echo("<td>$row[ADDRESS]</td>");
+            echo("<td>$row[PHONE_NUMBER]</td>");
+            echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>
         </table>
@@ -176,16 +182,30 @@
             <div class="modal-body text-center">
               <img src="../../../dist/public/remove.svg" alt="">
               <h3 class="mt-3">Are You Sure?</h3>
-              <p>You are about to delete item(s). This process cannot be undone</p>
+              <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
             </div>
             <div class="modal-footer text-center">
-              <button type="button" class="btn btn-danger mx-auto w-100">Delete</button>
+              <?php
+                echo("<a href='./AdminViewTraderDelete.php?id=$id&action=delete' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+              ?>
               <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <!-- Script to update productId in the modal -->
+    <script>
+      $('#exampleModalDelete').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var id = button.data('id'); // Extract trader id from data-id attribute
+        var name = button.data('name'); // Extract trader name from data-name attribute
+        var email = button.data('email'); // Extract trader name from data-name attribute
+        var modal = $(this);
+        modal.find('#productName').text(name); // Update the modal content
+        modal.find('#deleteLink').attr('href', './AdminViewTraderDelete.php?id=' + id + '&action=delete' + '&username=' + name + '&email=' + email); // Update the delete link
+      });
+    </script>
     <!-- End demo content -->
 </body>
 
