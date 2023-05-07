@@ -182,7 +182,7 @@
             <div class="modal-body text-center">
               <img src="../../../dist/public/remove.svg" alt="">
               <h3 class="mt-3">Are You Sure?</h3>
-              <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
+              <p>You are about to delete <span id="username"></span> along with their products. This process cannot be undone.</p>
             </div>
             <div class="modal-footer text-center">
               <?php
@@ -202,7 +202,7 @@
         var name = button.data('name'); // Extract trader name from data-name attribute
         var email = button.data('email'); // Extract trader name from data-name attribute
         var modal = $(this);
-        modal.find('#productName').text(name); // Update the modal content
+        modal.find('#username').text(name); // Update the modal content
         modal.find('#deleteLink').attr('href', './AdminViewTraderDelete.php?id=' + id + '&action=delete' + '&username=' + name + '&email=' + email); // Update the delete link
       });
     </script>

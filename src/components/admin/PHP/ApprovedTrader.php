@@ -68,7 +68,6 @@
                     oci_execute($RunCategoryInsertionQuery);
 
 
-
                     $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_OWNER) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderUsername)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);
