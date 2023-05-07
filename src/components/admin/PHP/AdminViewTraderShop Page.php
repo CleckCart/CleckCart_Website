@@ -23,8 +23,8 @@
 </head>
 
 <body>
-    <!-- Vertical navbar -->
-<div class="vertical-nav bg-white" id="sidebar">
+ <!-- Vertical navbar -->
+ <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
@@ -41,7 +41,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
         <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
@@ -51,7 +51,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderShop Page.php" class="nav-link text-dark">
       <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
       </a>
     </li>
@@ -76,7 +76,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
+      <a href="./AdminApproveTraderItemPage.php" class="nav-link text-dark">
       <i class="fa-solid fa-square-check m-3"></i>Approve Products
       </a>
     </li>
@@ -91,6 +91,8 @@
 <!-- End vertical navbar -->
 
 
+
+
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
     <!-- Toggle button -->
@@ -98,41 +100,65 @@
 
     <!-- Demo content -->
     <!--Code -->
-          <div class="container bg-light">
-            <div class="modal-header text-center">
-              <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Shops</h5>
-            </div>
-            <div class="modal-body">
-              <form method="POST" action="AdminViewTrader'sShopEditSubmit.php">
-              <?php
-                if(isset($_GET['error'])) {?>
-                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-              <?php }?>
-                <div class="mb-3">
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Name</label>
-                      <input type="text" class="form-control" aria-label="Name" name="TraderShopName" placeholder="Shop name">
-                    </div>
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Category</label>
-                      <input type="text" class="form-control" aria-label="Category" name="TraderShopCategory" placeholder="Shop category">
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Description</label>
-                      <textarea class="form-control" placeholder="Leave a comment here" rows="5" name="TraderShopDescription"></textarea>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
-            </div>
+    <div class="container-fluid">
+      <div class="row row-cols-1 row-cols-md-2 bg-success">
+        <div class="col p-5">
+          <h1>Manage Shops</h1>
+        </div>
+        <div class="col p-5 text-end">
+          <div class="mt-2">
+            <form class="d-flex" role="search" method="POST" action="">
+              <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
+              if (isset($_POST['searchProduct'])) {
+                   echo (trim($_POST['searchProduct']));
+                }
+              ?>">
+              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
+              <a href = "./TraderViewItemsAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
             </form>
           </div>
+        </div>
+      </div>
+      <div class="row table-responsive">
+        <table class="table table-light table-striped text-center">
+        <?php
+        if(isset($_GET['error'])) {?>
+          <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+        if(isset($_GET['success'])) {?>
+          <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
+          <thead class="table-success">
+            <tr>
+              <th>Select</th>
+              <th>Shop Id</th>
+              <th>User Id</th>
+              <th>Shop Name</th>
+              <th>Shop Owner</th>
+              <th>Shop Description</th>
+              <th colspan=2>Action</th>            
+            </tr>
+          </thead>
+          <?php
+          include('connect.php');
+          $query = "SELECT * FROM SHOP ORDER BY SHOP_ID";
+          $result = oci_parse($conn, $query);
+          oci_execute($result);
+          while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $id = $row['SHOP_ID'];
+            $name = $row['SHOP_NAME'];
+            echo("<tr><td><input type='checkbox'/></td>");
+            echo("<td>$id</td>");
+            echo("<td>$row[USER_ID]</td>");
+            echo("<td>$row[SHOP_NAME]</td>");
+            echo("<td>$row[SHOP_OWNER]</td>");
+            echo("<td>$row[SHOP_DESCRIPTION]</td>");
+            echo("<td><a href='AdminViewTraderShopEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+          }
+          ?>
+        </table>
+      </div>
     <!-- End demo content -->
 </body>
 

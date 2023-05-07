@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminViewCustomer</title>
+  <title>AdminViewTrader'sItems</title>
   <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
   <!--font awesome CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -92,7 +92,6 @@
 
 
 
-
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
     <!-- Toggle button -->
@@ -100,74 +99,57 @@
 
     <!-- Demo content -->
     <!--Code -->
-    <div class="container-fluid">
-      <div class="row row-cols-1 row-cols-md-2 bg-success">
-        <div class="col p-5">
-          <h1>Manage Customers</h1>
-        </div>
-        <div class="col p-5 text-end">
-          <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchCustomer" placeholder="Search a customer" class="form-control border border-dark" value="<?php
-                                                                                                                                      if (isset($_POST['searchCustomer'])) {
-                                                                                                                                        echo (trim($_POST['searchCustomer']));
-                                                                                                                                      }
-                                                                                                                                      ?>">
-              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-            </form>
+        <div class="container bg-light">
+          <div class="modal-header text-center">
+            <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
+          <div class="modal-body">
+            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php" enctype="multipart/form-data">
+            <?php
+                if(isset($_GET['error'])) {?>
+                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
+              <div class="mb-3">
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Name</label>
+                    <input type="text" class="form-control" aria-label="Name" name="AdminAddItemName" placeholder="Product name">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Category</label>
+                    <input type="text" class="form-control" aria-label="Category" name="AdminAddItemCategory" placeholder="Product category">
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Description</label>
+                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="AdminAddItemDescription"></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">                 
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Stock</label>
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemStock" placeholder="Product stock">
+                  </div>
+                  <div class="col">
+                    <label for="exampleInputText1" class="form-label">Price</label>
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemPrice" placeholder="Product price">
+                  </div>                  
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="file" class="form-label">Image</label>
+                    <input type="file" class="form-control" id="file" aria-label="File" name="AdminAddItemImage">
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="AdminAddItemSubmit">
+          </div>
+          </form>
         </div>
-      </div>
-      <div class="row table-responsive">
-        <table class="table table-light table-striped text-center">
-          <thead class="table-success">
-            <tr>
-              <th>ID</th>
-              <th>Image</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Username</th>
-              <th>Address</th>
-              <th>Phone</th>
-              <th>Date</th>
-              <th colspan=2>Actions</th>
-              <th></th>
-            </tr>
-          </thead>
-          <?php
-          for ($i = 0; $i < 10; $i++) {
-            echo '
-              <tr>
-                <td>1</td>
-                <td>lorem.jpg</td>
-                <td>Lorem</td>
-                <td>Ipsum</td>
-                <td>lorem@ipsum.com</td>
-                <td>ipsum8</td>
-                <td>Lorem, Ipsum</td>
-                <td>123456789</td>
-                <td>2023/04/04</td>
-                <td>
-                  <!-- Edit Button trigger modal -->
-                  <a href = "./AdminViewCustomerPageEdit.php" class="btn">
-                    <img src="./../../../dist/public/edit.svg" alt="person">
-                  </>
-                </td>
-                <td>
-                  <!-- Delete Button trigger modal -->
-                  <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                    <img src="./../../../dist/public/delete.svg" alt="person">
-                  </button>
-                </td>
-                <td></td>
-                </tr>
-                ';
-          }
-          ?>
-        </table>
-      </div>
-    </div>
 
     <!-- Delete Modal -->
     <div class="modal fade" id="exampleModalDelete" tabindex="-1">
@@ -179,7 +161,7 @@
           <div class="modal-body text-center">
             <img src="../../../dist/public/remove.svg" alt="">
             <h3 class="mt-3">Are You Sure?</h3>
-            <p>You are about to delete a customer</p>
+            <p>You are about to delete item(s). This process cannot be undone</p>
           </div>
           <div class="modal-footer text-center">
             <button type="button" class="btn btn-danger mx-auto w-100">Delete</button>
@@ -190,20 +172,6 @@
     </div>
   </div>
   <!-- End demo content -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </body>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminViewTrader'sItems</title>
+  <title>AdminViewTrader'sShop</title>
   <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
   <!--font awesome CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,8 +23,8 @@
 </head>
 
 <body>
-<!-- Vertical navbar -->
-<div class="vertical-nav bg-white" id="sidebar">
+ <!-- Vertical navbar -->
+ <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
@@ -41,7 +41,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sItemsPage.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
         <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
@@ -51,7 +51,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTrader'sShop Page.php" class="nav-link text-dark">
+      <a href="./AdminViewTraderShop Page.php" class="nav-link text-dark">
       <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
       </a>
     </li>
@@ -76,7 +76,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTrader'sItemPage.php" class="nav-link text-dark">
+      <a href="./AdminApproveTraderItemPage.php" class="nav-link text-dark">
       <i class="fa-solid fa-square-check m-3"></i>Approve Products
       </a>
     </li>
@@ -91,6 +91,8 @@
 <!-- End vertical navbar -->
 
 
+
+
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
     <!-- Toggle button -->
@@ -98,81 +100,42 @@
 
     <!-- Demo content -->
     <!--Code -->
-        <div class="container bg-light">
-          <div class="modal-header text-center">
-            <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php" enctype="multipart/form-data">
-            <?php
+          <div class="container bg-light">
+            <div class="modal-header text-center">
+              <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Shops</h5>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action="AdminViewTrader'sShopEditSubmit.php">
+              <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-            <?php }?>
-              <div class="mb-3">
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name" name="AdminAddItemName" placeholder="Product name">
+              <?php }?>
+                <div class="mb-3">
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="exampleInputText1" class="form-label">Name</label>
+                      <input type="text" class="form-control" aria-label="Name" name="TraderShopName" placeholder="Shop name">
+                    </div>
+                    <div class="col">
+                      <label for="exampleInputText1" class="form-label">Category</label>
+                      <input type="text" class="form-control" aria-label="Category" name="TraderShopCategory" placeholder="Shop category">
+                      </select>
+                    </div>
                   </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Category</label>
-                    <input type="text" class="form-control" aria-label="Category" name="AdminAddItemCategory" placeholder="Product category">
-                    </select>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="AdminAddItemDescription"></textarea>
-                  </div>
-                </div>
-                <div class="row mb-3">                 
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemStock" placeholder="Product stock">
-                  </div>
-                  <div class="col">
-                    <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemPrice" placeholder="Product price">
-                  </div>                  
-                </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="AdminAddItemImage">
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="exampleInputText1" class="form-label">Description</label>
+                      <textarea class="form-control" placeholder="Leave a comment here" rows="5" name="TraderShopDescription"></textarea>
+                    </div>
                   </div>
                 </div>
-              </div>
+            </div>
+            <div class="modal-footer">
+              <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
+            </div>
+            </form>
           </div>
-          <div class="modal-footer">
-            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="AdminAddItemSubmit">
-          </div>
-          </form>
-        </div>
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <img src="../../../dist/public/remove.svg" alt="">
-            <h3 class="mt-3">Are You Sure?</h3>
-            <p>You are about to delete item(s). This process cannot be undone</p>
-          </div>
-          <div class="modal-footer text-center">
-            <button type="button" class="btn btn-danger mx-auto w-100">Delete</button>
-            <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End demo content -->
-
-
+    <!-- End demo content -->
 </body>
 
 </html>
