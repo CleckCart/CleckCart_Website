@@ -108,7 +108,7 @@
         <div class="col p-5 text-end">
           <div class="mt-2">
             <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
+              <input type="text" name="searchProduct" placeholder="Search a customer" class="form-control border border-dark" value="<?php
               if (isset($_POST['searchProduct'])) {
                    echo (trim($_POST['searchProduct']));
                 }
