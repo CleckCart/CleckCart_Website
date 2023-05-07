@@ -100,40 +100,63 @@
 
     <!-- Demo content -->
     <!--Code -->
+          <?php
+            if(isset($_GET['id']) && isset($_GET['action'])) 
+              {
+                  include("connect.php");
+                  $EditShopId = $_GET['id'];
+                  $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_ID = $EditShopId";                 
+                  $RunFetchShopQuery = oci_parse($conn, $FetchShopQuery);;
+                  oci_execute($RunFetchShopQuery); 
+              
+                  while($row=oci_fetch_array($RunFetchShopQuery, OCI_ASSOC))
+                      {
+                          $ShopId = $row['SHOP_ID'];
+                          $ShopName = $row['SHOP_NAME'];
+                          $ShopDescription = $row['SHOP_DESCRIPTION'];
+                      }
+              }
+          ?>
           <div class="container bg-light">
             <div class="modal-header text-center">
               <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Shops</h5>
             </div>
             <div class="modal-body">
-              <form method="POST" action="AdminViewTrader'sShopEditSubmit.php">
-              <?php
-                if(isset($_GET['error'])) {?>
-                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-              <?php }?>
-                <div class="mb-3">
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Name</label>
-                      <input type="text" class="form-control" aria-label="Name" name="TraderShopName" placeholder="Shop name">
-                    </div>
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Category</label>
-                      <input type="text" class="form-control" aria-label="Category" name="TraderShopCategory" placeholder="Shop category">
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col">
-                      <label for="exampleInputText1" class="form-label">Description</label>
-                      <textarea class="form-control" placeholder="Leave a comment here" rows="5" name="TraderShopDescription"></textarea>
+              <form method="POST" action="AdminViewTraderShopEditSubmit.php">
+                <?php
+                  if(isset($_GET['error'])) {?>
+                      <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                <?php }?>
+                <?php
+                  if(isset($_GET['success'])) {?>
+                      <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                <?php }?>
+                  <div class="mb-3">
+                    <div class="row mb-3">
+                      <div class="col">
+                        <input type='hidden' name='EditShopId' value='<?php
+                        echo($ShopId);?>'>
+                        <label for="exampleInputText1" class="form-label">Name</label>
+                        <input type="text" class="form-control" aria-label="Name" name="TraderShopName" placeholder="Shop name" value="<?php
+                        echo($ShopName);
+                        ?>">
+                      </div>
                     </div>
                   </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-              <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
-            </div>
-            </form>
+                    <div class="row mb-3">
+                      <div class="col">
+                        <label for="exampleInputText1" class="form-label">Description</label>
+                        <textarea class="form-control" placeholder="Leave a comment here" rows="5" name="TraderShopDescription"><?php
+                        echo($ShopDescription);
+                        ?></textarea>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="modal-footer">
+                    <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
+                  </div>
+              </form>
           </div>
     <!-- End demo content -->
 </body>

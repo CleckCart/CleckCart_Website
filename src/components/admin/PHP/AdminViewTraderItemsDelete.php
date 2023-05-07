@@ -6,9 +6,9 @@
       $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = $deleteProductId";     
       $DeleteQuery = oci_parse($conn, $sql);
       oci_execute($DeleteQuery);
-      header("Location:./AdminViewTrader'sItemsPage.php?success= Product has been deleted.");
+      header("Location:./AdminViewTraderItemsPage.php?success= Product has been deleted.");
     }
     else{
-      header("Location:./AdminViewTrader'sItemsPage.php?error= Something went wrong. Please try again.");
+      header("Location:./AdminViewTraderItemsPage.php?error= Something went wrong. Please try again.");
     }
 ?>
