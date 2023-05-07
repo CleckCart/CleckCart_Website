@@ -114,7 +114,6 @@
                 }
               ?>">
               <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-              <a href = "./TraderViewItemsAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
             </form>
           </div>
         </div>
