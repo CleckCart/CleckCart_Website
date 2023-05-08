@@ -32,6 +32,55 @@
                                                     
                                                     if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
                                                         {
+                                                            $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$AdminAddItemCategory'";
+                                                            $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                            oci_execute($runCheckCategoryQuery);
+
+                                                            $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                            if($row['CATEGORY_NAME']==$AdminAddItemCategory)
+                                                                {                                                              
+
+                                                                    $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$AdminAddItemCategory'";
+                                                                    $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                                    oci_execute($runCheckCategoryQuery);
+
+                                                                    $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                                        if($row['CATEGORY_NAME']==$AdminAddItemCategory)
+                                                                            {
+                                                                                $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$AdminAddItemCategory'";
+                                                                                $result2 = oci_parse($conn, $query2);
+                                                                                oci_execute($result2);
+                                                                                $row1 = oci_fetch_array($result2, OCI_ASSOC);
+                                                                                $AdminAddItemCategoryID=$row1['CATEGORY_ID'];
+                                                                                $AdminAddItemCategoryName=$row1['CATEGORY_NAME'];
+    
+                                                                                $query3="SELECT * FROM SHOP WHERE SHOP_NAME ='$AdminAddItemCategory'";
+                                                                                $result3 = oci_parse($conn, $query3);
+                                                                                oci_execute($result3);
+                                                                                $row2 = oci_fetch_array($result3, OCI_ASSOC);
+                                                                                $TraderItemAddShopID=$row2['SHOP_ID'];
+                                                                                $TraderItemAddShopName=$row2['SHOP_NAME'];
+
+                                                                                $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                                VALUES(PRODUCT_S.NEXTVAL, :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
+                                                                                $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $AdminAddItemCategoryID);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                     
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $AdminAddItemCategory);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $AdminAddItemImage);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $AdminAddItemName);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $AdminAddItemDescription);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $AdminAddItemPrice);
+                                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $AdminAddItemStock);
+                                                                                oci_execute($ProductRunInsertionQuery);
+                                                                                header('Location:./TraderViewItemsAdd.php?success=Product Listing Requested.');
+                                                                            }
+
+                                                                        else 
+                                                                            {
+                                                                                header('Location:./TraderViewItemsAdd.php?error=Please enter a valid category.');
+                                                                            }
+                                                                }
                                                         }
 
                                                     else

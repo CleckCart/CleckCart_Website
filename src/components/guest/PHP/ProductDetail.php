@@ -17,25 +17,29 @@
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<div class="modal">
-  <div class="modal-content">
-    <h2 class="modal-title">Review</h2>
-    <div class="modal-description">
-      <span>Description:</span>
-      <textarea placeholder="Write your review here"></textarea>
-    </div>
-    <div class="modal-rating">
-      <span>Rating:</span>
-      <div class="stars">
-        
+  <?php
+    include('./connect.php');
+  ?>
+  <!--modal code-->
+  <!-- <div class="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Review</h2>
+      <div class="modal-description">
+        <span>Description:</span>
+        <textarea placeholder="Write your review here"></textarea>
+      </div>
+      <div class="modal-rating">
+        <span>Rating:</span>
+        <div class="stars">
+          
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-cancel">Cancel</button>
+        <button class="modal-submit">Submit</button>
       </div>
     </div>
-    <div class="modal-buttons">
-      <button class="modal-cancel">Cancel</button>
-      <button class="modal-submit">Submit</button>
-    </div>
-  </div>
-</div>
+  </div> -->
 
 <!--NavBar-->
 <div class = "topbar">
@@ -105,50 +109,65 @@
             </div>
         </nav>
         </div>
-  <section class="product-detail">
-    <div class="upper-section">
-        <div class="product-img-cnt">
-          <img class="product-img" src="src/assets/img/bakery.jpg" alt="">
-        </div>
-        <div class="product-info">
-            <div class="product-title-box">
-              <h2 class="product-title">PRODUCT TITLE</h2>
-              <img src="" alt="Favourite icon">
-            </div>
-            <div class="star-rating-box">
-              <p>Star rating <span>No of rating</span></p>
-            </div>
-            <p class="product-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum incidunt soluta ducimus repellat neque. Doloribus, beatae nostrum vero eius laborum ut error neque debitis laboriosam reprehenderit cupiditate, magni blanditiis vitae.</p>
-           <span class="product-price">$$$</span>
-           <div class="product-quantity">
-            <span>Quantity:</span>
-            <div class="increment-decrement">
-              <span class="decrement-btn">-</span><hr/>
-              <span class="product-quantity-value">1</span><hr/>
-              <span class="increment-btn">+</span>
-              <p>3 in stock</p>
+        <?php
+            $id = $_GET['id'];
+            $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $id";
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+            while($row = oci_fetch_array($result, OCI_ASSOC)){
+              $productStock = $row['PRODUCT_STOCK'];
+            }
+            $productName = $_GET['name'];
+            $productDescription = $_GET['description'];
+            $productImage = $_GET['image'];
+            $productPrice = $_GET['price'];
+          ?>
+        <section class="product-detail">
+          <div class="upper-section">
+              <div class="product-img-cnt">
+                <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
+              </div>
+              <div class="product-info">
+                  <div class="product-title-box">
+                    <h2 class="product-title"><?php echo($productName)?></h2>
+                    <img src="" alt="Favourite icon">
+                  </div>
+                  <div class="star-rating-box">
+                    <p>Star rating <span>No of rating</span></p>
+                  </div>
+                  <p class="product-description"><?php echo($productDescription) ?></p>
+                <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
+                <div class="product-quantity">
+                  <span>Quantity:</span>
+                  <div class="increment-decrement">
+                    <span class="minus">-</span><hr/>
+                    <span class="quantity">1</span><hr/>
+                    <span class="plus">+</span>
+                    <script></script>
+                    <p><?php echo($productStock) ?> in stock</p>
+                  </div>
+                </div>
+                <?php echo("<a href = './CartProducts.php?id='$id'&image='$productImage'&name='$productName'&price='$productPrice'&quantity=$quantity class='btn add-to-cart'>ADD TO CART</a>")?>
+                <?php echo("<a href = './Checkout.php' class='btn buy-now'>BUY NOW</a>")?>
+                
+          </div>
+          </div>
+          <div class="lower-section">
+            <h2 class="review-heading">Customer Reviews</h2>
+            <div class="review">
+              <div class="review-left">
+                <h3 class="review-name">Customer Name</h3>
+                <span class="review-rating">Star rating</span>
+                <span class="review-date">01/01/2023</span>
+              </div>
+              <hr />
+              <div class="review-right">
+                  <h4 class="review-title">Review Title</h4>
+                  <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
+              </div>
             </div>
           </div>
-          <button class="add-to-cart">ADD TO CART</button>
-          <button class="buy-now">BUY NOW</button>
-    </div>
-    </div>
-    <div class="lower-section">
-      <h2 class="review-heading">Customer Reviews</h2>
-      <div class="review">
-        <div class="review-left">
-          <h3 class="review-name">Customer Name</h3>
-          <span class="review-rating">Star rating</span>
-          <span class="review-date">01/01/2023</span>
-        </div>
-        <hr />
-        <div class="review-right">
-            <h4 class="review-title">Review Title</h4>
-            <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
    <!--footer-->
    <footer>
     <div class = "container-fluid bg-secondary">
