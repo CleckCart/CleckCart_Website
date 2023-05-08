@@ -12,15 +12,15 @@
                 {   
                     while($row = oci_fetch_array($RunFetchQuery, OCI_ASSOC)){
                     $Id=$row['APPLY_ID'];
-                    $Username=$row['USERNAME'];
-                    $Role='Trader';
-                    $Firstname=$row['FIRST_NAME'];
-                    $Lastname=$row['LAST_NAME'];
-                    $Email=$row['EMAIL'];  
-                    $Category=$row['SHOP_CATEGORY'];
-                    $Gender=$row['GENDER'];
+                    $Username=strtolower($row['USERNAME']);
+                    $Role='trader';
+                    $Firstname=strtolower($row['FIRST_NAME']);
+                    $Lastname=strtolower($row['LAST_NAME']);
+                    $Email=strtolower($row['EMAIL']);  
+                    $Category=strtolower($row['SHOP_CATEGORY']);
+                    $Gender=strtolower($row['GENDER']);
                     $BirthDate=$row['DATE_OF_BIRTH'];
-                    $Address=$row['ADDRESS'];
+                    $Address=strtolower($row['ADDRESS']);
                     $PhoneNumber=$row['PHONE_NUMBER'];
                     $Password=$row['PASSWORD'];
                     

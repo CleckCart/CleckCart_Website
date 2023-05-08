@@ -23,6 +23,27 @@
 </head>
 
 <body>
+<?php
+  if(isset($_GET['id']) && isset($_GET['action'])) 
+    {
+        include("connect.php");
+        $ProductId = $_GET['id'];
+        $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $ProductId";                 
+        $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
+        oci_execute($RunFetchProductQuery); 
+    
+        while($row=oci_fetch_array($RunFetchProductQuery, OCI_ASSOC))
+            {
+                $ProductId = $row['PRODUCT_ID'];
+                $CategoryName = $row['CATEGORY_NAME'];
+                $ProductName = $row['PRODUCT_NAME'];
+                $ProductDescription = $row['PRODUCT_DESCRIPTION'];
+                $ProductImage = $row['PRODUCT_IMAGE'];
+                $ProductPrice = $row['PRODUCT_PRICE'];
+                $ProductStock = $row['PRODUCT_STOCK'];
+            }
+    }
+  ?>
  <!-- Vertical navbar -->
  <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
@@ -114,42 +135,45 @@
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name" name="TraderEditItemName" placeholder="Product name">
+                    <input type="text" class="form-control" aria-label="Name" name="TraderEditItemName" placeholder="Product name" value="<?php
+                    echo("$ProductName");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
-                    <input type="text" class="form-control" aria-label="Category" name="TraderEditItemCategory" placeholder="Product category">
+                    <input type="text" class="form-control" aria-label="Category" name="TraderEditItemCategory" placeholder="Product category" value="<?php
+                    echo("$CategoryName");?>">
                     </select>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="TraderEditItemDescription"></textarea>
+                    <textarea class="form-control" placeholder="Leave a description here" rows="5" name="TraderEditItemDescription"><?php
+                    echo("$ProductDescription");?></textarea>
                   </div>
                 </div>
-                <div class="row mb-3">
-                  <div class="col">
-                    <label for="date" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderEditItemDate">
-                  </div>
+                <div class="row mb-3">                 
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemStock" placeholder="Product stock">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemStock" placeholder="Product stock" value="<?php
+                    echo("$ProductStock");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemPrice" placeholder="Product price">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemPrice" placeholder="Product price" value="<?php
+                    echo("$ProductPrice");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemDiscount" placeholder="Product discount">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemDiscount" placeholder="Product discount" value="<?php
+                    echo(0);?>">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditItemImage">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditItemImage" value="<?php
+                    echo($ProductImage);?>">
                   </div>
                 </div>
               </div>

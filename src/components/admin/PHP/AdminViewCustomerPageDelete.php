@@ -4,7 +4,6 @@
   if(isset($_GET['id'])&&isset($_GET['action']))
     {
 
-     
       $DeleteUserQuery = "DELETE FROM USER_TABLE WHERE USER_ID = '$deleteCustomerId'";     
       $RunDeleteUserQuery = oci_parse($conn, $DeleteUserQuery);
       oci_execute($RunDeleteUserQuery);

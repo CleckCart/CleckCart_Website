@@ -11,18 +11,18 @@
                 }
             else
                 {
-                    $TraderFirstName = trim(filter_input(INPUT_POST, 'TraderFirstName', FILTER_SANITIZE_STRING));
-                    $TraderLastName = trim(filter_input(INPUT_POST, 'TraderLastName', FILTER_SANITIZE_STRING));
-                    $TraderUserName = trim(filter_input(INPUT_POST, 'TraderUserName', FILTER_SANITIZE_STRING));
-                    $TraderAddress = trim(filter_input(INPUT_POST, 'TraderAddress', FILTER_SANITIZE_STRING));
+                    $TraderFirstName = strtolower(trim(filter_input(INPUT_POST, 'TraderFirstName', FILTER_SANITIZE_STRING)));
+                    $TraderLastName = strtolower(trim(filter_input(INPUT_POST, 'TraderLastName', FILTER_SANITIZE_STRING)));
+                    $TraderUserName = strtolower(trim(filter_input(INPUT_POST, 'TraderUserName', FILTER_SANITIZE_STRING)));
+                    $TraderAddress = strtolower(trim(filter_input(INPUT_POST, 'TraderAddress', FILTER_SANITIZE_STRING)));
                     $TraderBirthDate = $_POST['TraderBirthDate'];
-                    $TraderEmail = trim(filter_input(INPUT_POST, 'TraderEmail', FILTER_SANITIZE_EMAIL));
+                    $TraderEmail = strtolower(trim(filter_input(INPUT_POST, 'TraderEmail', FILTER_SANITIZE_EMAIL)));
                     $TraderPhoneNumber = trim(filter_input(INPUT_POST, 'TraderPhoneNumber', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderGender = $_POST['TraderGender'];
-                    $TraderShopCategory = trim(filter_input(INPUT_POST, 'TraderShopCategory', FILTER_SANITIZE_STRING));
+                    $TraderGender = strtolower($_POST['TraderGender']);
+                    $TraderShopCategory = strtolower(trim(filter_input(INPUT_POST, 'TraderShopCategory', FILTER_SANITIZE_STRING)));
                     $TraderPassword = trim(filter_input(INPUT_POST, 'TraderPassword', FILTER_SANITIZE_STRING));
                     $TraderConfirmPassword = trim(filter_input(INPUT_POST, 'TraderConfirmPassword', FILTER_SANITIZE_STRING));
-                    $TraderRole = 'Trader';
+                    $TraderRole = 'trader';
                     
                     /*Check if username is of 5-30 characters*/
                     if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 30)

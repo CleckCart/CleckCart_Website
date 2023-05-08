@@ -7,9 +7,9 @@
         header('Location:./CustomerLogin.php?error=Please make sure all text fields are not empty.');
     }
     else{
-        $CustomerLoginUsername = trim(filter_input(INPUT_POST, 'CustomerLoginUsername', FILTER_SANITIZE_STRING));
+        $CustomerLoginUsername = strtolower(trim(filter_input(INPUT_POST, 'CustomerLoginUsername', FILTER_SANITIZE_STRING)));
         $CustomerLoginPassword = trim(filter_input(INPUT_POST, 'CustomerLoginPassword', FILTER_SANITIZE_STRING));
-        $CustomerRole="Customer";
+        $CustomerRole="customer";
         /*Check if username is of 5-10 characters*/
         if(strlen($CustomerLoginUsername) >= 5 && strlen($CustomerLoginUsername) <= 30){
                 $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
