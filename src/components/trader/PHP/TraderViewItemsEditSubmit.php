@@ -28,14 +28,7 @@
                                                 {
                                                     if(filter_input(INPUT_POST, 'TraderItemEditPrice', FILTER_VALIDATE_FLOAT) == true)
                                                         {
-                                                            if(filter_input(INPUT_POST, 'TraderItemEditDiscount', FILTER_VALIDATE_FLOAT) == true)
-                                                                {
-                                                                    
-                                                                }
-                                                            else
-                                                                {
-                                                                    header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product discount.');
-                                                                }
+                                                            
                                                         }
                                                     else
                                                         {

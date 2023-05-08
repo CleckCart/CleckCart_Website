@@ -18,7 +18,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
             $alphabetPattern = "/[^a-zA-Z\s]/";
             $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
             $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
-            $TraderItemImageTmpName = ($_FILES["TraderItemAddImage"]["tmp_name"]);
+            $TraderItemImageAddTmpName = ($_FILES["TraderItemAddImage"]["tmp_name"]);
             $TraderItemAddImageLocation = "../../../dist/public/TraderItemImages/" . $TraderItemAddImage;
             if(!preg_match($alphabetPattern,$TraderItemAddName))
                 {                               
@@ -31,7 +31,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                     
                                                     if(($TraderItemAddImageType == "image/jpeg" || $TraderItemAddImageType == "image/jpg" || $TraderItemAddImageType == "image/png"))
                                                         {
-                                                            if(move_uploaded_file($TraderItemImageTmpName, $TraderItemAddImageLocation))
+                                                            if(move_uploaded_file($TraderItemImageAddTmpName, $TraderItemAddImageLocation))
                                                                 {
                                                                     $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemAddCategory'";
                                                                     $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
@@ -86,6 +86,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                 }
                                                             
                                                         }
+                                                        
                                                     else
                                                         {
                                                             header('Location:./TraderViewItemsAdd.php?error=Please choose an image.');                                                                
