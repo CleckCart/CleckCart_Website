@@ -107,13 +107,13 @@
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchProduct" placeholder="Search a shop" class="form-control border border-dark" value="<?php
-              if (isset($_POST['searchProduct'])) {
-                   echo (trim($_POST['searchProduct']));
+            <form class="d-flex" role="search" method="POST" action="AdminSearchSubmit.php">
+              <input type="text" name="searchShop" placeholder="Search a shop" class="form-control border border-dark" value="<?php
+              if (isset($_POST['searchShop'])) {
+                   echo (trim($_POST['searchShop']));
                 }
               ?>">
-              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
+              <input type="submit" name="searchShopSubmit" value="Search" class="btn btn-light">
             </form>
           </div>
         </div>
