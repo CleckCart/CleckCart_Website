@@ -10,14 +10,14 @@
                 }
             else
                 {
-                    $customerUsername = trim(filter_input(INPUT_POST, 'customerUsername', FILTER_SANITIZE_STRING));
-                    $customerFirstname = trim(filter_input(INPUT_POST, 'customerFirstname', FILTER_SANITIZE_STRING));
-                    $customerLastname = trim(filter_input(INPUT_POST, 'customerLastname', FILTER_SANITIZE_STRING));
+                    $customerUsername = strtolower(trim(filter_input(INPUT_POST, 'customerUsername', FILTER_SANITIZE_STRING)));
+                    $customerFirstname = strtolower(trim(filter_input(INPUT_POST, 'customerFirstname', FILTER_SANITIZE_STRING)));
+                    $customerLastname = strtolower(trim(filter_input(INPUT_POST, 'customerLastname', FILTER_SANITIZE_STRING)));
                     $customerBirthDate = $_POST['customerBirthDate'];
-                    $customerEmail = trim(filter_input(INPUT_POST, 'customerEmail', FILTER_SANITIZE_EMAIL));
-                    $customerGender = $_POST['customerGender'];
+                    $customerEmail = strtolower(trim(filter_input(INPUT_POST, 'customerEmail', FILTER_SANITIZE_EMAIL)));
+                    $customerGender = strtolower($_POST['customerGender']);
                     $customerPhone = trim(filter_input(INPUT_POST, 'customerPhone', FILTER_SANITIZE_NUMBER_INT));
-                    $customerAddress = trim(filter_input(INPUT_POST, 'customerAddress', FILTER_SANITIZE_STRING));
+                    $customerAddress = strtolower(trim(filter_input(INPUT_POST, 'customerAddress', FILTER_SANITIZE_STRING)));
                     $customerPassword = trim(filter_input(INPUT_POST, 'customerPassword', FILTER_SANITIZE_STRING));
                     $customerConfirmPassword = trim(filter_input(INPUT_POST, 'customerConfirmPassword', FILTER_SANITIZE_STRING));
                     /*Check if username is of 5-30 characters*/
@@ -41,7 +41,7 @@
                                                                     if(preg_match($passwordPattern, $customerPassword))
                                                                         {
                                                                         /*For inserting into database*/
-                                                                            $customer_role = 'Customer';
+                                                                            $customer_role = 'customer';
                                                                             $customer_password = md5($customerPassword);
                                             
                                                                             $sql = "INSERT INTO USER_TABLE(USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)

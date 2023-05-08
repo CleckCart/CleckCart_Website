@@ -133,13 +133,11 @@
             include('connect.php');
             if(isset($_POST['searchShopSubmit']))
                 {
-                    $searchShop = trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING));
-                    $lowerCaseShopName=strtolower($searchShop);
-                    $firstUpperCaseShopName=ucfirst($lowerCaseShopName);
+                    $searchShop = strtolower(trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING)));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%'" ;
                     $RunSearchShopQuery = oci_parse($conn, $SearchShopQuery);
-                    oci_bind_by_name($RunSearchShopQuery,':ShopName', $firstUpperCaseShopName);
+                    oci_bind_by_name($RunSearchShopQuery,':ShopName', $searchShop);
                     oci_execute($RunSearchShopQuery);
                                   
                     

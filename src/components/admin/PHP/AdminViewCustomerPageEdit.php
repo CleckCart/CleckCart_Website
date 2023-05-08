@@ -185,21 +185,6 @@
   </div>
   <!-- End demo content -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </body>
 
 </html>

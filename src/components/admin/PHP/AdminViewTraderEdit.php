@@ -89,9 +89,6 @@
     </li>
   </ul>
 </div>
-<!-- End vertical navbar -->
-
-
 
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
@@ -114,42 +111,50 @@
                   <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">First Name</label>
-                      <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderEditFirstName">
+                      <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderEditFirstName" value="<?php
+                      echo("");?>">
                     </div>
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Last Name</label>
-                      <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderEditLastName">
+                      <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderEditLastName" value="<?php
+                      echo("");?>">>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Username</label>
-                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username" name="TraderEditUserName">
+                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="Username" name="TraderEditUserName" value="<?php
+                      echo("");?>">>
                     </div>
                     <div class="col">
                       <label for="exampleInputEmail1" class="form-label">Email</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="TraderEditEmail">
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="TraderEditEmail" value="<?php
+                      echo("");?>">>
                     </div>
                   </div>
 
                   <div class="row mb-3">
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Address</label>
-                      <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="TraderEditAddress">
+                      <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="TraderEditAddress" value="<?php
+                      echo("");?>">>
                     </div>
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Phone</label>
-                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderEditPhone">
+                      <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderEditPhone" value="<?php
+                      echo("");?>">>
                     </div>
                   </div>
                   <div class="row mb-3">
                     <div class="col">
                       <label for="file" class="form-label">Image</label>
-                      <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditImage">
+                      <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditImage" value="<?php
+                      echo("");?>">>
                     </div>
                     <div class="col">
                       <label for="date" class="form-label">Date of birth</label>
-                      <input type="date" class="form-control" id="date" aria-label="Date" name="TraderEditDate">
+                      <input type="date" class="form-control" id="date" aria-label="Date" name="TraderEditDate" value="<?php
+                      echo("");?>">>
                     </div>
                   </div>
                 </div>

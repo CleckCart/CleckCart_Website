@@ -2,24 +2,18 @@
         /*Check if form is submitted*/
         if (isset($_POST['TraderEdit'])) {
            
-                    $TraderEditUsername = trim(filter_input(INPUT_POST, 'TraderEditUsername', FILTER_SANITIZE_STRING));
-                    $TraderEditFirstname = trim(filter_input(INPUT_POST, 'TraderEditFirstname', FILTER_SANITIZE_STRING));
-                    $TraderEditLastname = trim(filter_input(INPUT_POST, 'TraderEditLastname', FILTER_SANITIZE_STRING));
-                    $TraderEditEmail = trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL));
+                    $TraderEditUsername = strtolower(trim(filter_input(INPUT_POST, 'TraderEditUsername', FILTER_SANITIZE_STRING)));
+                    $TraderEditFirstname = strtolower(trim(filter_input(INPUT_POST, 'TraderEditFirstname', FILTER_SANITIZE_STRING)));
+                    $TraderEditLastname = strtolower(trim(filter_input(INPUT_POST, 'TraderEditLastname', FILTER_SANITIZE_STRING)));
+                    $TraderEditEmail = strtolower(trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL)));
                     $TraderEditPhone = trim(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderEditAddress = trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING));
-                    $TraderEditGender = $_POST['TraderEditGender'];
+                    $TraderEditAddress = strtolower(trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING)));
+                    $TraderEditGender = strtolower($_POST['TraderEditGender']);
                     $TraderEditImage = ($_FILES["TraderEditImage"]["name"]);
                     $TraderEditImageType = ($_FILES["TraderEditImage"]["type"]);
                     $TraderEditImageTmpName = ($_FILES["TraderEditImage"]["tmp_name"]);
                     $TraderEditImageLocation = "TraderImages/" . $TraderEditImage;
 
-                    /*Check if username is of 5-10 characters*/
-                    if (empty($_POST['TraderEditFirstname']) || empty($_POST['TraderEditLastname']) || empty($_POST['TraderEditUsername']) || empty($_POST['TraderEditEmail']) 
-                    || empty($_POST['TraderEditPhone']) || empty($_POST['TraderEditGender']) || empty($_POST['TraderEditImage']) || empty($_POST['TraderEditAddress'])) 
-                        {
-                            
-                        }
                     if(strlen($TraderEditUsername) >= 5 && strlen($TraderEditUsername) <= 30)
                         {      
                             $alphabetPattern = "/[^a-zA-Z\s]/";

@@ -9,9 +9,9 @@
                 }
             else
                 {
-                    $AdminAddItemName = trim(filter_input(INPUT_POST, 'AdminAddItemName', FILTER_SANITIZE_STRING));
-                    $AdminAddItemCategory = trim(filter_input(INPUT_POST, 'AdminAddItemCategory', FILTER_SANITIZE_STRING));
-                    $AdminAddItemDescription = trim(filter_input(INPUT_POST, 'AdminAddItemDescription', FILTER_SANITIZE_STRING));
+                    $AdminAddItemName = strtolower(trim(filter_input(INPUT_POST, 'AdminAddItemName', FILTER_SANITIZE_STRING)));
+                    $AdminAddItemCategory = strtolower(trim(filter_input(INPUT_POST, 'AdminAddItemCategory', FILTER_SANITIZE_STRING)));
+                    $AdminAddItemDescription = strtolower(trim(filter_input(INPUT_POST, 'AdminAddItemDescription', FILTER_SANITIZE_STRING)));
                     $AdminAddItemDate = $_POST['AdminAddItemDate'];
                     $AdminAddItemStock = trim(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_SANITIZE_NUMBER_INT));
                     $AdminAddItemPrice = trim(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));

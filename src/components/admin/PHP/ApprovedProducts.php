@@ -12,10 +12,10 @@
                 {   
                     while($row = oci_fetch_array($RunFetchProductQuery, OCI_ASSOC)){
                     $ProductId=$row['APPLY_PRODUCT_ID'];
-                    $CategoryName=$row['CATEGORY_NAME'];
+                    $CategoryName=strtolower($row['CATEGORY_NAME']);
                     $ProductImage=$row['PRODUCT_IMAGE'];
-                    $ProductName=$row['PRODUCT_NAME'];  
-                    $ProductDescription=$row['PRODUCT_DESCRIPTION'];
+                    $ProductName=strtolower($row['PRODUCT_NAME']);  
+                    $ProductDescription=strtolower($row['PRODUCT_DESCRIPTION']);
                     $ProductPrice=$row['PRODUCT_PRICE'];
                     $ProductStock=$row['PRODUCT_STOCK'];
 
@@ -66,6 +66,11 @@
                     oci_execute($RunFetchEmailQuery);
                     $EmailRow = oci_fetch_array($RunFetchEmailQuery, OCI_ASSOC);
                     $Email= $EmailRow['EMAIL'];
+
+                    $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
+                    $DeleteQuery = oci_parse($conn, $sql);
+                    oci_execute($DeleteQuery);
+                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");
                 
                     require '../../../mail/phpmailer/src/Exception.php';
                     require '../../../mail/phpmailer/src/PHPMailer.php';
@@ -87,11 +92,7 @@
                     $mail->Subject = 'CleckCleck! ' . $ShopOwnerUsername . ',' . ' Your product ' . $ProductName .' has been approved.'; //subject of the email for reciever
                     $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been approved to be listed in CleckCart.<br>Happy Trading!'; //message for the reciever
                     $mail->send();
-               
-                    $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
-                    $DeleteQuery = oci_parse($conn, $sql);
-                    oci_execute($DeleteQuery);
-                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");
+                                  
                     }
                 }
         }

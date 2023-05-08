@@ -8,7 +8,7 @@
         header('Location:./TraderLogin.php?error=Please make sure all text fields are not empty.');
     }
     else{
-        $TraderLoginUsername = trim(filter_input(INPUT_POST, 'TraderLoginUsername', FILTER_SANITIZE_STRING));
+        $TraderLoginUsername = strtolower(trim(filter_input(INPUT_POST, 'TraderLoginUsername', FILTER_SANITIZE_STRING)));
         $TraderLoginPassword = trim(filter_input(INPUT_POST, 'TraderLoginPassword', FILTER_SANITIZE_STRING));
         $UserRole = $_POST['UserRole'];
         /*Check if username is of 5-10 characters*/

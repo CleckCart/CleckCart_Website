@@ -12,8 +12,8 @@
             else
                 {
                     $EditShopId = $_POST['EditShopId'];
-                    $EditTraderShopName = trim(filter_input(INPUT_POST, 'TraderShopName', FILTER_SANITIZE_STRING));
-                    $EditTraderShopDescription = trim(filter_input(INPUT_POST, 'TraderShopDescription', FILTER_SANITIZE_STRING));
+                    $EditTraderShopName = strtolower(trim(filter_input(INPUT_POST, 'TraderShopName', FILTER_SANITIZE_STRING)));
+                    $EditTraderShopDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderShopDescription', FILTER_SANITIZE_STRING)));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                             if(!preg_match($alphabetPattern,$EditTraderShopName))
                                 {

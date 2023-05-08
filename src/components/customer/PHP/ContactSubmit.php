@@ -10,11 +10,11 @@ if (isset($_POST['ContactSendMessage'])) {
         }
     else
         {
-            $ContactFullname = trim(filter_input(INPUT_POST, 'ContactFullname', FILTER_SANITIZE_STRING));
-            $ContactEmail= trim(filter_input(INPUT_POST, 'ContactEmail', FILTER_SANITIZE_EMAIL));
+            $ContactFullname = strtolower(trim(filter_input(INPUT_POST, 'ContactFullname', FILTER_SANITIZE_STRING)));
+            $ContactEmail= strtolower(trim(filter_input(INPUT_POST, 'ContactEmail', FILTER_SANITIZE_EMAIL)));
             $ContactPhone = trim(filter_input(INPUT_POST, 'ContactPhone', FILTER_SANITIZE_NUMBER_INT));
-            $ContactSubject = trim(filter_input(INPUT_POST, 'ContactSubject', FILTER_SANITIZE_STRING));
-            $ContactMessage = trim(filter_input(INPUT_POST, 'ContactMessage', FILTER_SANITIZE_STRING));
+            $ContactSubject = strtolower(trim(filter_input(INPUT_POST, 'ContactSubject', FILTER_SANITIZE_STRING)));
+            $ContactMessage = strtolower(trim(filter_input(INPUT_POST, 'ContactMessage', FILTER_SANITIZE_STRING)));
             $alphabetPattern = "/[^a-zA-Z\s]/";
                     if(!preg_match($alphabetPattern,$ContactFullname))
                         {

@@ -3,12 +3,12 @@
         /*Check if form is submitted*/
         if (isset($_POST['CustomerEdit'])) {
            
-                    $CustomerEditUsername = trim(filter_input(INPUT_POST, 'CustomerEditUsername', FILTER_SANITIZE_STRING));
-                    $CustomerEditFirstname = trim(filter_input(INPUT_POST, 'CustomerEditFirstname', FILTER_SANITIZE_STRING));
-                    $CustomerEditLastname = trim(filter_input(INPUT_POST, 'CustomerEditLastname', FILTER_SANITIZE_STRING));
-                    $CustomerEditEmail = trim(filter_input(INPUT_POST, 'CustomerEditEmail', FILTER_SANITIZE_EMAIL));
+                    $CustomerEditUsername = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditUsername', FILTER_SANITIZE_STRING)));
+                    $CustomerEditFirstname = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditFirstname', FILTER_SANITIZE_STRING)));
+                    $CustomerEditLastname = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditLastname', FILTER_SANITIZE_STRING)));
+                    $CustomerEditEmail = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditEmail', FILTER_SANITIZE_EMAIL)));
                     $CustomerEditPhone = trim(filter_input(INPUT_POST, 'CustomerEditPhone', FILTER_SANITIZE_NUMBER_INT));
-                    $CustomerEditAddress = trim(filter_input(INPUT_POST, 'CustomerEditAddress', FILTER_SANITIZE_STRING));
+                    $CustomerEditAddress = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditAddress', FILTER_SANITIZE_STRING)));
 
                     /*Check if username is of 5-10 characters*/
                     if(strlen($CustomerEditUsername) >= 5 && strlen($CustomerEditUsername) <= 30)

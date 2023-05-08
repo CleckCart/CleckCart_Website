@@ -9,12 +9,12 @@
                 }
             else
                 {
-                    $TraderEditFirstName = trim(filter_input(INPUT_POST, 'TraderEditFirstName', FILTER_SANITIZE_STRING));
-                    $TraderEditLastName = trim(filter_input(INPUT_POST, 'TraderEditLastName', FILTER_SANITIZE_STRING));
-                    $TraderEditUserName = trim(filter_input(INPUT_POST, 'TraderEditUserName', FILTER_SANITIZE_STRING));
-                    $TraderEditEmail = trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL));
+                    $TraderEditFirstName = strtolower(trim(filter_input(INPUT_POST, 'TraderEditFirstName', FILTER_SANITIZE_STRING)));
+                    $TraderEditLastName = strtolower(trim(filter_input(INPUT_POST, 'TraderEditLastName', FILTER_SANITIZE_STRING)));
+                    $TraderEditUserName = strtolower(trim(filter_input(INPUT_POST, 'TraderEditUserName', FILTER_SANITIZE_STRING)));
+                    $TraderEditEmail = strtolower(trim(filter_input(INPUT_POST, 'TraderEditEmail', FILTER_SANITIZE_EMAIL)));
                     $TraderEditPhone = trim(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderEditAddress = trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING));
+                    $TraderEditAddress = strtolower(trim(filter_input(INPUT_POST, 'TraderEditAddress', FILTER_SANITIZE_STRING)));
                     $TraderEditDate = $_POST['TraderEditDate'];
                     /*Check if username is of 5-10 characters*/
                     if(strlen($TraderEditUserName) >= 5 && strlen($TraderEditUserName) <= 30)

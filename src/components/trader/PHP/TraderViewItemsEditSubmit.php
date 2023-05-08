@@ -9,9 +9,9 @@
                 }
             else
                 {
-                    $TraderItemEditName = trim(filter_input(INPUT_POST, 'TraderItemEditName', FILTER_SANITIZE_STRING));
-                    $TraderItemEditCategory = trim(filter_input(INPUT_POST, 'TraderItemEditCategory', FILTER_SANITIZE_STRING));
-                    $TraderItemEditDescription = trim(filter_input(INPUT_POST, 'TraderItemEditDescription', FILTER_SANITIZE_STRING));
+                    $TraderItemEditName = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditName', FILTER_SANITIZE_STRING)));
+                    $TraderItemEditCategory = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditCategory', FILTER_SANITIZE_STRING)));
+                    $TraderItemEditDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditDescription', FILTER_SANITIZE_STRING)));
                     $TraderItemEditDate = $_POST['TraderItemEditDate'];
                     $TraderItemEditStock = trim(filter_input(INPUT_POST, 'TraderItemEditStock', FILTER_SANITIZE_NUMBER_INT));
                     $TraderItemEditPrice = trim(filter_input(INPUT_POST, 'TraderItemEditPrice', FILTER_SANITIZE_NUMBER_FLOAT));
