@@ -105,20 +105,16 @@
                 </div>
                 <div class="row mb-3">
                   <div class="col">
-                    <label for="date" class="form-label">Added Date</label>
-                    <input type="date" class="form-control" id="date" aria-label="date" name="TraderItemEditDate">
-                  </div>
-                  <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemEditStock">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditStock" min="0">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemEditPrice">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditPrice" min="1" step="0.01">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemEditDiscount">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditDiscount" min="0" step="0.01">
                   </div>
                 </div>
                 <div class="row mb-3">

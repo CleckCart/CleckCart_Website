@@ -34,7 +34,6 @@
     
         while($row=oci_fetch_array($RunFetchProductQuery, OCI_ASSOC))
             {
-                $ProductId = $row['PRODUCT_ID'];
                 $CategoryName = $row['CATEGORY_NAME'];
                 $ProductName = $row['PRODUCT_NAME'];
                 $ProductDescription = $row['PRODUCT_DESCRIPTION'];
@@ -126,14 +125,12 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="AdminViewTrader'sItemsPageEditSubmit.php">
-            <?php
-                if(isset($_GET['error'])) {?>
-                    <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-            <?php }?>
+            <form method="POST" action="AdminViewTraderItemsPageEditSubmit.php" enctype="multipart/form-data">
               <div class="mb-3">
                 <div class="row mb-3">
                   <div class="col">
+                  <input type='hidden' name='TraderEditItemId' value='<?php
+                    echo($ProductId);?>'>
                     <label for="exampleInputText1" class="form-label">Name</label>
                     <input type="text" class="form-control" aria-label="Name" name="TraderEditItemName" placeholder="Product name" value="<?php
                     echo("$ProductName");?>">
@@ -155,25 +152,24 @@
                 <div class="row mb-3">                 
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemStock" placeholder="Product stock" value="<?php
+                    <input type="number" class="form-control" aria-label="Stock" name="TraderEditItemStock" placeholder="Product stock" min="0" value="<?php
                     echo("$ProductStock");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemPrice" placeholder="Product price" value="<?php
+                    <input type="number" class="form-control" aria-label="Price" name="TraderEditItemPrice" placeholder="Product price" min="1" step="0.01" value="<?php
                     echo("$ProductPrice");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderEditItemDiscount" placeholder="Product discount" value="<?php
-                    echo(0);?>">
+                    <input type="number" class="form-control" aria-label="Discount" name="TraderEditItemDiscount" placeholder="Product discount" min="0" step="0.01" value="<?php               
+                      echo(0);?>">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditItemImage" value="<?php
-                    echo($ProductImage);?>">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderEditItemImage">
                   </div>
                 </div>
               </div>

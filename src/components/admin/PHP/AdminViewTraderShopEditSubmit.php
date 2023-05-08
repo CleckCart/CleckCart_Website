@@ -6,7 +6,7 @@
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderShopName']) || empty($_POST['TraderShopDescription'])) 
                 {
-                    header('Location:./AdminViewTraderShopEdit.php?error=Please make sure all text fields are not empty.');
+                    header('Location:./AdminViewTraderShop Page.php?error=Please make sure all text fields are not empty.');
                 }
 
             else
@@ -28,7 +28,7 @@
                                 }
                             else
                                 {
-                                    header('Location:./AdminViewTraderShopEdit.php?error=Please use alphabets only in shop name.');
+                                    header('Location:./AdminViewTraderShop Page.php?error=Please use alphabets only in shop name.');
                                 }
                 }
         }

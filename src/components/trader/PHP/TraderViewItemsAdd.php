@@ -110,11 +110,11 @@
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemAddStock">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemAddStock" min="0">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemAddPrice">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemAddPrice" min="1" step="0.01">
                   </div>
                 </div>
                 <div class="row mb-3">

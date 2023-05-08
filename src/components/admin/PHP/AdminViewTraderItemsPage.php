@@ -142,7 +142,7 @@
               <th>Price</th>
               <th>Stock</th>
               <th colspan=2>Actions</th>            
-            </tr>l
+            </tr>
           </thead>
           <?php
           include('connect.php');

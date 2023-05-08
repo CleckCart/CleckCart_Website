@@ -24,12 +24,10 @@
                         {                               
                             if(!preg_match($alphabetPattern,$AdminAddItemCategory))
                                 {
-
                                     if(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_VALIDATE_INT) == true)
                                         {
                                             if(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_VALIDATE_FLOAT) == true)
-                                                {
-                                                    
+                                                {                                                
                                                     if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
                                                         {
                                                             $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$AdminAddItemCategory'";

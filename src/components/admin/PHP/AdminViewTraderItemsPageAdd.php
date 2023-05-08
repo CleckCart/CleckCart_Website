@@ -130,11 +130,11 @@
                 <div class="row mb-3">                 
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemStock" placeholder="Product stock">
+                    <input type="number" class="form-control" aria-label="Stock" name="AdminAddItemStock" placeholder="Product stock" min="0">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="AdminAddItemPrice" placeholder="Product price">
+                    <input type="number" class="form-control" aria-label="Price" name="AdminAddItemPrice" placeholder="Product price" min="1" step="0.01">
                   </div>                  
                 </div>
                 <div class="row mb-3">
