@@ -135,22 +135,46 @@
                   <div class="star-rating-box">
                     <p>Star rating <span>No of rating</span></p>
                   </div>
-                  <p class="product-description"><?php echo($productDescription) ?></p>
+                <p class="product-description"><?php echo($productDescription) ?></p>
                 <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
                 <div class="product-quantity">
                   <span>Quantity:</span>
                   <div class="increment-decrement">
-                    <span class="minus">-</span><hr/>
+                    <span class="decrement">-</span><hr/>
                     <span class="quantity">1</span><hr/>
-                    <span class="plus">+</span>
-                    <script></script>
-                    <p><?php echo($productStock) ?> in stock</p>
+                    <span class="increment">+</span>
+                    <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
                   </div>
                 </div>
-                <?php echo("<a href = './CartProducts.php?id='$id'&image='$productImage'&name='$productName'&price='$productPrice'&quantity=$quantity class='btn add-to-cart'>ADD TO CART</a>")?>
-                <?php echo("<a href = './Checkout.php' class='btn buy-now'>BUY NOW</a>")?>
+                <?php echo("<a href = './CartProducts.php?id=$id&image=$productImage&name=$productName&price=$productPrice' class='btn add-to-cart'>ADD TO CART</a>")?>
+                <?php echo("<a href = './Checkout.php?id=$id&image=$productImage&name=$productName&price=$productPrice' class='btn buy-now'>BUY NOW</a>")?>
                 
-          </div>
+                </div>
+              <script>
+                let increment =document.querySelector('.increment');
+                let quantity =document.querySelector('.quantity');
+                let decrement =document.querySelector('.decrement');
+                let stockValue =document.querySelector('.stockValue');
+                let addToCartBtn = document.querySelector('.add-to-cart');
+                let buynowBtn = document.querySelector('.buy-now');
+                let currentQuantity = parseInt(quantity.innerText);
+                increment.addEventListener("click", () => {
+                  if(currentQuantity < (stockValue.innerText-1)){
+                    currentQuantity++;
+                    quantity.innerText = currentQuantity;
+                    addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                    buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                  }
+                });
+                decrement.addEventListener("click", ()=>{
+                  if(currentQuantity > 1){
+                      currentQuantity--;
+                      quantity.innerText = currentQuantity;
+                      addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                  }
+                })
+              </script>
           </div>
           <div class="lower-section">
             <h2 class="review-heading">Customer Reviews</h2>
