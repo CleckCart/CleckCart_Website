@@ -142,7 +142,7 @@
               <th>Date Of Birth</th>
               <th>Address</th>
               <th>Phone Number</th>
-              <th colspan=2>Actions</th>            
+              <th colspan=2>Actions</th>
             </tr>
           </thead>
           <?php

@@ -104,7 +104,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="./AdminViewTrader'sItemsPageAddSubmit.php" enctype="multipart/form-data">
+            <form method="POST" action="./AdminViewTraderItemsPageAddSubmit.php" enctype="multipart/form-data">
             <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -150,30 +150,6 @@
           </div>
           </form>
         </div>
-
-    <!-- Delete Modal -->
-    <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header text-center">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body text-center">
-            <img src="../../../dist/public/remove.svg" alt="">
-            <h3 class="mt-3">Are You Sure?</h3>
-            <p>You are about to delete item(s). This process cannot be undone</p>
-          </div>
-          <div class="modal-footer text-center">
-            <button type="button" class="btn btn-danger mx-auto w-100">Delete</button>
-            <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- End demo content -->
-
-
 </body>
 
 </html>
