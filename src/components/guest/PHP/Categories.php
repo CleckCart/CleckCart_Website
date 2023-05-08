@@ -81,100 +81,64 @@
             </div>
         </nav>
         </div>
-        
     </div>
+    <?php
+        include('./connect.php');
+    ?>
     <div class = "container-fluid text-center mt-5">
         <h1 >Our Categories</h1>
     </div>
 
     <div class = "container-fluid">
         <div class="row row-cols-2 row-cols-md-5 g-4">
-            <a class="nav-link p-5" href="#">
+            <a class="nav-link p-5" href="./CategoryView.php?category=Meat">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/bread.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
+                    <h3 class = "mt-5">BAKERY</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="#">
+            <a class="nav-link p-5" href="./CategoryView.php?category=Dairy">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/icecream.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
+                    <h3 class = "mt-5">DAIRY</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="#">
+            <a class="nav-link p-5" href="./CategoryView.php?category=Fruit">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/fruits.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
+                    <h3 class = "mt-5">FRUIT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="#">
+            <a class="nav-link p-5" href="./CategoryView.php?category=Meat">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/meat.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
+                    <h3 class = "mt-5">MEAT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="#">
+            <a class="nav-link p-5" href="./CategoryView.php?category=Vegetable">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/carrot.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
-                </div>
-            </a>
-            <a class="nav-link p-5" href="#">
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
-                </div>
-            </a>
-            <a class="nav-link p-5" href="#">
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
-                </div>
-            </a>
-            <a class="nav-link p-5" href="#">
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
+                    <h3 class = "mt-5">VEGETABLE</h1>
                 </div>
             </a>
         </div>

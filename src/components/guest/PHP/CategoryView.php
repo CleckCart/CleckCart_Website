@@ -87,87 +87,63 @@
         </div>
   <section class="product_page">
     <h2 class="product_page--title">OUR PRODUCTS</h2>
-    <select name="category" id="category-select">
-      <option value="category1">Category 1</option>
-      <option value="category2">Category 2</option>
-      <option value="category3">Category 3</option>
-      <option value="category4">Category 4</option>
-      <option value="category5">Category 5</option>
-    </select>
     <div class = "container-fluid p-5">
-    <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
+    <div class = "container-fluid p-5">
+        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
+            <?php
+                include('./connect.php');
+
+                if(isset($_GET['category'])){
+                    $productCategory = $_GET['category'];
+                }
+
+                $queryCategory = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME = '$productCategory'";
+                $resultCategory = oci_parse($conn, $queryCategory);
+                oci_execute($resultCategory);
+
+                while($row = oci_fetch_array($resultCategory, OCI_ASSOC)){
+                    $categoryid = $row['CATEGORY_ID'];
+                }
+
+                $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid'";
+                $result = oci_parse($conn, $query);
+                oci_execute($result);
+                while($row = oci_fetch_array($result, OCI_ASSOC)){
+                    $id = $row['PRODUCT_ID'];
+                    $name = $row['PRODUCT_NAME'];
+                    $categoryId = $row['CATEGORY_ID'];
+                    $shopId = $row['SHOP_ID'];
+                    $categoryName = $row['CATEGORY_NAME'];
+                    $productImage = $row['PRODUCT_IMAGE'];
+                    $productName = $row['PRODUCT_NAME'];
+                    $productDescription = $row['PRODUCT_DESCRIPTION'];
+                    $productPrice = $row['PRODUCT_PRICE'];
+                    $productStock = $row['PRODUCT_STOCK'];
+                    echo("<div class='col p-5'>");
+                    echo("<div class='card'>");
+                    echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
+                        <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                    echo("<div class='card-body'>");
+                    echo("<div class = 'row'>
+                            <div class = 'col'>
+                                <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
+                            </div>
+                            <div class = 'col'>
+                                <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                            </div>
+                        </div>");
+                    echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                    echo("</div></a>");            
+                    echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                    echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&price=$productPrice' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishList.php' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");
+                    echo("</div>");
+                    echo("</div>");
+                    echo("</div>");
+                }
+            ?>
+        </div>
     </div>
     </div>
   </section>
