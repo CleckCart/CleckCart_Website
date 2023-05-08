@@ -195,20 +195,24 @@
         </div>
         <!-- Delete Modal -->
         <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
-                        <h4>Delete #product?</h4>
+                    <img src="../../../dist/public/remove.svg" alt="">
+                    <h3 class="mt-3">Are You Sure?</h3>
+                    <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer text-center">
-                        <button type="button" class="btn btn-danger  w-50 ">Delete</button>
-                        <button type="button" class="btn btn-secondary  w-50 " data-bs-dismiss="modal">Cancel</button>
+                    <?php
+                        echo("<a href='#' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                    ?>
+                    <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
 </body>
 </div>
