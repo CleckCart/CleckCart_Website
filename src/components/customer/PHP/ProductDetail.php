@@ -128,6 +128,7 @@
               <span class="product-quantity-value">1</span><hr/>
               <span class="increment-btn">+</span>
               <p>3 in stock</p>
+              <
             </div>
           </div>
           <button class="add-to-cart">ADD TO CART</button>
