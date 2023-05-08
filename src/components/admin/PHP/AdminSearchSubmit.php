@@ -128,33 +128,46 @@
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
         <?php }?>
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>Shop Id</th>
-              <th>User Id</th>
-              <th>Shop Name</th>
-              <th>Shop Owner</th>
-              <th>Shop Description</th>
-              <th colspan=2>Action</th>            
-            </tr>
-          </thead>
+    
           <?php
-          include('connect.php');
-          $query = "SELECT * FROM SHOP ORDER BY SHOP_ID";
-          $result = oci_parse($conn, $query);
-          oci_execute($result);
-          while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $id = $row['SHOP_ID'];
-            echo("<tr><td><input type='checkbox'/></td>");
-            echo("<td>$id</td>");
-            echo("<td>$row[USER_ID]</td>");
-            echo("<td>$row[SHOP_NAME]</td>");
-            echo("<td>$row[SHOP_OWNER]</td>");
-            echo("<td>$row[SHOP_DESCRIPTION]</td>");
-            echo("<td><a href='AdminViewTraderShopEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-          }
-          ?>
+            include('connect.php');
+            if(isset($_POST['searchShopSubmit']))
+                {
+                    $searchShop = trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING));
+                    $lowerCaseShopName=strtolower($searchShop);
+                    $firstUpperCaseShopName=ucfirst($lowerCaseShopName);
+                    $alphabetPattern = "/[^a-zA-Z\s]/";
+                    $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%'" ;
+                    $RunSearchShopQuery = oci_parse($conn, $SearchShopQuery);
+                    oci_bind_by_name($RunSearchShopQuery,':ShopName', $firstUpperCaseShopName);
+                    oci_execute($RunSearchShopQuery);
+                                  
+                    
+                    if ($row=oci_fetch_assoc($RunSearchShopQuery)) 
+                        {
+                            do 
+                                {
+                                    $id = $row['SHOP_ID'];
+                                    echo("<tr><td><input type='checkbox'/></td>");
+                                    echo("<td>$id</td>");
+                                    echo("<td>{$row['USER_ID']}</td>");
+                                    echo("<td>{$row['SHOP_NAME']}</td>");
+                                    echo("<td>{$row['SHOP_OWNER']}</td>");
+                                    echo("<td>{$row['SHOP_DESCRIPTION']}</td>");
+                                    echo("<td><a href='AdminViewTraderShopEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+                                } while ($row = oci_fetch_assoc($RunSearchShopQuery));
+                        } 
+
+                    else 
+                        {
+                            echo("<div class='alert alert-danger text-center' role='alert'>");
+                            echo("No results found.");
+                            echo("</div>");
+                        }
+
+                }
+       
+        ?>
         </table>
       </div>
     <!-- End demo content -->
