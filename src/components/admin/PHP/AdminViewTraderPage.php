@@ -43,7 +43,7 @@
     </li>
     <li class="nav-item">
       <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
-        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
@@ -107,10 +107,10 @@
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="">
-              <input type="text" name="searchProduct" placeholder="Search a trader" class="form-control border border-dark" value="<?php
-              if (isset($_POST['searchProduct'])) {
-                   echo (trim($_POST['searchProduct']));
+            <form class="d-flex" role="search" method="POST" action="AdminSearchTrader.php" enctype="multipart/form-data">
+              <input type="text" name="searchTrader" placeholder="Search a trader" class="form-control border border-dark" value="<?php
+              if (isset($_POST['searchTrader'])) {
+                   echo (trim($_POST['searchTrader']));
                 }
               ?>">
               <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
@@ -147,7 +147,7 @@
           </thead>
           <?php
           include('connect.php');
-          $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'Trader' ORDER BY USER_ID";
+          $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'trader' ORDER BY USER_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
           while($row = oci_fetch_array($result, OCI_ASSOC)){

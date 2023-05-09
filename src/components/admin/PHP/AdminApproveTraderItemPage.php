@@ -42,7 +42,7 @@
     </li>
     <li class="nav-item">
       <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
-        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">

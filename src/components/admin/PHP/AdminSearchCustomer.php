@@ -128,47 +128,64 @@
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
         <?php }?>
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>User Id</th>
-              <th>Image</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Date Of Birth</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th colspan=2>Actions</th>
-            </tr>
-          </thead>
+          
           <?php
           include('connect.php');
-          $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'customer' ORDER BY USER_ID";
+          $Role='customer';
+          $searchCustomer = strtolower(trim(filter_input(INPUT_POST, 'searchCustomer', FILTER_SANITIZE_STRING)));
+          $query = "SELECT * FROM USER_TABLE WHERE FIRST_NAME LIKE '%' || :CustomerFirstname || '%' AND ROLE=:Role";
           $result = oci_parse($conn, $query);
+          oci_bind_by_name($result,':CustomerFirstname', $searchCustomer);
+          oci_bind_by_name($result,':Role', $Role);
           oci_execute($result);
-          while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $id = $row['USER_ID'];
-            $name = $row['USERNAME'];
-            $email = $row['EMAIL'];
-            echo("<tr><td><input type='checkbox'/></td>");
-            echo("<td>$id</td>");
-            echo("<td>$row[IMAGE]</td>");
-            echo("<td>$row[USERNAME]</td>");
-            echo("<td>$row[ROLE]</td>");
-            echo("<td>$row[FIRST_NAME]</td>");
-            echo("<td>$row[LAST_NAME]</td>");
-            echo("<td>$row[EMAIL]</td>");
-            echo("<td>$row[GENDER]</td>");
-            echo("<td>$row[DATE_OF_BIRTH]</td>");
-            echo("<td>$row[ADDRESS]</td>");
-            echo("<td>$row[PHONE_NUMBER]</td>");
-            echo("<td><a href='AdminViewCustomerPageEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
-          }
+          if ($row=oci_fetch_assoc($result)) 
+            {
+                echo("<thead class='table-success'>
+                <tr>
+                  <th>Select</th>
+                  <th>User Id</th>
+                  <th>Image</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Date Of Birth</th>
+                  <th>Address</th>
+                  <th>Phone Number</th>
+                  <th colspan=2>Actions</th>
+                </tr>
+              </thead>");
+                do 
+                    {
+                        $id = $row['USER_ID'];
+                        $name = $row['USERNAME'];
+                        $email = $row['EMAIL'];
+                        echo("<tr><td><input type='checkbox'/></td>");
+                        echo("<td>$id</td>");
+                        echo("<td>$row[IMAGE]</td>");
+                        echo("<td>$row[USERNAME]</td>");
+                        echo("<td>$row[ROLE]</td>");
+                        echo("<td>$row[FIRST_NAME]</td>");
+                        echo("<td>$row[LAST_NAME]</td>");
+                        echo("<td>$row[EMAIL]</td>");
+                        echo("<td>$row[GENDER]</td>");
+                        echo("<td>$row[DATE_OF_BIRTH]</td>");
+                        echo("<td>$row[ADDRESS]</td>");
+                        echo("<td>$row[PHONE_NUMBER]</td>");
+                        echo("<td><a href='AdminViewCustomerPageEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+                        echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+                    }   while ($row = oci_fetch_assoc($result));
+                }
+            
+            else
+                {
+                    echo("<div class='alert alert-danger text-center' role='alert'>");
+                    echo("No results found.");
+                    echo("</div>");
+                }
+                
           ?>
         </table>
       </div>

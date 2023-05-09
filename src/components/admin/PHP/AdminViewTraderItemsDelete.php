@@ -52,7 +52,7 @@
             $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been removed.'; //subject of the email for reciever
             $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been removed from listing in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
             $mail->send();
-            header("Location:AdminApproveTraderItemPage.php?error=Product has been refused.");
+            header("Location:AdminViewTraderItemsPage.php?error=Product has been refused.");
         }
     }
     else{
