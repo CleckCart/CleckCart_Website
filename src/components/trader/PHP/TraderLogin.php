@@ -60,7 +60,7 @@
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="../../guest/PHP/WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,7 +74,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="../../guest/PHP/Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
                         </li>
                     </ul>
                 </div>
