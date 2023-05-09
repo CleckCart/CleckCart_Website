@@ -1,9 +1,14 @@
 <?php
+if(isset($_GET['user'])){
+    $user = $_GET['user'];
+}
+?>
+<?php
  /*Check if form is submitted*/
  if(isset($_POST['TraderProfileEditPasswordSubmit'])){
     /*Check if all fields are filled*/ 
     if (empty($_POST['currentPassword']) || empty($_POST['newPassword']) || empty($_POST['confirmnewPassword'])){
-        header('Location:./TraderProfileEditPassword.php?error=Please make sure all text fields are not empty.');
+        header("Location:./TraderProfileEditPassword.php?user=$user&error=Please make sure all text fields are not empty.");
     }
     else{
         $traderCurrentPassword = trim(filter_input(INPUT_POST, 'currentPassword', FILTER_SANITIZE_STRING));
@@ -20,15 +25,15 @@
                     }
                 else
                     {
-                        header('Location:./TraderProfileEditPassword.php?error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.');
+                        header("Location:./TraderProfileEditPassword.php?user=$user&error=Password must have 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.");
                     }
             }
             else{
-                header('Location:./TraderProfileEditPassword.php?error=Please make sure password are matched.');
+                header("Location:./TraderProfileEditPassword.php?user=$user&error=Please make sure password are matched.");
             }
         }
         else{
-            header('Location:./TraderProfileEditPassword.php?error=Current password and new password cannot same.');
+            header("Location:./TraderProfileEditPassword.php?user=$user&error=Current password and new password cannot same.");
         }
     }
 }

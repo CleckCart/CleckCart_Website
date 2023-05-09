@@ -21,45 +21,51 @@
 
 <body>
 
-      <!-- Vertical navbar -->
-      <div class="vertical-nav bg-white" id="sidebar">
+<?php
+    include('./connect.php');
+    if(isset($_GET['user'])){
+      $user = $_GET['user'];
+    }
+  ?>
+    <!-- Vertical navbar -->
+    <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
-        <h4 class="m-0">Lorem ipsum</h4>
+        <?php echo("<h4 class='m-0'>$user</h4>")?>
       </div>
     </div>
   </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="./TraderDashboard.php" class="nav-link text-dark">
+        <?php echo("<a href='./TraderDashboard.php?user=$user' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderViewItems.php" class="nav-link text-dark">
-        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+      <?php echo("<a href='./TraderViewItems.php?user=$user' class='nav-link text-dark'>")?>
+      <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderManageProfile.php" class="nav-link text-dark">
+      <?php echo("<a href='./TraderManageProfile.php?user=$user' class='nav-link text-dark'>")?>
       <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
+        <?php echo("<a href='#?user=$user' class='nav-link text-dark'>")?>
         <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
       </a>
     </li>
     <li class="nav-item">
-      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
+        <?php echo("<a href='../../guest/PHP/HomePage.php?' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderLogout.php" class="nav-link text-dark">
+      <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-power-off m-3"></i></i>
                 Log Out
             </a>
@@ -90,7 +96,7 @@
                 }
               ?>">
               <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-              <a href = "./TraderViewItemsAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
+              <?php echo("<a href = './TraderViewItemsAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn btn-light'>Add&nbsp;Item</a>")?>
             </form>
           </div>
         </div>
@@ -121,8 +127,24 @@
             </tr>
           </thead>
           <?php
-          include('connect.php');
-          $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
+
+          // $queryUser = "SELECT * FROM USER_TABLE WHERE USERNAME = $user";
+          // $resultUser = oci_parse($conn, $queryUser);
+          // oci_execute($resultUser);
+          // while($row = oci_fetch_array($resultUser, OCI_ASSOC)){
+          //   $userID = $row['USER_ID'];
+          // }
+
+          $queryShop = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$user'";
+          $resultShop = oci_parse($conn, $queryShop);
+          // oci_bind_by_name($resultShop, ':user', $user);
+          oci_execute($resultShop);
+          while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
+            $shopID = $rowShop['SHOP_ID'];
+          }
+
+
+          $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
           while($row = oci_fetch_array($result, OCI_ASSOC)){
@@ -138,7 +160,7 @@
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
-            echo("<td><a href='TraderViewItemsEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><a href='TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>

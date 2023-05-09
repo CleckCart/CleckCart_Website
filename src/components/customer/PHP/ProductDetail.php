@@ -43,13 +43,6 @@
       </div>
     </div>
   </div> -->
-
-  <?php
-            include('./connect.php');
-            if(isset($_GET['user'])){
-                $user = $_GET['user'];
-            }
-        ?>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">

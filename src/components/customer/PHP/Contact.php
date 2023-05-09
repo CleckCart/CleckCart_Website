@@ -147,7 +147,7 @@
             </div>
             </div>
             <div class="col-md-7 rounded bg-secondary p-5">
-            <form method = "POST" action = "ContactSubmit.php" class = "p-5">
+            <?php echo("<form method = POST' action = 'ContactSubmit.php?user=$user' class = 'p-5'>")?>
                 <h1>Send Message</h1>
                 <?php
                 if(isset($_GET['error'])) {?>
