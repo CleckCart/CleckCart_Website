@@ -14,7 +14,7 @@
                     $AdminAddItemCategory = strtolower(trim(filter_input(INPUT_POST, 'AdminAddItemCategory', FILTER_SANITIZE_STRING)));
                     $AdminAddItemDescription = strtolower(trim(filter_input(INPUT_POST, 'AdminAddItemDescription', FILTER_SANITIZE_STRING)));
                     $AdminAddItemStock = trim(filter_input(INPUT_POST, 'AdminAddItemStock', FILTER_SANITIZE_NUMBER_INT));
-                    $AdminAddItemPrice = $_POST['AdminAddItemPrice'];
+                    $AdminAddItemPrice = trim(filter_input(INPUT_POST, 'AdminAddItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     $AdminAddItemImage = ($_FILES["AdminAddItemImage"]["name"]);
                     $AdminAddItemImageType = ($_FILES["AdminAddItemImage"]["type"]);

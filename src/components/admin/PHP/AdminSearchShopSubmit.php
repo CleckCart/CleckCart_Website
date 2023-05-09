@@ -42,7 +42,7 @@
     </li>
     <li class="nav-item">
       <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
-        <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
@@ -143,6 +143,18 @@
                     
                     if ($row=oci_fetch_assoc($RunSearchShopQuery)) 
                         {
+                            echo("<thead class=table-success>
+                            <tr>
+                              <th>Select</th>
+                              <th>Shop Id</th>
+                              <th>User Id</th>
+                              <th>Shop Name</th>
+                              <th>Shop Owner</th>
+                              <th>Shop Description</th>
+                              <th colspan=2>Action</th>            
+                            </tr>
+                          </thead>
+                            ");
                             do 
                                 {
                                     $id = $row['SHOP_ID'];

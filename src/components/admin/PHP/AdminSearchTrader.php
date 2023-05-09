@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminViewCustomer</title>
+  <title>AdminViewTraders</title>
   <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
   <!--font awesome CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -23,6 +23,7 @@
 </head>
 
 <body>
+
  <!-- Vertical navbar -->
  <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
@@ -92,7 +93,6 @@
 
 
 
-
   <!-- Page content holder -->
   <div class="page-content p-5" id="content">
     <!-- Toggle button -->
@@ -107,10 +107,10 @@
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="AdminSearchCustomer.php" enctype="multipart/form-data">
-              <input type="text" name="searchCustomer" placeholder="Search a customer" class="form-control border border-dark" value="<?php
-              if (isset($_POST['searchCustomer'])) {
-                   echo (trim($_POST['searchCustomer']));
+            <form class="d-flex" role="search" method="POST" action="AdminSearchTrader.php" enctype="multipart/form-data">
+              <input type="text" name="searchTrader" placeholder="Search a trader" class="form-control border border-dark" value="<?php
+              if (isset($_POST['searchTrader'])) {
+                   echo (trim($_POST['searchTrader']));
                 }
               ?>">
               <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
@@ -127,48 +127,62 @@
         <?php
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-        <?php }?>
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>User Id</th>
-              <th>Image</th>
-              <th>Username</th>
-              <th>Role</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Date Of Birth</th>
-              <th>Address</th>
-              <th>Phone Number</th>
-              <th colspan=2>Actions</th>
-            </tr>
-          </thead>
+        <?php }?>          
           <?php
           include('connect.php');
-          $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'customer' ORDER BY USER_ID";
+          $Role='trader';
+          $searchTrader = strtolower(trim(filter_input(INPUT_POST, 'searchTrader', FILTER_SANITIZE_STRING)));
+          $query = "SELECT * FROM USER_TABLE WHERE FIRST_NAME LIKE '%' || :TraderFirstname || '%' AND ROLE=:Role";
           $result = oci_parse($conn, $query);
+          oci_bind_by_name($result,':TraderFirstname', $searchTrader);
+          oci_bind_by_name($result,':Role', $Role);
           oci_execute($result);
-          while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $id = $row['USER_ID'];
-            $name = $row['USERNAME'];
-            $email = $row['EMAIL'];
-            echo("<tr><td><input type='checkbox'/></td>");
-            echo("<td>$id</td>");
-            echo("<td>$row[IMAGE]</td>");
-            echo("<td>$row[USERNAME]</td>");
-            echo("<td>$row[ROLE]</td>");
-            echo("<td>$row[FIRST_NAME]</td>");
-            echo("<td>$row[LAST_NAME]</td>");
-            echo("<td>$row[EMAIL]</td>");
-            echo("<td>$row[GENDER]</td>");
-            echo("<td>$row[DATE_OF_BIRTH]</td>");
-            echo("<td>$row[ADDRESS]</td>");
-            echo("<td>$row[PHONE_NUMBER]</td>");
-            echo("<td><a href='AdminViewCustomerPageEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
-          }
+          if ($row=oci_fetch_assoc($result)) 
+            {
+                echo("<thead class=table-success>
+                <tr>
+                  <th>Select</th>
+                  <th>User Id</th>
+                  <th>Image</th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Date Of Birth</th>
+                  <th>Address</th>
+                  <th>Phone Number</th>
+                  <th colspan=2>Actions</th>            
+                </tr>
+              </thead>");
+              do{
+                  $id = $row['USER_ID'];
+                  $name = $row['USERNAME'];
+                  $email = $row['EMAIL'];
+                  echo("<tr><td><input type='checkbox'/></td>");
+                  echo("<td>$id</td>");
+                  echo("<td>$row[IMAGE]</td>");
+                  echo("<td>$row[USERNAME]</td>");
+                  echo("<td>$row[ROLE]</td>");
+                  echo("<td>$row[FIRST_NAME]</td>");
+                  echo("<td>$row[LAST_NAME]</td>");
+                  echo("<td>$row[EMAIL]</td>");
+                  echo("<td>$row[GENDER]</td>");
+                  echo("<td>$row[DATE_OF_BIRTH]</td>");
+                  echo("<td>$row[ADDRESS]</td>");
+                  echo("<td>$row[PHONE_NUMBER]</td>");
+                  echo("<td><a href='AdminViewTraderEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+                  echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+                }while($row = oci_fetch_assoc($result));
+            }
+
+          else
+            {
+              echo("<div class='alert alert-danger text-center' role='alert'>");
+              echo("No results found.");
+              echo("</div>");
+            }
           ?>
         </table>
       </div>
@@ -187,7 +201,7 @@
             </div>
             <div class="modal-footer text-center">
               <?php
-                echo("<a href='./AdminViewCustomerPageDelete.php?id=$id&action=delete' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                echo("<a href='./AdminViewTraderDelete.php?id=$id&action=delete' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
               ?>
               <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
@@ -204,10 +218,10 @@
         var email = button.data('email'); // Extract trader name from data-name attribute
         var modal = $(this);
         modal.find('#username').text(name); // Update the modal content
-        modal.find('#deleteLink').attr('href', './AdminViewCustomerPageDelete.php?id=' + id + '&action=delete' + '&username=' + name + '&email=' + email); // Update the delete link
+        modal.find('#deleteLink').attr('href', './AdminViewTraderDelete.php?id=' + id + '&action=delete' + '&username=' + name + '&email=' + email); // Update the delete link
       });
     </script>
     <!-- End demo content -->
-  <!-- End demo content -->
 </body>
+
 </html>
