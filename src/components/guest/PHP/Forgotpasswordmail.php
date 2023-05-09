@@ -17,8 +17,11 @@ $otp = $_SESSION['otp'];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
 
-    <!--NavBar-->
-    <div class = "topbar">
+    <?php
+            include('./connect.php');
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -41,8 +44,6 @@ $otp = $_SESSION['otp'];
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -64,7 +65,7 @@ $otp = $_SESSION['otp'];
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,7 +79,7 @@ $otp = $_SESSION['otp'];
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
                         </li>
                     </ul>
                 </div>

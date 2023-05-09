@@ -13,6 +13,9 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
+    <?php
+            include('./connect.php');
+        ?>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -37,8 +40,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -85,6 +86,14 @@
 
 
         <div class="container-fluid">
+            <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
+            <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+            <?php }?>
             <div class="row table-responsive">
                 <table class="table table-hover">
                     <thead>

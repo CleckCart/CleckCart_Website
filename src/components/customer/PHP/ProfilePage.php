@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-include('connectSession.php');
-$username = $_SESSION['username'];
-// echo $username;
-$query = "SELECT * FROM USER_TABLE WHERE USERNAME='$username' AND ROLE ='Customer'";
-
-$result = oci_parse($conn, $query);
-oci_execute($result);
-$row = oci_fetch_array($result, OCI_ASSOC);
-$id = $row['USER_ID'];
-
-?>
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,91 +22,79 @@ $id = $row['USER_ID'];
     <script src="../../service/passwordVisibility.js"></script>
     <!-- <script src="../../service/test.js"></script> -->
 
-<!--NavBar-->
-<div class="topbar">
+    <?php
+        include('./connect.php');
+            if(isset($_GET['user'])){
+                $user = $_GET['user'];
+            }
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePage.php">
-
+                <a class="navbar-brand" href="./CustomerSession.php">
+                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
-    
+
                         <li class="nav-item dropdown me-5"><!---->
                             <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
                             </ul>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
-                    
+
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Trader</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="./Register.php">Sign Up Customer</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="#">Log Out</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <li><hr class="dropdown-divider"></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
     </div>
     <?php
     // echo $id;
@@ -257,7 +232,7 @@ $id = $row['USER_ID'];
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <a class="btn btn-primary d-block mx-auto" href="ProfileUpdate.php?id=$id&action=edit" role="button">Edit Profile</a>
+                <?php echo("<a class='btn btn-primary d-block mx-auto' href='ProfileUpdate.php?user=$user' role='button'>Edit Profile</a>")?>
             </div>
 
         </div>

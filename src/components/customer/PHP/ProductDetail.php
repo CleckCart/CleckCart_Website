@@ -17,31 +17,44 @@
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<div class="modal">
-  <div class="modal-content">
-    <h2 class="modal-title">Review</h2>
-    <div class="modal-description">
-      <span>Description:</span>
-      <textarea placeholder="Write your review here"></textarea>
-    </div>
-    <div class="modal-rating">
-      <span>Rating:</span>
-      <div class="stars">
-        
+  <?php
+    include('./connect.php');
+      if(isset($_GET['user'])){
+        $user = $_GET['user'];
+      }
+  ?>
+  <!--modal code-->
+  <!-- <div class="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Review</h2>
+      <div class="modal-description">
+        <span>Description:</span>
+        <textarea placeholder="Write your review here"></textarea>
+      </div>
+      <div class="modal-rating">
+        <span>Rating:</span>
+        <div class="stars">
+          
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-cancel">Cancel</button>
+        <button class="modal-submit">Submit</button>
       </div>
     </div>
-    <div class="modal-buttons">
-      <button class="modal-cancel">Cancel</button>
-      <button class="modal-submit">Submit</button>
-    </div>
-  </div>
-</div>
+  </div> -->
 
-<!--NavBar-->
-<div class = "topbar">
+  <?php
+            include('./connect.php');
+            if(isset($_GET['user'])){
+                $user = $_GET['user'];
+            }
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePageSession.php">
+                <a class="navbar-brand" href="./CustomerSession.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
@@ -52,7 +65,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePageSession.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -60,97 +73,143 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
                             </ul>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-  <section class="product-detail">
-    <div class="upper-section">
-        <div class="product-img-cnt">
-          <img class="product-img" src="src/assets/img/bakery.jpg" alt="">
-        </div>
-        <div class="product-info">
-            <div class="product-title-box">
-              <h2 class="product-title">PRODUCT TITLE</h2>
-              <img src="" alt="Favourite icon">
-            </div>
-            <div class="star-rating-box">
-              <p>Star rating <span>No of rating</span></p>
-            </div>
-            <p class="product-description">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eum incidunt soluta ducimus repellat neque. Doloribus, beatae nostrum vero eius laborum ut error neque debitis laboriosam reprehenderit cupiditate, magni blanditiis vitae.</p>
-           <span class="product-price">$$$</span>
-           <div class="product-quantity">
-            <span>Quantity:</span>
-            <div class="increment-decrement">
-              <span class="decrement-btn">-</span><hr/>
-              <span class="product-quantity-value">1</span><hr/>
-              <span class="increment-btn">+</span>
-              <p>3 in stock</p>
-              <
+        <?php
+            $id = $_GET['id'];
+            $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $id";
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+            while($row = oci_fetch_array($result, OCI_ASSOC)){
+              $productStock = $row['PRODUCT_STOCK'];
+            }
+            $productName = $_GET['name'];
+            $productDescription = $_GET['description'];
+            $productImage = $_GET['image'];
+            $productPrice = $_GET['price'];
+            $productQuantity = 1;
+          ?>
+        <section class="product-detail">
+          <?php
+          if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+          <?php }?>
+          <?php
+          if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+          <?php }?>
+          <div class="upper-section">
+              <div class="product-img-cnt">
+                <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
+              </div>
+              <div class="product-info">
+                  <div class="product-title-box">
+                    <h2 class="product-title"><?php echo($productName)?></h2>
+                    <img src="" alt="Favourite icon">
+                  </div>
+                  <div class="star-rating-box">
+                    <p>Star rating <span>No of rating</span></p>
+                  </div>
+                <p class="product-description"><?php echo($productDescription) ?></p>
+                <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
+                <div class="product-quantity">
+                  <span>Quantity:</span>
+                  <div class="increment-decrement">
+                    <span class="decrement">-</span><hr/>
+                    <span class="quantity"><?php echo($productQuantity)?></span><hr/>
+                    <span class="increment">+</span>
+                    <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
+                  </div>
+                </div>
+                <?php echo("<a href = './CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=$productQuantity' class='btn add-to-cart'>ADD TO CART</a>")?>
+                <?php echo("<a href = './Checkout.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=$productQuantity' class='btn buy-now'>BUY NOW</a>")?>
+                
+                </div>
+              <script>
+                let increment =document.querySelector('.increment');
+                let quantity =document.querySelector('.quantity');
+                let decrement =document.querySelector('.decrement');
+                let stockValue =document.querySelector('.stockValue');
+                let addToCartBtn = document.querySelector('.add-to-cart');
+                let buynowBtn = document.querySelector('.buy-now');
+                let currentQuantity = parseInt(quantity.innerText);
+                increment.addEventListener("click", () => {
+                  if(currentQuantity < (stockValue.innerText-1)){
+                    currentQuantity++;
+                    quantity.innerText = currentQuantity;
+                    addToCartBtn.href = `./CartProducts.php?user=<?php echo($user)?>&id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./Checkout.php?user=<?php echo($user)?>&id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                  }
+                });
+                decrement.addEventListener("click", ()=>{
+                  if(currentQuantity > 1){
+                      currentQuantity--;
+                      quantity.innerText = currentQuantity;
+                      addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                  }
+                })
+              </script>
+          </div>
+          <div class="lower-section">
+            <h2 class="review-heading">Customer Reviews</h2>
+            <div class="review">
+              <div class="review-left">
+                <h3 class="review-name">Customer Name</h3>
+                <span class="review-rating">Star rating</span>
+                <span class="review-date">01/01/2023</span>
+              </div>
+              <hr />
+              <div class="review-right">
+                  <h4 class="review-title">Review Title</h4>
+                  <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
+              </div>
             </div>
           </div>
-          <button class="add-to-cart">ADD TO CART</button>
-          <button class="buy-now">BUY NOW</button>
-    </div>
-    </div>
-    <div class="lower-section">
-      <h2 class="review-heading">Customer Reviews</h2>
-      <div class="review">
-        <div class="review-left">
-          <h3 class="review-name">Customer Name</h3>
-          <span class="review-rating">Star rating</span>
-          <span class="review-date">01/01/2023</span>
-        </div>
-        <hr />
-        <div class="review-right">
-            <h4 class="review-title">Review Title</h4>
-            <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
-        </div>
-      </div>
-    </div>
-  </section>
+        </section>
    <!--footer-->
    <footer>
     <div class = "container-fluid bg-secondary">
