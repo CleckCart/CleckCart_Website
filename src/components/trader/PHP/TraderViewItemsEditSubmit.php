@@ -14,8 +14,8 @@
                     $TraderItemEditDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditDescription', FILTER_SANITIZE_STRING)));
                     $TraderItemEditDate = $_POST['TraderItemEditDate'];
                     $TraderItemEditStock = trim(filter_input(INPUT_POST, 'TraderItemEditStock', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderItemEditPrice = trim(filter_input(INPUT_POST, 'TraderItemEditPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $TraderItemEditDiscount = trim(filter_input(INPUT_POST, 'TraderItemEditDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
+                    $TraderItemEditPrice = $_POST['TraderItemEditPrice'];
+                    $TraderItemEditDiscount = $_POST['TraderItemEditDiscount'];
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     if(!preg_match($alphabetPattern,$TraderItemEditName))
                         {                               

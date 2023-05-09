@@ -14,7 +14,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
             $TraderItemAddCategory = strtolower(trim(filter_input(INPUT_POST, 'TraderItemAddCategory', FILTER_SANITIZE_STRING)));
             $TraderItemAddDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderItemAddDescription', FILTER_SANITIZE_STRING)));
             $TraderItemAddStock = trim(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_SANITIZE_NUMBER_INT));
-            $TraderItemAddPrice = trim(filter_input(INPUT_POST, 'TraderItemAddPrice', FILTER_SANITIZE_NUMBER_FLOAT));
+            $TraderItemAddPrice = $_POST['TraderItemAddPrice'];
             $alphabetPattern = "/[^a-zA-Z\s]/";
             $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
             $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
