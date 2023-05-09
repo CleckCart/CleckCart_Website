@@ -15,76 +15,81 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
-   <!--NavBar-->
-   <div class = "topbar">
+    <?php
+            include('./connect.php');
+            if(isset($_GET['user'])){
+                $user = $_GET['user'];
+            }
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePage.php">
+                <a class="navbar-brand" href="./CustomerSession.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
-    
+
                         <li class="nav-item dropdown me-5"><!---->
                             <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
                             </ul>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
-                    
+
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        
     </div>
+
 
     <div class="container-fluid">
         <div class="row px-5 ">
@@ -97,37 +102,36 @@
 
         <div class="row px-5 ">
             <div class="col-sm-7 ">
+            <div class="row table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-1"></th>
-                            <th scope="col" class="col-sm-5"></th>
-                            <th scope="col" class="col-sm-2">Price</th>
-                            <th scope="col" class="col-sm-2">Quantity</th>
-                            <th scope="col" class="col-sm-2">Total</th>
+                            
+                            <th colspan = '2' class = 'text-center'><h3>Name</h3></th>
+                            <th class = 'text-center'><h3>Price</h3></th>
+                            <th class = 'text-center'><h3>Quantity</h3></th>
+                            <th class = 'text-center'><h3>Action</h3></th>
                         </tr>
                     </thead>
 
                     <?php
                     for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
-                        echo '<tr>
-                                <td class = "text-center"><img src="../../../dist/public/3.jpg" alt="image" width="80"height="60"></td>
-                                <td> link product name here</td>
-                                <td class = "text-center">$10</td>
-                                <td class = "text-center">
-                                
-                                </td>
-                                <td class = "text-center">
-                                    $10
+                        echo "<tr>
+                                <td ><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
+                                <td>link product name here</td>
+                                <td class = 'text-center'>$10</td>
+                                <td class = 'text-center'>10</td>
+                                <td class = 'text-center'>
                                     <!-- Delete Button trigger modal -->
-                                    <button class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                                    <img src="./../../../dist/public/delete.svg" alt="delete" >
+                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
+                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
                                     </button>
-                                </td>';
-                    }
+                                </td>
+                            </tr>";
+                        }
                     ?>
-
                 </table>
+            </div>
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-4 ">
@@ -190,26 +194,30 @@
                 </div>
                 <div class="row text-center py-4 border  my-4">
                     <h5>Sub Total: $40</h5>
-                    <a class="btn btn-primary w-50 d-block mx-auto" href="PayementGateway.php" role="button">Link</a>
+                    <?php echo("<a class='btn btn-primary w-50 d-block mx-auto' href='./PayementGateway.php?user=$user' role='button'>Checkout</a>")?>
                 </div>
             </div>
         </div>
         <!-- Delete Modal -->
         <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
-                        <h4>Delete #product?</h4>
+                    <img src="../../../dist/public/remove.svg" alt="">
+                    <h3 class="mt-3">Are You Sure?</h3>
+                    <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer text-center">
-                        <button type="button" class="btn btn-danger  w-50 ">Delete</button>
-                        <button type="button" class="btn btn-secondary  w-50 " data-bs-dismiss="modal">Cancel</button>
+                    <?php
+                        echo("<a href='#' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                    ?>
+                    <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
-            </div>
+                </div>
         </div>
 </body>
 </div>

@@ -2,7 +2,7 @@
 include('./connectSession.php');
 if(isset($_SESSION['username']) && $_SESSION['UserRole'] == 'Admin')
         {
-            include('./AdminDashboard.php');    
+            header('Location:./AdminDashboard.php?user='.$_SESSION['username']);    
         }
     
     else

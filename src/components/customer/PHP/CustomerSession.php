@@ -1,8 +1,8 @@
 <?php
 include('./connectSession.php');
 if(isset($_SESSION['username']) && $_SESSION['UserRole'] == 'customer'){
-            echo("<br>" .$_SESSION['username']);
-            include('./HomePageSession.php');
+            $user = $_SESSION['username'];
+            header('Location:./HomePageSession.php?user='.$_SESSION['username']);
         }
     
     else

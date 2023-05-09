@@ -15,8 +15,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
-    <!--NavBar-->
-    <div class = "topbar">
+    <?php
+            include('./connect.php');
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -39,8 +42,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -62,7 +63,7 @@
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -76,7 +77,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
                         </li>
                     </ul>
                 </div>
@@ -96,37 +97,36 @@
 
         <div class="row px-5 ">
             <div class="col-sm-7 ">
+            <div class="row table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col" class="col-sm-1"></th>
-                            <th scope="col" class="col-sm-5"></th>
-                            <th scope="col" class="col-sm-2">Price</th>
-                            <th scope="col" class="col-sm-2">Quantity</th>
-                            <th scope="col" class="col-sm-2">Total</th>
+                            
+                            <th colspan = '2' class = 'text-center'><h3>Name</h3></th>
+                            <th class = 'text-center'><h3>Price</h3></th>
+                            <th class = 'text-center'><h3>Quantity</h3></th>
+                            <th class = 'text-center'><h3>Action</h3></th>
                         </tr>
                     </thead>
 
                     <?php
                     for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
-                        echo '<tr>
-                                <td class = "text-center"><img src="../../../dist/public/3.jpg" alt="image" width="80"height="60"></td>
-                                <td> link product name here</td>
-                                <td class = "text-center">$10</td>
-                                <td class = "text-center">
-                                
-                                </td>
-                                <td class = "text-center">
-                                    $10
+                        echo "<tr>
+                                <td ><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
+                                <td>link product name here</td>
+                                <td class = 'text-center'>$10</td>
+                                <td class = 'text-center'>10</td>
+                                <td class = 'text-center'>
                                     <!-- Delete Button trigger modal -->
-                                    <button class="btn custom-btn" data-bs-toggle="modal" data-bs-target="#exampleModalDelete">
-                                    <img src="./../../../dist/public/delete.svg" alt="delete" >
+                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
+                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
                                     </button>
-                                </td>';
-                    }
+                                </td>
+                            </tr>";
+                        }
                     ?>
-
                 </table>
+            </div>
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-4 ">
@@ -189,7 +189,7 @@
                 </div>
                 <div class="row text-center py-4 border  my-4">
                     <h5>Sub Total: $40</h5>
-                    <a class="btn btn-primary w-50 d-block mx-auto" href="PayementGateway.php" role="button">Link</a>
+                    <a class="btn btn-primary w-50 d-block mx-auto" href="./CheckoutVerify.php" role="button">Checkout</a>
                 </div>
             </div>
         </div>

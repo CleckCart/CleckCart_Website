@@ -39,8 +39,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -184,7 +182,6 @@
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <?php
-                include('connect.php');
                 $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
                 $result = oci_parse($conn, $query);
                 oci_execute($result);
@@ -209,15 +206,15 @@
                                 <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
                             </div>
                             <div class = 'col'>
-                                <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                                <h3 class='card-title text-end'> &pound;$row[PRODUCT_PRICE]</h3>
                             </div>
                         </div>");
                     echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
                     echo("</div></a>");            
                     echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
                     echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&price=$productPrice' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
-                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishList.php' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
                     echo("</div>");
                     echo("</div>");
                     echo("</div>");

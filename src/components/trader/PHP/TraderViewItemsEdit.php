@@ -21,45 +21,51 @@
 
 <body>
 
-      <!-- Vertical navbar -->
-      <div class="vertical-nav bg-white" id="sidebar">
+<?php
+    include('./connect.php');
+    if(isset($_GET['user'])){
+      $user = $_GET['user'];
+    }
+  ?>
+    <!-- Vertical navbar -->
+    <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
-        <h4 class="m-0">Lorem ipsum</h4>
+        <?php echo("<h4 class='m-0'>$user</h4>")?>
       </div>
     </div>
   </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="./TraderDashboard.php" class="nav-link text-dark">
+        <?php echo("<a href='./TraderDashboard.php?user=$user' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderViewItems.php" class="nav-link text-dark">
-        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
+      <?php echo("<a href='./TraderViewItems.php?user=$user' class='nav-link text-dark'>")?>
+      <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderManageProfile.php" class="nav-link text-dark">
+      <?php echo("<a href='./TraderManageProfile.php?user=$user' class='nav-link text-dark'>")?>
       <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
+        <?php echo("<a href='#?user=$user' class='nav-link text-dark'>")?>
         <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
       </a>
     </li>
     <li class="nav-item">
-      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
+        <?php echo("<a href='../../guest/PHP/HomePage.php?' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
       </a>
     </li>
     <li class="nav-item">
-      <a href="./TraderLogout.php" class="nav-link text-dark">
+      <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-power-off m-3"></i></i>
                 Log Out
             </a>

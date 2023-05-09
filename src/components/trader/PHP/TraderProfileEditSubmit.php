@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
         /*Check if form is submitted*/
         if (isset($_POST['TraderEdit'])) {
            
@@ -30,35 +35,35 @@
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./TraderProfileEdit.php?error=Please choose an image.');
+                                                                    header("Location:./TraderProfileEdit.php?user=$user&error=Please choose an image.");
                                                                 }
                                                         }
 
                                                     else
                                                         {
-                                                            header('Location:./TraderProfileEdit.php?error=Please pick the added date of the product.');
+                                                            header("Location:./TraderProfileEdit.php?user=$user&error=Please pick the added date of the product.");
                                                         }
                                                 }
                                             else
                                                 {
-                                                    header('Location:./TraderProfileEdit.php?error=Please type integer numbers in phone number.');
+                                                    header("Location:./TraderProfileEdit.php?user=$user&error=Please type integer numbers in phone number.");
                                                 }
                                         }
                                     else
                                         {
-                                            header('Location:./TraderProfileEdit.php?error=Please use alphabets only in lastname.');
+                                            header("Location:./TraderProfileEdit.php?user=$user&error=Please use alphabets only in lastname.");
                                         }        
                                 }   
                                 
                             else
                                 {
-                                    header('Location:./TraderProfileEdit.php?error=Please use alphabets only in firstname.');
+                                    header("Location:./TraderProfileEdit.php?user=$user&error=Please use alphabets only in firstname.");
                                 }
                             
                         }
                     else
                         {   
-                            header('Location:./TraderProfileEdit.php?error=Please make sure username is 5 - 30 characters.');                   
+                            header("Location:./TraderProfileEdit.php?user=$user&error=Please make sure username is 5 - 30 characters.");                   
                         }
                 }
             

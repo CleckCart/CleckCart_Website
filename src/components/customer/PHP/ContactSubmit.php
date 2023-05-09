@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
 include('../../trader/PHP/connect.php');
 /*Check if form is submitted*/
 if (isset($_POST['ContactSendMessage'])) {
@@ -6,7 +11,7 @@ if (isset($_POST['ContactSendMessage'])) {
     if (empty($_POST['ContactFullname']) || empty($_POST['ContactEmail']) || empty($_POST['ContactPhone']) || empty($_POST['ContactSubject']) 
     || empty($_POST['ContactMessage'])) 
         {
-            header('Location:./Contact.php?error=Please make sure all text fields are not empty.');
+            header("Location:./Contact.php?user=$user&error=Please make sure all text fields are not empty.");
         }
     else
         {
@@ -35,26 +40,26 @@ if (isset($_POST['ContactSendMessage'])) {
                                                                     oci_bind_by_name($result, ':ContactMessage', $ContactMessage);
 
                                                                     oci_execute($result);
-                                                                    header('Location:./Contact.php?success=Form submitted successfully.');
+                                                                    header("Location:./Contact.php?user=$user&success=Form submitted successfully.");
                                                                 }
                                                             else
                                                                 {
-                                                                    header('Location:./Contact.php?error=Please use alphabets only in message field.');
+                                                                    header("Location:./Contact.php?user=$user&error=Please use alphabets only in message field.");
                                                                 }
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./Contact.php?error=Please use alphabets only in subject.');
+                                                            header("Location:./Contact.php?user=$user&error=Please use alphabets only in subject.");
                                                         }
                                         }
                                     else
                                         {
-                                            header('Location:./Contact.php?error=Please type integer numbers in phone number.');
+                                            header("Location:./Contact.php?user=$user&error=Please type integer numbers in phone number.");
                                         }
                             }
                     else
                         {
-                            header('Location:./Contact.php?error=Please use alphabets only in fullname.');
+                            header("Location:./Contact.php?user=$user&error=Please use alphabets only in fullname.");
                         }
                 }
         }
