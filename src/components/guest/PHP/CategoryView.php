@@ -17,8 +17,11 @@
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!--NavBar-->
-<div class = "topbar">
+<?php
+            include('./connect.php');
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -41,8 +44,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -64,7 +65,7 @@
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -78,7 +79,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
                         </li>
                     </ul>
                 </div>
@@ -91,7 +92,6 @@
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <?php
-                include('./connect.php');
 
                 if(isset($_GET['category'])){
                     $productCategory = $_GET['category'];
@@ -104,44 +104,53 @@
                 while($row = oci_fetch_array($resultCategory, OCI_ASSOC)){
                     $categoryid = $row['CATEGORY_ID'];
                 }
-
-                $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid'";
-                $result = oci_parse($conn, $query);
-                oci_execute($result);
-                while($row = oci_fetch_array($result, OCI_ASSOC)){
-                    $id = $row['PRODUCT_ID'];
-                    $name = $row['PRODUCT_NAME'];
-                    $categoryId = $row['CATEGORY_ID'];
-                    $shopId = $row['SHOP_ID'];
-                    $categoryName = $row['CATEGORY_NAME'];
-                    $productImage = $row['PRODUCT_IMAGE'];
-                    $productName = $row['PRODUCT_NAME'];
-                    $productDescription = $row['PRODUCT_DESCRIPTION'];
-                    $productPrice = $row['PRODUCT_PRICE'];
-                    $productStock = $row['PRODUCT_STOCK'];
-                    echo("<div class='col p-5'>");
-                    echo("<div class='card'>");
-                    echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                        <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
-                    echo("<div class='card-body'>");
-                    echo("<div class = 'row'>
-                            <div class = 'col'>
-                                <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
-                            </div>
-                            <div class = 'col'>
-                                <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
-                            </div>
-                        </div>");
-                    echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
-                    echo("</div></a>");            
-                    echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
-                    echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&price=$productPrice' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");
-                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishList.php' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");
-                    echo("</div>");
-                    echo("</div>");
+                
+                
+                if(!empty($categoryid)){
+                    $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid'";
+                    $result = oci_parse($conn, $query);
+                    oci_execute($result);
+                    while($row = oci_fetch_array($result, OCI_ASSOC)){
+                        $id = $row['PRODUCT_ID'];
+                        $name = $row['PRODUCT_NAME'];
+                        $categoryId = $row['CATEGORY_ID'];
+                        $shopId = $row['SHOP_ID'];
+                        $categoryName = $row['CATEGORY_NAME'];
+                        $productImage = $row['PRODUCT_IMAGE'];
+                        $productName = $row['PRODUCT_NAME'];
+                        $productDescription = $row['PRODUCT_DESCRIPTION'];
+                        $productPrice = $row['PRODUCT_PRICE'];
+                        $productStock = $row['PRODUCT_STOCK'];
+                        echo("<div class='col p-5'>");
+                        echo("<div class='card'>");
+                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
+                            <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                        echo("<div class='card-body'>");
+                        echo("<div class = 'row'>
+                                <div class = 'col'>
+                                    <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
+                                </div>
+                                <div class = 'col'>
+                                    <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                                </div>
+                            </div>");
+                        echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("</div></a>");            
+                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                    }
+                }
+                else{
+                    echo("<div class='col-12 p-5'>");
+                    echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
                     echo("</div>");
                 }
+
             ?>
         </div>
     </div>

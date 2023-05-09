@@ -13,6 +13,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
     
+        <?php
+            include('./connect.php');
+            if(isset($_GET['user'])){
+                $user = $_GET['user'];
+            }
+        ?>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -36,46 +42,45 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
                             </ul>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
@@ -178,117 +183,54 @@
 
     <!--Product Space-->
     <div class="container-fluid text-center mb-5">
-        <h1 >OUR PRODUCTS</h1>
-    </div>
-    <div class = "container-fluid p-5">
-        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col p-5">
-                <div class="card">
-                    <img src="../../../dist/public/kiwi.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                    <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                    </div>
-                </div>
+            <h1 >OUR PRODUCTS</h1>
+        </div>
+        <div class = "container-fluid p-5">
+            <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
+                <?php
+                    $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
+                    $result = oci_parse($conn, $query);
+                    oci_execute($result);
+                    while($row = oci_fetch_array($result, OCI_ASSOC)){
+                        $id = $row['PRODUCT_ID'];
+                        $name = $row['PRODUCT_NAME'];
+                        $categoryId = $row['CATEGORY_ID'];
+                        $shopId = $row['SHOP_ID'];
+                        $categoryName = $row['CATEGORY_NAME'];
+                        $productImage = $row['PRODUCT_IMAGE'];
+                        $productName = $row['PRODUCT_NAME'];
+                        $productDescription = $row['PRODUCT_DESCRIPTION'];
+                        $productPrice = $row['PRODUCT_PRICE'];
+                        $productStock = $row['PRODUCT_STOCK'];
+                        echo("<div class='col p-5'>");
+                        echo("<div class='card'>");
+                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
+                            <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                        echo("<div class='card-body'>");
+                        echo("<div class = 'row'>
+                                <div class = 'col'>
+                                    <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
+                                </div>
+                                <div class = 'col'>
+                                    <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                                </div>
+                            </div>");
+                        echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("</div></a>");            
+                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                    }
+                ?>
             </div>
         </div>
-    </div>
-    <div class = "custom-margin"></div>
+        <div class = "custom-margin"></div>
+
+    <!--Category-->
 
     <!--Category-->
 
@@ -297,74 +239,58 @@
     </div>
     <div class = "custom-margin"></div>
     <div class = "container-fluid bg-info">
-            <div class="row row-cols-2 row-cols-md-3 row-cols-xl-6 g-4">
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
+            <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=bakery'>")?>
+                <div class="col mt-5 text-center">
+                    <div class= "d-flex justify-content-center">
+                        <div class="ellipse p-5">
+                            <img src="./../../../dist/public/bread.svg" alt="package">
                         </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                     </div>
-                </a>
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
+                    <h3 class = "mt-5">BAKERY</h1>
+                </div>
+            </a>
+                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=dairy'>")?>
+                <div class="col mt-5 text-center">
+                    <div class= "d-flex justify-content-center">
+                        <div class="ellipse p-5">
+                            <img src="./../../../dist/public/icecream.svg" alt="package">
                         </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                     </div>
-                </a>
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
+                    <h3 class = "mt-5">DAIRY</h1>
+                </div>
+            </a>
+                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=fruit'>")?>
+                <div class="col mt-5 text-center">
+                    <div class= "d-flex justify-content-center">
+                        <div class="ellipse p-5">
+                            <img src="./../../../dist/public/fruits.svg" alt="package">
                         </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                     </div>
-                </a>
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
+                    <h3 class = "mt-5">FRUIT</h1>
+                </div>
+            </a>
+                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=meat'>")?>
+                <div class="col mt-5 text-center">
+                    <div class= "d-flex justify-content-center">
+                        <div class="ellipse p-5">
+                            <img src="./../../../dist/public/meat.svg" alt="package">
                         </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                     </div>
-                </a>
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
+                    <h3 class = "mt-5">MEAT</h1>
+                </div>
+            </a>
+                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=vegetable'>")?>
+                <div class="col mt-5 text-center">
+                    <div class= "d-flex justify-content-center">
+                        <div class="ellipse p-5">
+                            <img src="./../../../dist/public/carrot.svg" alt="package">
                         </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                     </div>
-                </a>
-                <a class="nav-link p-5" href="#">
-                    <div class="col mt-5 text-center">
-                        <div class= "d-flex justify-content-center">
-                            <div class="ellipse p-5">
-                                <img src="./../../../dist/public/package.svg" alt="package">
-                            </div>
-                        </div>
-                        <h3 class = "mt-5">SELF-PICKUP</h1>
-                        <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
-                    </div>
-                </a>
-            </div>
+                    <h3 class = "mt-5">VEGETABLE</h1>
+                </div>
+            </a>
+        </div>
     </div>
     <div class = "custom-margin"></div>
 

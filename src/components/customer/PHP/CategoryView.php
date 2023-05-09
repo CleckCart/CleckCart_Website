@@ -17,159 +17,142 @@
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<!--NavBar-->
-<div class = "topbar">
+        <?php
+            include('./connect.php');
+            if(isset($_GET['user'])){
+                $user = $_GET['user'];
+            }
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="./HomePage.php">
+                <a class="navbar-brand" href="./CustomerSession.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
-    
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-    
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
-    
+
                         <li class="nav-item dropdown me-5"><!---->
                             <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
                             </ul>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
                         </li>
-    
+
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
-                    
+
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./ProfilePage.php">Manage Profile</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./MyOrders.php">My Orders</a></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        
     </div>
   <section class="product_page">
     <h2 class="product_page--title">OUR PRODUCTS</h2>
-    <select name="category" id="category-select">
-      <option value="category1">Category 1</option>
-      <option value="category2">Category 2</option>
-      <option value="category3">Category 3</option>
-      <option value="category4">Category 4</option>
-      <option value="category5">Category 5</option>
-    </select>
     <div class = "container-fluid p-5">
-    <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
-        <div class="col p-5">
-            <div class="card">
-                <img class="product_image" src="../../../dist/public/kiwi.jpg" alt="">
-                <div class="d-flex flex-row flex-wrap p-2 align-self-center w-100">
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/cart2.svg" alt = "cart2"/></a>
-                        <a class="btn btn-productsize btn-primary btn-outline-dark w-50" href="#" role="button"><img src = "./../../../dist/public/heart2.svg" alt = "cart2"/></a>
-                </div>
-            </div>
-        </div>               
+    <div class = "container-fluid p-5">
+        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
+            <?php
+                $queryCategory = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME = '$productCategory'";
+                $resultCategory = oci_parse($conn, $queryCategory);
+                oci_execute($resultCategory);
+
+                while($row = oci_fetch_array($resultCategory, OCI_ASSOC)){
+                    $categoryid = $row['CATEGORY_ID'];
+                }
+                
+                
+                if(!empty($categoryid)){
+                    $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid'";
+                    $result = oci_parse($conn, $query);
+                    oci_execute($result);
+                    while($row = oci_fetch_array($result, OCI_ASSOC)){
+                        $id = $row['PRODUCT_ID'];
+                        $name = $row['PRODUCT_NAME'];
+                        $categoryId = $row['CATEGORY_ID'];
+                        $shopId = $row['SHOP_ID'];
+                        $categoryName = $row['CATEGORY_NAME'];
+                        $productImage = $row['PRODUCT_IMAGE'];
+                        $productName = $row['PRODUCT_NAME'];
+                        $productDescription = $row['PRODUCT_DESCRIPTION'];
+                        $productPrice = $row['PRODUCT_PRICE'];
+                        $productStock = $row['PRODUCT_STOCK'];
+                        echo("<div class='col p-5'>");
+                        echo("<div class='card'>");
+                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
+                            <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                        echo("<div class='card-body'>");
+                        echo("<div class = 'row'>
+                                <div class = 'col'>
+                                    <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
+                                </div>
+                                <div class = 'col'>
+                                    <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                                </div>
+                            </div>");
+                        echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("</div></a>");            
+                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
+                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                    }
+                }
+                else{
+                    echo("<div class='col-12 p-5'>");
+                    echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
+                    echo("</div>");
+                }
+
+            ?>
+        </div>
     </div>
     </div>
   </section>

@@ -1,7 +1,7 @@
 <?php
 include('./connectSession.php');
 if(isset($_SESSION['username']) && $_SESSION['UserRole'] == 'Trader'){
-            include('./TraderDashboard.php');    
+            header('Location:./TraderDashboard.php?user='.$_SESSION['username']);    
         }
     
     else

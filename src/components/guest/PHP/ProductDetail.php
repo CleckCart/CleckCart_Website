@@ -41,8 +41,11 @@
     </div>
   </div> -->
 
-<!--NavBar-->
-<div class = "topbar">
+  <?php
+            include('./connect.php');
+        ?>
+        <!--NavBar-->
+        <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -65,8 +68,6 @@
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
                         </li>
 
@@ -88,7 +89,7 @@
                             <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -102,7 +103,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
                         </li>
                     </ul>
                 </div>
@@ -121,8 +122,17 @@
             $productDescription = $_GET['description'];
             $productImage = $_GET['image'];
             $productPrice = $_GET['price'];
+            $productQuantity = 1;
           ?>
         <section class="product-detail">
+          <?php
+          if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+          <?php }?>
+          <?php
+          if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+          <?php }?>
           <div class="upper-section">
               <div class="product-img-cnt">
                 <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
@@ -141,13 +151,13 @@
                   <span>Quantity:</span>
                   <div class="increment-decrement">
                     <span class="decrement">-</span><hr/>
-                    <span class="quantity">1</span><hr/>
+                    <span class="quantity"><?php echo($productQuantity)?></span><hr/>
                     <span class="increment">+</span>
                     <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
                   </div>
                 </div>
-                <?php echo("<a href = './CartProducts.php?id=$id&image=$productImage&name=$productName&price=$productPrice' class='btn add-to-cart'>ADD TO CART</a>")?>
-                <?php echo("<a href = './Checkout.php?id=$id&image=$productImage&name=$productName&price=$productPrice' class='btn buy-now'>BUY NOW</a>")?>
+                <?php echo("<a href = './CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=$productQuantity' class='btn add-to-cart'>ADD TO CART</a>")?>
+                <?php echo("<a href = './Checkout.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=$productQuantity' class='btn buy-now'>BUY NOW</a>")?>
                 
                 </div>
               <script>
@@ -162,16 +172,16 @@
                   if(currentQuantity < (stockValue.innerText-1)){
                     currentQuantity++;
                     quantity.innerText = currentQuantity;
-                    addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
-                    buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                    addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
                   }
                 });
                 decrement.addEventListener("click", ()=>{
                   if(currentQuantity > 1){
                       currentQuantity--;
                       quantity.innerText = currentQuantity;
-                      addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
-                      buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./Checkout.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&quantity=${currentQuantity}`;
                   }
                 })
               </script>
