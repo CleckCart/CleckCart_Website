@@ -15,8 +15,8 @@
                     $TraderEditItemCategory = strtolower(trim(filter_input(INPUT_POST, 'TraderEditItemCategory', FILTER_SANITIZE_STRING)));
                     $TraderEditItemDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderEditItemDescription', FILTER_SANITIZE_STRING)));
                     $TraderEditItemStock = trim(filter_input(INPUT_POST, 'TraderEditItemStock', FILTER_SANITIZE_NUMBER_INT));
-                    $TraderEditItemPrice = trim(filter_input(INPUT_POST, 'TraderEditItemPrice', FILTER_SANITIZE_NUMBER_FLOAT));
-                    $TraderEditItemDiscount = trim(filter_input(INPUT_POST, 'TraderEditItemDiscount', FILTER_SANITIZE_NUMBER_FLOAT));
+                    $TraderEditItemPrice = $_POST['TraderEditItemPrice'];
+                    $TraderEditItemDiscount = $_POST['TraderEditItemDiscount'];
                     $TraderEditItemImage = ($_FILES["TraderEditItemImage"]["name"]);
                     $TraderEditItemImageType = ($_FILES["TraderEditItemImage"]["type"]);
                     $TraderEditItemImageTmpName = ($_FILES["TraderEditItemImage"]["tmp_name"]);
