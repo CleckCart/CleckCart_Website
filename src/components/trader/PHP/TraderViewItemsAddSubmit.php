@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
 /*Check if form is submitted*/
 if (isset($_POST['TraderItemAddSubmit'])) {
     include('./connect.php');
@@ -6,7 +11,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
     if (empty($_POST['TraderItemAddName']) || empty($_POST['TraderItemAddCategory']) || empty($_POST['TraderItemAddDescription']) || empty($_POST['TraderItemAddStock']) 
     || empty($_POST['TraderItemAddPrice']))
         {
-            header('Location:./TraderViewItemsAdd.php?error=Please make sure all text fields are not empty.');
+            header("Location:./TraderViewItemsAdd.php?user=$user&error=Please make sure all text fields are not empty.");
         }
     else
         {
@@ -71,49 +76,49 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
                                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $TraderItemAddStock);
                                                                                 oci_execute($ProductRunInsertionQuery);
-                                                                                header('Location:./TraderViewItemsAdd.php?success=Product Listing Requested.');
+                                                                                header("Location:./TraderViewItemsAdd.php?user=$user&success=Product Listing Requested.");
                                                                             }
 
                                                                         else 
                                                                             {
-                                                                                header('Location:./TraderViewItemsAdd.php?error=Please enter a valid category.');
+                                                                                header("Location:./TraderViewItemsAdd.php?user=$user&error=Please enter a valid category.");
                                                                             }   
                                                                 }    
                                                             
                                                             else
                                                                 {
-                                                                    header('Location:./TraderViewItemsAdd.php?error=Failed to upload image.');
+                                                                    header("Location:./TraderViewItemsAdd.php?user=$user&error=Failed to upload image.");
                                                                 }
                                                             
                                                         }
                                                         
                                                     else
                                                         {
-                                                            header('Location:./TraderViewItemsAdd.php?error=Please choose an image.');                                                                
+                                                            header("Location:./TraderViewItemsAdd.php?user=$user&error=Please choose an image.");
                                                         }
                                                    
                                                 }
                                             else
                                                 {
-                                                    header('Location:./TraderViewItemsAdd.php?error=Please type decimal numbers in product price.');
+                                                    header("Location:./TraderViewItemsAdd.php?user=$user&error=Please type decimal numbers in product price.");
                                                 }
                                         }
 
                                     else
                                         {
-                                            header('Location:./TraderViewItemsAdd.php?error=Please type integer numbers in product stock.');
+                                            header("Location:./TraderViewItemsAdd.php?user=$user&error=Please type integer numbers in product stock.");
                                         }                                          
                                 }
                            
                     else
                         {
-                            header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product category.');
+                            header("Location:./TraderViewItemsAdd.php?user=$user&error=Please use alphabets only in product category.");
                         }
                     
                 }
             else
                 {   
-                    header('Location:./TraderViewItemsAdd.php?error=Please use alphabets only in product name.');                   
+                    header("Location:./TraderViewItemsAdd.php?user=$user&error=Please use alphabets only in product name.");
                 }
         }
     }

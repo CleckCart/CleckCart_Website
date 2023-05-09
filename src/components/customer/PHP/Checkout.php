@@ -194,7 +194,7 @@
                 </div>
                 <div class="row text-center py-4 border  my-4">
                     <h5>Sub Total: $40</h5>
-                    <a class="btn btn-primary w-50 d-block mx-auto" href="./PayementGateway.php" role="button">Checkout</a>
+                    <?php echo("<a class='btn btn-primary w-50 d-block mx-auto' href='./PayementGateway.php?user=$user' role='button'>Checkout</a>")?>
                 </div>
             </div>
         </div>

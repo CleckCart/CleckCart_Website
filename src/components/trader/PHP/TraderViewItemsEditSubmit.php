@@ -1,11 +1,16 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
         /*Check if form is submitted*/
         if (isset($_POST['TraderItemEditSubmit'])) {
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderItemEditName']) || empty($_POST['TraderItemEditCategory']) || empty($_POST['TraderItemEditDescription']) || empty($_POST['TraderItemEditStock']) 
             || empty($_POST['TraderItemEditPrice']) || empty($_POST['TraderItemEditDiscount'])) 
                 {
-                    header('Location:./TraderViewItemsEdit.php?error=Please make sure all text fields are not empty.');
+                    header("Location:./TraderViewItemsEdit.php?user=$user&error=Please make sure all text fields are not empty.");
                 }
             else
                 {
@@ -32,30 +37,30 @@
                                                         }
                                                     else
                                                         {
-                                                            header('Location:./TraderViewItemsEdit.php?error=Please type decimal numbers in product price.');
+                                                            header("Location:./TraderViewItemsEdit.php?user=$user&error=Please type decimal numbers in product price.");
                                                         }
                                                 }
 
                                             else
                                                 {
-                                                    header('Location:./TraderViewItemsEdit.php?error=Please type integer numbers in product stock.');
+                                                    header("Location:./TraderViewItemsEdit.php?user=$user&error=Please type integer numbers in product stock.");
                                                 }
                                         }
                                     else
                                         {
-                                            header('Location:./TraderViewItemsEdit.php?error=Please pick the added date of the product.');
+                                            header("Location:./TraderViewItemsEdit.php?user=$user&error=Please pick the added date of the product.");
                                         }                                           
                                 }                                          
                                 
                             else
                                 {
-                                    header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product category.');
+                                    header("Location:./TraderViewItemsEdit.php?user=$user&error=Please use alphabets only in product category.");
                                 }
                             
                         }
                     else
                         {   
-                            header('Location:./TraderViewItemsEdit.php?error=Please use alphabets only in product name.');                   
+                            header("Location:./TraderViewItemsEdit.php?user=$user&error=Please use alphabets only in product name.");                   
                         }
                 }
             }
