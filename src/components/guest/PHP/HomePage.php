@@ -235,7 +235,7 @@
     <div class = "custom-margin"></div>
     <div class = "container-fluid bg-info">
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
-            <a class="nav-link p-5" href="./CategoryView.php?category=Meat">
+            <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
@@ -245,7 +245,7 @@
                     <h3 class = "mt-5">BAKERY</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=Dairy">
+            <a class="nav-link p-5" href="./CategoryView.php?category=dairy">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
@@ -255,7 +255,7 @@
                     <h3 class = "mt-5">DAIRY</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=Fruit">
+            <a class="nav-link p-5" href="./CategoryView.php?category=fruit">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
@@ -265,7 +265,7 @@
                     <h3 class = "mt-5">FRUIT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=Meat">
+            <a class="nav-link p-5" href="./CategoryView.php?category=meat">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
@@ -275,7 +275,7 @@
                     <h3 class = "mt-5">MEAT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=Vegetable">
+            <a class="nav-link p-5" href="./CategoryView.php?category=vegetable">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">

@@ -23,7 +23,7 @@
                         } else {
                             if($UserRole == "Admin"){
                                 $encryptedPassword = md5($TraderLoginPassword);
-                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='Admin'";
+                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='admin'";
                                 $result = oci_parse($conn, $query);
                                 oci_execute($result);
                                 // Fetch the result
@@ -41,7 +41,7 @@
                             }
                             else if($UserRole == "Trader"){
                                 $encryptedPassword = md5($TraderLoginPassword);
-                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='Trader'";
+                                $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$TraderLoginUsername' AND PASSWORD = '$encryptedPassword' AND ROLE ='trader'";
                                 $result = oci_parse($conn, $query);
                                 oci_execute($result);
                                 // Fetch the result
