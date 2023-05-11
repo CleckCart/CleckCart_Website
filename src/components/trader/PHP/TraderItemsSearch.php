@@ -21,12 +21,12 @@
 
 <body>
 
-  <?php
-      include('./connect.php');
-      if(isset($_GET['user'])){
-        $user = $_GET['user'];
-      }
-    ?>
+<?php
+    include('./connect.php');
+    if(isset($_GET['user'])){
+      $user = $_GET['user'];
+    }
+  ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
@@ -46,7 +46,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderViewItems.php?user=$user' class='nav-link text-dark'>")?>
-      <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
+      <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
@@ -89,7 +89,7 @@
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <?php echo("<form class='d-flex' role='search' method='POST' action='./TraderItemsSearch.php?user=$user'>")?>
+          <?php echo("<form class='d-flex' role='search' method='POST' action='./TraderItemsSearch.php?user=$user'>")?>
               <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
               if (isset($_POST['searchProduct'])) {
                    echo (trim($_POST['searchProduct']));
@@ -110,39 +110,40 @@
         <?php
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-        <?php }?>         
+        <?php }?>
+          <thead class="table-success">
+            <tr>
+              <th>Select</th>
+              <th>Product Id</th>
+              <th>Category Id</th>
+              <th>Shop Id</th>
+              <th>Category Name</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th colspan=2>Actions</th>            
+            </tr>
+          </thead>
           <?php
-          if(isset($_GET['user'])){
-            $user = $_GET['user'];
-          }
+          include('connect.php');
+
           $queryShop = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$user'";
           $resultShop = oci_parse($conn, $queryShop);
           oci_execute($resultShop);
           while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
             $shopID = $rowShop['SHOP_ID'];
           }
-
-
-          $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID";
-          $result = oci_parse($conn, $query);
-          oci_execute($result);
-          while($row = oci_fetch_array($result, OCI_ASSOC)){
+          
+          $ProductName=strtolower(trim(filter_input(INPUT_POST, 'searchProduct', FILTER_SANITIZE_STRING)));
+          $SearchProductQuery = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID AND PRODUCT_NAME LIKE '%' || :ProductName || '%'";
+          $RunSearchProductQuery = oci_parse($conn, $SearchProductQuery);
+          oci_bind_by_name($RunSearchProductQuery,':ProductName', $ProductName);
+          oci_execute($RunSearchProductQuery);
+          while($row = oci_fetch_array($RunSearchProductQuery, OCI_ASSOC)){
             $id = $row['PRODUCT_ID'];
             $name = $row['PRODUCT_NAME'];
-
-            $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
-            $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
-            oci_execute($RunDiscountQuery);
-            if($Row = oci_fetch_assoc($RunDiscountQuery))
-              {            
-                $Discount=$Row['DISCOUNT'];
-              }
-            
-            else
-              {
-                  $Discount=0;
-              }
-              
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
             echo("<td>$row[CATEGORY_ID]</td>");
@@ -152,10 +153,9 @@
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
-            echo("<td>$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
-            echo("<td><a href='TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+            echo("<td><a href='./TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user='$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>
         </table>
@@ -187,7 +187,7 @@
     <script>
       $('#exampleModalDelete').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget); // Button that triggered the modal
-        var user = button.data('user');
+        var user = button.data('user'); // Extract product id from data-id attribute
         var id = button.data('id'); // Extract product id from data-id attribute
         var name = button.data('name'); // Extract product name from data-name attribute
         var modal = $(this);

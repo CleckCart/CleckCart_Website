@@ -22,9 +22,28 @@
 <body>
 
 <?php
-    include('./connect.php');
-    if(isset($_GET['user'])){
-      $user = $_GET['user'];
+  include('./connect.php');
+  if(isset($_GET['user'])){
+    $user = $_GET['user'];
+  }
+?>
+
+<?php
+    if(isset($_GET['id']) && isset($_GET['action'])){
+      $ProductId = $_GET['id'];
+      $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $ProductId";                 
+      $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
+      oci_execute($RunFetchProductQuery); 
+  
+      while($row=oci_fetch_array($RunFetchProductQuery, OCI_ASSOC))
+          {
+              $CategoryName = $row['CATEGORY_NAME'];
+              $ProductName = $row['PRODUCT_NAME'];
+              $ProductDescription = $row['PRODUCT_DESCRIPTION'];
+              $ProductImage = $row['PRODUCT_IMAGE'];
+              $ProductPrice = $row['PRODUCT_PRICE'];
+              $ProductStock = $row['PRODUCT_STOCK'];
+          }
     }
   ?>
     <!-- Vertical navbar -->
@@ -87,7 +106,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="TraderViewItemsEditSubmit.php">
+            <?php echo("<form method='POST' action='TraderViewItemsEditSubmit.php?user=$user' enctype='multipart/form-data'>")?>
             <?php
                 if(isset($_GET['error'])) {?>
                   <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -95,38 +114,46 @@
               <div class="mb-3">
                 <div class="row mb-3">
                   <div class="col">
+                    <input type='hidden' name='TraderEditItemId' value='<?php
+                      echo($ProductId);?>'>
                     <label for="exampleInputText1" class="form-label">Name</label>
-                    <input type="text" class="form-control" aria-label="Name" placeholder="Product name" name="TraderItemEditName">
+                    <input type="text" class="form-control" aria-label="Name" placeholder="Product name" name="TraderItemEditName" value="<?php
+                      echo("$ProductName");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
-                    <input type="text" class="form-control" aria-label="Category" name="TraderItemEditCategory" placeholder="Product category">
+                    <input type="text" class="form-control" aria-label="Category" name="TraderItemEditCategory" placeholder="Product category" value="<?php
+                      echo("$CategoryName");?>">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Description</label>
-                    <textarea class="form-control" placeholder="Leave product description here" rows="5" name="TraderItemEditDescription"></textarea>
+                    <textarea class="form-control" placeholder="Leave product description here" rows="5" name="TraderItemEditDescription"><?php
+                    echo("$ProductDescription");?></textarea>
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Stock</label>
-                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditStock" min="0">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditStock" min="0" value="<?php
+                      echo("$ProductStock");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Price</label>
-                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditPrice" min="1" step="0.01">
+                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditPrice" min="1" step="0.01" value="<?php
+                      echo("$ProductPrice");?>">
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="number" class="form-control" aria-label="PhoneNumber" name="TraderItemEditDiscount" min="0" step="0.01">
+                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemEditDiscount" value="<?php
+                      echo("");?>">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <div class="col">
                     <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderItemEditImage">
+                    <input type="file" class="form-control" id="file" aria-label="File" name="TraderItemEditImage"/>
                   </div>
                 </div>
               </div>
