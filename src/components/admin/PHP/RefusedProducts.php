@@ -25,6 +25,10 @@
             $EmailRow = oci_fetch_array($RunFetchEmailQuery, OCI_ASSOC);
             $Email= $EmailRow['EMAIL'];
 
+            $DeleteDiscountQuery = "DELETE FROM OFFER WHERE PRODUCT_ID = $refusedProductId";     
+            $RunDeleteDiscountQuery = oci_parse($conn, $DeleteDiscountQuery);
+            oci_execute($RunDeleteDiscountQuery);
+
             $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $refusedProductId";     
             $DeleteQuery = oci_parse($conn, $sql);
             oci_execute($DeleteQuery);

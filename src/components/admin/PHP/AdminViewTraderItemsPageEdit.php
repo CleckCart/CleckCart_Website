@@ -28,7 +28,7 @@
     {
         include("connect.php");
         $ProductId = $_GET['id'];
-        $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $ProductId";                 
+        $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";                 
         $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
         oci_execute($RunFetchProductQuery); 
     
@@ -41,6 +41,12 @@
                 $ProductPrice = $row['PRODUCT_PRICE'];
                 $ProductStock = $row['PRODUCT_STOCK'];
             }
+
+        $FetchOfferQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID = '$ProductId'";                 
+        $RunFetchOfferQuery = oci_parse($conn, $FetchOfferQuery);
+        oci_execute($RunFetchOfferQuery); 
+        $DiscountRow=oci_fetch_array($RunFetchOfferQuery, OCI_ASSOC);
+        $Discount = $DiscountRow['DISCOUNT'];
     }
   ?>
  <!-- Vertical navbar -->
@@ -163,7 +169,7 @@
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
                     <input type="number" class="form-control" aria-label="Discount" name="TraderEditItemDiscount" placeholder="Product discount" min="0" step="0.01" value="<?php               
-                      echo(0);?>">
+                      echo("$Discount");?>">
                   </div>
                 </div>
                 <div class="row mb-3">
