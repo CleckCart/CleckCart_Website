@@ -42,7 +42,7 @@
                 $CustomerEmail = $row['EMAIL'];
                 $CustomerGender = $row['GENDER'];
                 $CustomerPassword = $row['PASSWORD'];
-                $CustomerDate = $row['DATE_OF_BIRTH'];
+                $CustomerDate = date('Y-m-d', strtotime($row['DATE_OF_BIRTH']));
                 $CustomerAddress = $row['ADDRESS'];
                 $CustomerPhone = $row['PHONE_NUMBER'];
             }
@@ -130,7 +130,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Customer</h5>
         </div>
         <div class="modal-body">
-            <form method="POST" action="AdminViewCustomerPageEditSubmit.php">
+            <form method="POST" action="AdminViewCustomerPageEditSubmit.php" enctype="multipart/form-data">
             <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -152,24 +152,47 @@
                 </div>
                 </div>
                 <div class="row mb-3">
-                <div class="col">
-                    <label for="exampleInputText1" class="form-label">Username</label>
-                    <input type="tel" class="form-control" placeholder="Enter User name" aria-label="Username" name="CustomerEditUsername" value="<?php
-                    echo($CustomerUsername);?>">
-                </div>
-                <div class="col">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="CustomerEditEmail" value="<?php
-                    echo($CustomerEmail);?>">
-                </div>
+                  <div class="col">
+                      <label for="exampleInputText1" class="form-label">Gender</label>
+                      <select class="form-select" aria-label="Default select example" name="CustomerEditGender">
+                        <?php
+                          if($CustomerGender=='male')
+                            {
+                                echo("<option value='male' selected>Male</option>");
+                                echo("<option value='female'>Female</option>");
+                                echo("<option value='other'>Other</option>");
+                            }
+
+                          else if($CustomerGender=='female')
+                            {
+                                echo("<option value='male'>Male</option>");
+                                echo("<option value='female' selected>Female</option>");
+                                echo("<option value='other'>Other</option>");
+                            }
+
+                          else
+                            {
+                              echo("<option value='male' selected>Male</option>");
+                              echo("<option value='female'>Female</option>");
+                              echo("<option value='other' selected>Other</option>");
+                            }
+                        ?>
+                      </select>
+                      
+                  </div>
+                  <div class="col">
+                      <label for="exampleInputEmail1" class="form-label">Email</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="CustomerEditEmail" value="<?php
+                      echo($CustomerEmail);?>">
+                  </div>
                 </div>
 
                 <div class="row mb-3">
-                <div class="col">
-                    <label for="exampleInputText1" class="form-label">Address</label>
-                    <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="CustomerEditAddress" value="<?php
-                    echo($CustomerAddress);?>">
-                </div>
+                  <div class="col">
+                      <label for="date" class="form-label">Date of Birth</label>
+                      <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate" value="<?php
+                      echo($CustomerDate);?>">                  
+                  </div>
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Phone</label>
                     <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone" value="<?php
@@ -177,16 +200,9 @@
                 </div>
                 </div>                 
                   <div class="mb-3">
-                    <div class="row mb-3">
-                      <div class="col">
-                        <label for="file" class="form-label">Image</label>
-                        <input type="file" class="form-control" id="file" aria-label="File" name="CustomerEditImage">
-                      </div>
-                      <div class="col">
-                        <label for="date" class="form-label">Date of Birth</label>
-                        <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate">
-                      </div>
-                    </div>
+                    <label for="exampleInputText1" class="form-label">Address</label>
+                      <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="CustomerEditAddress" value="<?php
+                      echo($CustomerAddress);?>">
                 </div>
             </div>
         </div>

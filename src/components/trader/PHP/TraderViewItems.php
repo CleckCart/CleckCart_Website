@@ -110,22 +110,7 @@
         <?php
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-        <?php }?>
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>Product Id</th>
-              <th>Category Id</th>
-              <th>Shop Id</th>
-              <th>Category Name</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th colspan=2>Actions</th>            
-            </tr>
-          </thead>
+        <?php }?>         
           <?php
           if(isset($_GET['user'])){
             $user = $_GET['user'];
@@ -144,6 +129,20 @@
           while($row = oci_fetch_array($result, OCI_ASSOC)){
             $id = $row['PRODUCT_ID'];
             $name = $row['PRODUCT_NAME'];
+
+            $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
+            $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
+            oci_execute($RunDiscountQuery);
+            if($Row = oci_fetch_assoc($RunDiscountQuery))
+              {            
+                $Discount=$Row['DISCOUNT'];
+              }
+            
+            else
+              {
+                  $Discount=0;
+              }
+              
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
             echo("<td>$row[CATEGORY_ID]</td>");
@@ -153,6 +152,7 @@
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
+            echo("<td>$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");

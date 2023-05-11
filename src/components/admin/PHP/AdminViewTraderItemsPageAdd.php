@@ -142,10 +142,14 @@
                   </div>                  
                 </div>
                 <div class="row mb-3">
-                  <div class="col">
-                    <label for="file" class="form-label">Image</label>
-                    <input type="file" class="form-control" id="file" aria-label="File" name="AdminAddItemImage">
-                  </div>
+                    <div class="col">
+                        <label for="exampleInputText1" class="form-label">Discount</label>
+                        <input type="number" class="form-control" aria-label="Discount" name="AdminAddItemDiscount" placeholder="Product discount" min="0" step="0.01">
+                      </div>
+                    <div class="col">
+                      <label for="file" class="form-label">Image</label>
+                      <input type="file" class="form-control" id="file" aria-label="File" name="AdminAddItemImage">                   
+                    </div>
                 </div>
               </div>
           </div>

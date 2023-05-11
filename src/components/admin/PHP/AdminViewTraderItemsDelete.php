@@ -24,13 +24,16 @@
       oci_execute($RunFetchEmailQuery);
       $EmailRow = oci_fetch_array($RunFetchEmailQuery, OCI_ASSOC);
       $Email= $EmailRow['EMAIL'];
-      
-      $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = $deleteProductId";     
+
+      $OfferSql = "DELETE FROM OFFER WHERE PRODUCT_ID = '$deleteProductId'";     
+      $DeleteOfferSql = oci_parse($conn, $OfferSql);
+      oci_execute($DeleteOfferSql);
+
+      $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = '$deleteProductId'";     
       $DeleteQuery = oci_parse($conn, $sql);
       oci_execute($DeleteQuery);
-      header("Location:./AdminViewTraderItemsPage.php?success= Product has been deleted.");
 
-      if($DeleteQuery)
+      if($DeleteOfferSql)
         {
             require '../../../mail/phpmailer/src/Exception.php';
             require '../../../mail/phpmailer/src/PHPMailer.php';
@@ -51,8 +54,8 @@
             $mail->isHTML(true);
             $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been removed.'; //subject of the email for reciever
             $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been removed from listing in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
-            $mail->send();
-            header("Location:AdminViewTraderItemsPage.php?error=Product has been refused.");
+            $mail->send();      
+            header("Location:./AdminViewTraderItemsPage.php?success= Product has been removed.");    
         }
     }
     else{

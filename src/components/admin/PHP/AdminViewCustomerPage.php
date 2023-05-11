@@ -103,7 +103,7 @@
     <div class="container-fluid">
       <div class="row row-cols-1 row-cols-md-2 bg-success">
         <div class="col p-5">
-          <h1>Manage Traders</h1>
+          <h1>Manage Customers</h1>
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">

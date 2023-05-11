@@ -8,7 +8,7 @@
         if (isset($_POST['TraderItemEditSubmit'])) {
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderItemEditName']) || empty($_POST['TraderItemEditCategory']) || empty($_POST['TraderItemEditDescription']) || empty($_POST['TraderItemEditStock']) 
-            || empty($_POST['TraderItemEditPrice']) || empty($_POST['TraderItemEditDiscount'])) 
+            || empty($_POST['TraderItemEditPrice'])) 
                 {
                     header("Location:./TraderViewItemsEdit.php?user=$user&error=Please make sure all text fields are not empty.");
                 }
