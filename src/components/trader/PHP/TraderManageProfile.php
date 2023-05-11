@@ -79,66 +79,114 @@
   <!-- Toggle button -->
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 "><i class="fa fa-bars mr-2"></i></button>
 
-  <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col text-center">
                 <h2 class="mb-3 mt-3">Your Information</h2>
             </div>
         </div>
-
-    </div>
-    <div class="container mt-3">
-        <form>
-            <fieldset disabled>
-                <div class="row">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3">
-                        <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="disabledTextInput-fn" class="form-label">First Name</label>
-                            <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="First Name">
-                            <label for="disabledTextInput-g" class="form-label mt-3" >Username</label>
-                            <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username">
-                            <label for="disabledTextInput-add" class="form-label mt-3" >Address</label>
-                            <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address">
-                            <label for="disabledTextInput-pn" class="form-label mt-3" >Phone Number</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number">
-                            <label for="disabledTextInput-pn" class="form-label mt-3" >Date of Birth</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="DOB">
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="form-group">
-                            <label for="disabledTextInput-ln" class="form-label">Last Name</label>
-                            <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="Last Name">
-                            <label for="disabledTextInput-email" class="form-label mt-3" >Email Address</label>
-                            <input type="text" id="disabledTextInput-email" class="form-control" placeholder="Email Address">
-                            <label for="disabledTextInput-pn" class="form-label mt-3">Gender</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Gender">
-                            <label for="disabledTextInput-pn" class="form-label mt-3" >Shop Category</label>
-                            <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Shop Category">
-                        </div>
-                    </div>
-                    <div class="col-sm-1"></div>
-            </fieldset>
-        </form>
     </div>
 
-    <div class="container mt-5 mb-2">
-        <div class="row ">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-2">
-                <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user' role='button'>Edit Profile</a>")?>
-            </div>
-            <div class="col-sm-2">
-                <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user' role='button'>Update Password</a>")?>
-            </div>
-            <div class="col-sm-4"></div>
+    <div class="container-fluid">
+      <?php
+        include('./connect.php');
+
+        $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
+        $result = oci_parse($conn, $query);
+        oci_execute($result);
+        while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $uid = $row['USER_ID'];
+            $username = $row['USERNAME'];
+            $first_name = $row['FIRST_NAME'];
+            $last_name = $row['LAST_NAME'];
+            $email = $row['EMAIL'];
+            $address = $row['ADDRESS'];
+            $phone_number = $row['PHONE_NUMBER'];
+            $date_of_birth = $row['DATE_OF_BIRTH'];
+            $gender = $row['GENDER'];
+        }
+
+        $queryShop = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$username'";
+        $resultShop = oci_parse($conn, $queryShop);
+        oci_execute($resultShop);
+        while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
+          $shopname = $rowShop['SHOP_NAME'];
+        }
+      ?>
+      <div class = 'row row-cols-1'>
+        <div class="col text-center">
+            <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
+          </div>
         </div>
+        <div class="col text-start">
+          <?php echo("<form class = mt-5 method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname'>")?>
+                  <div class="row mb-3">
+                    <div class="col">
+                      <input type='hidden' name='TraderEditItemId' value='<?php
+                      echo($uid);?>'>
+                      <label for="disabledTextInput-ln" class="form-label">First Name</label>
+                      <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="First Name" value = '<?php echo($first_name)?>' disabled>
+                    </div>
+                    <div class="col">
+                      <label for="disabledTextInput-ln" class="form-label">Last Name</label>
+                      <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="Last Name" value = '<?php echo($last_name)?>' disabled>
+                    </div>
+                  </div>
+    
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="disabledTextInput-g" class="form-label mt-3" >Username</label>
+                      <input type="text" id="disabledTextInput-g" class="form-control" placeholder="Username" value = '<?php echo($username)?>' disabled>
+                    </div>
+                    <div class="col">
+                      <label for="disabledTextInput-add" class="form-label mt-3" >Address</label>
+                      <input type="text" id="disabledTextInput-add" class="form-control" placeholder="Address" value = '<?php echo($address)?>' disabled>
+                    </div>
+                  </div>
+    
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="disabledTextInput-pn" class="form-label mt-3" >Phone Number</label>
+                      <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Phone Number" value = '<?php echo($phone_number)?>' disabled>
+                    </div>
+                    <div class="col">
+                      <label for="disabledTextInput-pn" class="form-label mt-3" >Date of Birth</label>
+                      <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="DOB" value = '<?php echo($date_of_birth)?>' disabled>
+                    </div>
+                  </div>
+    
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="disabledTextInput-email" class="form-label mt-3" >Email Address</label>
+                      <input type="text" id="disabledTextInput-email" class="form-control" placeholder="Email Address" value = '<?php echo($email)?>' disabled>
+                    </div>
+                    <div class="col">
+                      <label for="disabledTextInput-pn" class="form-label mt-3">Gender</label>
+                      <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="Gender" value = '<?php echo($gender)?>' disabled>
+                    </div>
+                  </div>
+    
+                  <div class="row mb-3">
+                    <div class="col">
+                      <label for="disabledTextInput-pn" class="form-label mt-3" >Shop Category</label>
+                      <input type="text" id="disabledTextInput-pn" class="form-control w-50" placeholder="Shop Category" value = '<?php echo($shopname)?>'disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4"></div>
+                  <div class="col-sm-2">
+                      <input class = 'btn btn-primary d-block mx-auto' type = 'submit' value = 'Edit Profile' name = 'TraderProfileEditSubmit'/>
+                  </div>
+                  <div class="col-sm-2">
+                      <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user&id=$uid'>Update Password</a>")?>
+                  </div>
+                  <div class="col-sm-4"></div>
+                </div>
+              </form>
+        </div>
+      </div>
     </div>
-
 
 </div>
 <!-- End demo content -->

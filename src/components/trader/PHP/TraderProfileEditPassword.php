@@ -24,8 +24,9 @@
 <body>
 <?php
     include('./connect.php');
-    if(isset($_GET['user'])){
+    if(isset($_GET['user']) && isset($_GET['id'])){
       $user = $_GET['user'];
+      $id = $_GET['id'];
     }
   ?>
     <!-- Vertical navbar -->
@@ -92,6 +93,10 @@
         <?php
             if(isset($_GET['error'])) {?>
             <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
         <?php }?>
         <label for="current-password">Current Password</label>
         <input type="password" id="current-password" name="currentPassword" placeholder="Enter Current Password" value="<?php
