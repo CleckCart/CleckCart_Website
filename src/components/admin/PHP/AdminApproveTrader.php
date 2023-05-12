@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -150,8 +151,7 @@
               <th></th>
             </tr>
           </thead>
-          <?php
-          include('connect.php');
+          <?php          
           $query = "SELECT * FROM APPLY_TRADER ORDER BY APPLY_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);

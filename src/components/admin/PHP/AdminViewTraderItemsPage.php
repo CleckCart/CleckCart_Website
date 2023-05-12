@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -147,7 +148,6 @@
         <?php }?>
           
           <?php
-          include('connect.php');
           $query = "SELECT * FROM PRODUCT ORDER BY PRODUCT_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);

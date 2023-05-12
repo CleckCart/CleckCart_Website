@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -162,7 +163,6 @@
             </tr>
           </thead>
           <?php
-          include('connect.php');
           $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'customer' ORDER BY USER_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
@@ -182,7 +182,7 @@
             echo("<td>$row[DATE_OF_BIRTH]</td>");
             echo("<td>$row[ADDRESS]</td>");
             echo("<td>$row[PHONE_NUMBER]</td>");
-            echo("<td><a href='AdminViewCustomerPageEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><a href='AdminViewCustomerPageEdit.php?id=$id&action=edit&user=$user' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name' data-email = '$email'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>

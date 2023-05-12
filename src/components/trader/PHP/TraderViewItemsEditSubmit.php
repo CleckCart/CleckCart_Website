@@ -55,7 +55,7 @@
                                                                         {
                                                                             if($TraderItemEditPrice > $TraderItemEditDiscount)
                                                                                 {                                                           
-                                                                                    $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
+                                                                                    $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderItemEditId"; 
                                                                                     $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
                                                                                     oci_bind_by_name($RunUpdateProductQuery, ':CategoryName', $TraderItemEditCategory);
                                                                                     oci_bind_by_name($RunUpdateProductQuery, ':ProductImage',  $TraderItemEditImage);

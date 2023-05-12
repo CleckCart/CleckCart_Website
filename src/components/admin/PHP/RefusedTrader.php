@@ -1,4 +1,5 @@
 <?php
+include('connect.php');
 if(isset($_GET['user'])){
     $user = $_GET['user'];
 }
@@ -6,7 +7,6 @@ if(isset($_GET['user'])){
 <?php
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
-    include('connect.php');
     $refusedTraderId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {

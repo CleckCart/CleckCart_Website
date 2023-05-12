@@ -23,6 +23,7 @@
 </head>
 
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -146,7 +147,6 @@
         <?php }?>
 
           <?php
-          include('connect.php');
           $ProductName=strtolower(trim(filter_input(INPUT_POST, 'searchProduct', FILTER_SANITIZE_STRING)));
           $SearchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME LIKE '%' || :ProductName || '%'";
           $RunSearchProductQuery = oci_parse($conn, $SearchProductQuery);

@@ -21,6 +21,7 @@
 </head>
 <body>
   <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }

@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -119,7 +120,6 @@
           <?php
             if(isset($_GET['id']) && isset($_GET['action'])) 
               {
-                  include("connect.php");
                   $EditShopId = $_GET['id'];
                   $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_ID = $EditShopId";                 
                   $RunFetchShopQuery = oci_parse($conn, $FetchShopQuery);;
