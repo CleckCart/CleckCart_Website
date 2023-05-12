@@ -123,14 +123,14 @@
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="AdminViewTraderItemsSearch.php">
+            <?php echo("<form class='d-flex' role='search' method='POST' action='AdminViewTraderItemsSearch.php?user=$user'>")?>
               <input type="text" name="searchProduct" placeholder="Search a product" class="form-control border border-dark" value="<?php
               if (isset($_POST['searchProduct'])) {
                    echo (trim($_POST['searchProduct']));
                 }
               ?>">
               <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-              <a href = "./AdminViewTraderItemsPageAdd.php" name="searchCustomerSubmit" value="Add Item" class="mx-3 btn btn-light">Add&nbsp;Item</a>
+              <?php echo("<a href = './AdminViewTraderItemsPageAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn btn-light'>Add&nbsp;Item</a>")?>
             </form>
           </div>
         </div>
