@@ -31,7 +31,7 @@
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
       <div class="media-body">
-        <h4 class="m-0">Admin</h4>
+      <h4 class="m-0"><?php echo($user)?></h4>
       </div>
     </div>
   </div>
