@@ -1,4 +1,9 @@
 <?php
+if(isset($_GET['user'])){
+  $user = $_GET['user'];
+}
+?>
+<?php
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
   include('connect.php');
@@ -55,10 +60,10 @@
             $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been removed.'; //subject of the email for reciever
             $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been removed from listing in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
             $mail->send();      
-            header("Location:./AdminViewTraderItemsPage.php?success= Product has been removed.");    
+            header("Location:./AdminViewTraderItemsPage.php?user=$user&success= Product has been removed.");    
         }
     }
     else{
-      header("Location:./AdminViewTraderItemsPage.php?error= Something went wrong. Please try again.");
+      header("Location:./AdminViewTraderItemsPage.php?user=$user&error= Something went wrong. Please try again.");
     }
 ?>

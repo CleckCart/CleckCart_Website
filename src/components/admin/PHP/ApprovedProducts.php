@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['admin'];
+    }
+?>
+<?php
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     include('connect.php');
@@ -108,7 +113,7 @@
                     $mail->Subject = 'CleckCleck! ' . $ShopOwnerUsername . ',' . ' Your product ' . $ProductName .' has been approved.'; //subject of the email for reciever
                     $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been approved to be listed in CleckCart.<br>Happy Trading!'; //message for the reciever
                     $mail->send();
-                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");       
+                    header("Location:AdminApproveTraderItemPage.php?user=$user&success=Product has been approved.");       
                     }
                 }
         }

@@ -23,8 +23,13 @@
 </head>
 
 <body>
- <!-- Vertical navbar -->
- <div class="vertical-nav bg-white" id="sidebar">
+<?php
+    if(isset($_GET['user'])){
+      $user = $_GET['user'];
+    }
+  ?>
+  <!-- Vertical navbar -->
+  <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
@@ -36,49 +41,60 @@
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="./AdminDashboard.php" class="nav-link text-dark">
-        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-      </a>
+      <?php echo("<a href='./AdminDashboard.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-house fa-lg m-3'></i> Dashboard
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
-        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
-      </a>
+      <?php echo("<a href='./AdminViewTraderItemsPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-cart-shopping fa-lg m-3'></i></i>Manage Products
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
-      </a>
+      <?php
+      echo("<a href='./AdminViewTraderPage.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-user fa-lg m-3'></i>Manage Traders
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderShop Page.php" class="nav-link text-dark">
-      <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
-      </a>
+      <?php echo("<a href='./AdminViewTraderShop Page.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-shop fa-lg m-3'></i>Manage Shops
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
-      </a>
+      <?php echo ("
+        <a href='./AdminViewCustomerPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-headset fa-lg m-3'></i>Manage Customers
+        </a>
+      ");?>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-      </a>
+      <?php
+        echo("<a href='#' class='nav-link text-dark'>
+        <i class='fa fa-line-chart m-3 fa-fw fa-lg m-3'></i>Sales Report
+      </a>")
+      ?>
     </li>
     <li class="nav-item">
-      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
-        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-      </a>
+        <a href='../../guest/PHP/HomePage.php' class='nav-link text-dark'>
+          <i class='fa-solid fa-globe fa-lg m-3'></i>Go to Website
+        </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTrader.php" class="nav-link text-dark">
-      <i class="fa-solid fa-users m-3"></i>Approve Traders
-      </a>
+      <?php
+        echo("
+          <a href='./AdminApproveTrader.php?user=$user' class='nav-link text-dark'>
+          <i class='fa-solid fa-users m-3'></i>Approve Traders
+          </a>
+        ");
+      ?>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTraderItemPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-square-check m-3"></i>Approve Products
-      </a>
+      <?php echo("
+        <a href='./AdminApproveTraderItemPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-square-check m-3'></i>Approve Products
+        </a>
+      ")?>
     </li>
     <li class="nav-item">
       <a href="./AdminLogout.php" class="nav-link text-dark">
@@ -87,7 +103,7 @@
             </a>
     </li>
   </ul>
-</div>
+  </div>
 <!-- End vertical navbar -->
 
 
@@ -180,8 +196,8 @@
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
-            echo("<td><a href='./AdminViewTraderItemsPageEdit.php?id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
-            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+            echo("<td><a href='./AdminViewTraderItemsPageEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
+            echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
           }
           ?>
         </table>
@@ -201,7 +217,7 @@
             </div>
             <div class="modal-footer text-center">
               <?php
-                echo("<a href='./AdminViewTraderItemsDelete.php?id=$id&action=delete' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                echo("<a href='./AdminViewTraderItemsDelete.php?user=$user&id=$id&action=delete' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
               ?>
               <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
             </div>
@@ -215,10 +231,11 @@
         var button = $(event.relatedTarget); // Button that triggered the modal
         var id = button.data('id'); // Extract product id from data-id attribute
         var name = button.data('name'); // Extract product name from data-name attribute
+        var user = button.data('user');
         var modal = $(this);
         modal.find('#productId').text(id); // Update the modal content
         modal.find('#productName').text(name); // Update the modal content
-        modal.find('#deleteLink').attr('href', './AdminViewTraderItemsDelete.php?id=' + id + '&action=delete'); // Update the delete link
+        modal.find('#deleteLink').attr('href', './AdminViewTraderItemsDelete.php?user=' + user + '&id=' + id + '&action=delete'); // Update the delete link
       });
     </script>
   <!-- End demo content -->

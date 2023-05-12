@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
     /*Check if form is submitted*/
     if (isset($_POST['TraderShopEditSubmit'])) 
         {
@@ -6,7 +11,7 @@
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderShopName']) || empty($_POST['TraderShopDescription'])) 
                 {
-                    header('Location:./AdminViewTraderShop Page.php?error=Please make sure all text fields are not empty.');
+                    header("Location:./AdminViewTraderShop Page.php?user=$user&error=Please make sure all text fields are not empty.");
                 }
 
             else
@@ -24,11 +29,11 @@
                                     oci_bind_by_name($RunUpdateShopQuery, ':ShopDescription', $EditTraderShopDescription);
                                     oci_execute($RunUpdateShopQuery); 
 
-                                    header('Location:./AdminViewTraderShop Page.php?success=Details successfully updated.');                                     
+                                    header("Location:./AdminViewTraderShop Page.php?user=$user&success=Details successfully updated.");                                     
                                 }
                             else
                                 {
-                                    header('Location:./AdminViewTraderShop Page.php?error=Please use alphabets only in shop name.');
+                                    header("Location:./AdminViewTraderShop Page.php?user=$user&error=Please use alphabets only in shop name.");
                                 }
                 }
         }

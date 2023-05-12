@@ -23,8 +23,13 @@
 </head>
 
 <body>
- <!-- Vertical navbar -->
- <div class="vertical-nav bg-white" id="sidebar">
+<?php
+    if(isset($_GET['user'])){
+      $user = $_GET['user'];
+    }
+  ?>
+  <!-- Vertical navbar -->
+  <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
       <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
@@ -36,49 +41,60 @@
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-      <a href="./AdminDashboard.php" class="nav-link text-dark">
-        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-      </a>
+      <?php echo("<a href='./AdminDashboard.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-house fa-lg m-3'></i> Dashboard
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderItemsPage.php" class="nav-link text-dark">
-        <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
-      </a>
+      <?php echo("<a href='./AdminViewTraderItemsPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-cart-shopping fa-lg m-3'></i></i>Manage Products
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Traders
-      </a>
+      <?php
+      echo("<a href='./AdminViewTraderPage.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-user fa-lg m-3'></i>Manage Traders
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewTraderShop Page.php" class="nav-link text-dark">
-      <i class="fa-solid fa-shop fa-lg m-3"></i>Manage Shops
-      </a>
+      <?php echo("<a href='./AdminViewTraderShop Page.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-shop fa-lg m-3'></i>Manage Shops
+      </a>");?>
     </li>
     <li class="nav-item">
-      <a href="./AdminViewCustomerPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-headset fa-lg m-3"></i>Manage Customers
-      </a>
+      <?php echo ("
+        <a href='./AdminViewCustomerPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-headset fa-lg m-3'></i>Manage Customers
+        </a>
+      ");?>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link text-dark">
-        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-      </a>
+      <?php
+        echo("<a href='#' class='nav-link text-dark'>
+        <i class='fa fa-line-chart m-3 fa-fw fa-lg m-3'></i>Sales Report
+      </a>")
+      ?>
     </li>
     <li class="nav-item">
-      <a href="../../guest/PHP/HomePage.php" class="nav-link text-dark">
-        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-      </a>
+        <a href='../../guest/PHP/HomePage.php' class='nav-link text-dark'>
+          <i class='fa-solid fa-globe fa-lg m-3'></i>Go to Website
+        </a>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTrader.php" class="nav-link text-dark">
-      <i class="fa-solid fa-users m-3"></i>Approve Traders
-      </a>
+      <?php
+        echo("
+          <a href='./AdminApproveTrader.php?user=$user' class='nav-link text-dark'>
+          <i class='fa-solid fa-users m-3'></i>Approve Traders
+          </a>
+        ");
+      ?>
     </li>
     <li class="nav-item">
-      <a href="./AdminApproveTraderItemPage.php" class="nav-link text-dark">
-      <i class="fa-solid fa-square-check m-3"></i>Approve Products
-      </a>
+      <?php echo("
+        <a href='./AdminApproveTraderItemPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-square-check m-3'></i>Approve Products
+        </a>
+      ")?>
     </li>
     <li class="nav-item">
       <a href="./AdminLogout.php" class="nav-link text-dark">
@@ -87,9 +103,8 @@
             </a>
     </li>
   </ul>
-</div>
+  </div>
 <!-- End vertical navbar -->
-
 
 
   <!-- Page content holder -->
@@ -104,7 +119,7 @@
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
           <div class="modal-body">
-            <form method="POST" action="./AdminViewTraderItemsPageAddSubmit.php" enctype="multipart/form-data">
+            <?php echo ("<form method='POST' action='./AdminViewTraderItemsPageAddSubmit.php?user=$user' enctype='multipart/form-data'>")?>
             <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
