@@ -17,6 +17,7 @@
                     $ProductName=strtolower($row['PRODUCT_NAME']);  
                     $ProductDescription=strtolower($row['PRODUCT_DESCRIPTION']);
                     $ProductPrice=$row['PRODUCT_PRICE'];
+                    $ProductDiscount=$row['DISCOUNT'];
                     $ProductStock=$row['PRODUCT_STOCK'];
 
                     $FetchCategoryIdQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME=:CategoryName";
@@ -47,7 +48,23 @@
                     oci_bind_by_name($RunInsertionQuery, ':ProductStock', $ProductStock);
                     oci_execute($RunInsertionQuery);
 
-                    
+                    $FetchIdQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME='$ProductName'";
+                    $RunFetchIdQuery = oci_parse($conn, $FetchIdQuery);
+                    oci_execute($RunFetchIdQuery);
+                    $ProductRow = oci_fetch_array($RunFetchIdQuery, OCI_ASSOC);
+                    $ProductId = $ProductRow['PRODUCT_ID'];
+
+                    $StartDate = date('Y-m-d');
+                    $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
+                    $OfferStatus = 'Y';
+                    $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
+                    VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";
+                    $RunDiscountInsertionQuery = oci_parse($conn, $DiscountInsertionQuery);
+                    oci_bind_by_name($RunDiscountInsertionQuery, ':StartDate', $StartDate);
+                    oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
+                    oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
+                    oci_execute($RunDiscountInsertionQuery);
+   
                     $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID=$approvedProductId";     
                     $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
                     oci_execute($RunFetchProductQuery);
@@ -69,9 +86,8 @@
 
                     $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
                     $DeleteQuery = oci_parse($conn, $sql);
-                    oci_execute($DeleteQuery);
-                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");
-                
+                    oci_execute($DeleteQuery);                   
+
                     require '../../../mail/phpmailer/src/Exception.php';
                     require '../../../mail/phpmailer/src/PHPMailer.php';
                     require '../../../mail/phpmailer/src/SMTP.php';
@@ -92,7 +108,7 @@
                     $mail->Subject = 'CleckCleck! ' . $ShopOwnerUsername . ',' . ' Your product ' . $ProductName .' has been approved.'; //subject of the email for reciever
                     $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been approved to be listed in CleckCart.<br>Happy Trading!'; //message for the reciever
                     $mail->send();
-                                  
+                    header("Location:AdminApproveTraderItemPage.php?success=Product has been approved.");       
                     }
                 }
         }

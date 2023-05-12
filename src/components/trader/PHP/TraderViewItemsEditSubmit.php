@@ -14,7 +14,8 @@
                 }
             else
                 {
-                    $TraderEditItemId = $_POST['TraderEditItemId'];
+                    include('./connect.php');
+                    $TraderItemEditId = $_POST['TraderEditItemId'];
                     $TraderItemEditName = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditName', FILTER_SANITIZE_STRING)));
                     $TraderItemEditCategory = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditCategory', FILTER_SANITIZE_STRING)));
                     $TraderItemEditDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderItemEditDescription', FILTER_SANITIZE_STRING)));
@@ -37,20 +38,53 @@
                                                     if($TraderItemEditImageType == "image/jpeg" || $TraderItemEditImageType == "image/jpg" || $TraderItemEditImageType == "image/png")
                                                         {
                                                             if(move_uploaded_file($TraderItemEditImageTmpName, $TraderItemEditImageLocation))
-                                                                {          
-                                                                    include('./connect.php');                                                       
-                                                                    $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
-                                                                    $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':CategoryName', $TraderItemEditCategory);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductImage',  $TraderItemEditImage);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductName', $TraderItemEditName);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductDescription', $TraderItemEditDescription);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductPrice', $TraderItemEditPrice);
-                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductStock', $TraderItemEditStock);
-                                                                    oci_execute($RunUpdateProductQuery); 
-                                                                    header("Location:./TraderViewItems.php?user=$user&success=Details successfully updated.");  
-                                                                }
-                                                            else
+                                                                {    
+                                                                    $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemEditCategory'";
+                                                                    $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                                    oci_execute($runCheckCategoryQuery);
+
+                                                                    $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
+                                                                                                                                
+
+                                                                    $checkCategoryQuery = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME='$TraderItemEditCategory'";
+                                                                    $runCheckCategoryQuery = oci_parse($conn, $checkCategoryQuery);
+                                                                    oci_execute($runCheckCategoryQuery);
+
+                                                                    $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);     
+                                                                    if($row['CATEGORY_NAME']==$TraderItemEditCategory)
+                                                                        {
+                                                                            if($TraderItemEditPrice > $TraderItemEditDiscount)
+                                                                                {                                                           
+                                                                                    $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
+                                                                                    $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':CategoryName', $TraderItemEditCategory);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductImage',  $TraderItemEditImage);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductName', $TraderItemEditName);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductDescription', $TraderItemEditDescription);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductPrice', $TraderItemEditPrice);
+                                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductStock', $TraderItemEditStock);
+                                                                                    oci_execute($RunUpdateProductQuery); 
+
+                                                                                    $UpdateOfferQuery = "UPDATE OFFER SET DISCOUNT=:Discount WHERE PRODUCT_ID='$TraderItemEditId'"; 
+                                                                                    $RunUpdateOfferQuery = oci_parse($conn, $UpdateOfferQuery);
+                                                                                    oci_bind_by_name($RunUpdateOfferQuery, ':Discount', $TraderItemEditDiscount);
+                                                                                    oci_execute($RunUpdateOfferQuery); 
+                                                                                    header("Location:./TraderViewItems.php?user=$user&success=Details successfully updated.");  
+                                                                                }
+
+                                                                            else
+                                                                                {
+                                                                                    header('Location:./TraderViewItems.php?error=Discount amount cannot be greater than price.');
+
+                                                                                }
+                                                                        }
+
+                                                                    else
+                                                                        {
+                                                                            header('Location:./TraderViewItems.php?error=Please enter a valid category.');
+                                                                        }
+                                                                    }
+                                                                else
                                                                 {
                                                                     header("Location:./TraderViewItems.php?user=$user&error=Failed to upload image.");
                                                                 }

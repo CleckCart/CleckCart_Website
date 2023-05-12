@@ -33,23 +33,31 @@
                                                 {
                                                     if(move_uploaded_file($TraderEditItemImageTmpName, $TraderEditItemImageLocation))
                                                         {          
-                                                            include('connect.php');                                                       
-                                                            $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
-                                                            $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':CategoryName', $TraderEditItemCategory);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':ProductImage',  $TraderEditItemImage);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':ProductName', $TraderEditItemName);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':ProductDescription', $TraderEditItemDescription);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':ProductPrice', $TraderEditItemPrice);
-                                                            oci_bind_by_name($RunUpdateProductQuery, ':ProductStock', $TraderEditItemStock);
-                                                            oci_execute($RunUpdateProductQuery); 
+                                                            if($TraderEditItemPrice > $TraderEditItemDiscount)
+                                                                {
+                                                                    include('connect.php');                                                       
+                                                                    $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
+                                                                    $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':CategoryName', $TraderEditItemCategory);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductImage',  $TraderEditItemImage);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductName', $TraderEditItemName);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductDescription', $TraderEditItemDescription);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductPrice', $TraderEditItemPrice);
+                                                                    oci_bind_by_name($RunUpdateProductQuery, ':ProductStock', $TraderEditItemStock);
+                                                                    oci_execute($RunUpdateProductQuery); 
 
-                                                            $UpdateOfferQuery = "UPDATE OFFER SET DISCOUNT=:Discount WHERE PRODUCT_ID='$TraderEditItemId'"; 
-                                                            $RunUpdateOfferQuery = oci_parse($conn, $UpdateOfferQuery);
-                                                            oci_bind_by_name($RunUpdateOfferQuery, ':Discount', $TraderEditItemDiscount);
-                                                            oci_execute($RunUpdateOfferQuery); 
-                        
-                                                            header('Location:./AdminViewTraderItemsPage.php?success=Details successfully updated.');  
+                                                                    $UpdateOfferQuery = "UPDATE OFFER SET DISCOUNT=:Discount WHERE PRODUCT_ID='$TraderEditItemId'"; 
+                                                                    $RunUpdateOfferQuery = oci_parse($conn, $UpdateOfferQuery);
+                                                                    oci_bind_by_name($RunUpdateOfferQuery, ':Discount', $TraderEditItemDiscount);
+                                                                    oci_execute($RunUpdateOfferQuery); 
+                                
+                                                                    header('Location:./AdminViewTraderItemsPage.php?success=Details successfully updated.');  
+                                                                }
+
+                                                            else
+                                                                {
+                                                                    header('Location:./AdminViewTraderItemsPage.php?error=Discount amount cannot be greater than price.');
+                                                                }
                                                         }
                                                     
                                                     else

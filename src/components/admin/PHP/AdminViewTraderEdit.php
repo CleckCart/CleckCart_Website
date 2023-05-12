@@ -23,7 +23,31 @@
 </head>
 
 <body>
-
+<?php
+  if(isset($_GET['id']) && isset($_GET['action'])) 
+    {
+        include("connect.php");
+        $UserId = $_GET['id'];
+        $FetchUserQuery = "SELECT * FROM USER_TABLE WHERE USER_ID = $UserId AND ROLE='trader'";                 
+        $RunFetchUserQuery = oci_parse($conn, $FetchUserQuery);
+        oci_execute($RunFetchUserQuery); 
+    
+        while($row=oci_fetch_array($RunFetchUserQuery, OCI_ASSOC))
+            {
+                $TraderId = $row['USER_ID'];
+                $TraderImage = $row['IMAGE'];
+                $TraderUsername = $row['USERNAME'];
+                $TraderFirstname = $row['FIRST_NAME'];
+                $TraderLastname = $row['LAST_NAME'];
+                $TraderEmail = $row['EMAIL'];
+                $TraderGender = $row['GENDER'];
+                $TraderPassword = $row['PASSWORD'];
+                $TraderDate = date('Y-m-d', strtotime($row['DATE_OF_BIRTH']));
+                $TraderAddress = $row['ADDRESS'];
+                $TraderPhone = $row['PHONE_NUMBER'];
+            }
+    }
+  ?>
  <!-- Vertical navbar -->
  <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
@@ -102,7 +126,7 @@
               <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Update Trader</h5>
             </div>
             <div class="modal-body">
-              <form method="POST" action="AdminViewTraderEditSubmit.php">
+              <form method="POST" action="AdminViewTraderEditSubmit.php" enctype="multipart/form-data">
               <?php
                 if(isset($_GET['error'])) {?>
                     <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -110,14 +134,16 @@
                 <div class="mb-3">
                   <div class="row mb-3">
                     <div class="col">
+                      <input type='hidden' name='EditTraderId' value='<?php
+                        echo($TraderId);?>'>
                       <label for="exampleInputText1" class="form-label">First Name</label>
                       <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderEditFirstName" value="<?php
-                      echo("");?>">
+                      echo($TraderFirstname);?>">
                     </div>
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Last Name</label>
                       <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderEditLastName" value="<?php
-                      echo("");?>">
+                      echo($TraderLastname);?>">
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -151,7 +177,7 @@
                     <div class="col">
                       <label for="exampleInputEmail1" class="form-label">Email</label>
                       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Email Address" name="TraderEditEmail" value="<?php
-                      echo("");?>">
+                      echo($TraderEmail);?>">
                     </div>
                   </div>
 
@@ -159,18 +185,18 @@
                     <div class="col">
                       <label for="date" class="form-label">Date of birth</label>
                       <input type="date" class="form-control" id="date" aria-label="Date" name="TraderEditDate" value="<?php
-                      echo("");?>">
+                      echo($TraderDate);?>">
                     </div>
                     <div class="col">
                       <label for="exampleInputText1" class="form-label">Phone</label>
                       <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderEditPhone" value="<?php
-                      echo("");?>">
+                      echo($TraderPhone);?>">
                     </div>
                   </div>
                   <div class="mb-3">
                       <label for="exampleInputText1" class="form-label">Address</label>
                       <input type="tel" class="form-control" placeholder="Enter Address" aria-label="Address" name="TraderEditAddress" value="<?php
-                      echo("");?>">
+                      echo($TraderAddress);?>">
                   </div>
                 </div>
             </div>

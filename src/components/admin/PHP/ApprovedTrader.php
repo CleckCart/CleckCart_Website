@@ -14,6 +14,7 @@
                     $Id=$row['APPLY_ID'];
                     $Username=strtolower($row['USERNAME']);
                     $Role='trader';
+                    $Image=$row['IMAGE'];
                     $Firstname=strtolower($row['FIRST_NAME']);
                     $Lastname=strtolower($row['LAST_NAME']);
                     $Email=strtolower($row['EMAIL']);  
@@ -24,10 +25,11 @@
                     $PhoneNumber=$row['PHONE_NUMBER'];
                     $Password=$row['PASSWORD'];
                     
-                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                    VALUES(:TraderId, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                     $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderId', $Id);   
+                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderImage', $Image);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderUserName', $Username);   
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderRole', $Role);                         
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderFirstName', $Firstname);

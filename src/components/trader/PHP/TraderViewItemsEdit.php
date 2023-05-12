@@ -26,9 +26,7 @@
   if(isset($_GET['user'])){
     $user = $_GET['user'];
   }
-?>
 
-<?php
     if(isset($_GET['id']) && isset($_GET['action'])){
       $ProductId = $_GET['id'];
       $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $ProductId";                 
@@ -44,6 +42,12 @@
               $ProductPrice = $row['PRODUCT_PRICE'];
               $ProductStock = $row['PRODUCT_STOCK'];
           }
+
+      $FetchOfferQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID = $ProductId";                 
+      $RunFetchOfferQuery = oci_parse($conn, $FetchOfferQuery);
+      oci_execute($RunFetchOfferQuery); 
+      $DiscountRow=oci_fetch_array($RunFetchOfferQuery, OCI_ASSOC);
+      $Discount = $DiscountRow['DISCOUNT'];
     }
   ?>
     <!-- Vertical navbar -->
@@ -123,7 +127,7 @@
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
                     <input type="text" class="form-control" aria-label="Category" name="TraderItemEditCategory" placeholder="Product category" value="<?php
-                      echo("$CategoryName");?>">
+                      echo("$CategoryName");?>" readonly>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -146,8 +150,8 @@
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="text" class="form-control" aria-label="PhoneNumber" name="TraderItemEditDiscount" value="<?php
-                      echo("");?>">
+                    <input type="number" class="form-control" aria-label="Discount" name="TraderItemEditDiscount" placeholder="Product discount" min="0" step="0.01" value="<?php               
+                      echo("$Discount");?>">
                   </div>
                 </div>
                 <div class="row mb-3">

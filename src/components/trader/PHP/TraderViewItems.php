@@ -126,6 +126,22 @@
           $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
+          echo("<thead class=table-success>
+          <tr>
+            <th>Select</th>
+            <th>Product Id</th>
+            <th>Category Id</th>
+            <th>Shop Id</th>
+            <th>Category Name</th>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>             
+            <th>Price</th>
+            <th>Discount</th>
+            <th>Stock</th>
+            <th colspan=2>Actions</th>            
+          </tr>
+        </thead>");
           while($row = oci_fetch_array($result, OCI_ASSOC)){
             $id = $row['PRODUCT_ID'];
             $name = $row['PRODUCT_NAME'];
@@ -133,15 +149,12 @@
             $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
             $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
             oci_execute($RunDiscountQuery);
-            if($Row = oci_fetch_assoc($RunDiscountQuery))
+            if($DiscountRow = oci_fetch_array($RunDiscountQuery, OCI_ASSOC))
               {            
-                $Discount=$Row['DISCOUNT'];
+                $Discount=$DiscountRow['DISCOUNT'];
               }
             
-            else
-              {
-                  $Discount=0;
-              }
+            
               
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
