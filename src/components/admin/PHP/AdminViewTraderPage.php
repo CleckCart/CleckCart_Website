@@ -25,6 +25,7 @@
 <body>
 
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -162,7 +163,6 @@
             </tr>
           </thead>
           <?php
-          include('connect.php');
           $query = "SELECT * FROM USER_TABLE WHERE ROLE = 'trader' ORDER BY USER_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);

@@ -1,4 +1,5 @@
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
         $user = $_GET['user'];
     }
@@ -7,7 +8,6 @@
     /*Check if form is submitted*/
     if (isset($_POST['TraderShopEditSubmit'])) 
         {
-            include('connect.php');
             /*Check if all fields are filled*/ 
             if (empty($_POST['TraderShopName']) || empty($_POST['TraderShopDescription'])) 
                 {

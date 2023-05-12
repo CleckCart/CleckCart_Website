@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -148,8 +149,7 @@
               <th></th>
             </tr>
           </thead>
-          <?php
-            include('connect.php');
+          <?php           
             $query = "SELECT * FROM APPLY_PRODUCT ORDER BY APPLY_PRODUCT_ID";
             $result = oci_parse($conn, $query);
             oci_execute($result);

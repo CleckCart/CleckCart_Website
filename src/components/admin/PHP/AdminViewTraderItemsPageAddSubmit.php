@@ -1,10 +1,11 @@
 <?php
+include('connect.php');
 if(isset($_GET['user'])){
     $user = $_GET['user'];
 }
 ?>
 <?php
-        include('connect.php');
+        
         /*Check if form is submitted*/
         if (isset($_POST['AdminAddItemSubmit'])) {
             /*Check if all fields are filled*/ 
@@ -92,7 +93,7 @@ if(isset($_GET['user'])){
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
                                                                                         oci_execute($RunDiscountInsertionQuery);
-                                                                                        header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&success=Product listed successfully.");
+                                                                                        //header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&success=Product listed successfully.");
                                                                                     }
 
                                                                                 else

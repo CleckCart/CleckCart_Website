@@ -1,10 +1,10 @@
 <?php
+  include('connect.php');
   if(isset($_GET['user'])){
     $user = $_GET['user'];
   }
 ?>
 <?php
-  include('connect.php');
   $deleteCustomerId = $_GET['id'];
   if(isset($_GET['id'])&&isset($_GET['action']))
     {

@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -119,11 +120,11 @@
     <div class="container-fluid">
       <div class="row row-cols-1 row-cols-md-2 bg-success">
         <div class="col p-5">
-          <h1>Manage Traders</h1>
+          <h1>Manage Customers</h1>
         </div>
         <div class="col p-5 text-end">
           <div class="mt-2">
-            <form class="d-flex" role="search" method="POST" action="AdminSearchCustomer.php" enctype="multipart/form-data">
+            <form class="d-flex" role="search" method="POST" action="AdminSearchCustomer.php?user=<?php echo($user);?>" enctype="multipart/form-data">
               <input type="text" name="searchCustomer" placeholder="Search a customer" class="form-control border border-dark" value="<?php
               if (isset($_POST['searchCustomer'])) {
                    echo (trim($_POST['searchCustomer']));
@@ -146,7 +147,6 @@
         <?php }?>
           
           <?php
-          include('connect.php');
           $Role='customer';
           $searchCustomer = strtolower(trim(filter_input(INPUT_POST, 'searchCustomer', FILTER_SANITIZE_STRING)));
           $query = "SELECT * FROM USER_TABLE WHERE FIRST_NAME LIKE '%' || :CustomerFirstname || '%' AND ROLE=:Role";

@@ -24,6 +24,7 @@
 
 <body>
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
@@ -146,7 +147,6 @@
         <?php }?>
     
           <?php
-            include('connect.php');
             if(isset($_POST['searchShopSubmit']))
                 {
                     $searchShop = strtolower(trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING)));

@@ -1,4 +1,5 @@
 <?php
+    include('connect.php');
     if(isset($_GET['user'])){
         $user = $_GET['user'];
     }
@@ -32,7 +33,6 @@
                                         {
                                             if (!empty($_POST['TraderEditDate']))
                                                 {
-                                                    include('connect.php');
                                                     $UpdateUserQuery = "UPDATE USER_TABLE SET FIRST_NAME=:TraderFirstname, LAST_NAME=:TraderLastname, EMAIL=:TraderEmail, GENDER=:TraderGender, DATE_OF_BIRTH=:TraderDate, ADDRESS=:TraderAddress, PHONE_NUMBER=:TraderPhone WHERE USER_ID = $TraderEditId AND ROLE=:TraderRole"; 
                                                     $RunUpdateUserQuery = oci_parse($conn, $UpdateUserQuery);
                                                     oci_bind_by_name($RunUpdateUserQuery, ':TraderRole', $TraderRole);
