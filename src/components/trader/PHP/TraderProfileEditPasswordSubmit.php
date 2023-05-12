@@ -1,4 +1,5 @@
 <?php
+include('./connect.php');
 if(isset($_GET['user']) && isset($_GET['id'])){
     $user = $_GET['user'];
     $id = $_GET['id'];
@@ -17,17 +18,17 @@ if(isset($_GET['user']) && isset($_GET['id'])){
         $traderConfirmNewPassword = trim(filter_input(INPUT_POST, 'confirmnewPassword', FILTER_SANITIZE_STRING));
         if(strcmp($traderCurrentPassword,$traderNewPassword)!=0){
             $traderCurrentEnteredPassword = md5($traderCurrentPassword);
-            $query = "SELECT * FROM USER_TABLE WHERE USER_ID = $id AND PASSWORD = $traderCurrentEnteredPassword";
+            $query = "SELECT * FROM USER_TABLE WHERE USER_ID = $id AND PASSWORD = '$traderCurrentEnteredPassword'";
             $result = oci_parse($conn, $query);
             oci_execute($result);
             while($row = oci_fetch_array($result, OCI_ASSOC)){
                 $password = $row['PASSWORD'];
             }
 
-            if($password == $traderCurrentPassword){
+            if($traderCurrentEnteredPassword == $password){
                 /*Check if password and confirm password matches*/
     
-                if(strcmp($traderNewPassword,$customerConfirmPassword)==0){
+                if(strcmp($traderNewPassword,$traderConfirmNewPassword)==0){
                     $passwordPattern = '/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,10}$/';
                     /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
                     if(preg_match($passwordPattern, $traderNewPassword))
@@ -38,8 +39,6 @@ if(isset($_GET['user']) && isset($_GET['id'])){
                             oci_bind_by_name($result, ":password", $traderConfirmNewPassword);
                             oci_execute($result);
                             header("Location:./TraderProfileEditPassword.php?user=$user&id=$id&success=Password successfully updated.");  
-    
-    
                         /*For inserting into database*/
                         }
                     else

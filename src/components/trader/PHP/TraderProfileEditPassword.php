@@ -86,7 +86,7 @@
   <!--Code -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <script src = "../../service/passwordVisibility.js"></script>
-    <?php echo("<form method = 'POST' action = './TraderProfileEditPasswordSubmit.php?user=$user'>")?>
+    <?php echo("<form method = 'POST' action = './TraderProfileEditPasswordSubmit.php?user=$user&id=$id'>")?>
       <div class="container">
         <h1>Change Password</h1>
         <div class="logo"></div>

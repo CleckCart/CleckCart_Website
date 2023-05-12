@@ -114,6 +114,9 @@
                     <?php } ?>
                     <div class="mb-3">
                         <div class="row mb-3">
+                            <input type='hidden' name='EditTraderId' value='<?php
+                            echo($userId);?>'>
+
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
                                 <input type="text" class="form-control" placeholder="First Name" aria-label="First name" name="TraderEditFirstname" value = '<?php echo ($first_name)?>'>
@@ -148,7 +151,7 @@
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Shop Category</label>
-                                    <input type="tel" class="form-control" id="exampleInputText1" aria-label="ShopCategory" name="Shop" placeholder="Shop" value = '<?php echo ($shopName)?>'>
+                                    <input type="tel" class="form-control" id="exampleInputText1" aria-label="ShopCategory" name="Shop" placeholder="Shop" value = '<?php echo ($shopName)?>' disabled>
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>

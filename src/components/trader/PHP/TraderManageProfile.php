@@ -80,6 +80,14 @@
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 "><i class="fa fa-bars mr-2"></i></button>
 
     <div class="container">
+      <?php
+            if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
         <div class="row">
             <div class="col text-center">
                 <h2 class="mb-3 mt-3">Your Information</h2>
