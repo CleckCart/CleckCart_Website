@@ -28,7 +28,7 @@
     {
         include("connect.php");
         $UserId = $_GET['id'];
-        $FetchUserQuery = "SELECT * FROM USER_TABLE WHERE USER_ID = $UserId";                 
+        $FetchUserQuery = "SELECT * FROM USER_TABLE WHERE USER_ID = $UserId AND ROLE='customer'";                 
         $RunFetchUserQuery = oci_parse($conn, $FetchUserQuery);
         oci_execute($RunFetchUserQuery); 
     

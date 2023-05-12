@@ -133,40 +133,29 @@
             </tr>
           </thead>
           <?php
-          include('connect.php');
-          $query = "SELECT * FROM APPLY_PRODUCT ORDER BY APPLY_PRODUCT_ID";
-          $result = oci_parse($conn, $query);
-          oci_execute($result);
-                               
-          
-          while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $id=$row['APPLY_PRODUCT_ID'];
-            $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
-            $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
-            oci_execute($RunDiscountQuery);
-            if($Row = oci_fetch_assoc($RunDiscountQuery))
-              {            
-                $Discount=$Row['DISCOUNT'];
-              }
+            include('connect.php');
+            $query = "SELECT * FROM APPLY_PRODUCT ORDER BY APPLY_PRODUCT_ID";
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+                                
             
-            else
-              {
-                  $Discount=0;
-              }
-            echo('<tr><td><input type = "checkbox"/></td>');
-            echo("<td>$row[APPLY_PRODUCT_ID]</td>");
-            echo("<td>$row[CATEGORY_NAME]</td>");
-            echo("<td>$row[PRODUCT_IMAGE]</td>");     
-            echo("<td>$row[PRODUCT_NAME]</td>");
-            echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
-            echo("<td>$row[PRODUCT_PRICE]</td>");
-            echo("<td>$Discount</td>");
-            echo("<td>$row[PRODUCT_STOCK]</td>");
-            echo("<td><a href='ApprovedProducts.php?id=$id&action=approved''><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
-            echo("<td><a href='RefusedProducts.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
-            echo("<td></td>");
-            echo("</tr>");
-          }
+            while($row = oci_fetch_array($result, OCI_ASSOC)){
+              $id=$row['APPLY_PRODUCT_ID'];
+              
+              echo("<tr><td><input type = checkbox></td>");
+              echo("<td>$row[APPLY_PRODUCT_ID]</td>");
+              echo("<td>$row[CATEGORY_NAME]</td>");
+              echo("<td>$row[PRODUCT_IMAGE]</td>");   
+              echo("<td>$row[PRODUCT_NAME]</td>");
+              echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
+              echo("<td>$row[PRODUCT_PRICE]</td>");
+              echo("<td>$row[DISCOUNT]</td>");
+              echo("<td>$row[PRODUCT_STOCK]</td>");
+              echo("<td><a href='ApprovedProducts.php?id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
+              echo("<td><a href='RefusedProducts.php?id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
+              echo("<td></td>");
+              echo("</tr>");
+            }
           ?>
         </table>
       </div>

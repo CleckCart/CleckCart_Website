@@ -26,6 +26,12 @@
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
+
+    $FetchCategory = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$user'";
+    $RunFetchCategory = oci_parse($conn, $FetchCategory);
+    oci_execute($RunFetchCategory);
+    $row = oci_fetch_assoc($RunFetchCategory);
+    $Category= $row['SHOP_NAME'];
   ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
@@ -104,7 +110,8 @@
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Category</label>
-                    <input type="text" class="form-control" aria-label="Category" name="TraderItemAddCategory" placeholder="Product category">
+                    <input type="text" class="form-control" aria-label="Category" name="TraderItemAddCategory" placeholder="Product category" value="<?php
+                    echo($Category);?>" readonly>
                   </div>
                 </div>
                 <div class="row mb-3">
@@ -126,7 +133,7 @@
                 <div class="row mb-3">
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="number" class="form-control" aria-label="Discount" name="AdminAddItemDiscount" placeholder="Product discount" min="0" step="0.01">
+                    <input type="number" class="form-control" aria-label="Discount" name="TraderItemAddDiscount" placeholder="Product discount" min="0" step="0.01">
                   </div>
                   <div class="col">
                     <label for="file" class="form-label">Image</label>

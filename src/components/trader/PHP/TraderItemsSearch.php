@@ -111,21 +111,7 @@
         if(isset($_GET['success'])) {?>
           <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
         <?php }?>
-          <thead class="table-success">
-            <tr>
-              <th>Select</th>
-              <th>Product Id</th>
-              <th>Category Id</th>
-              <th>Shop Id</th>
-              <th>Category Name</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Stock</th>
-              <th colspan=2>Actions</th>            
-            </tr>
-          </thead>
+          
           <?php
           include('connect.php');
 
@@ -141,7 +127,23 @@
           $RunSearchProductQuery = oci_parse($conn, $SearchProductQuery);
           oci_bind_by_name($RunSearchProductQuery,':ProductName', $ProductName);
           oci_execute($RunSearchProductQuery);
-          while($row = oci_fetch_array($RunSearchProductQuery, OCI_ASSOC)){
+          if($row = oci_fetch_assoc($RunSearchProductQuery)){
+            echo("<thead class=table-success>
+            <tr>
+              <th>Select</th>
+              <th>Product Id</th>
+              <th>Category Id</th>
+              <th>Shop Id</th>
+              <th>Category Name</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th colspan=2>Actions</th>            
+            </tr>
+          </thead>");
+            do {
             $id = $row['PRODUCT_ID'];
             $name = $row['PRODUCT_NAME'];
             echo("<tr><td><input type='checkbox'/></td>");
@@ -156,7 +158,14 @@
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='./TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user='$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
+            }while($row = oci_fetch_assoc($RunSearchProductQuery));
           }
+          else
+            {
+              echo("<div class='alert alert-danger text-center' role='alert'>");
+              echo("No results found.");
+              echo("</div>");
+            }
           ?>
         </table>
       </div>

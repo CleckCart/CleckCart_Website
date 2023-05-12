@@ -6,7 +6,11 @@
   $deleteProductId = $_GET['id'];
   if(isset($_GET['id'])&&isset($_GET['action']))
     {
-      $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = $deleteProductId";     
+      $OfferSql = "DELETE FROM OFFER WHERE PRODUCT_ID = '$deleteProductId'";     
+      $DeleteOfferSql = oci_parse($conn, $OfferSql);
+      oci_execute($DeleteOfferSql);
+
+      $sql = "DELETE FROM PRODUCT WHERE PRODUCT_ID = '$deleteProductId'";     
       $DeleteQuery = oci_parse($conn, $sql);
       oci_execute($DeleteQuery);
       header("Location:./TraderViewItems.php?user=$user&success= Product has been deleted.");
