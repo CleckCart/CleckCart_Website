@@ -1,4 +1,9 @@
 <?php
+    if(isset($_GET['user'])){
+        $user = $_GET['user'];
+    }
+?>
+<?php
         /*Check if form is submitted*/
         if (isset($_POST['CustomerEdit'])) {
             /*Check if all fields are filled*/ 
@@ -28,7 +33,7 @@
                                         {
                                             if (!empty($_POST['CustomerEditDate']))
                                                 {
-                                                    include('connect.php');                                                       
+                                                    include('connect.php');
                                                     $UpdateUserQuery = "UPDATE USER_TABLE SET FIRST_NAME=:CustomerFirstname, LAST_NAME=:CustomerLastname, EMAIL=:CustomerEmail, GENDER=:CustomerGender, DATE_OF_BIRTH=:CustomerDate, ADDRESS=:CustomerAddress, PHONE_NUMBER=:CustomerPhone WHERE USER_ID = $CustomerEditId AND ROLE = :CustomerRole"; 
                                                     $RunUpdateUserQuery = oci_parse($conn, $UpdateUserQuery);
                                                     oci_bind_by_name($RunUpdateUserQuery, ':CustomerRole', $CustomerRole);
@@ -39,33 +44,30 @@
                                                     oci_bind_by_name($RunUpdateUserQuery, ':CustomerDate', $CustomerEditDate);
                                                     oci_bind_by_name($RunUpdateUserQuery, ':CustomerAddress', $CustomerEditAddress);
                                                     oci_bind_by_name($RunUpdateUserQuery, ':CustomerPhone', $CustomerEditPhone);
-                                                    oci_execute($RunUpdateUserQuery); 
-                                                    header('Location:./AdminViewCustomerPage.php?success=Customer details successfully updated.');
+                                                    oci_execute($RunUpdateUserQuery);
+                                                    header("Location:./AdminViewCustomerPage.php?user=$user&success=Customer details successfully updated.");
                                                 }
 
                                             else
                                                 {
-                                                    header('Location:./AdminViewCustomerPage.php?error=Please pick the birth date of the product.');
+                                                    header("Location:./AdminViewCustomerPage.php?user=$user&error=Please pick the birth date of the product.");
                                                 }
                                         }
                                     else
                                         {
-                                            header('Location:./AdminViewCustomerPage.php?error=Please type integer numbers in phone number.');
+                                            header("Location:./AdminViewCustomerPage.php?user=$user&error=Please type integer numbers in phone number.");
                                         }
                                 }
                             else
                                 {
-                                    header('Location:./AdminViewCustomerPage.php?error=Please use alphabets only in lastname.');
+                                    header("Location:./AdminViewCustomerPage.php?user=$user&error=Please use alphabets only in lastname.");
                                 }        
                         }   
                         
                     else
                         {
-                            header('Location:./AdminViewCustomerPage.php?error=Please use alphabets only in firstname.');
+                            header("Location:./AdminViewCustomerPage.php?user=$user&error=Please use alphabets only in firstname.");
                         }
-                            
-                        
-                   
                 }
             }
     ?>

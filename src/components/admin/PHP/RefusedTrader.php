@@ -1,4 +1,9 @@
 <?php
+if(isset($_GET['user'])){
+    $user = $_GET['user'];
+}
+?>
+<?php
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     include('connect.php');
@@ -40,7 +45,7 @@
                     $mail->Subject = 'Sorry ' . $Firstname .', You have been refused.'; //subject of the email for reciever
                     $mail->Body = 'Dear, '. $Firstname .'<br>We regret to inform you that your request has been denied to be a trader in CleckCart.'; //message for the reciever
                     $mail->send();
-                    header("Location:AdminApproveTrader.php?error=Trader has been refused.");
+                    header("Location:AdminApproveTrader.php?user=$user&error=Trader has been refused.");
                 }
         }
 ?>

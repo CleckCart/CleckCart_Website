@@ -1,4 +1,9 @@
 <?php
+if(isset($_GET['user'])){
+    $user = $_GET['user'];
+}
+?>
+<?php
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
     include('connect.php');
@@ -54,7 +59,7 @@
                     $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been refused.'; //subject of the email for reciever
                     $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been denied to be listed in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
                     $mail->send();
-                    header("Location:AdminApproveTraderItemPage.php?error=Product has been refused.");
+                    header("Location:AdminApproveTraderItemPage.php?user=$user&error=Product has been refused.");
                 }
         }
 ?>

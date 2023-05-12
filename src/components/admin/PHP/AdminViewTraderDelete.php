@@ -1,4 +1,9 @@
 <?php
+  if(isset($_GET['user'])){
+    $user = $_GET['user'];
+  }
+?>
+<?php
   use PHPMailer\PHPMailer\PHPMailer;
   use PHPMailer\PHPMailer\Exception;
   include('connect.php');
@@ -51,10 +56,10 @@
       $mail->Subject = 'Notice Of Termination!!! '; //subject of the email for reciever
       $mail->Body = 'Dear, '. $deleteTraderName .'<br>You have been removed from CleckCart as a Trader.<br> Thank you for your time and contribution!'; //message for the reciever
       $mail->send();
-      header("Location:./AdminViewTraderPage.php?success= Trader has been deleted.");
+      header("Location:./AdminViewTraderPage.php?user=$user&success=Trader has been deleted.");
     }
 
     else{
-      header("Location:./AdminViewTraderPage.php?error= Something went wrong. Please try again.");
+      header("Location:./AdminViewTraderPage.php?user=$user&error=Something went wrong. Please try again.");
     }
 ?>

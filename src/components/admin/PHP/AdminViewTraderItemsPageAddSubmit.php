@@ -1,4 +1,9 @@
 <?php
+if(isset($_GET['user'])){
+    $user = $_GET['user'];
+}
+?>
+<?php
         include('connect.php');
         /*Check if form is submitted*/
         if (isset($_POST['AdminAddItemSubmit'])) {
@@ -6,7 +11,7 @@
             if (empty($_POST['AdminAddItemName']) || empty($_POST['AdminAddItemCategory']) || empty($_POST['AdminAddItemDescription']) || empty($_POST['AdminAddItemStock']) 
             || empty($_POST['AdminAddItemPrice'])) 
                 {
-                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Please make sure all text fields are not empty.');
+                    header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please make sure all text fields are not empty.");
                 }
             else
                 {
@@ -87,51 +92,47 @@
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
                                                                                         oci_execute($RunDiscountInsertionQuery);
-                                                                                        header('Location:./AdminViewTraderItemsPageAdd.php?success=Product listed successfully.');
+                                                                                        header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&success=Product listed successfully.");
                                                                                     }
 
                                                                                 else
                                                                                     {
-                                                                                        header('Location:./AdminViewTraderItemsPageAdd.php?error=Discount amount cannot be greater than price.');
+                                                                                        header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Discount amount cannot be greater than price.");
                                                                                     }
                                                                             }
 
                                                                         else 
                                                                             {
-                                                                                header('Location:./AdminViewTraderItemsPageAdd.php?error=Please enter a valid category.');
+                                                                                header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please enter a valid category.");
                                                                             }
                                                                 }
 
                                                             else
                                                                 {
-                                                                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Failed to upload the image.');
+                                                                    header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Failed to upload the image.");
                                                                 }
                                                         }
 
                                                     else
                                                         {
-                                                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please choose an image.');
+                                                            header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please choose an image.");
                                                         }
-                                                                                                          
-                                                
                                         }
-
                                     else
                                         {
-                                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please type integer numbers in product stock.');
+                                            header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please type integer numbers in product stock.");
                                         }
                                 }                                                                                                                   
                                 
                             else
                                 {
-                                    header('Location:./AdminViewTraderItemsPageAdd.php?error=Please use alphabets only in product category.');
+                                    header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please use alphabets only in product category.");
                                 }
-                            
                         }
 
                     else
-                        {   
-                            header('Location:./AdminViewTraderItemsPageAdd.php?error=Please use alphabets only in product name.');                   
+                        {
+                            header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&error=Please use alphabets only in product name.");
                         }
                 }
             }
