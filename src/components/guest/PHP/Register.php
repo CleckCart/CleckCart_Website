@@ -154,7 +154,7 @@
                             </div>
                             <div class= "col">
                                 <label for="exampleInputText1" class="form-label">Phone Number</label>
-                                <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
+                                <input type="number" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="customerPhone" value="<?php
                                     if (isset($_POST['customerPhone'])) {
                                         echo (trim($_POST['customerPhone']));
                                     }

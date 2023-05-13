@@ -18,7 +18,7 @@
                                 {
                                     if(!preg_match($alphabetPattern,$CustomerEditLastname))
                                         {
-                                            if(filter_input(INPUT_POST, 'CustomerEditPhone', FILTER_VALIDATE_INT) == true)
+                                            if(strlen($CustomerEditPhone)>=10 && strlen($CustomerEditPhone) < 12) 
                                                 {
                                                     if (!empty($_POST['CustomerEditDate']))
                                                         {

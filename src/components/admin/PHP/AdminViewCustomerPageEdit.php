@@ -211,7 +211,7 @@
                   </div>
                 <div class="col">
                     <label for="exampleInputText1" class="form-label">Phone</label>
-                    <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone" value="<?php
+                    <input type="number" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="CustomerEditPhone" value="<?php
                     echo($CustomerPhone);?>">
                 </div>
                 </div>                 

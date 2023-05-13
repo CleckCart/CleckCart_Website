@@ -35,7 +35,7 @@
         $email = $_GET['email'];
         $address = $_GET['address'];
         $phone_number = $_GET['phone_number'];
-        $date_of_birth = $_GET['date_of_birth'];
+        $date_of_birth = date('Y-m-d', strtotime($_GET['date_of_birth']));
         $gender = $_GET['gender'];
         $shopName = $_GET['shop'];
       }
@@ -144,21 +144,40 @@
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" placeholder="Phone Number" aria-label="PhoneNumber" name="TraderEditPhone" value = '<?php echo ($phone_number)?>'>
+                                <input type="number" class="form-control" placeholder="Phone Number" aria-label="PhoneNumber" name="TraderEditPhone" value = '<?php echo ($phone_number)?>'>
                             </div>
                         </div>
                         <div class="mb-3">
                             <div class="row mb-3">
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Shop Category</label>
-                                    <input type="tel" class="form-control" id="exampleInputText1" aria-label="ShopCategory" name="Shop" placeholder="Shop" value = '<?php echo ($shopName)?>' disabled>
+                                    <input type="tel" class="form-control" id="exampleInputText1" aria-label="ShopCategory" name="Shop" placeholder="Shop" value = '<?php echo ($shopName)?>' readonly>
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
-                                    <select class="form-select" aria-label="Default select example" name="TraderEditGender" selected = '<?php echo ($gender)?>'>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
+                                    <select class="form-select" aria-label="Default select example" name="TraderEditGender">
+                                            <?php
+                                                if($gender=='male')
+                                                {
+                                                    echo("<option value='male' selected>Male</option>");
+                                                    echo("<option value='female'>Female</option>");
+                                                    echo("<option value='other'>Other</option>");
+                                                }
+                    
+                                              else if($gender=='female')
+                                                {
+                                                    echo("<option value='male'>Male</option>");
+                                                    echo("<option value='female' selected>Female</option>");
+                                                    echo("<option value='other'>Other</option>");
+                                                }
+                    
+                                              else
+                                                {
+                                                  echo("<option value='male' selected>Male</option>");
+                                                  echo("<option value='female'>Female</option>");
+                                                  echo("<option value='other' selected>Other</option>");
+                                                }
+                                            ?>
                                     </select>
                                 </div>
                             </div>

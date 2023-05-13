@@ -30,7 +30,7 @@
                                         {
                                             if (!empty($_POST['customerBirthDate']))
                                                 {
-                                                    if(filter_input(INPUT_POST, 'customerPhone', FILTER_VALIDATE_INT) == true)
+                                                    if(strlen($customerPhone)>=10 && strlen($customerPhone) < 12) 
                                                         {
                                                             
                                                             /*Check if password and confirm password matches*/
@@ -86,7 +86,7 @@
 
                                                     else
                                                         {
-                                                            header('Location:./Register.php?error=Please type integer numbers in phone number.');
+                                                            header('Location:./Register.php?error=Please enter a valid phone number.');
                                                         }
                                                 }
 

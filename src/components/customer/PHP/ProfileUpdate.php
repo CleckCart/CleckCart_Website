@@ -135,7 +135,7 @@
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
-                                <input type="tel" class="form-control" placeholder="<?php echo $row['PHONE_NUMBER'] ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
+                                <input type="number" class="form-control" placeholder="<?php echo $row['PHONE_NUMBER'] ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
                             </div>
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>

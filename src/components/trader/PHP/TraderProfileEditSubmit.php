@@ -1,8 +1,7 @@
 <?php
     include('./connect.php');
-    if(isset($_GET['user']) && isset($_GET['id'])){
+    if(isset($_GET['user'])){
         $user = $_GET['user'];
-        $id = $_GET['id'];
     }
 ?>
 <?php
@@ -21,6 +20,7 @@
                     $TraderEditImageType = ($_FILES["TraderEditImage"]["type"]);
                     $TraderEditImageTmpName = ($_FILES["TraderEditImage"]["tmp_name"]);
                     $TraderEditImageLocation = "TraderImages/" . $TraderEditImage;
+                    $TraderRole = 'trader';
 
                     if(strlen($TraderEditUsername) >= 5 && strlen($TraderEditUsername) <= 30)
                         {      
@@ -29,16 +29,17 @@
                                 {
                                     if(!preg_match($alphabetPattern,$TraderEditLastname))
                                         {
-                                            if(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_VALIDATE_INT) == true)
+                                            if(strlen($TraderEditPhone)>=10 && strlen($TraderEditPhone) < 12) 
                                                 {
                                                     if (!empty($_POST['TraderEditDate']))
                                                         {
                                                             if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
                                                                 {
                                                                     
-                                                                    $query = "UPDATE USER_TABLE SET USERNAME=:username FIRST_NAME=:firstname, LAST_NAME=:lastname, EMAIL=:email, GENDER=:gender, DATE_OF_BIRTH=:dateofbirth, ADDERSS=:address, PHONE_NUMBER=:phonenumber WHERE USER_ID=$TraderEditId AND ROLE=:TraderRole";
+                                                                    $query = "UPDATE USER_TABLE SET USERNAME=:username, FIRST_NAME=:firstname, LAST_NAME=:lastname, EMAIL=:email, GENDER=:gender, DATE_OF_BIRTH=:dateofbirth, ADDRESS=:address, PHONE_NUMBER=:phonenumber WHERE USER_ID='$TraderEditId' AND ROLE=:TraderRole";
                                                                     $result = oci_parse($conn, $query);
                                                                     oci_bind_by_name($result, ":username", $TraderEditUsername);
+                                                                    oci_bind_by_name($result, ":TraderRole", $TraderRole);
                                                                     oci_bind_by_name($result, ":firstname", $TraderEditFirstname);
                                                                     oci_bind_by_name($result, ":lastname", $TraderEditLastname);
                                                                     oci_bind_by_name($result, ":email", $TraderEditEmail);
@@ -47,7 +48,7 @@
                                                                     oci_bind_by_name($result, ":address", $TraderEditAddress);
                                                                     oci_bind_by_name($result, ":phonenumber", $TraderEditPhone);
                                                                     oci_execute($result);
-                                                                    //header("Location:./TraderManageProfile.php?user=$user&success=Details updates successfully.");
+                                                                    header("Location:./TraderManageProfile.php?user=$user&success=Details updates successfully.");
                                                                 }
                                                             else
                                                                 {
@@ -62,7 +63,7 @@
                                                 }
                                             else
                                                 {
-                                                    header("Location:./TraderManageProfile.php?user=$user&error=Please type integer numbers in phone number.");
+                                                    header("Location:./TraderManageProfile.php?user=$user&error=Please enter a valid phone number.");
                                                 }
                                         }
                                     else

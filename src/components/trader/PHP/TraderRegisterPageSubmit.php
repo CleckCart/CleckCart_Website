@@ -32,7 +32,7 @@
                                 {
                                     if(!preg_match($alphabetPattern,$TraderLastName))
                                         {
-                                            if(filter_input(INPUT_POST, 'TraderPhoneNumber', FILTER_VALIDATE_INT) == true)
+                                            if(strlen($TraderPhoneNumber)>=10 && strlen($TraderPhoneNumber) < 12) 
                                                 {
                                                     if(!preg_match($alphabetPattern,$TraderShopCategory))
                                                         {
@@ -78,7 +78,7 @@
                                                 }
                                             else
                                                 {
-                                                    header('Location:./TraderRegisterPage.php?error=Please type integer numbers in phone number.');
+                                                    header('Location:./TraderRegisterPage.php?error=Please enter a valid phone number.');
                                                 }
                                         }
                                     else
