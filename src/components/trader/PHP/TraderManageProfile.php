@@ -80,14 +80,6 @@
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 "><i class="fa fa-bars mr-2"></i></button>
 
     <div class="container">
-      <?php
-            if(isset($_GET['error'])) {?>
-            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-        <?php }?>
-        <?php
-            if(isset($_GET['success'])) {?>
-            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-        <?php }?>
         <div class="row">
             <div class="col text-center">
                 <h2 class="mb-3 mt-3">Your Information</h2>
@@ -97,7 +89,6 @@
 
     <div class="container-fluid">
       <?php
-        include('./connect.php');
 
         $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
         $result = oci_parse($conn, $query);
@@ -125,6 +116,14 @@
         <div class="col text-center">
             <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
           </div>
+          <?php
+            if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center mt-5' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center mt-5' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
         </div>
         <div class="col text-start">
           <?php echo("<form class = mt-5 method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname'>")?>
@@ -184,7 +183,7 @@
                 <div class="row">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-2">
-                      <input class = 'btn btn-primary d-block mx-auto' type = 'submit' value = 'Edit Profile' name = 'TraderProfileEditSubmit'/>
+                     <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname'>Edit Profile</a>"); ?>
                   </div>
                   <div class="col-sm-2">
                       <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user&id=$uid'>Update Password</a>")?>

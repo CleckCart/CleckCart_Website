@@ -11,7 +11,7 @@
             if (empty($_POST['TraderEditFirstName']) || empty($_POST['TraderEditLastName']) || empty($_POST['TraderEditEmail']) 
             || empty($_POST['TraderEditPhone']) || empty($_POST['TraderEditAddress'])) 
                 {
-                    header('Location:./AdminViewTrader.php?error=Please make sure all text fields are not empty.');
+                    header("Location:./AdminViewTraderPage.php?user=$user&error=Please make sure all text fields are not empty.");
                 }
             else
                 {
@@ -29,7 +29,7 @@
                         {
                             if(!preg_match($alphabetPattern,$TraderEditLastname))
                                 {
-                                    if(filter_input(INPUT_POST, 'TraderEditPhone', FILTER_VALIDATE_INT) == true)
+                                    if(strlen($TraderEditPhone)>=10 && strlen($TraderEditPhone) < 12) 
                                         {
                                             if (!empty($_POST['TraderEditDate']))
                                                 {
@@ -49,22 +49,22 @@
 
                                             else
                                                 {
-                                                    header("Location:./AdminViewTrader.php?user=$user&error=Please pick the date for date of birth.");
+                                                    header("Location:./AdminViewTraderPage.php?user=$user&error=Please pick the date for date of birth.");
                                                 }
                                         }
                                     else
                                         {
-                                            header("Location:./AdminViewTrader.php?user=$user&error=Please type integer numbers in phone number.");
+                                            header("Location:./AdminViewTraderPage.php?user=$user&error=Please a valid phone number.");
                                         }
                                 }
                             else
                                 {
-                                    header("Location:./AdminViewTrader.php?user=$user&error=Please use alphabets only in lastname.");
+                                    header("Location:./AdminViewTraderPage.php?user=$user&error=Please use alphabets only in lastname.");
                                 }
                         }
                     else
                         {
-                            header("Location:./AdminViewTrader.php?user=$user&error=Please use alphabets only in firstname.");
+                            header("Location:./AdminViewTraderPage.php?user=$user&error=Please use alphabets only in firstname.");
                         }
                 }
             }

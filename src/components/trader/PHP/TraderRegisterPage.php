@@ -132,7 +132,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderPhoneNumber" >
+                            <input type="number" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderPhoneNumber" >
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputText1" class="form-label">Address</label>

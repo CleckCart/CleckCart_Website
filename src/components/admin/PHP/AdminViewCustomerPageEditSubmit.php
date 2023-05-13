@@ -30,7 +30,7 @@
                         {
                             if(!preg_match($alphabetPattern,$CustomerEditLastname))
                                 {
-                                    if(filter_input(INPUT_POST, 'CustomerEditPhone', FILTER_VALIDATE_INT) == true)
+                                    if(strlen($CustomerEditPhone)>=10 && strlen($CustomerEditPhone) < 12) 
                                         {
                                             if (!empty($_POST['CustomerEditDate']))
                                                 {
@@ -55,7 +55,7 @@
                                         }
                                     else
                                         {
-                                            header("Location:./AdminViewCustomerPage.php?user=$user&error=Please type integer numbers in phone number.");
+                                            header("Location:./AdminViewCustomerPage.php?user=$user&error=Please type a valid phone number.");
                                         }
                                 }
                             else
