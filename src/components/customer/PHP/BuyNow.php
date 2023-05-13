@@ -45,9 +45,9 @@
         oci_execute($resultCartProduct);
 
 
-        header("Location:./ProductDetail.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock&quantity=$productQuantity&success=Added to Cart");
+        header("Location:./Checkout.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock&quantity=$productQuantity");
     }
     else{
-        header("Location:./ProductDetail.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock&quantity=$productQuantity&error=Something went wrong");
+        header("Location:./Checkout.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock&quantity=$productQuantity");
     }
     ?>

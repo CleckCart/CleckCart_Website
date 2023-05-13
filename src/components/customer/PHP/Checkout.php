@@ -9,10 +9,14 @@
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <!-- <link rel="stylesheet" href="../CSS/categorypage.css"> -->
+    <!--bootstrap JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <!--Jquery-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
     <?php
@@ -92,6 +96,14 @@
 
 
     <div class="container-fluid">
+    <?php
+        if(isset($_GET['error'])) {?>
+          <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+        if(isset($_GET['success'])) {?>
+          <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
         <div class="row px-5 ">
             <div class="col-sm-8 ">
                 <h3>My Cart</h3>
@@ -115,20 +127,46 @@
                     </thead>
 
                     <?php
-                    for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
-                        echo "<tr>
-                                <td ><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
-                                <td>link product name here</td>
-                                <td class = 'text-center'>$10</td>
-                                <td class = 'text-center'>10</td>
-                                <td class = 'text-center'>
-                                    <!-- Delete Button trigger modal -->
-                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
-                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
-                                    </button>
-                                </td>
-                            </tr>";
-                        }
+                    $queryCustomer = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE = 'customer'";
+                    $resultCustomer = oci_parse($conn, $queryCustomer);
+                    oci_execute($resultCustomer);
+                    while($rowCustomer = oci_fetch_array($resultCustomer, OCI_ASSOC)){
+                        $userId = $rowCustomer['USER_ID'];
+                    }
+                    
+                    $queryCart = "SELECT * FROM CART WHERE USER_ID = $userId";
+                    $resultCart = oci_parse($conn, $queryCart);
+                    oci_execute($resultCart);
+                    while($rowCart = oci_fetch_array($resultCart, OCI_ASSOC)){
+                        $cartId = $rowCart['CART_ID'];
+                    }
+
+                    $queryCartProduct = "SELECT * FROM CART_PRODUCT WHERE CART_ID = $cartId";
+                    $resultCartProduct = oci_parse($conn, $queryCartProduct);
+                    oci_execute($resultCartProduct);
+                    $productTotalPrice = 0;
+                    while($rowCartProduct = oci_fetch_array($resultCartProduct, OCI_ASSOC)){
+                        $cartId = $rowCartProduct['CART_ID'];
+                        $cartproductId = $rowCartProduct['CART_PRODUCT_ID'];
+                        $productId = $rowCartProduct['PRODUCT_ID'];
+                        $productImage = $rowCartProduct['PRODUCT_IMAGE'];
+                        $productName = $rowCartProduct['PRODUCT_NAME'];
+                        $productPrice = $rowCartProduct['PRODUCT_PRICE'];
+                        $productQuantity = $rowCartProduct['PRODUCT_QUANTITY'];
+                        $productTotalPrice += $productPrice * $productQuantity;
+                        echo ("<tr>
+                        <td ><img src='../../../dist/public/$productImage' alt='image' width='80'height='60'></td>
+                        <td>$productName</td>
+                        <td class = 'text-center'>&pound;$productPrice</td>
+                        <td class = 'text-center'>$productQuantity</td>
+                        <td class = 'text-center'>
+                        <!-- Delete Button trigger modal -->
+                        <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$cartproductId' data-name='$productName' data-user='$user'>
+                        <img src='./../../../dist/public/delete.svg' alt='delete'/>
+                        </button>
+                        </td>
+                        </tr>");
+                    }
                     ?>
                 </table>
             </div>
@@ -193,7 +231,7 @@
                     </div>
                 </div>
                 <div class="row text-center py-4 border  my-4">
-                    <h5>Sub Total: $40</h5>
+                    <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
                     <?php echo("<a class='btn btn-primary w-50 d-block mx-auto' href='./PayementGateway.php?user=$user' role='button'>Checkout</a>")?>
                 </div>
             </div>
@@ -208,17 +246,29 @@
                     <div class="modal-body text-center">
                     <img src="../../../dist/public/remove.svg" alt="">
                     <h3 class="mt-3">Are You Sure?</h3>
-                    <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
+                    <p>You are about to remove <span id="productName"> </span> from your cart. This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer text-center">
                     <?php
-                        echo("<a href='#' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                        echo("<a href='./CartProductsDelete.php?user=$user&id=$cartproductId' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
                     ?>
                     <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
                 </div>
-        </div>
+            </div>
+            </div>
+        <script>
+        $('#exampleModalDelete').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var user = button.data('user');
+            var id = button.data('id'); // Extract cart product id from data-id attribute
+            var name = button.data('name'); // Extract product name from data-name attribute
+            var modal = $(this);
+            modal.find('#productName').text(name); // Update the modal content
+            modal.find('#deleteLink').attr('href', './CartProductsDelete.php?user=' + user + '&id=' + id + '&action=delete' + '&name=' + name); // Update the delete link
+        });
+        </script>
 </body>
 </div>
 </div>
