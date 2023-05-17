@@ -42,9 +42,9 @@
         oci_bind_by_name($resultWishListProduct, ':productPrice', $productPrice);
         oci_execute($resultWishListProduct);
 
-        header("Location:./WishList.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&quantity=$productQuantity&success=Added to WishList");
+        header("Location:./WishList.php?user=$productUser&id=$productId&action=delete&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&quantity=$productQuantity&success=Added to WishList");
     }
     else{
-        header("Location:./wishList.php?user=$productUser&id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&quantity=$productQuantity&success=Something went wrong");
+        header("Location:./wishList.php?user=$productUser&id=$productId&action=delete&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&quantity=$productQuantity&success=Something went wrong");
     }
     ?>
