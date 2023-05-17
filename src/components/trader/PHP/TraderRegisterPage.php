@@ -120,7 +120,7 @@
                                     <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
                                 </div>
                                 <div class="col">
-                                    <label for="date" class="form-label">Date of Birth:</label>
+                                    <label for="date" class="form-label">Date of Birth</label>
                                     <input type="date" class="form-control" id="date" aria-label="Address" name="TraderBirthDate">
                                 </div>
                             </div>

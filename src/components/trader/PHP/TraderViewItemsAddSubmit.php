@@ -66,12 +66,14 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                 $TraderItemAddShopID=$row2['SHOP_ID'];
                                                                 $TraderItemAddShopName=$row2['SHOP_NAME'];
 
-                                                                $ProductInsertionQuery = "INSERT INTO APPLY_PRODUCT (APPLY_PRODUCT_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, DISCOUNT, PRODUCT_STOCK)
-                                                                VALUES(APPLY_PRODUCT_S.NEXTVAL, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductDiscount, :ProductStock)";
+                                                                $TraderItemAddDate=date("m/d/Y");
+                                                                $ProductInsertionQuery = "INSERT INTO APPLY_PRODUCT (APPLY_PRODUCT_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DATE, PRODUCT_DESCRIPTION, PRODUCT_PRICE, DISCOUNT, PRODUCT_STOCK)
+                                                                VALUES(APPLY_PRODUCT_S.NEXTVAL, :CategoryName, :ProductImage, :ProductName, :ProductDate, :ProductDescription, :ProductPrice, :ProductDiscount, :ProductStock)";
                                                                 $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);                     
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $TraderItemAddCategory);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $TraderItemAddImage);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $TraderItemAddName);
+                                                                oci_bind_by_name($ProductRunInsertionQuery, ':ProductDate', $TraderItemAddDate);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $TraderItemAddDescription);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductDiscount', $TraderItemAddDiscount);
