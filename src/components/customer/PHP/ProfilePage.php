@@ -97,35 +97,21 @@
         </nav>
     </div>
     <?php
-    // echo $id;
-    include("../../trader/PHP/connect.php");
-    if (isset($_POST['profileimagesubmit'])) {
-        $CustomerProfileImage = ($_FILES["CustomerProfileImage"]["name"]);
-        $CustomerProfileImageType = ($_FILES["CustomerProfileImage"]["type"]);
-        $CustomerProfileImageLocation = "../../dist/CustomerProfileImages/" . $CustomerProfileImage;
-
-        if (($CustomerProfileImageType == "image/jpeg" || $CustomerProfileImageType == "image/jpg" || $CustomerProfileImageType == "image/png")) {
-
-            $ProfileQuery = "UPDATE USER_TABLE SET IMAGE=:images WHERE USER_ID=:USER_ID";
-
-            $ProfileRunQuery = oci_parse($conn, $ProfileQuery);
-
-            oci_bind_by_name($ProfileRunQuery, ':images', $CustomerProfileImage);
-
-            oci_execute($ProfileRunQuery);
+   
+    $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE='customer'";
+    $result = oci_parse($conn, $query);
+    oci_execute($result);
+        while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $uid = $row['USER_ID'];
+            $username = $row['USERNAME'];
+            $first_name = $row['FIRST_NAME'];
+            $last_name = $row['LAST_NAME'];
+            $email = $row['EMAIL'];
+            $address = $row['ADDRESS'];
+            $phone_number = $row['PHONE_NUMBER'];
+            $date_of_birth = $row['DATE_OF_BIRTH'];
+            $gender = $row['GENDER'];
         }
-
-
-
-        // if ($result) {
-        //     header('Location:./ProfilePage.php?success=Image Uploaded!');
-        // } else {
-        //     header('Location:./ProfilePage.php?error=Error. Please Try Again');
-        // }
-
-
-    }
-
     ?>
     <div class="container">
         <div class="row">
@@ -141,49 +127,25 @@
     <div class="container">
 
         <div class="row ">
-            <div class="col-sm-4 d-flex justify-content-center ">
-                <?php
-                if (isset($_GET['error'])) { ?>
-                    <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
-                <?php } ?>
-                <?php
-                if (isset($_GET['success'])) { ?>
-                    <div class='alert alert-success text-center' role='alert'><?php echo ($_GET['success']); ?></div>
-                <?php } ?>
+            <div class="col-sm-4 d-flex justify-content-center ">              
                 <div class="profile-img-container">
                     <form method="POST" id="form1">
 
                         <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img-thumbnail img-circle img-responsive" />
-                        <i class="fa fa-upload fa-5x"></i>
-                        <!-- <input type="file" name="test"> -->
-                        <input type='file' id='uploadfile' name="CustomerProfileImage" class="image-input" onchange="toggleSubmitButton()">
-                        <script>
-                            $('.profile-img-container img').click(function() {
-                                $('#uploadfile').click();
-                            });
-
-                            function toggleSubmitButton() {
-                                var inputFile = document.querySelector('.image-input');
-                                var submitButton = document.querySelector('#image-button');
-                                var imageName = document.getElementById('image-name');
-                                if (inputFile.files.length > 0) {
-                                    imageName.textContent = inputFile.files[0].name;
-                                    submitButton.style.display = 'block';
-                                } else {
-                                    imageName.textContent = '';
-                                    submitButton.style.display = 'none';
-                                }
-                            }
-                        </script>
-                        <span id="image-name"></span>
-                        <input type="submit" class="btn btn-primary w-50 " id="image-button" value="Upload" name="profileimagesubmit">
-
                     </form>
                 </div>
 
             </div>
             <div class="col-sm-8">
                 <form>
+                    <?php
+                    if (isset($_GET['error'])) { ?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
+                    <?php } ?>
+                    <?php
+                    if (isset($_GET['success'])) { ?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo ($_GET['success']); ?></div>
+                    <?php } ?>
                     <fieldset disabled>
                         <div class="row">
 
@@ -191,16 +153,16 @@
                                 <div class="form-group">
                                     <label for="disabledTextInput-fn" class="form-label mt-2">First Name</label>
                                     <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['FIRST_NAME'] ?>">
+                                                                                                                    $first_name ?>">
                                     <label for="disabledTextInput-g" class="form-label mt-2">Username</label>
                                     <input type="text" id="disabledTextInput-g" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['USERNAME'] ?>">
+                                                                                                                    $last_name; ?>">
                                     <label for="disabledTextInput-add" class="form-label mt-2">Address</label>
                                     <input type="text" id="disabledTextInput-add" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['ADDRESS'] ?>">
+                                                                                                                    $address;?>">
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Date of birth</label>
                                     <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['DATE_OF_BIRTH'] ?>">
+                                                                                                                    $date_of_birth ?>">
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -208,23 +170,25 @@
                                 <div class="form-group">
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Last Name</label>
                                     <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['LAST_NAME'] ?>">
+                                                                                                                    $last_name ?>">
                                     <label for="disabledTextInput-email" class="form-label mt-2">Email Address</label>
                                     <input type="text" id="disabledTextInput-email" class="form-control" placeholder="<?php echo
-                                                                                                                        $row['EMAIL'] ?>">
+                                                                                                                        $email; ?>">
                                     <label for="disabledTextInput-pn" class="form-label mt-2">Phone Number</label>
                                     <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['PHONE_NUMBER'] ?>">
+                                                                                                                    $phone_number ?>">
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Gender</label>
                                     <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['GENDER'] ?>">
+                                                                                                                    $gender; ?>">
                                 </div>
                             </div>
                     </fieldset>
                 </form>
+               
             </div>
         </div>
     </div>
+    
     <!-- <div class="col">
                     </div> -->
 
@@ -232,7 +196,7 @@
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <?php echo("<a class='btn btn-primary d-block mx-auto' href='ProfileUpdate.php?user=$user' role='button'>Edit Profile</a>")?>
+            <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender'>Edit Profile</a>"); ?>
             </div>
 
         </div>
@@ -240,6 +204,7 @@
 
 
     <!-- <footer> -->
+    <div class ="container mt-5">&nbsp;</div>
     <footer class="page-footer font-small pt-5">
 
         <div class="container-fluid bg-secondary">
