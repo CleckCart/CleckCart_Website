@@ -161,7 +161,8 @@
             <th>Category Name</th>
             <th>Image</th>
             <th>Name</th>
-            <th>Description</th>             
+            <th>Description</th>       
+            <th>Added Date</th>      
             <th>Price</th>
             <th>Discount</th>
             <th>Stock</th>
@@ -193,6 +194,7 @@
             echo("<td>$row[PRODUCT_IMAGE]</td>");
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
+            echo("<td>$row[PRODUCT_DATE]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
             echo("<td>$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");

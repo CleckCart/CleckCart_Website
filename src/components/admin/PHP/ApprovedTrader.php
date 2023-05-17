@@ -50,14 +50,16 @@ if(isset($_GET['user'])){
                     $CategoryInsertionQuery = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) VALUES(CATEGORY_S.NEXTVAL,:TraderCategory)";
                     $RunCategoryInsertionQuery = oci_parse($conn, $CategoryInsertionQuery);
                     oci_bind_by_name($RunCategoryInsertionQuery, ':TraderCategory', $Category);
-                    oci_execute($RunCategoryInsertionQuery);
+                    oci_execute($RunCategoryInsertionQuery);                   
 
                     $changeCase = strtolower($Category);
+                    $ShopDate=date("m/d/Y");
                     $ShopDescription = "Welcome to ". $Username ."'s shop!\nWe offer a wide range of high-quality ". $changeCase . " products that are both affordable and fresh.";
-                    $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderUsername, :ShopDescription)";
+                    $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_DATE, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderShopDate, :TraderUsername, :ShopDescription)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderShopName', $Category);
+                    oci_bind_by_name($RunShopInsertionQuery, ':TraderShopDate', $ShopDate);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUsername', $Username);   
                     oci_bind_by_name($RunShopInsertionQuery, ':ShopDescription', $ShopDescription);
                     oci_execute($RunShopInsertionQuery); 

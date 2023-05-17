@@ -151,7 +151,7 @@
                 {
                     $searchShop = strtolower(trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING)));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
-                    $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%'" ;
+                    $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%'";
                     $RunSearchShopQuery = oci_parse($conn, $SearchShopQuery);
                     oci_bind_by_name($RunSearchShopQuery,':ShopName', $searchShop);
                     oci_execute($RunSearchShopQuery);
@@ -164,6 +164,7 @@
                               <th>Select</th>
                               <th>Shop Id</th>
                               <th>User Id</th>
+                              <th>Shop Created Date</th>
                               <th>Shop Name</th>
                               <th>Shop Owner</th>
                               <th>Shop Description</th>
@@ -177,6 +178,7 @@
                                     echo("<tr><td><input type='checkbox'/></td>");
                                     echo("<td>$id</td>");
                                     echo("<td>{$row['USER_ID']}</td>");
+                                    echo("<td>{$row['SHOP_DATE']}</td>");
                                     echo("<td>{$row['SHOP_NAME']}</td>");
                                     echo("<td>{$row['SHOP_OWNER']}</td>");
                                     echo("<td>{$row['SHOP_DESCRIPTION']}</td>");

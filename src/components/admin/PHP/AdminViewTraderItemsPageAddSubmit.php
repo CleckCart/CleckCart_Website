@@ -63,28 +63,30 @@ if(isset($_GET['user'])){
                                                                                         $row2 = oci_fetch_array($result3, OCI_ASSOC);
                                                                                         $TraderItemAddShopID=$row2['SHOP_ID'];
                                                                                         $TraderItemAddShopName=$row2['SHOP_NAME'];
+                                                                                        $AdminAddItemDate = date('m/d/Y');
 
-                                                                                        $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
-                                                                                        VALUES(PRODUCT_S.NEXTVAL, :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDescription, :ProductPrice, :ProductStock)";
+                                                                                        $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DATE, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
+                                                                                        VALUES(PRODUCT_S.NEXTVAL, :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDate, :ProductDescription, :ProductPrice, :ProductStock)";
                                                                                         $ProductRunInsertionQuery = oci_parse($conn, $ProductInsertionQuery);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':CategoryId', $AdminAddItemCategoryID);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ShopId', $TraderItemAddShopID);                     
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':CategoryName', $AdminAddItemCategory);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ProductImage', $AdminAddItemImage);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ProductName', $AdminAddItemName);
+                                                                                        oci_bind_by_name($ProductRunInsertionQuery, ':ProductDate', $AdminAddItemDate);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ProductDescription', $AdminAddItemDescription);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $AdminAddItemPrice);
                                                                                         oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $AdminAddItemStock);
                                                                                         oci_execute($ProductRunInsertionQuery);
 
-                                                                                        $FetchIdQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME='$AdminAddItemName'";
+                                                                                        $FetchIdQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_NAME='$AdminAddItemName' AND PRODUCT_DESCRIPTION='$AdminAddItemDescription'";
                                                                                         $RunFetchIdQuery = oci_parse($conn, $FetchIdQuery);
                                                                                         oci_execute($RunFetchIdQuery);
                                                                                         $ProductRow = oci_fetch_array($RunFetchIdQuery, OCI_ASSOC);
                                                                                         $ProductId = $ProductRow['PRODUCT_ID'];
                                                                                         
-                                                                                        $StartDate = date('Y-m-d');
-                                                                                        $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
+                                                                                        $StartDate = date('m/d/Y');
+                                                                                        $EndDate = date('m/d/Y', strtotime($StartDate . ' +1 week'));
                                                                                         $OfferStatus = 'Y';
                                                                                         $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
                                                                                         VALUES(OFFER_S.NEXTVAL, $ProductId, $AdminAddItemDiscount, :StartDate, :EndDate, :OfferStatus)";
@@ -93,7 +95,7 @@ if(isset($_GET['user'])){
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
                                                                                         oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
                                                                                         oci_execute($RunDiscountInsertionQuery);
-                                                                                        //header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&success=Product listed successfully.");
+                                                                                        header("Location:./AdminViewTraderItemsPageAdd.php?user=$user&success=Product listed successfully.");
                                                                                     }
 
                                                                                 else
