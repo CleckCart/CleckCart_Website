@@ -24,6 +24,23 @@
             if(isset($_GET['user'])){
                 $user = $_GET['user'];
             }
+            
+
+            $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE='customer'";
+            $result = oci_parse($conn, $query);
+            oci_execute($result);
+            while($row = oci_fetch_array($result, OCI_ASSOC)){
+                $uid = $row['USER_ID'];
+                $username = $row['USERNAME'];
+                $first_name = $row['FIRST_NAME'];
+                $last_name = $row['LAST_NAME'];
+                $email = $row['EMAIL'];
+                $address = $row['ADDRESS'];
+                $phone_number = $row['PHONE_NUMBER'];
+                $date_of_birth = date('Y-m-d', strtotime($row['DATE_OF_BIRTH']));
+                $gender = $row['GENDER'];
+            }
+    
         ?>
         <!--NavBar-->
         <div class = "topbar">
@@ -116,30 +133,29 @@
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="<?php echo $row['FIRST_NAME'] ?>" aria-label="First name" name="CustomerEditFirstname">
+                                <input type="text" class="form-control" value="<?php echo $first_name; ?>" aria-label="First name" name="CustomerEditFirstname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="<?php echo
-                                                                                                                    $row['LAST_NAME'] ?>" aria-label="Last name" name="CustomerEditLastname">
+                                <input type="text" class="form-control" value="<?php echo $last_name;?>" aria-label="Last name" name="CustomerEditLastname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Username</label>
-                                <input type="tel" class="form-control" placeholder="<?php echo $row['USERNAME'] ?>" aria-label="Username" name="CustomerEditUsername">
+                                <input type="tel" class="form-control" value="<?php echo $username ?>" aria-label="Username" name="CustomerEditUsername">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Address</label>
-                                <input type="tel" class="form-control" placeholder="<?php echo $row['ADDRESS'] ?>" aria-label="Address" name="CustomerEditAddress">
+                                <input type="tel" class="form-control" value="<?php echo $address;?>" aria-label="Address" name="CustomerEditAddress">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
-                                <input type="number" class="form-control" placeholder="<?php echo $row['PHONE_NUMBER'] ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
+                                <input type="number" class="form-control" value="<?php echo $phone_number; ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
                             </div>
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?php echo $row['EMAIL'] ?>" name="CustomerEditEmail">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $email; ?>" name="CustomerEditEmail">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -150,20 +166,38 @@
                                 </div>
                                 <div class="col">
                                     <label for="date" class="form-label">Date of Birth</label>
-                                    <input type="text" class="form-control" id="date" aria-label="date" name="CustomerEditDate" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="<?php echo$row['DATE_OF_BIRTH'] ?>">
+                                    <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate" value="<?php echo$date_of_birth; ?>">
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
                                     <select class="form-select" aria-label="Default select example" name="CustomerEditGender">
-                                        <option value="User" selected><?php echo$row['GENDER'] ?></option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
+                                            <?php
+                                                if($gender=='male')
+                                                {
+                                                    echo("<option value='male' selected>Male</option>");
+                                                    echo("<option value='female'>Female</option>");
+                                                    echo("<option value='other'>Other</option>");
+                                                }
+                    
+                                              else if($gender=='female')
+                                                {
+                                                    echo("<option value='male'>Male</option>");
+                                                    echo("<option value='female' selected>Female</option>");
+                                                    echo("<option value='other'>Other</option>");
+                                                }
+                    
+                                              else
+                                                {
+                                                  echo("<option value='male' selected>Male</option>");
+                                                  echo("<option value='female'>Female</option>");
+                                                  echo("<option value='other' selected>Other</option>");
+                                                }
+                                            ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3 w-50 mt-4" ">
+                        <div class="mb-3 w-50 mt-4" >
                             <input type="submit" class="btn btn-primary w-50 " value="Update" name="CustomerEdit">
                         </div>
                     </div>
@@ -174,7 +208,7 @@
         </div>
     </div>
 
-
+    <div class ="container mt-5">&nbsp;</div>
     <!-- footer -->
     <footer>
         <footer class="page-footer font-small pt-5">
