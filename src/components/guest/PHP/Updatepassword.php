@@ -134,7 +134,7 @@
 
 
                     <div class="mb-3 col mt-3">
-                        <p class="text-muted mb-5">Back to Login? <a href="./CustomerLogin.php" class="link-dark">Login</a></p>
+                        <p class = "text-muted mb-5">Back to Login? <a href = "./CustomerLogin.php" class="link-dark">Customer Login</a> Or <a href="../../trader/PHP/TraderLogin.php" class="link-dark">Trader Login</a></p>
                     </div>
                 </form>
             </div>
