@@ -108,24 +108,65 @@
                             <th colspan="3" class = "text-center"><h3>Action</h3></th>
                         </tr>
                     </thead>
-
                     <?php
-                    for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
+
+                    $queryCustomer = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE = 'customer'";
+                    $resultCustomer = oci_parse($conn, $queryCustomer);
+                    oci_execute($resultCustomer);
+                    while($rowCustomer = oci_fetch_array($resultCustomer, OCI_ASSOC)){
+                        $userId = $rowCustomer['USER_ID'];
+                    }
+                    
+                    $queryWishList = "SELECT * FROM WISHLIST WHERE USER_ID = $userId";
+                    $resultWishList = oci_parse($conn, $queryWishList);
+                    oci_execute($resultWishList);
+                    while($rowCart = oci_fetch_array($resultWishList, OCI_ASSOC)){
+                        $wishlistId = $rowCart['WISHLIST_ID'];
+                    }
+
+                    $queryWishListProduct = "SELECT * FROM WISHLIST_PRODUCT WHERE WISHLIST_ID = $wishlistId";
+                    $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
+                    oci_execute($resultWishListProduct);
+                    while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
+                        $productId = $rowWishListProduct['PRODUCT_ID'];
+                    }
+                    
+                    $queryProductTable = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $productId";
+                    $resultProductTable = oci_parse($conn, $queryProductTable);
+                    oci_execute($resultProductTable);
+                    while($rowProductTable = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
+                        $productDescription = $rowProductTable['PRODUCT_DESCRIPTION'];
+                    }
+
+
+
+
+                    $queryWishListProduct = "SELECT * FROM WISHLIST_PRODUCT WHERE WISHLIST_ID = $wishlistId";
+                    $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
+                    oci_execute($resultWishListProduct);
+                    $productTotalPrice = 0;
+                    while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
+                        $wishlistId = $rowWishListProduct['WISHLIST_ID'];
+                        $wishlistproductId = $rowWishListProduct['WISHLIST_PRODUCT_ID'];
+                        $productId = $rowWishListProduct['PRODUCT_ID'];
+                        $productImage = $rowWishListProduct['PRODUCT_IMAGE'];
+                        $productName = $rowWishListProduct['PRODUCT_NAME'];
+                        $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
                         echo "<tr>
-                                <td colspan = '3' class ='text-center'><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
-                                <td colspan = '2' >link product name here</td>
-                                <td colspan = '3' class = 'text-end'>$10</td>
-                                <td colspan = '3' class = 'text-center'>
-                                    <!-- Delete Button trigger modal -->
-                                    <button class='btn custom-btn'>
-                                        <img src='./../../../dist/public/cart2.svg' alt='delete' >
-                                    </button>
-                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
-                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
-                                    </button>
-                                </td>
-                            </tr>";
-                        }
+                        <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
+                        <td colspan = '2' >$productName</td>
+                        <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
+                        <td colspan = '3' class = 'text-center'>
+                            <!-- Delete Button trigger modal -->
+                            <a class='btn custom-btn' href = './CartProducts.php?user=$user&id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
+                                <img src='./../../../dist/public/cart2.svg' alt='delete' >
+                            </a>
+                            <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$wishlistproductId' data-name='$productName' data-user='$user'>
+                                <img src='./../../../dist/public/delete.svg' alt='delete'/>
+                            </button>
+                        </td>
+                        </tr>";
+                    }
                     ?>
                 </table>
             </div>
