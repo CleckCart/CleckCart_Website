@@ -53,7 +53,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderViewItems.php?user=$user' class='nav-link text-dark'>")?>
-      <i class="fa-regular fa-cube fa-lg m-3"></i>Manage Products
+      <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
       </a>
     </li>
     <li class="nav-item">
@@ -158,7 +158,7 @@
             echo("<td>$row[CATEGORY_ID]</td>");
             echo("<td>$row[SHOP_ID]</td>");
             echo("<td>$row[CATEGORY_NAME]</td>");
-            echo("<td>$row[PRODUCT_IMAGE]</td>");
+            echo("<td><img src = './../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' alt='$row[PRODUCT_IMAGE]' class = 'img-circle img-thumbnail' width='100px' height='100px'></td>");
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");

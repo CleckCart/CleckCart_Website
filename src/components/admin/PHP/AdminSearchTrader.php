@@ -148,7 +148,7 @@
           <?php
           $Role='trader';
           $searchTrader = strtolower(trim(filter_input(INPUT_POST, 'searchTrader', FILTER_SANITIZE_STRING)));
-          $query = "SELECT * FROM USER_TABLE WHERE FIRST_NAME LIKE '%' || :TraderFirstname || '%' AND ROLE=:Role";
+          $query = "SELECT * FROM USER_TABLE WHERE FIRST_NAME LIKE '%' || :TraderFirstname || '%' AND ROLE=:Role ORDER BY USER_ID";
           $result = oci_parse($conn, $query);
           oci_bind_by_name($result,':TraderFirstname', $searchTrader);
           oci_bind_by_name($result,':Role', $Role);
@@ -178,7 +178,7 @@
                   $email = $row['EMAIL'];
                   echo("<tr><td><input type='checkbox'/></td>");
                   echo("<td>$id</td>");
-                  echo("<td>$row[IMAGE]</td>");
+                  echo("<td><img src = './../../../dist/public/TraderImages/$row[IMAGE]' alt='$row[IMAGE]' class = 'img-circle img-thumbnail' width='100px' height='100px'></td>");
                   echo("<td>$row[USERNAME]</td>");
                   echo("<td>$row[ROLE]</td>");
                   echo("<td>$row[FIRST_NAME]</td>");

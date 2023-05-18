@@ -191,7 +191,7 @@
             echo("<td>$row[CATEGORY_ID]</td>");
             echo("<td>$row[SHOP_ID]</td>");
             echo("<td>$row[CATEGORY_NAME]</td>");
-            echo("<td>$row[PRODUCT_IMAGE]</td>");
+            echo("<td><img src = './../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' alt='$row[PRODUCT_IMAGE]' class = 'img-circle img-thumbnail' width='100px' height='100px'></td>");
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_DATE]</td>");

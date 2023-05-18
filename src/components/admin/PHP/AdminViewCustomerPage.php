@@ -172,7 +172,7 @@
             $email = $row['EMAIL'];
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
-            echo("<td>$row[IMAGE]</td>");
+            echo("<td><img src = './../../../dist/public/TraderItemImages/$row[IMAGE]' alt='$row[IMAGE]' class = 'img-circle img-thumbnail' width='100px' height='100px'></td>");
             echo("<td>$row[USERNAME]</td>");
             echo("<td>$row[ROLE]</td>");
             echo("<td>$row[FIRST_NAME]</td>");

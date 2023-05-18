@@ -53,7 +53,7 @@ if(isset($_GET['user'])){
                     oci_execute($RunCategoryInsertionQuery);                   
 
                     $changeCase = strtolower($Category);
-                    $ShopDate=date("m/d/Y");
+                    $ShopDate=date("Y-m-d");
                     $ShopDescription = "Welcome to ". $Username ."'s shop!\nWe offer a wide range of high-quality ". $changeCase . " products that are both affordable and fresh.";
                     $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_DATE, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderShopDate, :TraderUsername, :ShopDescription)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
