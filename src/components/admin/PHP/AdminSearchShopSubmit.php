@@ -130,7 +130,7 @@
                    echo (trim($_POST['searchShop']));
                 }
               ?>">
-              <input type="submit" name="searchShopSubmit" value="Search" class="btn btn-light">
+              <input type="submit" name="searchShopSubmit" value="Search" class="btn" style='background-color:#C1E1C1;'>
             </form>
           </div>
         </div>

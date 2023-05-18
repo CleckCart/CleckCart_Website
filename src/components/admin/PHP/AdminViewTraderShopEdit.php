@@ -170,7 +170,7 @@
                   </div>
               
                   <div class="modal-footer">
-                    <input type="submit" class="form-control btn btn-primary w-100" value="Update" name="TraderShopEditSubmit"></button>
+                    <input type="submit" class="form-control btn btn-success w-100" value="Update" name="TraderShopEditSubmit"></button>
                   </div>
               </form>
           </div>

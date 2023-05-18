@@ -223,7 +223,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <input type="submit" class="btn btn-primary w-100 " value="Update" name="CustomerEdit">
+            <input type="submit" class="btn btn-success w-100 " value="Update" name="CustomerEdit">
         </div>
         </form>
         </div>
