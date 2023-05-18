@@ -36,14 +36,14 @@
   ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-      <?php echo"<img loading='lazy' src='./../../../dist/public/TraderImages/$image' alt='$image' width='90' height='80'class='m-3 rounded-circle img-responsive p-1 border border-grey'>"; ?>
-      <div class="media-body">
-        <?php echo("<h4 class='m-0'>$user</h4>")?>
+      <div class="py-4 px-3 mb-4 bg-light">
+        <div class="media d-flex align-items-center">
+          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
+          <div class="media-body">
+            <?php echo("<h4 class='m-0'>$user</h4>")?>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -145,13 +145,28 @@
               <th>Image</th>
               <th>Name</th>
               <th>Description</th>
+              <th>Added Date</th>
               <th>Price</th>
+              <th>Discount</th>
               <th>Stock</th>
               <th colspan=2>Actions</th>            
             </tr>
           </thead>");
+          
             do {
-            $id = $row['PRODUCT_ID'];
+              $id = $row['PRODUCT_ID'];
+              $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
+              $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
+              oci_execute($RunDiscountQuery);
+              if($Row = oci_fetch_assoc($RunDiscountQuery))
+                {            
+                  $Discount=$Row['DISCOUNT'];
+                }
+              
+              else
+                {
+                    $Discount=0;
+                }
             $name = $row['PRODUCT_NAME'];
             echo("<tr><td><input type='checkbox'/></td>");
             echo("<td>$id</td>");
@@ -161,7 +176,9 @@
             echo("<td><img src = './../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' alt='$row[PRODUCT_IMAGE]' class = 'img-circle img-thumbnail' width='100px' height='100px'></td>");
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
+            echo("<td>$row[PRODUCT_DATE]</td>");
             echo("<td>$row[PRODUCT_PRICE]</td>");
+            echo("<td>$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='./TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user='$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
