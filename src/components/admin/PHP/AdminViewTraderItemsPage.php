@@ -130,8 +130,8 @@
                    echo (trim($_POST['searchProduct']));
                 }
               ?>">
-              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-              <?php echo("<a href = './AdminViewTraderItemsPageAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn btn-light'>Add&nbsp;Item</a>")?>
+              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn" style="background-color:#C1E1C1;">
+              <?php echo("<a href = './AdminViewTraderItemsPageAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn' style='background-color:#C1E1C1;'>Add&nbsp;Item</a>")?>
             </form>
           </div>
         </div>
