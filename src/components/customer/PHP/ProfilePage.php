@@ -111,6 +111,7 @@
             $phone_number = $row['PHONE_NUMBER'];
             $date_of_birth = $row['DATE_OF_BIRTH'];
             $gender = $row['GENDER'];
+            $image = $row['IMAGE'];
         }
     ?>
     <div class="container">
@@ -130,8 +131,7 @@
             <div class="col-sm-4 d-flex justify-content-center ">              
                 <div class="profile-img-container">
 
-
-                        <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img-thumbnail img-circle img-responsive" />
+                        <?php echo"<img src='./../../../dist/public/CustomerImages/$image' class='img-circle img-responsive img-thumbnail' alt='$image'>";?>
                 </div>
 
             </div>

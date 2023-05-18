@@ -18,7 +18,7 @@
                     $CustomerEditImage = ($_FILES["CustomerEditImage"]["name"]);
                     $CustomerEditImageType = ($_FILES["CustomerEditImage"]["type"]);
                     $CustomerEditImageTmpName = ($_FILES["CustomerEditImage"]["tmp_name"]);
-                    $CustomerEditImageLocation = "CustomerImages/" . $CustomerEditImage;
+                    $CustomerEditImageLocation = "../../../dist/public/CustomerImages/" . $CustomerEditImage;
                     $CustomerRole='customer';
                     /*Check if username is of 5-10 characters*/
                     if(strlen($CustomerEditUsername) >= 5 && strlen($CustomerEditUsername) <= 30)
@@ -36,20 +36,29 @@
                                                                 {
                                                                     if(($CustomerEditImageType == "image/jpeg" || $CustomerEditImageType == "image/jpg" || $CustomerEditImageType == "image/png"))
                                                                         {
+                                                                            if(move_uploaded_file($CustomerEditImageTmpName, $CustomerEditImageLocation))
+                                                                                {
+
+                                                                                    $query = "UPDATE USER_TABLE SET IMAGE=:CustomerImage, USERNAME=:CustomerUsername, FIRST_NAME=:CustomerFirstname, LAST_NAME=:CustomerLastname, EMAIL=:CustomerEmail, GENDER=:CustomerGender, DATE_OF_BIRTH=:CustomerDateOfBirth, ADDRESS=:CustomerAddress, PHONE_NUMBER=:CustomerPhoneNumber WHERE USER_ID='$CustomerEditId' AND ROLE=:CustomerRole";
+                                                                                    $result = oci_parse($conn, $query);
+                                                                                    oci_bind_by_name($result, ":CustomerImage", $CustomerEditImage);
+                                                                                    oci_bind_by_name($result, ":CustomerUsername", $CustomerEditUsername);
+                                                                                    oci_bind_by_name($result, ":CustomerRole", $CustomerRole);
+                                                                                    oci_bind_by_name($result, ":CustomerFirstname", $CustomerEditFirstname);
+                                                                                    oci_bind_by_name($result, ":CustomerLastname", $CustomerEditLastname);
+                                                                                    oci_bind_by_name($result, ":CustomerEmail", $CustomerEditEmail);
+                                                                                    oci_bind_by_name($result, ":CustomerGender", $CustomerEditGender);
+                                                                                    oci_bind_by_name($result, ":CustomerDateOfBirth", $CustomerEditDate);
+                                                                                    oci_bind_by_name($result, ":CustomerAddress", $CustomerEditAddress);
+                                                                                    oci_bind_by_name($result, ":CustomerPhoneNumber", $CustomerEditPhone);
+                                                                                    oci_execute($result);
+                                                                                    header("Location:./ProfilePage.php?user=$user&success=Details updates successfully.");
+                                                                                }
                                                                             
-                                                                            $query = "UPDATE USER_TABLE SET USERNAME=:CustomerUsername, FIRST_NAME=:CustomerFirstname, LAST_NAME=:CustomerLastname, EMAIL=:CustomerEmail, GENDER=:CustomerGender, DATE_OF_BIRTH=:CustomerDateOfBirth, ADDRESS=:CustomerAddress, PHONE_NUMBER=:CustomerPhoneNumber WHERE USER_ID='$CustomerEditId' AND ROLE=:CustomerRole";
-                                                                            $result = oci_parse($conn, $query);
-                                                                            oci_bind_by_name($result, ":CustomerUsername", $CustomerEditUsername);
-                                                                            oci_bind_by_name($result, ":CustomerRole", $CustomerRole);
-                                                                            oci_bind_by_name($result, ":CustomerFirstname", $CustomerEditFirstname);
-                                                                            oci_bind_by_name($result, ":CustomerLastname", $CustomerEditLastname);
-                                                                            oci_bind_by_name($result, ":CustomerEmail", $CustomerEditEmail);
-                                                                            oci_bind_by_name($result, ":CustomerGender", $CustomerEditGender);
-                                                                            oci_bind_by_name($result, ":CustomerDateOfBirth", $CustomerEditDate);
-                                                                            oci_bind_by_name($result, ":CustomerAddress", $CustomerEditAddress);
-                                                                            oci_bind_by_name($result, ":CustomerPhoneNumber", $CustomerEditPhone);
-                                                                            oci_execute($result);
-                                                                            header("Location:./ProfilePage.php?user=$user&success=Details updates successfully.");
+                                                                            else
+                                                                                {
+
+                                                                                }    
                                                                         }
                                                                     else
                                                                         {

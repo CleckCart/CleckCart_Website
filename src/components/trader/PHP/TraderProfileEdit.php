@@ -24,6 +24,7 @@
     include('./connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
+
     }
  
         if(isset($_GET['id']) && isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['email']) && isset($_GET['address']) && isset($_GET['phone_number']) && isset($_GET['gender']) && isset($_GET['shop'])){
@@ -32,6 +33,7 @@
         $first_name = $_GET['fname'];
         $last_name = $_GET['lname'];
         $email = $_GET['email'];
+        $image = $_GET['image'];
         $address = $_GET['address'];
         $phone_number = $_GET['phone_number'];
         $date_of_birth = $_GET['date_of_birth'];
@@ -43,7 +45,7 @@
     <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
-      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+        <?php echo"<img loading='lazy' src='./../../../dist/public/TraderImages/$image' alt='$image' width='90' height='80'class='m-3 rounded-circle img-responsive p-1 border border-grey'>"; ?>
       <div class="media-body">
         <?php echo("<h4 class='m-0'>$user</h4>")?>
       </div>
