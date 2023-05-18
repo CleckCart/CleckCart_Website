@@ -56,14 +56,14 @@
   ?>
   <!-- Vertical navbar -->
   <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
-      <div class="media-body">
-      <h4 class="m-0"><?php echo($user)?></h4>
+    <div class="py-4 px-3 mb-4 bg-light">
+      <div class="media d-flex align-items-center mt-4 mb-4">
+        <img src='./../../../dist/public/logo.png' alt='logo.jpg' width='80' class='rounded-circle img-responsive img-thumbnail'>
+        <div class="media-body">
+          <?php echo("<h4 class='ms-3'>$user</h4>")?>
+        </div>
       </div>
     </div>
-  </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">

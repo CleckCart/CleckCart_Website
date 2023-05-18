@@ -51,14 +51,14 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
 ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-      <?php echo"<img loading='lazy' src='./../../../dist/public/TraderImages/$image' alt='$image' width='90' height='80'class='m-3 rounded-circle img-responsive p-1 border border-grey'>"; ?>
-      <div class="media-body">
-        <?php echo("<h4 class='m-0'>$user</h4>")?>
+      <div class="py-4 px-3 mb-4 bg-light">
+        <div class="media d-flex align-items-center">
+            <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
+            <div class="media-body">
+              <?php echo("<h4 class='m-0'>$user</h4>")?>
+            </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">

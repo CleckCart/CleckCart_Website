@@ -193,13 +193,14 @@
                     $categoryName = $row['CATEGORY_NAME'];
                     $productImage = $row['PRODUCT_IMAGE'];
                     $productName = $row['PRODUCT_NAME'];
+                    $changecase=ucfirst($row['PRODUCT_NAME']);
                     $productDescription = $row['PRODUCT_DESCRIPTION'];
                     $productPrice = $row['PRODUCT_PRICE'];
                     $productStock = $row['PRODUCT_STOCK'];
                     echo("<div class='col p-5'>");
                     echo("<div class='card'>");
                     echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                        <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                        <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' width='auto'>");
                     echo("<div class='card-body'>");
                     echo("<div class = 'row'>
                             <div class = 'col'>
