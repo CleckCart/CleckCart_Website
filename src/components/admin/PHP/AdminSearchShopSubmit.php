@@ -151,7 +151,7 @@
                 {
                     $searchShop = strtolower(trim(filter_input(INPUT_POST, 'searchShop', FILTER_SANITIZE_STRING)));
                     $alphabetPattern = "/[^a-zA-Z\s]/";
-                    $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%'";
+                    $SearchShopQuery = "SELECT * FROM SHOP WHERE SHOP_NAME LIKE '%' || :ShopName || '%' ORDER BY SHOP_ID";
                     $RunSearchShopQuery = oci_parse($conn, $SearchShopQuery);
                     oci_bind_by_name($RunSearchShopQuery,':ShopName', $searchShop);
                     oci_execute($RunSearchShopQuery);

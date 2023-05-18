@@ -26,7 +26,7 @@
                     $TraderEditItemImage = ($_FILES["TraderEditItemImage"]["name"]);
                     $TraderEditItemImageType = ($_FILES["TraderEditItemImage"]["type"]);
                     $TraderEditItemImageTmpName = ($_FILES["TraderEditItemImage"]["tmp_name"]);
-                    $TraderEditItemImageLocation = "../../../dist/public/AdminItemImages/" . $TraderEditItemImage;
+                    $TraderEditItemImageLocation = "../../../dist/public/TraderItemImages/" . $TraderEditItemImage;
                     $alphabetPattern = "/[^a-zA-Z\s]/";
                     if(!preg_match($alphabetPattern,$TraderEditItemName))
                         {                               

@@ -26,7 +26,7 @@ if(isset($_GET['user'])){
                     $AdminAddItemImage = ($_FILES["AdminAddItemImage"]["name"]);
                     $AdminAddItemImageType = ($_FILES["AdminAddItemImage"]["type"]);
                     $AdminAddItemImageTmpName = ($_FILES["AdminAddItemImage"]["tmp_name"]);
-                    $AdminAddItemImageLocation = "../../../dist/public/AdminItemImages/" . $AdminAddItemImage;
+                    $AdminAddItemImageLocation = "../../../dist/public/TraderItemImages/" . $AdminAddItemImage;
                     if(!preg_match($alphabetPattern,$AdminAddItemName))
                         {                               
                             if(!preg_match($alphabetPattern,$AdminAddItemCategory))
