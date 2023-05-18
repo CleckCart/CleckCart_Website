@@ -48,13 +48,20 @@
       oci_execute($RunFetchOfferQuery); 
       $DiscountRow=oci_fetch_array($RunFetchOfferQuery, OCI_ASSOC);
       $Discount = $DiscountRow['DISCOUNT'];
+
+      $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' and ROLE='trader'";
+      $result = oci_parse($conn, $query);
+      oci_execute($result);
+      while($row = oci_fetch_array($result, OCI_ASSOC)){
+          $image=$row['IMAGE'];
+    }
     }
   ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
-      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+      <?php echo"<img loading='lazy' src='./../../../dist/public/TraderImages/$image' alt='$image' width='90' height='80'class='m-3 rounded-circle img-responsive p-1 border border-grey'>"; ?>
       <div class="media-body">
         <?php echo("<h4 class='m-0'>$user</h4>")?>
       </div>

@@ -21,16 +21,39 @@
     
 <body>
 <?php
-    include('./connect.php');
-    if(isset($_GET['user'])){
-      $user = $_GET['user'];
-    }
-  ?>
+ include('./connect.php');
+ if(isset($_GET['user'])){
+   $user = $_GET['user'];
+ }
+
+$query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' and ROLE='trader'";
+$result = oci_parse($conn, $query);
+oci_execute($result);
+while($row = oci_fetch_array($result, OCI_ASSOC)){
+    $uid = $row['USER_ID'];
+    $username = $row['USERNAME'];
+    $first_name = $row['FIRST_NAME'];
+    $last_name = $row['LAST_NAME'];
+    $email = $row['EMAIL'];
+    $address = $row['ADDRESS'];
+    $phone_number = $row['PHONE_NUMBER'];
+    $date_of_birth = $row['DATE_OF_BIRTH'];
+    $image=$row['IMAGE'];
+    $gender = $row['GENDER'];
+}
+
+$queryShop = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$username'";
+$resultShop = oci_parse($conn, $queryShop);
+oci_execute($resultShop);
+while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
+  $shopname = $rowShop['SHOP_NAME'];
+}
+?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
   <div class="py-4 px-3 mb-4 bg-light">
     <div class="media d-flex align-items-center">
-      <img loading="lazy" src="images/p-1.png" alt="..." width="80" height="80" class="m-3 rounded-circle img-thumbnail shadow-sm">
+      <?php echo"<img loading='lazy' src='./../../../dist/public/TraderImages/$image' alt='$image' width='90' height='80'class='m-3 rounded-circle img-responsive p-1 border border-grey'>"; ?>
       <div class="media-body">
         <?php echo("<h4 class='m-0'>$user</h4>")?>
       </div>
@@ -88,33 +111,10 @@
     </div>
 
     <div class="container-fluid">
-      <?php
-
-        $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' and ROLE='trader'";
-        $result = oci_parse($conn, $query);
-        oci_execute($result);
-        while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $uid = $row['USER_ID'];
-            $username = $row['USERNAME'];
-            $first_name = $row['FIRST_NAME'];
-            $last_name = $row['LAST_NAME'];
-            $email = $row['EMAIL'];
-            $address = $row['ADDRESS'];
-            $phone_number = $row['PHONE_NUMBER'];
-            $date_of_birth = $row['DATE_OF_BIRTH'];
-            $gender = $row['GENDER'];
-        }
-
-        $queryShop = "SELECT * FROM SHOP WHERE SHOP_OWNER = '$username'";
-        $resultShop = oci_parse($conn, $queryShop);
-        oci_execute($resultShop);
-        while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
-          $shopname = $rowShop['SHOP_NAME'];
-        }
-      ?>
+      
       <div class = 'row row-cols-1'>
-        <div class="col text-center">
-            <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
+        <div class="profile-img-container text-center">
+            <?php echo"<img src='./../../../dist/public/TraderImages/$image' class='rounded-circle img-responsive p-1 border border-grey' alt='$image' width='200' height='200'>";?>
           </div>
           <?php
             if(isset($_GET['error'])) {?>
@@ -126,7 +126,7 @@
         <?php }?>
         </div>
         <div class="col text-start">
-          <?php echo("<form class = mt-5 method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname'>")?>
+          <?php echo("<form class = mt-5 method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>")?>
                   <div class="row mb-3">
                     <div class="col">
                       <input type='hidden' name='TraderEditItemId' value='<?php
@@ -183,7 +183,7 @@
                 <div class="row">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-2">
-                     <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname'>Edit Profile</a>"); ?>
+                     <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>Edit Profile</a>"); ?>
                   </div>
                   <div class="col-sm-2">
                       <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user&id=$uid'>Update Password</a>")?>
