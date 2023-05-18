@@ -99,7 +99,7 @@
     <!--external container-->
     <div class="container-fluid">
         <!--bi-containers-->
-        <div class="row row-cols-1 row-cols-lg-2 g-2 m-3">
+        <div class="row row-cols-1 row-cols-lg-2 g-2 m-3 mt-5">
             <!--first-container-->
             <div class =  "col text-center">
                 <div class = "row">
@@ -108,65 +108,12 @@
                             <h3><p class = "text-start">How Would you like to pay?</p></h3>
                         </div>
                     </div>
-                    <div class = "col-4">
-                        <div class="d-flex flex-row-reverse bd-highlight">
-                            <div class="p-2 bd-highlight">
-                                <select class="form-select" aria-label="Default select example">
-                                <option selected>Country</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
                 </div>
-                <div class = "container-fluid">
-                    <div class="row row-cols-1 row row-cols-lg-2 g-4">
+                <div class = "container-fluid mb-5">
+                    <div class="row row-cols-1 row row-cols-lg-1 g-4">
                             <button type="button" class="btn btn-primary btn-lg btn-block border-0 " style = "background-color: #ffff33; height: 200px"><img src = "../../../dist/public/paypal.png" alt = "paypal"/></button>
                             <button type="button" class="btn btn-primary btn-lg btn-block border-0" id = "stripeButton" onclick = "showToast()" style = "height:200px; background-image: url('../../../dist/public/stripe-background.png')"><img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
                     </div>
-                </div>
-                <div class = "container mt-5">
-                    <h3><p class = "text-start">Fill up your personal information</p></h3>
-                    <form method = "POST" action = "#">
-                        <div class="mb-4">
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="FirstName" aria-label="First name">
-                                </div>
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder="LastName" aria-label="Last name">
-                                </div>
-                            </div>
-
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Email Address">
-                                </div>
-                                <div class="col">
-                                    <input type="tel" class="form-control" placeholder="Card Number" aria-label="CardNumber">
-                                </div>
-                            </div>
-
-                            <div class="row mb-4">
-                                <div class="col">
-                                    <input type="text" class="form-control" placeholder = "Expiration Date" aria-label="date">
-                                </div>
-                                <div class="col">
-                                    <input type="tel" class="form-control" placeholder="CVV" aria-label="CVV">
-                                </div>
-                                <div class="col">
-                                    <input type="tel" class="form-control" placeholder="ZIP" aria-label="ZIP">
-                                </div>
-                            </div>
-                            <div class="row mb-3 mt-5">
-                                <div class = "d-grid gap-2">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block border-0">PAY NOW</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
                 </div>
             </div>
             <!--second containers-->
@@ -183,27 +130,59 @@
                         <div class = "col">
                             Price
                         </div>
+                        <div class = "col">
+                            Total Price
+                        </div>
                     </div>
                     <hr style = "height: 10px">
                     <?php
-                        for($i = 0; $i < 10; $i++) {
-                            echo '<div class = "row mt-3">
-                                <div class = "col">
-                                    Name
+                    $queryCustomer = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE = 'customer'";
+                    $resultCustomer = oci_parse($conn, $queryCustomer);
+                    oci_execute($resultCustomer);
+                    while($rowCustomer = oci_fetch_array($resultCustomer, OCI_ASSOC)){
+                        $userId = $rowCustomer['USER_ID'];
+                    }
+                    
+                    $queryCart = "SELECT * FROM CART WHERE USER_ID = $userId";
+                    $resultCart = oci_parse($conn, $queryCart);
+                    oci_execute($resultCart);
+                    while($rowCart = oci_fetch_array($resultCart, OCI_ASSOC)){
+                        $cartId = $rowCart['CART_ID'];
+                    }
+
+                    $queryCartProduct = "SELECT * FROM CART_PRODUCT WHERE CART_ID = $cartId";
+                    $resultCartProduct = oci_parse($conn, $queryCartProduct);
+                    oci_execute($resultCartProduct);
+                    $productTotalPrice = 0;
+                    $productTotalQuantity = 0;
+                    while($rowCartProduct = oci_fetch_array($resultCartProduct, OCI_ASSOC)){
+                        $cartId = $rowCartProduct['CART_ID'];
+                        $productName = $rowCartProduct['PRODUCT_NAME'];
+                        $productPrice = $rowCartProduct['PRODUCT_PRICE'];
+                        $productQuantity = $rowCartProduct['PRODUCT_QUANTITY'];
+                        $productTotal = $productPrice * $productQuantity;
+                        $productTotalPrice += $productPrice * $productQuantity;
+                        echo ("<div class = 'row mt-3'>
+                                    <div class = 'col'>
+                                        $productName
+                                    </div>
+                                    <div class = 'col'>
+                                        $productQuantity
+                                    </div>
+                                    <div class = 'col'>
+                                        &pound;$productPrice
+                                    </div>
+                                    <div class = 'col'>
+                                        &pound;$productTotal
                                 </div>
-                                <div class = "col">
-                                    10
-                                </div>
-                                <div class = "col">
-                                    $$$
-                                </div>
-                            </div>';
-                        }
-                        ?>
+                                </div>"
+                        );
+                    }
+                    ?>
                 </div>
                 <div class="d-flex flex-row-reverse bd-highlight">
-                    <div class="p-2 bd-highlight">
-                        <h5>Total : $$$</h5>
+                    <div class="p-2 bd-highlight mt-5">
+                        <h5>Total : &pound;<?php echo("$productTotalPrice")?></h5>
                     </div>
                 </div>
             </div>
