@@ -220,7 +220,7 @@
                         echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
                         echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
-                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
                         echo("</div>");
                         echo("</div>");
                         echo("</div>");

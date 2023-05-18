@@ -145,6 +145,7 @@
                     $resultCartProduct = oci_parse($conn, $queryCartProduct);
                     oci_execute($resultCartProduct);
                     $productTotalPrice = 0;
+                    $productTotalQuantity = 0;
                     while($rowCartProduct = oci_fetch_array($resultCartProduct, OCI_ASSOC)){
                         $cartId = $rowCartProduct['CART_ID'];
                         $cartproductId = $rowCartProduct['CART_PRODUCT_ID'];
@@ -154,6 +155,7 @@
                         $productPrice = $rowCartProduct['PRODUCT_PRICE'];
                         $productQuantity = $rowCartProduct['PRODUCT_QUANTITY'];
                         $productTotalPrice += $productPrice * $productQuantity;
+                        $productTotalQuantity += $productQuantity;
                         echo ("<tr>
                         <td ><img src='../../../dist/public/$productImage' alt='image' width='80'height='60'></td>
                         <td>$productName</td>
@@ -173,6 +175,9 @@
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-4 ">
+            <?php 
+            echo("<form method = 'POST' action = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity'>");
+            ?>
                 <div class="row text-center ">
                     <h4>Collection Slot</h4>
                 </div>
@@ -183,19 +188,19 @@
 
                         <div class="form-check">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="wed-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Wednesday" id="wed-check">
                                 <label class="form-check-label" for="wed-check">
                                     Wednesday
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="thurs-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Thursday" id="thurs-check">
                                 <label class="form-check-label" for="thurs-check">
                                     Thursday
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="fri-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Friday" id="fri-check">
                                 <label class="form-check-label" for="fri-check">
                                     Friday
                                 </label>
@@ -208,33 +213,34 @@
 
 
                         <div class="form-check">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="10-check">
-                                <label class="form-check-label" for="10-check">
-                                    10:00-13:00
-                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check">
+                                    <label class="form-check-label" for="10-check">
+                                        10:00-13:00
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "13:00-16:00" id="13-check">
+                                    <label class="form-check-label" for="13-check">
+                                        13:00-16:00
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "16:00-19:00" id="16-check">
+                                    <label class="form-check-label" for="16-check">
+                                        16:00-19:00
+                                    </label>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="13-check">
-                                <label class="form-check-label" for="13-check">
-                                    13:00-16:00
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="16-check">
-                                <label class="form-check-label" for="16-check">
-                                    16:00-19:00
-                                </label>
-                            </div>
+                            
                         </div>
-
+                    </div>
+                    <div class="row text-center py-4 border  my-4">
+                        <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
+                        <input type = "submit" class = "btn btn-primary w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                     </div>
                 </div>
-                <div class="row text-center py-4 border  my-4">
-                    <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
-                    <?php echo("<a class='btn btn-primary w-50 d-block mx-auto' href='./PayementGateway.php?user=$user' role='button'>Checkout</a>")?>
-                </div>
-            </div>
+            </form>
         </div>
         <!-- Delete Modal -->
         <div class="modal fade" id="exampleModalDelete" tabindex="-1">

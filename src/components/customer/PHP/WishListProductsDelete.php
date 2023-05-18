@@ -5,7 +5,7 @@
         $wishlistproductId = $_GET['id'];
         $productName = $_GET['name'];
 
-        $query = "DELETE FROM WISHLIST WHERE WISHLIST_PRODUCT_ID = $wishlistproductId";
+        $query = "DELETE FROM WISHLIST_PRODUCT WHERE WISHLIST_PRODUCT_ID = $wishlistproductId";
         $result = oci_parse($conn, $query);
         oci_execute($result);
 
