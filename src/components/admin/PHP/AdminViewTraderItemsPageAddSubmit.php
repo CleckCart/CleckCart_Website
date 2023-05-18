@@ -63,7 +63,7 @@ if(isset($_GET['user'])){
                                                                                         $row2 = oci_fetch_array($result3, OCI_ASSOC);
                                                                                         $TraderItemAddShopID=$row2['SHOP_ID'];
                                                                                         $TraderItemAddShopName=$row2['SHOP_NAME'];
-                                                                                        $AdminAddItemDate = date('m/d/Y');
+                                                                                        $AdminAddItemDate = date('Y-m-d');
 
                                                                                         $ProductInsertionQuery = "INSERT INTO PRODUCT (PRODUCT_ID, CATEGORY_ID, SHOP_ID, CATEGORY_NAME, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_DATE, PRODUCT_DESCRIPTION, PRODUCT_PRICE, PRODUCT_STOCK)
                                                                                         VALUES(PRODUCT_S.NEXTVAL, :CategoryId, :ShopId, :CategoryName, :ProductImage, :ProductName, :ProductDate, :ProductDescription, :ProductPrice, :ProductStock)";

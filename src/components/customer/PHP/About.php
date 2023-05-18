@@ -12,7 +12,7 @@
 
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<?php
+        <?php
             include('./connect.php');
             if(isset($_GET['user'])){
                 $user = $_GET['user'];
@@ -33,7 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
+                            <?php echo("<a class='nav-link mr-3' aria-current='page' href='./HomePageSession.php?user=$user'>HOME</a>");?>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -87,7 +87,29 @@
         </nav>
     </div>
         
-
+    <div class="container text-center text-justify p-5">
+            <div class = "row">
+                <div class= "col">
+                    <h1 class="display-1 mt-5">About Us</h1>
+                    <p class ="mt-5 lead">Welcome to our website, which brings together the growing local businesses of Cleckhuddersfax,
+                        a prominent suburb acknowledged for its one-of-a-kind shopping experience.
+                        Despite increased competition from large chains, our objective is to encourage small businesses 
+                        and maintain a deep belief of our community.</p>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col">
+                    <h6 class="display-6 mt-5">Our Story</h6>
+                    <p class ="mt-5 lead">In a world dominated by giant businesses, Cleckhuddersfax distinguishes out for its lively local buying and selling location. 
+                        Despite the inconvenience of surrounding supermarkets, our small businesses have stayed strong. 
+                        However, the increasing presence of big chains has presented a new challenge to our neighborhood. 
+                        Through this platform, we strive to make it easier for busy locals to support their community while enjoying fresh and 
+                        natural products with the convenience they desire.</p>  
+                        <img src="../../../dist/public/story.jpg" class="rounded img-fluid w-75 border border-success mt-5" alt ="vegetables.jpg">                 
+                </div>               
+            </div>
+        </div>
+        
 
     <!--footer-->
     <footer>

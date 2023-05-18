@@ -20,7 +20,7 @@
                     $CategoryName=strtolower($row['CATEGORY_NAME']);
                     $ProductImage=$row['PRODUCT_IMAGE'];
                     $ProductName=strtolower($row['PRODUCT_NAME']);  
-                    $ProductDate=strtolower($row['PRODUCT_DATE']); 
+                    $ProductDate=$row['PRODUCT_DATE']; 
                     $ProductDescription=strtolower($row['PRODUCT_DESCRIPTION']);
                     $ProductPrice=$row['PRODUCT_PRICE'];
                     $ProductDiscount=$row['DISCOUNT'];
@@ -60,8 +60,8 @@
                     $ProductRow = oci_fetch_array($RunFetchIdQuery, OCI_ASSOC);
                     $ProductId = $ProductRow['PRODUCT_ID'];
 
-                    $StartDate = date('m/d/Y');
-                    $EndDate = date('m/d/Y', strtotime($StartDate . ' +1 week'));
+                    $StartDate = date('Y-m-d');
+                    $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
                     $OfferStatus = 'Y';
                     $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
                     VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";

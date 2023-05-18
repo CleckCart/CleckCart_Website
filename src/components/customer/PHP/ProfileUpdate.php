@@ -26,22 +26,18 @@
             }
             
 
-            $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE='customer'";
-            $result = oci_parse($conn, $query);
-            oci_execute($result);
-            while($row = oci_fetch_array($result, OCI_ASSOC)){
-                $uid = $row['USER_ID'];
-                $username = $row['USERNAME'];
-                $first_name = $row['FIRST_NAME'];
-                $last_name = $row['LAST_NAME'];
-                $email = $row['EMAIL'];
-                $address = $row['ADDRESS'];
-                $phone_number = $row['PHONE_NUMBER'];
-                $date_of_birth = date('Y-m-d', strtotime($row['DATE_OF_BIRTH']));
-                $gender = $row['GENDER'];
-            }
+            if(isset($_GET['id']) && isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['email']) && isset($_GET['address']) && isset($_GET['phone_number']) && isset($_GET['gender'])){
+                $userId = $_GET['id'];
+                $first_name = $_GET['fname'];
+                $last_name = $_GET['lname'];
+                $email = $_GET['email'];
+                $address = $_GET['address'];
+                $phone_number = $_GET['phone_number'];
+                $date_of_birth =$_GET['date_of_birth'];
+                $gender = $_GET['gender'];
+              }
+          ?>
     
-        ?>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -120,7 +116,7 @@
                     <h5>Update Profile</h5>
                 </div>
                 <hr>
-                <form method="POST" action="ProfileUpdateSubmit.php" enctype="multipart/form-data">
+                <?php echo"<form method='POST' action='./ProfileUpdateSubmit.php?user=$user' enctype='multipart/form-data'>";?>
                     <?php
                     if (isset($_GET['error'])) { ?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
@@ -131,31 +127,33 @@
                     <?php } ?>
                     <div class="mb-3">
                         <div class="row mb-3">
+                        <input type='hidden' name='EditCustomerId' value='<?php
+                            echo($userId);?>'>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" value="<?php echo $first_name; ?>" aria-label="First name" name="CustomerEditFirstname">
+                                <input type="text" class="form-control" value='<?php echo ($first_name)?>' aria-label="First name" name="CustomerEditFirstname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" value="<?php echo $last_name;?>" aria-label="Last name" name="CustomerEditLastname">
+                                <input type="text" class="form-control" value='<?php echo ($last_name)?>' aria-label="Last name" name="CustomerEditLastname">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Username</label>
-                                <input type="tel" class="form-control" value="<?php echo $username ?>" aria-label="Username" name="CustomerEditUsername">
+                                <input type="tel" class="form-control" value='<?php echo ($user) ?>' aria-label="Username" name="CustomerEditUsername">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Address</label>
-                                <input type="tel" class="form-control" value="<?php echo $address;?>" aria-label="Address" name="CustomerEditAddress">
+                                <input type="tel" class="form-control" value='<?php echo ($address)?>' aria-label="Address" name="CustomerEditAddress">
                             </div>
                             <div class="col">
                                 <label for="exampleInputText1" class="form-label">Phone</label>
-                                <input type="number" class="form-control" value="<?php echo $phone_number; ?>" aria-label="PhoneNumber" name="CustomerEditPhone">
+                                <input type="number" class="form-control" value='<?php echo ($phone_number) ?>' aria-label="PhoneNumber" name="CustomerEditPhone">
                             </div>
                             <div class="col">
                                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<?php echo $email; ?>" name="CustomerEditEmail">
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value='<?php echo ($email) ?>' name="CustomerEditEmail">
                             </div>
                         </div>
                         <div class="mb-3">
@@ -166,7 +164,7 @@
                                 </div>
                                 <div class="col">
                                     <label for="date" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate" value="<?php echo$date_of_birth; ?>">
+                                    <input type="date" class="form-control" id="date" aria-label="date" name="CustomerEditDate" value='<?php echo ($date_of_birth) ?>'>
                                 </div>
                                 <div class="col">
                                     <label for="exampleInputText1" class="form-label">Gender</label>
