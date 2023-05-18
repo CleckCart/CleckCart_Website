@@ -184,23 +184,51 @@
                 <div class="row border pb-4">
                     <div class="col-sm-6 px-4 ">
                         <h6 class="py-2">Day</h6>
+                        <?php
+                        // Get the current day and time
+                        $currentDay = date('l');
+                        $currentHour = date('H');
+
+                        // Define the available days and time slots
+                        $days = ['Wednesday', 'Thursday', 'Friday'];
+                        $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
+
+                        // Determine which day and time slot to disable
+                        $disabledDay = $currentDay;
+                        $disabledTimeSlots = [];
+
+                        if ($currentHour >= 19) {
+                            // If the current hour is 19 or later, disable all time slots
+                            $disabledTimeSlots = $timeSlots;
+                        } else {
+                            // Disable the time slots before the current time
+                            foreach ($timeSlots as $timeSlot) {
+                                $timeRange = explode('-', $timeSlot);
+                                $startTime = explode(':', $timeRange[0])[0];
+
+                                if ($startTime <= $currentHour) {
+                                    $disabledTimeSlots[] = $timeSlot;
+                                }
+                            }
+                        }
+                        ?>
 
 
                         <div class="form-check">
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Wednesday" id="wed-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Wednesday" id="wed-check" <?php if ($disabledDay === 'Wednesday') echo ('disabled');?>>
                                 <label class="form-check-label" for="wed-check">
                                     Wednesday
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Thursday" id="thurs-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Thursday" id="thurs-check" <?php if ($disabledDay === 'Thursday') echo ('disabled'); ?>>
                                 <label class="form-check-label" for="thurs-check">
                                     Thursday
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Friday" id="fri-check">
+                                <input class="form-check-input" type="radio" name = "day" value = "Friday" id="fri-check" <?php if ($disabledDay === 'Friday') echo ('disabled'); ?>>
                                 <label class="form-check-label" for="fri-check">
                                     Friday
                                 </label>
@@ -214,19 +242,19 @@
 
                         <div class="form-check">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check" <?php if (in_array("10:00-13:00", $disabledTimeSlots)) echo ('disabled'); ?>>
                                     <label class="form-check-label" for="10-check">
                                         10:00-13:00
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name = "time" value = "13:00-16:00" id="13-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "13:00-16:00" id="13-check" <?php if (in_array("13:00-16:00", $disabledTimeSlots)) echo ('disabled'); ?>>
                                     <label class="form-check-label" for="13-check">
                                         13:00-16:00
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name = "time" value = "16:00-19:00" id="16-check">
+                                    <input class="form-check-input" type="radio" name = "time" value = "16:00-19:00" id="16-check" <?php if (in_array("16:00-19:00", $disabledTimeSlots)) echo ('disabled'); ?>>
                                     <label class="form-check-label" for="16-check">
                                         16:00-19:00
                                     </label>
