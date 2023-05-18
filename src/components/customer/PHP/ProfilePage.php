@@ -129,16 +129,14 @@
         <div class="row ">
             <div class="col-sm-4 d-flex justify-content-center ">              
                 <div class="profile-img-container">
-                    <form method="POST" id="form1">
+
 
                         <img src="http://s3.amazonaws.com/37assets/svn/765-default-avatar.png" class="img-thumbnail img-circle img-responsive" />
-                    </form>
                 </div>
 
             </div>
             <div class="col-sm-8">
-                <form>
-                    <?php
+                <?php
                     if (isset($_GET['error'])) { ?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo ($_GET['error']); ?></div>
                     <?php } ?>
@@ -146,39 +144,40 @@
                     if (isset($_GET['success'])) { ?>
                         <div class='alert alert-success text-center' role='alert'><?php echo ($_GET['success']); ?></div>
                     <?php } ?>
+                    <?php echo("<form class = mt-5 method = 'POST' action = './ProfileUpdate.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender'>")?>
                     <fieldset disabled>
                         <div class="row">
 
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="disabledTextInput-fn" class="form-label mt-2">First Name</label>
-                                    <input type="text" id="disabledTextInput-fn" class="form-control" placeholder="<?php echo
-                                                                                                                    $first_name ?>">
+                                    <input type="text" id="disabledTextInput-fn" class="form-control" value="<?php echo
+                                                                                                                    $first_name ?>" disabled>
                                     <label for="disabledTextInput-g" class="form-label mt-2">Username</label>
-                                    <input type="text" id="disabledTextInput-g" class="form-control" placeholder="<?php echo
-                                                                                                                    $last_name; ?>">
+                                    <input type="text" id="disabledTextInput-g" class="form-control" value="<?php echo
+                                                                                                                    $last_name ?>" disabled>
                                     <label for="disabledTextInput-add" class="form-label mt-2">Address</label>
-                                    <input type="text" id="disabledTextInput-add" class="form-control" placeholder="<?php echo
-                                                                                                                    $address;?>">
+                                    <input type="text" id="disabledTextInput-add" class="form-control" value="<?php echo
+                                                                                                                    $address?>" disabled>
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Date of birth</label>
-                                    <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
-                                                                                                                    $date_of_birth ?>">
+                                    <input type="text" id="disabledTextInput-ln" class="form-control" value="<?php echo
+                                                                                                                    $date_of_birth ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6">
 
                                 <div class="form-group">
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Last Name</label>
-                                    <input type="text" id="disabledTextInput-ln" class="form-control" placeholder="<?php echo
+                                    <input type="text" id="disabledTextInput-ln" class="form-control" value="<?php echo
                                                                                                                     $last_name ?>">
                                     <label for="disabledTextInput-email" class="form-label mt-2">Email Address</label>
-                                    <input type="text" id="disabledTextInput-email" class="form-control" placeholder="<?php echo
-                                                                                                                        $email; ?>">
+                                    <input type="text" id="disabledTextInput-email" class="form-control" value="<?php echo
+                                                                                                                        $email ?>">
                                     <label for="disabledTextInput-pn" class="form-label mt-2">Phone Number</label>
-                                    <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
+                                    <input type="text" id="disabledTextInput-pn" class="form-control" value="<?php echo
                                                                                                                     $phone_number ?>">
                                     <label for="disabledTextInput-ln" class="form-label mt-2">Gender</label>
-                                    <input type="text" id="disabledTextInput-pn" class="form-control" placeholder="<?php echo
+                                    <input type="text" id="disabledTextInput-pn" class="form-control" value="<?php echo
                                                                                                                     $gender; ?>">
                                 </div>
                             </div>
@@ -196,7 +195,7 @@
         <div class="row ">
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-            <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender'>Edit Profile</a>"); ?>
+            <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./ProfileUpdate.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender'>Edit Profile</a>"); ?>
             </div>
 
         </div>
@@ -256,11 +255,7 @@
         </div>
 
     </footer>
-    <!-- <script>
-        $('.profile-img-container img').click(function() {
-            $('#uploadfile').click();
-        });
-    </script> -->
+
 </body>
 
 </html>

@@ -25,8 +25,7 @@
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
-  ?>
-  <?php
+ 
         if(isset($_GET['id']) && isset($_GET['fname']) && isset($_GET['lname']) && isset($_GET['email']) && isset($_GET['address']) && isset($_GET['phone_number']) && isset($_GET['gender']) && isset($_GET['shop'])){
         $userId = $_GET['id'];
         $username = $_GET['user'];
@@ -35,7 +34,7 @@
         $email = $_GET['email'];
         $address = $_GET['address'];
         $phone_number = $_GET['phone_number'];
-        $date_of_birth = date('Y-m-d', strtotime($_GET['date_of_birth']));
+        $date_of_birth = $_GET['date_of_birth'];
         $gender = $_GET['gender'];
         $shopName = $_GET['shop'];
       }

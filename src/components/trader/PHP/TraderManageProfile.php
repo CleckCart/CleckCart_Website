@@ -90,7 +90,7 @@
     <div class="container-fluid">
       <?php
 
-        $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
+        $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' and ROLE='trader'";
         $result = oci_parse($conn, $query);
         oci_execute($result);
         while($row = oci_fetch_array($result, OCI_ASSOC)){

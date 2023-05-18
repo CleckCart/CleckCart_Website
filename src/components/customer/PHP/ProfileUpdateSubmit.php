@@ -6,6 +6,7 @@
         /*Check if form is submitted*/
         if (isset($_POST['CustomerEdit'])) {
            
+                    $CustomerEditId=$_POST['EditCustomerId'];
                     $CustomerEditUsername = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditUsername', FILTER_SANITIZE_STRING)));
                     $CustomerEditFirstname = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditFirstname', FILTER_SANITIZE_STRING)));
                     $CustomerEditLastname = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditLastname', FILTER_SANITIZE_STRING)));
@@ -14,7 +15,11 @@
                     $CustomerEditAddress = strtolower(trim(filter_input(INPUT_POST, 'CustomerEditAddress', FILTER_SANITIZE_STRING)));
                     $CustomerEditDate = $_POST['CustomerEditDate'];
                     $CustomerEditGender = $_POST['CustomerEditGender'];
-
+                    $CustomerEditImage = ($_FILES["CustomerEditImage"]["name"]);
+                    $CustomerEditImageType = ($_FILES["CustomerEditImage"]["type"]);
+                    $CustomerEditImageTmpName = ($_FILES["CustomerEditImage"]["tmp_name"]);
+                    $CustomerEditImageLocation = "CustomerImages/" . $CustomerEditImage;
+                    $CustomerRole='customer';
                     /*Check if username is of 5-10 characters*/
                     if(strlen($CustomerEditUsername) >= 5 && strlen($CustomerEditUsername) <= 30)
                         {      
@@ -27,9 +32,29 @@
                                                 {
                                                     if (!empty($_POST['CustomerEditDate']))
                                                         {
-                                                            if (!empty($_POST['TraderEditDate']))
+                                                            if(!empty($_POST['CustomerEditDate']))
                                                                 {
-
+                                                                    if(($CustomerEditImageType == "image/jpeg" || $CustomerEditImageType == "image/jpg" || $CustomerEditImageType == "image/png"))
+                                                                        {
+                                                                            
+                                                                            $query = "UPDATE USER_TABLE SET USERNAME=:CustomerUsername, FIRST_NAME=:CustomerFirstname, LAST_NAME=:CustomerLastname, EMAIL=:CustomerEmail, GENDER=:CustomerGender, DATE_OF_BIRTH=:CustomerDateOfBirth, ADDRESS=:CustomerAddress, PHONE_NUMBER=:CustomerPhoneNumber WHERE USER_ID='$CustomerEditId' AND ROLE=:CustomerRole";
+                                                                            $result = oci_parse($conn, $query);
+                                                                            oci_bind_by_name($result, ":CustomerUsername", $CustomerEditUsername);
+                                                                            oci_bind_by_name($result, ":CustomerRole", $CustomerRole);
+                                                                            oci_bind_by_name($result, ":CustomerFirstname", $CustomerEditFirstname);
+                                                                            oci_bind_by_name($result, ":CustomerLastname", $CustomerEditLastname);
+                                                                            oci_bind_by_name($result, ":CustomerEmail", $CustomerEditEmail);
+                                                                            oci_bind_by_name($result, ":CustomerGender", $CustomerEditGender);
+                                                                            oci_bind_by_name($result, ":CustomerDateOfBirth", $CustomerEditDate);
+                                                                            oci_bind_by_name($result, ":CustomerAddress", $CustomerEditAddress);
+                                                                            oci_bind_by_name($result, ":CustomerPhoneNumber", $CustomerEditPhone);
+                                                                            oci_execute($result);
+                                                                            header("Location:./ProfilePage.php?user=$user&success=Details updates successfully.");
+                                                                        }
+                                                                    else
+                                                                        {
+                                                                            header("Location:./ProfilePage.php?user=$user&error=Please choose an image.");
+                                                                        }
                                                                 }
 
                                                             else
