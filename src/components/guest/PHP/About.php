@@ -81,8 +81,31 @@
             </div>
         </nav>
         </div>
+        <div class="container text-center text-justify p-5">
+            <div class = "row">
+                <div class= "col">
+                    <h1 class="display-1 mt-5">About Us</h1>
+                    <p class ="mt-5 lead">Welcome to our website, which brings together the growing local businesses of Cleckhuddersfax,
+                        a prominent suburb acknowledged for its one-of-a-kind shopping experience.
+                        Despite increased competition from large chains, our objective is to encourage small businesses 
+                        and maintain a deep belief of our community.</p>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col">
+                    <h6 class="display-6 mt-5">Our Story</h6>
+                    <p class ="mt-5 lead">In a world dominated by giant businesses, Cleckhuddersfax distinguishes out for its lively local buying and selling location. 
+                        Despite the inconvenience of surrounding supermarkets, our small businesses have stayed strong. 
+                        However, the increasing presence of big chains has presented a new challenge to our neighborhood. 
+                        Through this platform, we strive to make it easier for busy locals to support their community while enjoying fresh and 
+                        natural products with the convenience they desire.</p>  
+                        <img src="../../../dist/public/story.jpg" class="rounded img-fluid w-75 border border-success mt-5" alt ="vegetables.jpg">                 
+                </div>               
+            </div>
+        </div>
         
     <!--footer-->
+    <div class="container mt-5"></div>
     <footer>
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
