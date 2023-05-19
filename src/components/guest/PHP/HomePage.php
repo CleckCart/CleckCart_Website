@@ -17,7 +17,7 @@
         ?>
         <!--NavBar-->
         <div class = "topbar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
+        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
@@ -30,52 +30,53 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3 text-success" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
-                            <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link mr-3 dropdown-toggle text-success" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
+                                <li><a class="dropdown-item text-success" href="./Categories.php">CATEGORY</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <a class="nav-link text-success" href="#">SALE</a>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <a class="nav-link mr-3 text-success" href="./About.php">ABOUT</a>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <a class="nav-link mr-3 text-success" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
-                        <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
-                        </li>
-                        <li class="nav-item me-3">
-                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
-                        </li>
-                        <li class="nav-item dropdown me-3"><!---->
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="./../../../dist/public/person.svg" alt="person">
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
-                        </li>
-                    </ul>
+    <li class="nav-item me-3">
+        <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #157347;"></i></a>
+    </li>
+    <li class="nav-item me-3">
+        <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg" style="color: #157347;"></i></a>
+    </li>
+    <li class="nav-item dropdown me-3">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-regular fa-user fa-lg" style="color: #157347;"></i>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
+        </ul>
+    </li>
+    <li class="nav-item me-5">
+        <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #157347;"></i></a>
+    </li>
+</ul>
+
                 </div>
             </div>
         </nav>
@@ -170,13 +171,13 @@
     <!--Button and Text-->
     <div class="container-fluid text-center mt-5">
         <h1>Lorem ipsum dolor sit amet.</h1>
-        <a class="btn btn-size btn-primary btn-outline-dark mt-5" href="#" role="button">Shop Now</a>
+        <a class="btn btn-size btn-success border-2 border-secondary mt-5" href="#" role="button">SHOP NOW</a>
     </div>
     <div class = "custom-margin"></div>
 
     <!--Product Space-->
     <div class="container-fluid text-center mb-5">
-        <h1 >OUR PRODUCTS</h1>
+        <h1 class="text-success">OUR PRODUCTS</h1>
     </div>
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
@@ -227,59 +228,59 @@
     <!--Category-->
 
     <div class="container-fluid text-center mb-5">
-        <h1 >CATEGORIES</h1>
+        <h1 class="text-success">CATEGORIES</h1>
     </div>
     <div class = "custom-margin"></div>
-    <div class = "container-fluid bg-info">
+    <div class = "container-fluid bg-light border rounded">
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
             <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
+                        <div class="ellipse bg-success p-5">
                             <img src="./../../../dist/public/bread.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">BAKERY</h1>
+                    <h3 class = "mt-5 text-success">BAKERY</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=dairy">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
+                        <div class="ellipse bg-success p-5">
                             <img src="./../../../dist/public/icecream.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">DAIRY</h1>
+                    <h3 class = "mt-5 text-success">DAIRY</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=fruit">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
+                        <div class="ellipse bg-success p-5">
                             <img src="./../../../dist/public/fruits.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">FRUIT</h1>
+                    <h3 class = "mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=meat">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
+                        <div class="ellipse bg-success p-5">
                             <img src="./../../../dist/public/meat.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">MEAT</h1>
+                    <h3 class = "mt-5 text-success">MEAT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=vegetable">
+            <a class="nav-link p-5 " href="./CategoryView.php?category=vegetable">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
+                        <div class="ellipse bg-success p-5">
                             <img src="./../../../dist/public/carrot.svg" alt="package">
                         </div>
                     </div>
-                    <h3 class = "mt-5">VEGETABLE</h1>
+                    <h3 class = "mt-5 text-success">VEGETABLE</h1>
                 </div>
             </a>
         </div>

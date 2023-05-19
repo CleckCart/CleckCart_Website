@@ -36,9 +36,7 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="./Categories.php">CATEGORY</a></li>
                             </ul>
                         </li>
 
@@ -69,8 +67,7 @@
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <li><a class="dropdown-item" href="../../guest/PHP/CustomerLogin.php">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>                               
                             </ul>
                         </li>
                         <li class="nav-item me-5">
