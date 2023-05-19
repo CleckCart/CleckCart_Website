@@ -89,10 +89,10 @@
                 <div class = "d-flex flex-column justify-content-center text-center">
                     <h1 class = "display-1">Join us! Start Selling with CleckCart</h1>
                     <p class = "mt-5">Create an account in a few minutes and reach out to hundreds of customers!</p>
-                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php">Sign in</a></p>
+                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php" class="text-success">Sign in</a></p>
                 </div>
             </div>
-            <div class = "col bg-success p-5">
+            <div class = "col bg-light border rounded p-5">
             <form method = "POST" action = "./TraderRegisterPageSubmit.php">
                     <?php
                         if(isset($_GET['error'])) {?>
@@ -172,7 +172,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <input type="submit" class="btn btn-primary w-100 " value = "Register" name = "TraderRegisterSubmit" >
+                        <input type="submit" class="btn btn-success w-100 " value = "Register" name = "TraderRegisterSubmit" >
                     </div>
                 </form>
             </div>

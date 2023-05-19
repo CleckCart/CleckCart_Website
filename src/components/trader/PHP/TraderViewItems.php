@@ -36,14 +36,14 @@
     ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-      <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
-      <div class="media-body">
-        <?php echo("<h4 class='m-0'>$user</h4>")?>
+      <div class="py-4 px-3 mb-4 bg-light">
+        <div class="media d-flex align-items-center">
+          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' class='m-3 rounded-circle img-responsive p-1 border border-grey' alt='$image' width='90' height='80'>"; ?>
+          <div class="media-body">
+            <?php echo("<h4 class='m-0'>$user</h4>")?>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -73,7 +73,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>
                 Log Out
             </a>
     </li>
@@ -90,7 +90,7 @@
     <!-- Demo content -->
     <!--Code -->
     <div class="container-fluid">
-      <div class="row row-cols-1 row-cols-md-2 bg-success">
+      <div class="row row-cols-1 row-cols-md-2 bg-success border rounded">
         <div class="col p-5">
           <h1>Manage Products</h1>
         </div>
@@ -102,8 +102,8 @@
                    echo (trim($_POST['searchProduct']));
                 }
               ?>">
-              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn btn-light">
-              <?php echo("<a href = './TraderViewItemsAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn btn-light'>Add&nbsp;Item</a>")?>
+              <input type="submit" name="searchCustomerSubmit" value="Search" class="btn" style='background-color:#C1E1C1;'>
+              <?php echo("<a href = './TraderViewItemsAdd.php?user=$user' name='searchCustomerSubmit' value='Add Item' class='mx-3 btn' style='background-color:#C1E1C1;'>Add&nbsp;Item</a>")?>
             </form>
           </div>
         </div>
@@ -173,8 +173,8 @@
             echo("<td>$row[PRODUCT_NAME]</td>");
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_DATE]</td>");
-            echo("<td>$row[PRODUCT_PRICE]</td>");
-            echo("<td>$Discount</td>");
+            echo("<td>&pound;$row[PRODUCT_PRICE]</td>");
+            echo("<td>&pound;$Discount</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
@@ -191,7 +191,6 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-              <img src="../../../dist/public/remove.svg" alt="">
               <h3 class="mt-3">Are You Sure?</h3>
               <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
             </div>

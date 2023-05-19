@@ -33,7 +33,7 @@
   <div class="vertical-nav bg-white" id="sidebar">
     <div class="py-4 px-3 mb-4 bg-light">
       <div class="media d-flex align-items-center mt-4 mb-4">
-        <img src='./../../../dist/public/logo.png' alt='logo.jpg' width='80' class='rounded-circle img-responsive img-thumbnail'>
+        <img src='./../../../dist/public/logo.jpg' alt='logo.jpg' class='rounded-circle img-responsive p-1 border border-grey' width='80' height='70'>
         <div class="media-body">
           <?php echo("<h4 class='ms-3'>$user</h4>")?>
         </div>
@@ -85,7 +85,7 @@
       <?php
         echo("
           <a href='./AdminApproveTrader.php?user=$user' class='nav-link text-dark'>
-          <i class='fa-solid fa-users m-3'></i>Approve Traders
+          <i class='fa-solid fa-users m-3 fa-lg'></i>Approve Traders
           </a>
         ");
       ?>
@@ -93,13 +93,13 @@
     <li class="nav-item">
       <?php echo("
         <a href='./AdminApproveTraderItemPage.php?user=$user' class='nav-link text-dark'>
-        <i class='fa-solid fa-square-check m-3'></i>Approve Products
+        <i class='fa-solid fa-square-check m-3 fa-lg'></i>Approve Products
         </a>
       ")?>
     </li>
     <li class="nav-item">
       <a href="./AdminLogout.php" class="nav-link text-dark">
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off m-3 fa-lg"></i></i>
                 Log Out
             </a>
     </li>
@@ -119,7 +119,7 @@
     <!--Code -->
 
     <div class="container">
-      <div class="row bg-success">
+      <div class="row bg-success border rounded">
         <div class="col-12 p-5">
           <h1>Approve Trader</h1>
         </div>

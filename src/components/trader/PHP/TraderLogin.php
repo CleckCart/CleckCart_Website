@@ -70,7 +70,6 @@
                                 <li><a class="dropdown-item" href="../../guest/PHP/CustomerLogin.php">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
-                                <li><hr class="dropdown-divider"></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -86,8 +85,8 @@
 
     <div class = "container">
         <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
-            <div class = "col bg-success">
-                    <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
+            <div class = "col">
+                    <img src = "../../../dist/public/scene.jpg" class = "w-100 h-100 img-thumbnail"/>
             </div>
             <div class = "col">
                 <form method = "POST" action = "./TraderLoginSubmit.php">
@@ -121,18 +120,18 @@
                             <option value="Trader">Trader</option>
                             <option value="Admin">Admin</option>
                         </select>
-                        <p class = "text-end"><a href = "../../guest/PHP/Forgotpassword.php">Forgot Password?</a></p>
+                        <p class = "text-end"><a href = "../../guest/PHP/Forgotpassword.php" class="text-success">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-primary w-100" name = "TraderLoginSubmit" value="Login">
+                        <input type="submit" class="btn btn-success w-100" name = "TraderLoginSubmit" value="Login">
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
                     <div class = "mb-3">
-                        <p>New Here? <a href = "../../trader/PHP/TraderRegisterPage.php">Create an account</a></p>
+                        <p>New Here? <a href = "../../trader/PHP/TraderRegisterPage.php" class="text-success">Create an account</a></p>
                     </div>
                     </div>
                 </form>

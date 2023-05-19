@@ -45,10 +45,10 @@
     <div class="vertical-nav bg-white" id="sidebar">
       <div class="py-4 px-3 mb-4 bg-light">
         <div class="media d-flex align-items-center">
-            <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
-            <div class="media-body">
-              <?php echo("<h4 class='m-0'>$user</h4>")?>
-            </div>
+          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' class='m-3 rounded-circle img-responsive p-1 border border-grey' alt='$image' width='90' height='80'>"; ?>
+          <div class="media-body">
+            <?php echo("<h4 class='m-0'>$user</h4>")?>
+          </div>
         </div>
       </div>
 
@@ -80,7 +80,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>
                 Log Out
             </a>
     </li>
@@ -97,10 +97,10 @@
         <!-- Demo content -->
         <!--Code -->
 
-        <div class="row">
+        <div class="row bg-light border rounded pt-5 pb-5 mt-5">
             <div class="col-sm-1"></div>
             <div class="col-sm-10">
-                <div class="text-center">
+                <div class="text-center mb-5">
                     <h5>Update Your Profile</h5>
                 </div>
                 <hr>
@@ -197,7 +197,7 @@
                         </div>
                     </div>
                     <div class="col-sm-8 mt-4">
-                        <input type="submit" class="btn btn-primary w-50 " value="Update" name="TraderEdit">
+                        <input type="submit" class="btn btn-success w-50 " value="Update" name="TraderEdit">
                     </div>
                 </form>
             </div>
