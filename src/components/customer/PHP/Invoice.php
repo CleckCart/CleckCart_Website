@@ -13,8 +13,10 @@
 
 <?php
             include('./connect.php');
-            if(isset($_GET['user'])){
+            if(isset($_GET['user']) && isset($_GET['time']) && isset($_GET['day'])){
                 $user = $_GET['user'];
+                $collectionTime = $_GET['time'];
+                $collectionDate = $_GET['day'];
             }
         ?>
         <!--NavBar-->
@@ -171,7 +173,7 @@
             <h4 class = "text-end">Total <?php echo("&pound;$productTotalPrice")?></h4>
         </div>
         <div class = "container text-center mt-5">
-            <?php echo("<a href = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity' class = 'btn btn-primary w-100'>Continue</a>")?>
+            <?php echo("<a href = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity&time=$collectionTime&date=$collectionDate' class = 'btn btn-primary w-100'>Continue</a>")?>
         </div>
     </div>
 
