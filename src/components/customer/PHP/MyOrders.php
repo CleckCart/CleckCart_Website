@@ -84,80 +84,106 @@
             </div>
         </nav>
     </div>
-
     <div class = "container">
-        <h1>My Orders</h1>
-        <div class = "container">
-            <p class = "mt-5">Order ID : 23234234</p>
-            <div class="row table-responsive">
-                <table class="table table-light table-striped text-center">
-                    <thead class="table-success">
-                        <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th >Category</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Order Date</th>
-                        <th>Collection Date</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    for ($i = 0; $i < 3; $i++) {
-                        echo '
-                        <tr>
-                        <td><img src = "../../../dist/public/1.jpg" class = "w-50 h-50"/></td>
-                        <td>lorem</td>
-                        <td>Lorem</td>
-                        <td>Lorem ipsum asdfsdafasdf</td>
-                        <td>&pound;200</td>
-                        <td>1</td>
-                        <td>2023/12/12</td>
-                        <td>2023/12/12</td>
-                        </tr>
-                    ';
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
-        <div class = "container">
-            <p class = "mt-5">Order ID : 23234234</p>
-            <div class="row table-responsive">
-                <table class="table table-light table-striped text-center">
-                    <thead class="table-success">
-                        <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th >Category</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Order Date</th>
-                        <th>Collection Date</th>
-                        </tr>
-                    </thead>
-                    <?php
-                    for ($i = 0; $i < 3; $i++) {
-                        echo '
-                        <tr>
-                        <td><img src = "../../../dist/public/1.jpg" class = "w-50 h-50"/></td>
-                        <td>lorem</td>
-                        <td>Lorem</td>
-                        <td>Lorem ipsum asdfsdafasdf</td>
-                        <td>&pound;200</td>
-                        <td>1</td>
-                        <td>2023/12/12</td>
-                        <td>2023/12/12</td>
-                        </tr>
-                    ';
-                    }
-                    ?>
-                </table>
-            </div>
-        </div>
+            <h1>My Orders</h1>
     </div>
+    
+    <?php
+
+        $queryUserId = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
+        $resultUserId = oci_parse($conn, $queryUserId);
+        oci_execute($resultUserId);
+        while($rowUserId = oci_fetch_array($resultUserId, OCI_ASSOC)){
+            $uid = $rowUserId['USER_ID'];
+        }
+
+        $queryCart = "SELECT * FROM CART WHERE USER_ID = $uid";
+        $resultCart = oci_parse($conn, $queryCart);
+        oci_execute($resultCart);
+        while($rowCart = oci_fetch_array($resultCart, OCI_ASSOC)){
+            $cartId = $rowCart['CART_ID'];
+        }
+
+        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
+        $resultOrder = oci_parse($conn, $queryOrder);
+        oci_execute($resultOrder);
+        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
+            $productId = $rowOrder['PRODUCT_ID'];
+            $orderQuantity = $rowOrder['ORDER_QUANTITY'];
+            $orderDate = $rowOrder['ORDER_DATE'];
+        }
+
+        $queryProduct = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $productId";
+        $resultProduct = oci_parse($conn, $queryProduct);
+        oci_execute($resultProduct);
+        while($rowOrder = oci_fetch_array($resultProduct, OCI_ASSOC)){
+            $productImage = $rowOrder['PRODUCT_IMAGE'];
+            $productName = $rowOrder['PRODUCT_NAME'];
+            $productCategory = $rowOrder['CATEGORY_NAME'];
+            $productDescription = $rowOrder['PRODUCT_DESCRIPTION'];
+            $productPrice = $rowOrder['PRODUCT_PRICE'];
+            $productStock = $rowOrder['PRODUCT_STOCK'];
+        }
+        
+        $queryCollectionSlot = "SELECT * FROM COLLECTION_SLOT WHERE CART_ID = $cartId";
+        $resultCollectionSlot = oci_parse($conn, $queryCollectionSlot);
+        oci_execute($resultCollectionSlot);
+        while($rowCollectionSlot = oci_fetch_array($resultCollectionSlot, OCI_ASSOC)){
+            $collectionDate = $rowCollectionSlot['COLLECTION_DATE'];
+            $collectionTime = $rowCollectionSlot['COLLECTION_TIME'];
+        }
+        
+        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
+        $resultOrder = oci_parse($conn, $queryOrder);
+        oci_execute($resultOrder);
+        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
+            $productId = $rowOrder['PRODUCT_ID'];
+            $orderQuantity = $rowOrder['ORDER_QUANTITY'];
+            $orderDate = $rowOrder['ORDER_DATE'];
+        }
+
+        $queryPayment = "SELECT * FROM PAYMENT WHERE CART_ID = $cartId";
+        $resultPayment = oci_parse($conn, $queryPayment);
+        oci_execute($resultPayment);
+        while($rowPayment = oci_fetch_array($resultPayment, OCI_ASSOC)){
+            $paymentId = $rowPayment['PAYMENT_ID'];
+            echo("
+            <div class = 'container'>
+                <div class = 'container'>
+                    <p class = 'mt-5'>Payment ID : $paymentId </p>
+                        <div class='row table-responsive'>
+                            <table class='table table-light table-striped text-center'>
+                                <thead class='table-success'>
+                                    <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th >Category</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Order Date</th>
+                                    <th>Collection Date</th>
+                                    </tr>
+                                </thead>
+                                    <tr>
+                                    <td><img src = '$productImage' class = 'w-50 h-50'/></td>
+                                    <td>$productName</td>
+                                    <td>$productCategory</td>
+                                    <td>$productDescription</td>
+                                    <td>&pound;$productPrice</td>
+                                    <td>$orderQuantity</td>
+                                    <td>$orderDate</td>
+                                    <td>$collectionDate</td>
+                                    </tr>
+                            </table>
+                        </div>
+                </div>
+            </div>
+            ");
+        }
+
+
+    ?>
     <div class = "container">&nbsp;</div>
     
     <!--footer-->

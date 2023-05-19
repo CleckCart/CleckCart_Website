@@ -27,7 +27,7 @@
                     oci_bind_by_name($resultInvoice, ':invoiceDate', $today);
                     oci_bind_by_name($resultInvoice, ':customerName', $user);
                     oci_execute($resultInvoice);
-                    header("Location:./Invoice.php?user=$user&date=$today");
+                    header("Location:./Invoice.php?user=$user&time=$collectionTime&day=$collectionDate");
                 }
                 else{
                     header("Location:./Checkout.php?user=$user&error=You can Only Have Total of 20 Cart Items.");
