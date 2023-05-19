@@ -70,7 +70,6 @@
                                 <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
-                                <li><hr class="dropdown-divider"></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">

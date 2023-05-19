@@ -32,7 +32,7 @@
   <div class="vertical-nav bg-white" id="sidebar">
     <div class="py-4 px-3 mb-4 bg-light">
       <div class="media d-flex align-items-center mt-4 mb-4">
-        <img src='./../../../dist/public/logo.png' alt='logo.jpg' width='80' class='rounded-circle img-responsive img-thumbnail'>
+        <img src='./../../../dist/public/logo.jpg' alt='logo.jpg' class='rounded-circle img-responsive p-1 border border-grey' width='80' height='70'>
         <div class="media-body">
           <?php echo("<h4 class='ms-3'>$user</h4>")?>
         </div>
@@ -84,7 +84,7 @@
       <?php
         echo("
           <a href='./AdminApproveTrader.php?user=$user' class='nav-link text-dark'>
-          <i class='fa-solid fa-users m-3'></i>Approve Traders
+          <i class='fa-solid fa-users m-3 fa-lg'></i>Approve Traders
           </a>
         ");
       ?>
@@ -92,13 +92,13 @@
     <li class="nav-item">
       <?php echo("
         <a href='./AdminApproveTraderItemPage.php?user=$user' class='nav-link text-dark'>
-        <i class='fa-solid fa-square-check m-3'></i>Approve Products
+        <i class='fa-solid fa-square-check m-3 fa-lg'></i>Approve Products
         </a>
       ")?>
     </li>
     <li class="nav-item">
       <a href="./AdminLogout.php" class="nav-link text-dark">
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off m-3 fa-lg"></i></i>
                 Log Out
             </a>
     </li>
@@ -117,7 +117,7 @@
     <!-- Demo content -->
     <!--Code -->
     <div class="container-fluid">
-      <div class="row row-cols-1 row-cols-md-2 bg-success">
+      <div class="row row-cols-1 row-cols-md-2 bg-success border rounded">
         <div class="col p-5">
           <h1>Manage Products</h1>
         </div>
@@ -197,8 +197,8 @@
                         echo("<td>$row[PRODUCT_NAME]</td>");
                         echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
                         echo("<td>$row[PRODUCT_DATE]</td>");
-                        echo("<td>$row[PRODUCT_PRICE]</td>");
-                        echo("<td>$Row[DISCOUNT]</td>");
+                        echo("<td>&pound;$row[PRODUCT_PRICE]</td>");
+                        echo("<td>&pound;$Row[DISCOUNT]</td>");
                         echo("<td>$row[PRODUCT_STOCK]</td>");
                         echo("<td><a href='./AdminViewTraderItemsPageEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
                         echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");

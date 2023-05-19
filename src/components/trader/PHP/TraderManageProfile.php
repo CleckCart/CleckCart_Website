@@ -53,10 +53,10 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
     <div class="vertical-nav bg-white" id="sidebar">
       <div class="py-4 px-3 mb-4 bg-light">
         <div class="media d-flex align-items-center">
-            <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
-            <div class="media-body">
-              <?php echo("<h4 class='m-0'>$user</h4>")?>
-            </div>
+          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' class='m-3 rounded-circle img-responsive p-1 border border-grey' alt='$image' width='90' height='80'>"; ?>
+          <div class="media-body">
+            <?php echo("<h4 class='m-0'>$user</h4>")?>
+          </div>
         </div>
       </div>
 
@@ -88,7 +88,7 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>
                 Log Out
             </a>
     </li>
@@ -110,7 +110,7 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid bg-light border rounded p-5 mb-5">
       
       <div class = 'row row-cols-1'>
         <div class="profile-img-container text-center">
@@ -126,7 +126,7 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
         <?php }?>
         </div>
         <div class="col text-start">
-          <?php echo("<form class = mt-5 method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>")?>
+          <?php echo("<form class = 'mt-5' method = 'POST' action = './TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>")?>
                   <div class="row mb-3">
                     <div class="col">
                       <input type='hidden' name='TraderEditItemId' value='<?php
@@ -180,13 +180,13 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
                     </div>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row mt-5">
                   <div class="col-sm-4"></div>
                   <div class="col-sm-2">
-                     <?php echo("<a class = 'btn btn-primary d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>Edit Profile</a>"); ?>
+                     <?php echo("<a class = 'btn btn-success d-block mx-auto' href='./TraderProfileEdit.php?user=$user&id=$uid&fname=$first_name&lname=$last_name&email=$email&address=$address&phone_number=$phone_number&date_of_birth=$date_of_birth&gender=$gender&shop=$shopname&image=$image'>Edit Profile</a>"); ?>
                   </div>
                   <div class="col-sm-2">
-                      <?php echo("<a class='btn btn-primary d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user&id=$uid'>Update Password</a>")?>
+                      <?php echo("<a class='btn btn-success d-block mx-auto' href='./TraderProfileEditPassword.php?user=$user&id=$uid'>Update Password</a>")?>
                   </div>
                   <div class="col-sm-4"></div>
                 </div>

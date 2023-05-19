@@ -42,14 +42,14 @@
   ?>
     <!-- Vertical navbar -->
     <div class="vertical-nav bg-white" id="sidebar">
-  <div class="py-4 px-3 mb-4 bg-light">
-    <div class="media d-flex align-items-center">
-      <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' width='80' class='m-3 rounded-circle img-responsive img-thumbnail'>"; ?>
-      <div class="media-body">
-        <?php echo("<h4 class='m-0'>$user</h4>")?>
+      <div class="py-4 px-3 mb-4 bg-light">
+        <div class="media d-flex align-items-center">
+          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' class='m-3 rounded-circle img-responsive p-1 border border-grey' alt='$image' width='90' height='80'>"; ?>
+          <div class="media-body">
+            <?php echo("<h4 class='m-0'>$user</h4>")?>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
@@ -79,7 +79,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off m-3"></i></i>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>
                 Log Out
             </a>
     </li>
@@ -95,7 +95,7 @@
 
     <!-- Demo content -->
     <!--Code -->
-        <div class="container bg-light">
+        <div class="container bg-light border rounded">
           <div class="modal-header text-center">
             <h5 class="modal-title mx-auto w-100" id="exampleModalLabel">Add Products</h5>
           </div>
@@ -150,7 +150,7 @@
               </div>
           </div>
           <div class="modal-footer">
-            <input type="submit" class="form-control btn btn-primary w-100" value="Add" name="TraderItemAddSubmit">
+            <input type="submit" class="form-control btn btn-success w-100" value="Add" name="TraderItemAddSubmit">
           </div>
           </form>
         </div>

@@ -33,7 +33,7 @@
                                                 {
                                                     if (!empty($_POST['TraderEditDate']))
                                                         {
-                                                            if(($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png"))
+                                                            if($TraderEditImageType == "image/jpeg" || $TraderEditImageType == "image/jpg" || $TraderEditImageType == "image/png")
                                                                 {
                                                                     if(move_uploaded_file($TraderEditImageTmpName, $TraderEditImageLocation))
                                                                         {
