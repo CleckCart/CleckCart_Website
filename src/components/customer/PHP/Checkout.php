@@ -176,7 +176,7 @@
             <div class="col-sm-1"></div>
             <div class="col-sm-4 ">
             <?php 
-            echo("<form method = 'POST' action = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity'>");
+            echo("<form method = 'POST' action = './InvoiceProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity'>");
             ?>
                 <div class="row text-center ">
                     <h4>Collection Slot</h4>

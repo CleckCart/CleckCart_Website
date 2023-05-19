@@ -15,6 +15,7 @@
     <script src="../../../../node_modules/toastr/build/toastr.min.js"></script>
     <link rel="stylesheet" href="../CSS/homepage.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=ATqJoT8uledW83BN2RvdA4o9tptMnGw4EUVlV1na6YHhKgqXEHcJXE8t0EZLGsDr4mybfMJ5nXxL10vQ&disable-funding=credit,card"></script>
     <script src = "../../service/passwordVisibility.js"></script>
     <script src = "../../service/toast.js"></script>
 </head>
@@ -111,8 +112,10 @@
                 </div>
                 <div class = "container-fluid mb-5">
                     <div class="row row-cols-1 row row-cols-lg-1 g-4">
-                            <button type="button" class="btn btn-primary btn-lg btn-block border-0 " style = "background-color: #ffff33; height: 200px"><img src = "../../../dist/public/paypal.png" alt = "paypal"/></button>
-                            <button type="button" class="btn btn-primary btn-lg btn-block border-0" id = "stripeButton" onclick = "showToast()" style = "height:200px; background-image: url('../../../dist/public/stripe-background.png')"><img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
+                            <div id="paypal-payment-button">
+                            </div>
+                            <!-- <button type="button" class="btn btn-primary btn-lg btn-block border-0 " id = "paypal-payment-button" style = "background-color: #ffff33; height: 200px"><img src = "../../../dist/public/paypal.png" alt = "paypal"/></button> -->
+                            <button type="button" class="btn btn-primary border-0 w-50" id = "stripeButton" onclick = "showToast()" style = " background-image: url('../../../dist/public/stripe-background.png')"><img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
                     </div>
                 </div>
             </div>
@@ -188,6 +191,29 @@
             </div>
         </div>
     </div>
+    <script>
+        paypal.Buttons({
+        style : {
+            color: 'gold',
+            shape: 'rect'
+        },
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units : [{
+                    amount: {
+                        value: <?php echo($productTotalPrice)?>
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (details) {
+                console.log(details)
+                <?php echo ("window.location.href = './PaymentSuccessProcess.php?user=$user&cartId=$cartId&amount=$productTotalPrice&method=paypal'");?>
+            })
+        }
+    }).render('#paypal-payment-button');
+    </script>
 
 
 

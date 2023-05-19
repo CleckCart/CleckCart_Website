@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
+    <title>ThankYou</title>
     <!--WebPage Icon-->
+    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
 <body>
+    <?php
+    include('./connect.php');
+    if(isset($_GET['user']) && isset($_GET['cartId']) && isset($_GET['amount'])){
+        $user = $_GET['user'];
+        $cartId = $_GET['cartId'];
+        $productTotalPrice= $_GET['amount'];
+    }
+    ?>
 
-<?php
-            include('./connect.php');
-            if(isset($_GET['user'])){
-                $user = $_GET['user'];
-            }
-        ?>
-        <!--NavBar-->
-        <div class = "topbar">
+    <!--NavBar-->
+    <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./CustomerSession.php">
@@ -85,97 +88,36 @@
             </div>
         </nav>
     </div>
-
-    <div class = "container bg-light p-5">
-        <h1 class = "text-start">Invoice</h1>
-        <div class = "row">
-            <div class = "col">
-                <p>Invoice to</p>
-                <p><?php echo($user)?></p>
+    <?php
+        $queryPayment = "SELECT * FROM PAYMENT WHERE CART_ID = $cartId ";
+        $resultPayment = oci_parse($conn, $queryPayment);
+        oci_execute($resultPayment);
+        while($row = oci_fetch_array($resultPayment, OCI_ASSOC)){
+            $paymentId = $row['PAYMENT_ID'];
+            $paymentAmount = $row['PAYMENT_AMOUNT'];
+            $paymentMethod = $row['PAYMENT_METHOD'];
+        }
+    ?>
+    <div class = "container mb-5">
+        <h1 class = "text-center mt-5">Thank You for shopping with CleckCart</h1>
+        <p class = "text-center mt-5"><span class = "fw-bold">Your order confirmation</span></p>
+        <div class = "row mt-5 mb-5">
+            <div class = "col text-center">
+                <p >Payment id : <?php echo($paymentId)?></p>
+                <p>Payement amount : &pound;<?php echo($paymentAmount)?></p>
+                <p>Payment method : <?php echo($paymentMethod)?></p>
+                <p>Paid By : <?php echo($user)?></p>
             </div>
-            <?php
-                $query = "SELECT * FROM INVOICE WHERE CUSTOMER_NAME = '$user'";
-                $result = oci_parse($conn, $query);
-                oci_execute($result);
-                while($row = oci_fetch_array($result, OCI_ASSOC)){
-                    $invoiceId = $row['INVOICE_ID'];
-                    $invoiceDate = $row['INVOICE_DATE'];
-                }
-            ?>
-            <div class = "col text-end">
-                <p>Invoice Number : <?php echo("$invoiceId");?></p>
-                <p>Invoice Date : <?php echo("$invoiceDate");?></p>
+            <div class = "col text-center">
+                <img src = "../../../dist/public/2.jpg" alt = "image"/>
             </div>
         </div>
-        <div class = "container">
-            <div class="row table-responsive">
-            <table class="table table-light table-striped text-center">
-            <thead class="table-success">
-                <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th >Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Amount</th>
-                </tr>
-            </thead>
-            <?php
-                $queryCustomer = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE = 'customer'";
-                $resultCustomer = oci_parse($conn, $queryCustomer);
-                oci_execute($resultCustomer);
-                while($rowCustomer = oci_fetch_array($resultCustomer, OCI_ASSOC)){
-                    $userId = $rowCustomer['USER_ID'];
-                }
-                
-                $queryCart = "SELECT * FROM CART WHERE USER_ID = $userId";
-                $resultCart = oci_parse($conn, $queryCart);
-                oci_execute($resultCart);
-                while($rowCart = oci_fetch_array($resultCart, OCI_ASSOC)){
-                    $cartId = $rowCart['CART_ID'];
-                }
-
-                $queryCartProduct = "SELECT * FROM CART_PRODUCT WHERE CART_ID = $cartId";
-                $resultCartProduct = oci_parse($conn, $queryCartProduct);
-                oci_execute($resultCartProduct);
-                $productTotalPrice = 0;
-                $productTotalQuantity = 0;
-                while($rowCartProduct = oci_fetch_array($resultCartProduct, OCI_ASSOC)){
-                    $cartId = $rowCartProduct['CART_ID'];
-                    $productId = $rowCartProduct['PRODUCT_ID'];
-                    $productName = $rowCartProduct['PRODUCT_NAME'];
-                    $productImage = $rowCartProduct['PRODUCT_IMAGE'];
-                    $productPrice = $rowCartProduct['PRODUCT_PRICE'];
-                    $productQuantity = $rowCartProduct['PRODUCT_QUANTITY'];
-                    $productTotal = $productPrice * $productQuantity;
-                    $productTotalPrice += $productPrice * $productQuantity;
-                    echo ("
-                    <tr>
-                    <td>$productId</td>
-                    <td>$productImage</td>
-                    <td>$productName</td>
-                    <td>$productQuantity</td>
-                    <td>&pound;$productPrice</td>
-                    <td>&pound;$productTotal</td>
-                    </tr>
-                    ");
-                }
-            ?>
-
-            <?php
-            ?>
-            </table>
-        </div>
-        </div>
-        <div class = "container">
-            <h4 class = "text-end">Total <?php echo("&pound;$productTotalPrice")?></h4>
-        </div>
-        <div class = "container text-center mt-5">
-            <?php echo("<a href = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity' class = 'btn btn-primary w-100'>Continue</a>")?>
-        </div>
+        <?php echo("<a href = './HomePageSession.php?user=$user' class = 'btn btn-success w-100'>Continue Shopping</a>")?>
     </div>
 
-<!--footer-->
+ 
+
+    <!--footer-->
     <footer>
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
@@ -224,7 +166,7 @@
                 </div>
             </div>
     </div>
-
     </footer>
 </body>
 </html>
+
