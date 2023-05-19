@@ -22,6 +22,15 @@
         oci_bind_by_name($result, ':paymentMethod', $paymentMethod);
         oci_bind_by_name($result, ':paymentDate', $paymentDate);
         oci_execute($result);
+
+        $queryDeleteCartProduct = "DELETE FROM CART_PRODUCT WHERE CART_ID = $cartId";     
+        $resultDeleteCartProduct = oci_parse($conn, $queryDeleteCartProduct);
+        oci_execute($resultDeleteCartProduct);
+
+        $queryDeleteInvoice = "DELETE FROM INVOICE WHERE CART_ID = $cartId";     
+        $resultDeleteCartProduct = oci_parse($conn, $queryDeleteInvoice);
+        oci_execute($resultDeleteCartProduct);
+
         header("Location:./PaymentSuccess.php?user=$user&cartId=$cartId&amount=$productTotalPrice");
     }
     ?>
