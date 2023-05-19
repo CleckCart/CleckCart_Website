@@ -38,7 +38,7 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="../../guest/PHP/Categories.php">Category</a></li>
+                                <li><a class="dropdown-item" href="../../guest/PHP/Categories.php">CATEGORY</a></li>
                             </ul>
                         </li>
 
