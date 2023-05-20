@@ -14,10 +14,17 @@
             $userid = $row['USER_ID'];
         }
 
-        $query = "INSERT INTO PAYMENT(PAYMENT_ID, USER_ID, CART_ID, PAYMENT_AMOUNT, PAYMENT_METHOD, PAYMENT_DATE) VALUES (PAYMENT_S.NEXTVAL, :userId, :cartId, :paymentAmount, :paymentMethod, :paymentDate)";
+        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
+        $resultOrder = oci_parse($conn, $queryOrder);
+        oci_execute($resultOrder);
+        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
+            $orderId = $rowOrder['ORDER_ID'];
+        }
+
+        $query = "INSERT INTO PAYMENT(PAYMENT_ID, USER_ID, ORDER_ID, PAYMENT_AMOUNT, PAYMENT_METHOD, PAYMENT_DATE) VALUES (PAYMENT_S.NEXTVAL, :userId, :orderId, :paymentAmount, :paymentMethod, :paymentDate)";
         $result = oci_parse($conn, $query);
         oci_bind_by_name($result, ':userId', $userid);
-        oci_bind_by_name($result, ':cartId', $cartId);
+        oci_bind_by_name($result, ':orderId', $orderId);
         oci_bind_by_name($result, ':paymentAmount', $productTotalPrice);
         oci_bind_by_name($result, ':paymentMethod', $paymentMethod);
         oci_bind_by_name($result, ':paymentDate', $paymentDate);
@@ -31,6 +38,6 @@
         $resultDeleteCartProduct = oci_parse($conn, $queryDeleteInvoice);
         oci_execute($resultDeleteCartProduct);
 
-        header("Location:./PaymentSuccess.php?user=$user&cartId=$cartId&amount=$productTotalPrice");
+        header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
     }
     ?>
