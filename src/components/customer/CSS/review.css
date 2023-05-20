@@ -1,0 +1,19 @@
+.rating {
+  display: inline-block;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  font-size: 4rem;
+  color: #ccc;
+  cursor: pointer;
+  float: right; /* Update: Float the labels to the right */
+  margin-right: 5px;
+}
+
+.rating > input:checked ~ label {
+  color: #fdd835;
+}

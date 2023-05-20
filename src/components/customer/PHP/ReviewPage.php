@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders</title>
-    <!--WebPage Icon-->
-    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
+    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/review.css">
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  </head>
 <body>
-<?php
-            include('./connect.php');
-            if(isset($_GET['user'])){
-                $user = $_GET['user'];
-            }
-        ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <?php
+    include('./connect.php');
+      if(isset($_GET['user']) && isset($_GET['id']) ){
+        $user = $_GET['user'];
+        $productId = $_GET['id'];
+      }
+  ?>
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -45,7 +55,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
+                            <?php echo ("<a class='nav-link' href='Sale.php?user=$user'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
@@ -85,90 +95,55 @@
             </div>
         </nav>
     </div>
-    <div class = "container">
-            <h1>My Orders</h1>
-    </div>
-    
-    <?php
-            $UserQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
-            $runUserQuery=oci_parse($conn,$UserQuery);
-            oci_execute($runUserQuery);
-            $userRow = oci_fetch_assoc($runUserQuery);
-            $userId=$userRow['USER_ID'];
 
-            $CartQuery = "SELECT * FROM CART WHERE USER_ID = '$userId'";
-            $runCartQuery=oci_parse($conn,$CartQuery);
-            oci_execute($runCartQuery);
-            $CartRow = oci_fetch_assoc($runCartQuery);
-            $CartId = $CartRow['CART_ID'];
-            
-            $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId'";
-            $runOrderQuery=oci_parse($conn,$OrderQuery);
-            oci_execute($runOrderQuery);
-            while($row=oci_fetch_assoc($runOrderQuery))
-                {
-                    $OrderId=$row['ORDER_ID'];
-                    $OrderDate=$row['ORDER_DATE'];
-                    echo("
-                        <div class = 'container'>
-                            <div class = 'container'>
-                                <p class = 'mt-5'>Order Id : $OrderId </p>
-                                    <div class='row table-responsive'>
-                                        <table class='table table-light table-striped text-center'>
-                                            <thead class='table-success'>
-                                                <tr>
-                                                <th>Image</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Description</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Order Date</th>
-                                                <th>Collection Date</th>
-                                                <th>Action</th>
-                                                </tr>
-                                            </thead><tbody>");
-                    $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
-                    $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
-                    oci_execute($runOrderProductQuery);
-                    while($row2=oci_fetch_assoc($runOrderProductQuery))
-                        {
-                            
-                            $ProductId = $row2['PRODUCT_ID'];
-                            $ProductQuantity = $row2['ORDER_QUANTITY'];
+        <?php echo("<form action = './ReviewSubmit.php?user=$user&id=$productId' method = 'POST'>") ?>
+        <div class = 'container mb-5 bg-light text-center w-50 border rounded'>
+            <h1 class = "p-5">Review</h1>
+            <?php
+            if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+            <?php }?>
+            <?php
+                if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+            <?php }?>
+            <p class = "m-5 text-start">Description</p>
+            <div class="form-floating m-5">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" name = "reviewDescription" style="height: 200px;"></textarea>
+                <label for="floatingTextarea2">Leave a review</label>
+            </div>
+            <p class = "mt-5 p-3">Rating</p>
+            <div class="rating text-center">
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">&#9733;</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">&#9733;</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">&#9733;</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">&#9733;</label>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">&#9733;</label>
+            </div>
+            <div class = "container mt-5">
+                <input type="hidden" id="selectedRating" name="selectedRating" value="">
+                <input class = "btn btn-success w-100" type = "submit" name = "reviewSubmit" value="SUBMIT"/>
+            </div>
+        </form>
+        <div class = "mt-5">&nbsp;</div>
+      </div>
+      <script>
+        $(document).ready(function() {
+            $('.rating input').click(function() {
+                var selectedValue = $(this).val();
+                $('#selectedRating').val(selectedValue);
+            });
+        });
+      </script>
 
-                            $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
-                            $runProductQuery=oci_parse($conn,$ProductQuery);
-                            oci_execute($runProductQuery);  
-                            $ProductRow = oci_fetch_assoc($runProductQuery); 
 
-                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
-                            $runCollectionQuery=oci_parse($conn,$CollectionQuery);
-                            oci_execute($runCollectionQuery);  
-                            $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
-                            $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                            echo("<tr>
-                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                    <td>$ProductRow[PRODUCT_NAME]</td>
-                                    <td>$ProductRow[CATEGORY_NAME]</td>
-                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                    <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                    <td>$ProductQuantity</td>
-                                    <td>$OrderDate</td>
-                                    <td>$CollectionDate</td>
-                                    <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
-                                    </tr>");
-                        }
-                    echo("</tbody></table></div></div></div>");
-                }
-                
-                                
-
-    ?>
-    <div class = "container">&nbsp;</div>
-    
-    <!--footer-->
-    <footer>
+   <!--footer-->
+   <footer>
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-5 text-center">

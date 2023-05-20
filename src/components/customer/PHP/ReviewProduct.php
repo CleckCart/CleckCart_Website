@@ -1,22 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders</title>
-    <!--WebPage Icon-->
-    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alkatra:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
+    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/product-detail.css" />
+  </head>
 <body>
-<?php
-            include('./connect.php');
-            if(isset($_GET['user'])){
-                $user = $_GET['user'];
-            }
-        ?>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <?php
+    include('./connect.php');
+      if(isset($_GET['user']) && isset($_GET['id']) ){
+        $user = $_GET['user'];
+        $productId = $_GET['id'];
+      }
+
+      $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$productId'";
+      $result = oci_parse($conn, $query);
+      oci_execute($result);
+      while($row = oci_fetch_array($result, OCI_ASSOC)){
+        $productName = $row['PRODUCT_NAME'];
+        $productDescription = $row['PRODUCT_DESCRIPTION'];
+        $productImage = $row['PRODUCT_IMAGE'];
+        $productPrice = $row['PRODUCT_PRICE'];
+      }
+  ?>
+  <!--modal code-->
+  <!-- <div class="modal">
+    <div class="modal-content">
+      <h2 class="modal-title">Review</h2>
+      <div class="modal-description">
+        <span>Description:</span>
+        <textarea placeholder="Write your review here"></textarea>
+      </div>
+      <div class="modal-rating">
+        <span>Rating:</span>
+        <div class="stars">
+          
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="modal-cancel">Cancel</button>
+        <button class="modal-submit">Submit</button>
+      </div>
+    </div>
+  </div> -->
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -45,7 +82,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
+                            <?php echo ("<a class='nav-link' href='Sale.php?user=$user'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
@@ -85,90 +122,53 @@
             </div>
         </nav>
     </div>
-    <div class = "container">
-            <h1>My Orders</h1>
-    </div>
-    
-    <?php
-            $UserQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
-            $runUserQuery=oci_parse($conn,$UserQuery);
-            oci_execute($runUserQuery);
-            $userRow = oci_fetch_assoc($runUserQuery);
-            $userId=$userRow['USER_ID'];
-
-            $CartQuery = "SELECT * FROM CART WHERE USER_ID = '$userId'";
-            $runCartQuery=oci_parse($conn,$CartQuery);
-            oci_execute($runCartQuery);
-            $CartRow = oci_fetch_assoc($runCartQuery);
-            $CartId = $CartRow['CART_ID'];
-            
-            $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId'";
-            $runOrderQuery=oci_parse($conn,$OrderQuery);
-            oci_execute($runOrderQuery);
-            while($row=oci_fetch_assoc($runOrderQuery))
-                {
-                    $OrderId=$row['ORDER_ID'];
-                    $OrderDate=$row['ORDER_DATE'];
-                    echo("
-                        <div class = 'container'>
-                            <div class = 'container'>
-                                <p class = 'mt-5'>Order Id : $OrderId </p>
-                                    <div class='row table-responsive'>
-                                        <table class='table table-light table-striped text-center'>
-                                            <thead class='table-success'>
-                                                <tr>
-                                                <th>Image</th>
-                                                <th>Name</th>
-                                                <th>Category</th>
-                                                <th>Description</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th>Order Date</th>
-                                                <th>Collection Date</th>
-                                                <th>Action</th>
-                                                </tr>
-                                            </thead><tbody>");
-                    $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
-                    $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
-                    oci_execute($runOrderProductQuery);
-                    while($row2=oci_fetch_assoc($runOrderProductQuery))
-                        {
-                            
-                            $ProductId = $row2['PRODUCT_ID'];
-                            $ProductQuantity = $row2['ORDER_QUANTITY'];
-
-                            $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
-                            $runProductQuery=oci_parse($conn,$ProductQuery);
-                            oci_execute($runProductQuery);  
-                            $ProductRow = oci_fetch_assoc($runProductQuery); 
-
-                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
-                            $runCollectionQuery=oci_parse($conn,$CollectionQuery);
-                            oci_execute($runCollectionQuery);  
-                            $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
-                            $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                            echo("<tr>
-                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                    <td>$ProductRow[PRODUCT_NAME]</td>
-                                    <td>$ProductRow[CATEGORY_NAME]</td>
-                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                    <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                    <td>$ProductQuantity</td>
-                                    <td>$OrderDate</td>
-                                    <td>$CollectionDate</td>
-                                    <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
-                                    </tr>");
-                        }
-                    echo("</tbody></table></div></div></div>");
-                }
-                
-                                
-
-    ?>
-    <div class = "container">&nbsp;</div>
-    
-    <!--footer-->
-    <footer>
+        <?php
+          ?>
+        <section class="product-detail">
+          <?php
+          if(isset($_GET['error'])) {?>
+            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+          <?php }?>
+          <?php
+          if(isset($_GET['success'])) {?>
+            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+          <?php }?>
+          <div class="upper-section">
+              <div class="product-img-cnt">
+                <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
+              </div>
+              <div class="product-info">
+                  <div class="product-title-box">
+                    <h2 class="product-title"><?php echo($productName)?></h2>
+                    <img src="" alt="Favourite icon">
+                  </div>
+                  <div class="star-rating-box">
+                    <p>Star rating <span>No of rating</span></p>
+                  </div>
+                <p class="product-description"><?php echo($productDescription) ?></p>
+                <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
+                <?php echo("<a href = './ReviewPage.php?user=$user&id=$productId' class='btn add-to-cart'>WRITE A REVIEW</a>")?>
+                </div>
+          </div>
+          
+          <div class="lower-section">
+            <h2 class="review-heading">Customer Reviews</h2>
+            <div class="review">
+              <div class="review-left">
+                <h3 class="review-name">Customer Name</h3>
+                <span class="review-rating">Star rating</span>
+                <span class="review-date">01/01/2023</span>
+              </div>
+              <hr />
+              <div class="review-right">
+                  <h4 class="review-title">Review Title</h4>
+                  <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
+              </div>
+            </div>
+          </div>
+        </section>
+   <!--footer-->
+   <footer>
     <div class = "container-fluid bg-secondary">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-5 text-center">

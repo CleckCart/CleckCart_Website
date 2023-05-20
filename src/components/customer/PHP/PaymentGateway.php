@@ -15,7 +15,7 @@
     <script src="../../../../node_modules/toastr/build/toastr.min.js"></script>
     <link rel="stylesheet" href="../CSS/homepage.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=ATqJoT8uledW83BN2RvdA4o9tptMnGw4EUVlV1na6YHhKgqXEHcJXE8t0EZLGsDr4mybfMJ5nXxL10vQ&disable-funding=credit,card"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AarTuLub3lSk6uTiV1S7315Ko-KglQS4W_ugQBmhoahLhCblaJ76IoA5rcdSUOatI1IDOachafdJLhOW&disable-funding=credit,card&currency=GBP"></script>
     <script src = "../../service/passwordVisibility.js"></script>
     <script src = "../../service/toast.js"></script>
 </head>
