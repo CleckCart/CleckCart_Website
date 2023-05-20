@@ -29,9 +29,10 @@ if(isset($_GET['user'])){
                     $Address=strtolower($row['ADDRESS']);
                     $PhoneNumber=$row['PHONE_NUMBER'];
                     $Password=$row['PASSWORD'];
+                    $Status = "No";
                     
-                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER, STATUS)
+                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber,:TraderStatus)";
                     $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderId', $Id);   
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderImage', $Image);
@@ -45,6 +46,8 @@ if(isset($_GET['user'])){
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderBirthDate', $BirthDate);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderAddress', $Address);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderPhoneNumber', $PhoneNumber);
+                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderStatus', $Status);
+
                     oci_execute($TraderRunInsertionQuery);                    
 
                     $CategoryInsertionQuery = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) VALUES(CATEGORY_S.NEXTVAL,:TraderCategory)";
@@ -55,6 +58,7 @@ if(isset($_GET['user'])){
                     $changeCase = strtolower($Category);
                     $ShopDate=date("Y-m-d");
                     $ShopDescription = "Welcome to ". $Username ."'s shop!\nWe offer a wide range of high-quality ". $changeCase . " products that are both affordable and fresh.";
+
                     $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_DATE, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderShopDate, :TraderUsername, :ShopDescription)";
                     $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);
@@ -62,33 +66,35 @@ if(isset($_GET['user'])){
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderShopDate', $ShopDate);
                     oci_bind_by_name($RunShopInsertionQuery, ':TraderUsername', $Username);   
                     oci_bind_by_name($RunShopInsertionQuery, ':ShopDescription', $ShopDescription);
-                    oci_execute($RunShopInsertionQuery); 
+                    if(oci_execute($RunShopInsertionQuery)){
+                        $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
+                        $RunDeleteQuery = oci_parse($conn, $DeleteAfterApproveQuery);
+                        oci_execute($RunDeleteQuery);
 
-                    $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
-                    $RunDeleteQuery = oci_parse($conn, $DeleteAfterApproveQuery);
-                    oci_execute($RunDeleteQuery);
+                        require '../../../mail/phpmailer/src/Exception.php';
+                        require '../../../mail/phpmailer/src/PHPMailer.php';
+                        require '../../../mail/phpmailer/src/SMTP.php';
+    
+                        $mail = new PHPMailer(true);
+                
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                        $mail->Password = 'jqmuadhegtgyetci'; //app password
+                        $mail->SMTPSecure = 'ssl';
+                        $mail->Port = '465';
+                
+                        $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                        $mail->addAddress($Email); //reciever's email
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
+                        $mail->Body = 'Dear, '. $Firstname .'<br>You have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
+                        $mail->send();
+                        header("Location:AdminApproveTrader.php?user=$user&success=Trader has been approved.");
+                    } 
 
-                    require '../../../mail/phpmailer/src/Exception.php';
-                    require '../../../mail/phpmailer/src/PHPMailer.php';
-                    require '../../../mail/phpmailer/src/SMTP.php';
 
-                    $mail = new PHPMailer(true);
-            
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'cleckcart@gmail.com'; //sender's email address
-                    $mail->Password = 'jqmuadhegtgyetci'; //app password
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port = '465';
-            
-                    $mail->setFrom('cleckcart@gmail.com'); //sender's email address
-                    $mail->addAddress($Email); //reciever's email
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $Firstname .'<br>You have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
-                    $mail->send();
-                    header("Location:AdminApproveTrader.php?user=$user&success=Trader has been approved.");
                     }
                 }
         }

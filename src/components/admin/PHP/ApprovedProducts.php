@@ -63,13 +63,15 @@
                     $StartDate = date('Y-m-d');
                     $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
                     $OfferStatus = 'Y';
-                    $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
-                    VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";
-                    $RunDiscountInsertionQuery = oci_parse($conn, $DiscountInsertionQuery);
-                    oci_bind_by_name($RunDiscountInsertionQuery, ':StartDate', $StartDate);
-                    oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
-                    oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
-                    oci_execute($RunDiscountInsertionQuery);
+                    if($ProductDiscount!=0){
+                        $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
+                        VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";
+                        $RunDiscountInsertionQuery = oci_parse($conn, $DiscountInsertionQuery);
+                        oci_bind_by_name($RunDiscountInsertionQuery, ':StartDate', $StartDate);
+                        oci_bind_by_name($RunDiscountInsertionQuery, ':EndDate', $EndDate);                     
+                        oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
+                        oci_execute($RunDiscountInsertionQuery);
+                    }
    
                     $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$approvedProductId'";     
                     $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);

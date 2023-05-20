@@ -161,7 +161,10 @@
               {            
                 $Discount=$DiscountRow['DISCOUNT'];
               }
-            
+              else
+              {
+                  $Discount=0;
+              }
             
               
             echo("<tr><td><input type='checkbox'/></td>");
@@ -174,7 +177,7 @@
             echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
             echo("<td>$row[PRODUCT_DATE]</td>");
             echo("<td>&pound;$row[PRODUCT_PRICE]</td>");
-            echo("<td>&pound;$Discount</td>");
+            echo("<td>$Discount %</td>");
             echo("<td>$row[PRODUCT_STOCK]</td>");
             echo("<td><a href='TraderViewItemsEdit.php?user=$user&id=$id&action=edit' class = 'btn'><img src='./../../../dist/public/edit.svg' alt='edit'></a></td>");
             echo("<td><button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-user = '$user' data-id='$id' data-name='$name'><img src='./../../../dist/public/delete.svg' alt='delete'></button></td></tr>");
