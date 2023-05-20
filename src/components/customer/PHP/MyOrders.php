@@ -140,7 +140,7 @@
                             oci_execute($runProductQuery);  
                             $ProductRow = oci_fetch_assoc($runProductQuery); 
 
-                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId'";
+                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
                             $runCollectionQuery=oci_parse($conn,$CollectionQuery);
                             oci_execute($runCollectionQuery);  
                             $CollectionRow = oci_fetch_assoc($runCollectionQuery); 

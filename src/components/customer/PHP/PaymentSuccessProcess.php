@@ -30,13 +30,25 @@
         oci_bind_by_name($result, ':paymentDate', $paymentDate);
         oci_execute($result);
 
-        $queryDeleteCartProduct = "DELETE FROM CART_PRODUCT WHERE CART_ID = $cartId";     
+        $queryDeleteCartProduct = "DELETE FROM CART_PRODUCT WHERE CART_ID = '$cartId'";     
         $resultDeleteCartProduct = oci_parse($conn, $queryDeleteCartProduct);
         oci_execute($resultDeleteCartProduct);
 
         $queryDeleteInvoice = "DELETE FROM INVOICE WHERE CART_ID = $cartId";     
         $resultDeleteCartProduct = oci_parse($conn, $queryDeleteInvoice);
         oci_execute($resultDeleteCartProduct);
+
+        $queryCollection = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID='$orderId'";
+        $resultCollection = oci_parse($conn, $queryCollection);
+        oci_execute($resultCollection);
+        $rowCollection = oci_fetch_assoc($resultCollection);
+        $CollectionId=$rowCollection['COLLECTION_ID'];
+
+        $SlotStatus = 'Y';
+        $queryUpdateCollectionSlot = "UPDATE COLLECTION_SLOT SET SLOT_STATUS=:SlotStatus WHERE COLLECTION_ID='$CollectionId'";
+        $resultUpdateCollectionSlot = oci_parse($conn, $queryUpdateCollectionSlot);
+        oci_bind_by_name($resultUpdateCollectionSlot, ":SlotStatus", $SlotStatus);
+        oci_execute($resultUpdateCollectionSlot);
 
         header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
     }

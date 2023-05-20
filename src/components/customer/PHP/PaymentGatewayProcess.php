@@ -31,7 +31,7 @@
         $row = oci_fetch_assoc($result);
         $OrderId = $row['ORDER_ID'];
         
-        $SlotStatus = 'Y';
+        $SlotStatus = 'N';
         $queryOrderCollection = "INSERT INTO COLLECTION_SLOT(COLLECTION_ID, ORDER_ID, COLLECTION_DATE, COLLECTION_TIME, SLOT_STATUS)
         VALUES (COLLECTION_SLOT_S.NEXTVAL, :OrderId, :collectionDate, :collectionTime, :slotStatus)";
         $resultOrderCollection = oci_parse($conn, $queryOrderCollection);

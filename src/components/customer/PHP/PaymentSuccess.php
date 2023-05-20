@@ -89,7 +89,7 @@
         </nav>
     </div>
     <?php
-        $queryPayment = "SELECT * FROM PAYMENT WHERE ORDER_ID = $orderId ";
+        $queryPayment = "SELECT * FROM PAYMENT WHERE ORDER_ID = '$orderId'";
         $resultPayment = oci_parse($conn, $queryPayment);
         oci_execute($resultPayment);
         while($row = oci_fetch_array($resultPayment, OCI_ASSOC)){

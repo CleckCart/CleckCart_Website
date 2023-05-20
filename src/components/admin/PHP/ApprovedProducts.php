@@ -63,7 +63,7 @@
                     $StartDate = date('Y-m-d');
                     $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
                     $OfferStatus = 'Y';
-                    if(!empty($ProductDiscount)){
+                    if($ProductDiscount!=0){
                         $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
                         VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";
                         $RunDiscountInsertionQuery = oci_parse($conn, $DiscountInsertionQuery);
