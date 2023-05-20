@@ -52,7 +52,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
+                            <?php echo ("<a class='nav-link' href='Sale.php?user=$user'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">

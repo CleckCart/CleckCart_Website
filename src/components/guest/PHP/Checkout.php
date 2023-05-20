@@ -9,6 +9,12 @@
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <!-- <link rel="stylesheet" href="../CSS/categorypage.css"> -->
+    <style>
+    td{
+        text-align: center;
+        vertical-align: middle;
+    }
+ </style>
 </head>
 
 <body>
@@ -46,7 +52,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="#">SALE</a>
+                            <a class="nav-link" href="./Sale.php">SALE</a>
                         </li>
 
                         <li class="nav-item me-5">
@@ -101,8 +107,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            
-                            <th colspan = '2' class = 'text-center'><h3>Name</h3></th>
+                            <th></th>
+                            <th class = 'text-center'><h3>Name</h3></th>
                             <th class = 'text-center'><h3>Price</h3></th>
                             <th class = 'text-center'><h3>Quantity</h3></th>
                             <th class = 'text-center'><h3>Action</h3></th>
