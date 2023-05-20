@@ -51,24 +51,14 @@
             oci_execute($resultOrderProduct);
         }
 
-        $query = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
-        $result = oci_parse($conn, $query);
-        oci_execute($result);
-        while($row = oci_fetch_array($result, OCI_ASSOC)){
-            $orderId = $row['ORDER_ID'];
-            $orderproductId = $row['PRODUCT_ID'];
-            $orderQuantity = $row['ORDER_QUANTITY'];
-            $orderDate = $row['ORDER_DATE'];
-            
-            $SlotStatus = 'N';
-            $queryOrderCollection = "INSERT INTO COLLECTION_SLOT(COLLECTION_ID, CART_ID, COLLECTION_DATE, COLLECTION_TIME, SLOT_STATUS) VALUES (COLLECTION_SLOT_S.NEXTVAL, :cartId, :collectionDate, :collectionTime, :slotStatus)";
-            $resultOrderCollection = oci_parse($conn, $queryOrderCollection);
-            oci_bind_by_name($resultOrderCollection, ':cartId', $cartId);
-            oci_bind_by_name($resultOrderCollection, ':collectionDate', $collectionDate);
-            oci_bind_by_name($resultOrderCollection, ':collectionTime', $collectionTime);
-            oci_bind_by_name($resultOrderCollection, ':slotStatus', $SlotStatus);
-            oci_execute($resultOrderCollection);
-        }
+        $SlotStatus = 'Y';
+        $queryOrderCollection = "INSERT INTO COLLECTION_SLOT(COLLECTION_ID, CART_ID, COLLECTION_DATE, COLLECTION_TIME, SLOT_STATUS) VALUES (COLLECTION_SLOT_S.NEXTVAL, :cartId, :collectionDate, :collectionTime, :slotStatus)";
+        $resultOrderCollection = oci_parse($conn, $queryOrderCollection);
+        oci_bind_by_name($resultOrderCollection, ':cartId', $cartId);
+        oci_bind_by_name($resultOrderCollection, ':collectionDate', $collectionDate);
+        oci_bind_by_name($resultOrderCollection, ':collectionTime', $collectionTime);
+        oci_bind_by_name($resultOrderCollection, ':slotStatus', $SlotStatus);
+        oci_execute($resultOrderCollection);
         header("Location:./PaymentGateway.php?user=$user");
     }
 ?>

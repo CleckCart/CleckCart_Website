@@ -13,7 +13,7 @@
         while($row = oci_fetch_array($resultCustomer, OCI_ASSOC)){
             $userid = $row['USER_ID'];
         }
-        
+
         $query = "INSERT INTO PAYMENT(PAYMENT_ID, USER_ID, CART_ID, PAYMENT_AMOUNT, PAYMENT_METHOD, PAYMENT_DATE) VALUES (PAYMENT_S.NEXTVAL, :userId, :cartId, :paymentAmount, :paymentMethod, :paymentDate)";
         $result = oci_parse($conn, $query);
         oci_bind_by_name($result, ':userId', $userid);
@@ -30,22 +30,6 @@
         $queryDeleteInvoice = "DELETE FROM INVOICE WHERE CART_ID = $cartId";     
         $resultDeleteCartProduct = oci_parse($conn, $queryDeleteInvoice);
         oci_execute($resultDeleteCartProduct);
-
-        $queryCollectionSlot = "SELECT * FROM COLLECTION_SLOT WHERE CART_ID = $cartId";
-        $resultCollectionSlot = oci_parse($conn, $queryCollectionSlot);
-        oci_execute($resultCollectionSlot);
-        while($row = oci_fetch_array($resultCollectionSlot, OCI_ASSOC)){
-            $collectionDate = $row['COLLECTION_DATE'];
-            $collectionTime = $row['COLLECTION_TIME'];
-        }
-
-        $slotStatus = 'Y';
-        $queryUpdateCollectionSlot = "UPDATE COLLECTION_SLOT SET COLLECTION_DATE=:collectionDate, COLLECTION_TIME=:collectionTime, SLOT_STATUS=:slotStatus WHERE CART_ID=$cartId";
-        $resultUpdateCollectionSlot = oci_parse($conn, $queryUpdateCollectionSlot);
-        oci_bind_by_name($resultUpdateCollectionSlot, ":collectionDate", $collectionDate);
-        oci_bind_by_name($resultUpdateCollectionSlot, ":collectionTime", $collectionTime);
-        oci_bind_by_name($resultUpdateCollectionSlot, ":slotStatus", $slotStatus);
-        oci_execute($resultUpdateCollectionSlot);
 
         header("Location:./PaymentSuccess.php?user=$user&cartId=$cartId&amount=$productTotalPrice");
     }
