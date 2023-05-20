@@ -197,7 +197,7 @@
 
                         // Define the available days and time slots
                         $days = ['Wednesday', 'Thursday', 'Friday'];
-                        $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-22:00'];
+                        $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
 
                         // Determine which day and time slot to disable
                         $disabledDay = $currentDay;
