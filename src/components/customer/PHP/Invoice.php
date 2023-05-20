@@ -149,6 +149,7 @@
                     $productImage = $rowCartProduct['PRODUCT_IMAGE'];
                     $productPrice = $rowCartProduct['PRODUCT_PRICE'];
                     $productQuantity = $rowCartProduct['PRODUCT_QUANTITY'];
+                    $productTotalQuantity = $productTotalQuantity + $productQuantity;
                     $productTotal = $productPrice * $productQuantity;
                     $productTotalPrice += $productPrice * $productQuantity;
                     echo ("
