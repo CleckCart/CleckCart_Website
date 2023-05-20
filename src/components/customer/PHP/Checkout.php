@@ -14,6 +14,12 @@
   <!--Jquery-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+ <style>
+    td{
+        text-align: center;
+        vertical-align: middle;
+    }
+ </style>
 </head>
 
 <body>
@@ -53,7 +59,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo ("<a class='nav-link' href='#'>SALE</a>");?>
+                            <?php echo ("<a class='nav-link' href='Sale.php?user=$user'>SALE</a>");?>
                         </li>
 
                         <li class="nav-item me-5">
@@ -118,8 +124,8 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            
-                            <th colspan = '2' class = 'text-center'><h3>Name</h3></th>
+                            <th></th>
+                            <th class = 'text-center'><h3>Name</h3></th>
                             <th class = 'text-center'><h3>Price</h3></th>
                             <th class = 'text-center'><h3>Quantity</h3></th>
                             <th class = 'text-center'><h3>Action</h3></th>
@@ -157,9 +163,9 @@
                         $productTotalPrice += $productPrice * $productQuantity;
                         $productTotalQuantity += $productQuantity;
                         echo ("<tr>
-                        <td ><img src='../../../dist/public/$productImage' alt='image' width='80'height='60'></td>
+                        <td ><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='90'height='80' style='object-fit:contain;'></td>
                         <td>$productName</td>
-                        <td class = 'text-center'>&pound;$productPrice</td>
+                        <td >&pound;$productPrice</td>
                         <td class = 'text-center'>$productQuantity</td>
                         <td class = 'text-center'>
                         <!-- Delete Button trigger modal -->
