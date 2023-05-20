@@ -13,6 +13,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
 
+    <?php
+            include('./connect.php');
             if(isset($_GET['user'])){
                 $user = $_GET['user'];
             }
@@ -21,7 +23,7 @@
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
             <div class="container-fluid">
-
+                <a class="navbar-brand" href="./CustomerSession.php">
                     <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
                 </a>
 
@@ -32,7 +34,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-
+                            <a class="nav-link mr-3" aria-current="page" href="./CustomerSession.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
@@ -40,30 +42,52 @@
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              </ul>
+                                <?php echo("<li><a class='dropdown-item' href='./Categories.php?user=$user'>Category</a></li>")?>
+                            </ul>
                         </li>
 
                         <li class="nav-item me-5">
+                            <?php echo ("<a class='nav-link' href='./Sale.php?user=$user'>SALE</a>");?>
+                        </li>
 
+                        <li class="nav-item me-5">
+                            <?php echo ("<a class='nav-link mr-3' href='./About.php?user=$user'>ABOUT</a>");?>
+                        </li>
+
+                        <li class="nav-item me-5">
+                            <?php echo ("<a class='nav-link mr-3' href='./Contact.php?user=$user'>CONTACT</a>");?>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-
+                            <?php echo ("<a class='nav-link' href='#'><img src='./../../../dist/public/search.svg' alt='search'></a>");?>
+                        </li>
+                        <li class="nav-item me-3">
+                            <?php echo ("<a class='nav-link' href='./WishList.php?user=$user'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                            
                         </li>
                         <li class="nav-item dropdown me-3"><!---->
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="./../../../dist/public/person.svg" alt="person">
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <li><hr class="dropdown-divider"></li>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item me-5">
+                            <?php echo ("<a class='nav-link' href='./Checkout.php?user=$user'><img src='./../../../dist/public/cart.svg' alt='cart'></a>");?>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
-
+    </div>
+    
 
         <div class="container-fluid text-center mb-5">
         <h1 >PRODUCTS ON SALE</h1>
@@ -107,7 +131,7 @@
                             <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
                             style='width:100%;
                                    height:17vw;
-
+                                   object-fit:cover;'>");//or use contain here
                         echo("<div class='card-body'>");
                         echo("<div class = 'row'>
                                 
@@ -119,13 +143,29 @@
                         echo("</div></a>");            
                         echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
+                            href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&quantity=1' 
+                            role='button'>
+                            <img src = './../../../dist/public/cart2.svg'   
+                                style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>
+                            ");                
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
+                            href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice'    
+                            role='button'>
+                            <img src = './../../../dist/public/heart2.svg' 
+                            style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>
+                            ");               
                         echo("</div>");
                         echo("</div>");
                         echo("</div>");
                     }
                 }
 
+
+            ?>
+        </div>
+
+    </div>
 
 
 

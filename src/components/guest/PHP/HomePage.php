@@ -45,6 +45,7 @@
                         </li>
 
                         <li class="nav-item me-5">
+                        <a class="nav-link mr-3 text-success" href="./Sale.php">SALE</a>
 
                         </li>
 
