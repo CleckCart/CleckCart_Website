@@ -62,6 +62,7 @@
     <li class="nav-item me-3">
         <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg" style="color: #157347;"></i></a>
     </li>
+    
     <li class="nav-item dropdown me-3">
         <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-regular fa-user fa-lg" style="color: #157347;"></i>

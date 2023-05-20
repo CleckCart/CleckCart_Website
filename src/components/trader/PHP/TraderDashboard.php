@@ -29,7 +29,8 @@
     $result = oci_parse($conn, $query);
     oci_execute($result);
     while($row = oci_fetch_array($result, OCI_ASSOC)){
-        $image=$row['IMAGE'];  
+        $image=$row['IMAGE']; 
+         
     }
   ?>
     <!-- Vertical navbar -->

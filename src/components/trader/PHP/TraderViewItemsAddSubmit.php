@@ -20,12 +20,17 @@ if (isset($_POST['TraderItemAddSubmit'])) {
             $TraderItemAddDescription = strtolower(trim(filter_input(INPUT_POST, 'TraderItemAddDescription', FILTER_SANITIZE_STRING)));
             $TraderItemAddStock = trim(filter_input(INPUT_POST, 'TraderItemAddStock', FILTER_SANITIZE_NUMBER_INT));
             $TraderItemAddPrice = $_POST['TraderItemAddPrice'];
-            $TraderItemAddDiscount=$_POST['TraderItemAddDiscount'];
+            $Discount=$_POST['TraderItemAddDiscount'];
             $alphabetPattern = "/[^a-zA-Z\s]/";
             $TraderItemAddImage = ($_FILES["TraderItemAddImage"]["name"]);
             $TraderItemAddImageType = ($_FILES["TraderItemAddImage"]["type"]);
             $TraderItemImageAddTmpName = ($_FILES["TraderItemAddImage"]["tmp_name"]);
             $TraderItemAddImageLocation = "../../../dist/public/TraderItemImages/" . $TraderItemAddImage;
+            if(empty($Discount)){
+                $TraderItemAddDiscount = 0;
+            }else{
+                $TraderItemAddDiscount = $Discount;
+            }
             if(!preg_match($alphabetPattern,$TraderItemAddName))
                 {                               
              
@@ -50,7 +55,7 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                             $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);
                                                 if($row['CATEGORY_NAME']==$TraderItemAddCategory)
                                                     {
-                                                        if($TraderItemAddPrice > $TraderItemAddDiscount)
+                                                        if($TraderItemAddDiscount < 100)
                                                             {   
                                                                 $query2="SELECT * FROM CATEGORY WHERE CATEGORY_NAME ='$TraderItemAddCategory'";
                                                                 $result2 = oci_parse($conn, $query2);
@@ -78,15 +83,19 @@ if (isset($_POST['TraderItemAddSubmit'])) {
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductPrice', $TraderItemAddPrice);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductDiscount', $TraderItemAddDiscount);
                                                                 oci_bind_by_name($ProductRunInsertionQuery, ':ProductStock', $TraderItemAddStock);
-                                                                oci_execute($ProductRunInsertionQuery);
+                                                                if(oci_execute($ProductRunInsertionQuery)){
+                                                                    header("Location:./TraderViewItemsAdd.php?user=$user&success=Product Listing Requested.");
+                                                                }else{
+                                                                    header("Location:./TraderViewItemsAdd.php?user=$user&error=Error processing. Please try again.");
+
+                                                                }
                                                                    
-                                                                header("Location:./TraderViewItems.php?user=$user&success=Product Listing Requested.");
 
                                                             }
 
                                                         else
                                                             {
-                                                                header("Location:./TraderViewItemsAdd.php?user=$user&error=Discount amount cannot be greater than price.");
+                                                                header("Location:./TraderViewItemsAdd.php?user=$user&error=Discount percent cannot be a 100 percent.");
                                                             }
                                                 
                                                     }    
