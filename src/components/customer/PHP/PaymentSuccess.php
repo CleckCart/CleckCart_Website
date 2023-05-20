@@ -13,9 +13,9 @@
 <body>
     <?php
     include('./connect.php');
-    if(isset($_GET['user']) && isset($_GET['cartId']) && isset($_GET['amount'])){
+    if(isset($_GET['user'])  && isset($_GET['orderId']) && isset($_GET['amount'])){
         $user = $_GET['user'];
-        $cartId = $_GET['cartId'];
+        $orderId = $_GET['orderId'];
         $productTotalPrice= $_GET['amount'];
     }
     ?>
@@ -89,7 +89,7 @@
         </nav>
     </div>
     <?php
-        $queryPayment = "SELECT * FROM PAYMENT WHERE CART_ID = $cartId ";
+        $queryPayment = "SELECT * FROM PAYMENT WHERE ORDER_ID = $orderId ";
         $resultPayment = oci_parse($conn, $queryPayment);
         oci_execute($resultPayment);
         while($row = oci_fetch_array($resultPayment, OCI_ASSOC)){
