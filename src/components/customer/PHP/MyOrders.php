@@ -89,99 +89,76 @@
     </div>
     
     <?php
+            $UserQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
+            $runUserQuery=oci_parse($conn,$UserQuery);
+            oci_execute($runUserQuery);
+            $userRow = oci_fetch_assoc($runUserQuery);
+            $userId=$userRow['USER_ID'];
 
-        $queryUserId = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user'";
-        $resultUserId = oci_parse($conn, $queryUserId);
-        oci_execute($resultUserId);
-        while($rowUserId = oci_fetch_array($resultUserId, OCI_ASSOC)){
-            $uid = $rowUserId['USER_ID'];
-        }
+            $CartQuery = "SELECT * FROM CART WHERE USER_ID = '$userId'";
+            $runCartQuery=oci_parse($conn,$CartQuery);
+            oci_execute($runCartQuery);
+            $CartRow = oci_fetch_assoc($runCartQuery);
+            $CartId = $CartRow['CART_ID'];
+            
+            $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId'";
+            $runOrderQuery=oci_parse($conn,$OrderQuery);
+            oci_execute($runOrderQuery);
+            while($row=oci_fetch_assoc($runOrderQuery))
+                {
+                    $OrderId=$row['ORDER_ID'];
+                    $OrderDate=$row['ORDER_DATE'];
+                    echo("
+                        <div class = 'container'>
+                            <div class = 'container'>
+                                <p class = 'mt-5'>Order Id : $OrderId </p>
+                                    <div class='row table-responsive'>
+                                        <table class='table table-light table-striped text-center'>
+                                            <thead class='table-success'>
+                                                <tr>
+                                                <th>Image</th>
+                                                <th>Name</th>
+                                                <th>Category</th>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                                <th>Order Date</th>
+                                                <th>Collection Date</th>
+                                                </tr>
+                                            </thead><tbody>");
+                    $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
+                    $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
+                    oci_execute($runOrderProductQuery);
+                    while($row2=oci_fetch_assoc($runOrderProductQuery))
+                        {
+                            
+                            $ProductId = $row2['PRODUCT_ID'];
+                            $ProductQuantity = $row2['ORDER_QUANTITY'];
 
-        $queryCart = "SELECT * FROM CART WHERE USER_ID = $uid";
-        $resultCart = oci_parse($conn, $queryCart);
-        oci_execute($resultCart);
-        while($rowCart = oci_fetch_array($resultCart, OCI_ASSOC)){
-            $cartId = $rowCart['CART_ID'];
-        }
+                            $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
+                            $runProductQuery=oci_parse($conn,$ProductQuery);
+                            oci_execute($runProductQuery);  
+                            $ProductRow = oci_fetch_assoc($runProductQuery); 
 
-        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
-        $resultOrder = oci_parse($conn, $queryOrder);
-        oci_execute($resultOrder);
-        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
-            $productId = $rowOrder['PRODUCT_ID'];
-            $orderQuantity = $rowOrder['ORDER_QUANTITY'];
-            $orderDate = $rowOrder['ORDER_DATE'];
-        }
-
-        $queryProduct = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $productId";
-        $resultProduct = oci_parse($conn, $queryProduct);
-        oci_execute($resultProduct);
-        while($rowOrder = oci_fetch_array($resultProduct, OCI_ASSOC)){
-            $productImage = $rowOrder['PRODUCT_IMAGE'];
-            $productName = $rowOrder['PRODUCT_NAME'];
-            $productCategory = $rowOrder['CATEGORY_NAME'];
-            $productDescription = $rowOrder['PRODUCT_DESCRIPTION'];
-            $productPrice = $rowOrder['PRODUCT_PRICE'];
-            $productStock = $rowOrder['PRODUCT_STOCK'];
-        }
-        
-        $queryCollectionSlot = "SELECT * FROM COLLECTION_SLOT WHERE CART_ID = $cartId";
-        $resultCollectionSlot = oci_parse($conn, $queryCollectionSlot);
-        oci_execute($resultCollectionSlot);
-        while($rowCollectionSlot = oci_fetch_array($resultCollectionSlot, OCI_ASSOC)){
-            $collectionDate = $rowCollectionSlot['COLLECTION_DATE'];
-            $collectionTime = $rowCollectionSlot['COLLECTION_TIME'];
-        }
-        
-        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
-        $resultOrder = oci_parse($conn, $queryOrder);
-        oci_execute($resultOrder);
-        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
-            $productId = $rowOrder['PRODUCT_ID'];
-            $orderQuantity = $rowOrder['ORDER_QUANTITY'];
-            $orderDate = $rowOrder['ORDER_DATE'];
-        }
-
-        $queryPayment = "SELECT * FROM PAYMENT WHERE CART_ID = $cartId";
-        $resultPayment = oci_parse($conn, $queryPayment);
-        oci_execute($resultPayment);
-        while($rowPayment = oci_fetch_array($resultPayment, OCI_ASSOC)){
-            $paymentId = $rowPayment['PAYMENT_ID'];
-            echo("
-            <div class = 'container'>
-                <div class = 'container'>
-                    <p class = 'mt-5'>Payment ID : $paymentId </p>
-                        <div class='row table-responsive'>
-                            <table class='table table-light table-striped text-center'>
-                                <thead class='table-success'>
-                                    <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th >Category</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Order Date</th>
-                                    <th>Collection Date</th>
-                                    </tr>
-                                </thead>
-                                    <tr>
-                                    <td><img src = '$productImage' class = 'w-50 h-50'/></td>
-                                    <td>$productName</td>
-                                    <td>$productCategory</td>
-                                    <td>$productDescription</td>
-                                    <td>&pound;$productPrice</td>
-                                    <td>$orderQuantity</td>
-                                    <td>$orderDate</td>
-                                    <td>$collectionDate</td>
-                                    </tr>
-                            </table>
-                        </div>
-                </div>
-            </div>
-            ");
-        }
-
+                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId'";
+                            $runCollectionQuery=oci_parse($conn,$CollectionQuery);
+                            oci_execute($runCollectionQuery);  
+                            $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
+                            $CollectionDate=$CollectionRow['COLLECTION_DATE'];
+                            echo("<tr>
+                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                    <td>$ProductRow[PRODUCT_NAME]</td>
+                                    <td>$ProductRow[CATEGORY_NAME]</td>
+                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
+                                    <td>$ProductRow[PRODUCT_PRICE]</td>
+                                    <td>$ProductQuantity</td>
+                                    <td>$OrderDate</td>
+                                    <td>$CollectionDate</td></tr>");
+                        }
+                    echo("</tbody></table></div></div></div>");
+                }
+                
+                                
 
     ?>
     <div class = "container">&nbsp;</div>

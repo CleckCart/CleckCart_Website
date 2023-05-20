@@ -31,8 +31,8 @@ if(isset($_GET['user'])){
                     $Password=$row['PASSWORD'];
                     $Status = "No";
                     
-                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER, STATUS)
-                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber,:TraderStatus)";
+                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                     $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderId', $Id);   
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderImage', $Image);
@@ -46,7 +46,7 @@ if(isset($_GET['user'])){
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderBirthDate', $BirthDate);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderAddress', $Address);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderPhoneNumber', $PhoneNumber);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderStatus', $Status);
+                    
 
                     oci_execute($TraderRunInsertionQuery);                    
 
