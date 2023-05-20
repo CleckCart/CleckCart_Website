@@ -43,7 +43,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link text-success" href="#">SALE</a>
+                            <a class="nav-link text-success" href="sale.php">SALE</a>
                         </li>
 
                         <li class="nav-item me-5">
