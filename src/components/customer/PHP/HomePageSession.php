@@ -47,6 +47,7 @@
                         </li>
 
                         <li class="nav-item me-5">
+                        <?php echo ("<a class='nav-link mr-3' href='./Sale.php?user=$user'>SALE</a>");?>
 
                         </li>
 
