@@ -150,7 +150,7 @@
                                     <td>$ProductRow[PRODUCT_NAME]</td>
                                     <td>$ProductRow[CATEGORY_NAME]</td>
                                     <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                    <td>$ProductRow[PRODUCT_PRICE]</td>
+                                    <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
                                     <td>$ProductQuantity</td>
                                     <td>$OrderDate</td>
                                     <td>$CollectionDate</td></tr>");

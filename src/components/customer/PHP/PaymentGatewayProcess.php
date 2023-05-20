@@ -28,8 +28,11 @@
         $query = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
         $result = oci_parse($conn, $query);
         oci_execute($result);
-        $row = oci_fetch_assoc($result);
-        $OrderId = $row['ORDER_ID'];
+
+        while ($row = oci_fetch_assoc($result))
+        {
+            $OrderId = $row['ORDER_ID'];
+        }
         
         $SlotStatus = 'N';
         $queryOrderCollection = "INSERT INTO COLLECTION_SLOT(COLLECTION_ID, ORDER_ID, COLLECTION_DATE, COLLECTION_TIME, SLOT_STATUS)
@@ -44,8 +47,9 @@
         $query = "SELECT * FROM CART_PRODUCT WHERE CART_ID = $cartId";
         $result = oci_parse($conn, $query);
         oci_execute($result);
-        while($row = oci_fetch_array($result, OCI_ASSOC)){
-            
+
+        while ($row = oci_fetch_array($result, OCI_ASSOC))
+        {
             $ProductId = $row['PRODUCT_ID'];
             $ProductQuantity = $row['PRODUCT_QUANTITY'];
 
@@ -55,8 +59,9 @@
             oci_bind_by_name($resultOrderProduct, ':productId', $ProductId);
             oci_bind_by_name($resultOrderProduct, ':productQuantity', $ProductQuantity);
             oci_execute($resultOrderProduct);
-        }
+        }      
+        
+
         header("Location:./PaymentGateway.php?user=$user");
-       
     }
 ?>
