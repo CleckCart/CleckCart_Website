@@ -86,7 +86,7 @@
         </nav>
     </div>
     <div class = "container">
-            <h1>My Orders</h1>
+            <h1 class="mb-4">My Orders</h1>
     </div>
     
     <?php
@@ -110,10 +110,10 @@
                     $OrderId=$row['ORDER_ID'];
                     $OrderDate=$row['ORDER_DATE'];
                     echo("
-                        <div class = 'container'>
+                        <div class = 'container bg-light border rounded mb-3'>
                             <div class = 'container'>
                                 <p class = 'mt-5'>Order Id : $OrderId </p>
-                                    <div class='row table-responsive'>
+                                    <div class='row table-responsive rounded'>
                                         <table class='table table-light table-striped text-center'>
                                             <thead class='table-success'>
                                                 <tr>
@@ -147,6 +147,7 @@
                             oci_execute($runCollectionQuery);  
                             $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
                             $CollectionDate=$CollectionRow['COLLECTION_DATE'];
+                            
                             $slotStatus = $CollectionRow['SLOT_STATUS'];
 
                             if(!empty($slotStatus)){
@@ -159,7 +160,7 @@
                                         <td>$ProductQuantity</td>
                                         <td>$OrderDate</td>
                                         <td>$CollectionDate</td>
-                                        <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
+                                        <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
                                         </tr>");
                             }
                             else{
@@ -168,7 +169,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td>No payment for this order</td>
+                                        <td>No payment made for this order.</td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
