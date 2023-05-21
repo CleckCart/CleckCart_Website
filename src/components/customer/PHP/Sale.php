@@ -144,13 +144,13 @@
                         echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
                         echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
-                            href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&quantity=1' 
+                            href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$discountedPrice&quantity=1'
                             role='button'>
                             <img src = './../../../dist/public/cart2.svg'   
                                 style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>
                             ");                
                         echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
-                            href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice'    
+                            href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$discountedPrice&quantity=1'    
                             role='button'>
                             <img src = './../../../dist/public/heart2.svg' 
                             style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>

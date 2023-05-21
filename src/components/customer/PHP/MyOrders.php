@@ -147,17 +147,35 @@
                             oci_execute($runCollectionQuery);  
                             $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
                             $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                            echo("<tr>
-                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                    <td>$ProductRow[PRODUCT_NAME]</td>
-                                    <td>$ProductRow[CATEGORY_NAME]</td>
-                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                    <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                    <td>$ProductQuantity</td>
-                                    <td>$OrderDate</td>
-                                    <td>$CollectionDate</td>
-                                    <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
+                            $slotStatus = $CollectionRow['SLOT_STATUS'];
+
+                            if(!empty($slotStatus)){
+                                echo("<tr>
+                                        <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                        <td>$ProductRow[PRODUCT_NAME]</td>
+                                        <td>$ProductRow[CATEGORY_NAME]</td>
+                                        <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
+                                        <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
+                                        <td>$ProductQuantity</td>
+                                        <td>$OrderDate</td>
+                                        <td>$CollectionDate</td>
+                                        <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
+                                        </tr>");
+                            }
+                            else{
+                                echo("<tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>No payment for this order</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>");
+                            }
+
                         }
                     echo("</tbody></table></div></div></div>");
                 }
