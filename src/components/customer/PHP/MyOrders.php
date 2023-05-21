@@ -86,7 +86,7 @@
         </nav>
     </div>
     <div class = "container">
-            <h1>My Orders</h1>
+            <h1 class="mb-4">My Orders</h1>
     </div>
     
     <?php
@@ -110,7 +110,7 @@
                     $OrderId=$row['ORDER_ID'];
                     $OrderDate=$row['ORDER_DATE'];
                     echo("
-                        <div class = 'container bg-light border rounded'>
+                        <div class = 'container bg-light border rounded mb-3'>
                             <div class = 'container'>
                                 <p class = 'mt-5'>Order Id : $OrderId </p>
                                     <div class='row table-responsive rounded'>
@@ -147,17 +147,36 @@
                             oci_execute($runCollectionQuery);  
                             $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
                             $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                            echo("<tr>
-                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                    <td>$ProductRow[PRODUCT_NAME]</td>
-                                    <td>$ProductRow[CATEGORY_NAME]</td>
-                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                    <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                    <td>$ProductQuantity</td>
-                                    <td>$OrderDate</td>
-                                    <td>$CollectionDate</td>
-                                    <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
+                            
+                            $slotStatus = $CollectionRow['SLOT_STATUS'];
+
+                            if(!empty($slotStatus)){
+                                echo("<tr>
+                                        <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                        <td>$ProductRow[PRODUCT_NAME]</td>
+                                        <td>$ProductRow[CATEGORY_NAME]</td>
+                                        <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
+                                        <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
+                                        <td>$ProductQuantity</td>
+                                        <td>$OrderDate</td>
+                                        <td>$CollectionDate</td>
+                                        <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
+                                        </tr>");
+                            }
+                            else{
+                                echo("<tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>No payment made for this order.</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
                                     </tr>");
+                            }
+
                         }
                     echo("</tbody></table></div></div></div>");
                 }
