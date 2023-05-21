@@ -19,10 +19,10 @@
     ?>
     <!--NavBar-->
     <div class="topbar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width="70" height="70" alt="logo">
+                    <img src="./../../../dist/public/logo.jpg" class="img-fluid rounded-circle img-thumbnail" width="80" height="70" alt="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,11 +32,11 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 text-success" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3 text-light" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
-                            <a class="nav-link mr-3 dropdown-toggle text-success" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link mr-3 dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,41 +45,41 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-success" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 text-success" href="./About.php">ABOUT</a>
+                            <a class="nav-link mr-3 text-light" href="./About.php">ABOUT</a>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 text-success" href="./Contact.php">CONTACT</a>
+                            <a class="nav-link mr-3 text-light" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #157347;"></i></a>
+                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg text-white"></i></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg" style="color: #157347;"></i></a>
+                            <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg text-white"></i></a>
                         </li>
 
                         <li class="nav-item dropdown me-3">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-regular fa-user fa-lg" style="color: #157347;"></i>
+                                <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php" >Log In Customer</a></li>
                                 <li>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider text-success">
                                 </li>
-                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
+                                <li><a class="dropdown-item text-success" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg" style="color: #157347;"></i></a>
+                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white" ></i></a>
                         </li>
                     </ul>
 
@@ -132,7 +132,7 @@
 
     <!--Images-->
     <div class="container-fluid">
-        <div class="row row-cols-2 row-cols-md-4 g-4 pt-5">
+        <div class="row row-cols-2 row-cols-md-4 g-4 pt-5 text-success">
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
                     <div class="ellipse p-5">
@@ -175,9 +175,9 @@
 
 
     <!--Button and Text-->
-    <div class="container-fluid text-center mt-5">
-        <h1>Lorem ipsum dolor sit amet.</h1>
-        <a class="btn btn-size btn-success border-2 border-secondary mt-5" href="#" role="button">SHOP NOW</a>
+    <div class="container-fluid text-center mt-5 text-success">
+        <h1 class="display-5">Browse through our fresh and natural products.</h1>
+        <a class="btn btn-size btn-success mt-5" href="#" role="button">SHOP NOW</a>
     </div>
     <div class="custom-margin"></div>
 
@@ -307,48 +307,50 @@
 
     <!--footer-->
     <footer>
-        <div class="container-fluid bg-secondary">
+        <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
-                <div class="col mt-5 text-center">
+                <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Cleck Cart</h3>
-                            <h5 class="mt-5">Satisfy your cravings, with local farm savings</h5>
+                            <h5 class="mt-4">Satisfy your cravings, with local farm savings.</h5>
+                            <h6>&#169; 2023 CleckCart. All rights reserved.</h6>
                         </div>
                         <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
+                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2xl" style="color: #ffffff;"></i></a>
                         </div>
                     </div>
                 </div>
-                <div class="col mt-5 text-center">
+                <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Join Us</h3>
-                            <h5 class="mt-5">Sell on CleckCart</h5>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
+                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
                         </div>
                     </div>
                 </div>
-                <div class="col mt-5 text-center">
+                <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Help</h3>
-                            <h5 class="mt-5">Pick Up Information</h5>
-                            <h5 class="mt-2">Lorem ipsum</h5>
-                            <h5 class="mt-2">Lorem ipsum</h5>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
+                            <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
+                            <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
                         </div>
                     </div>
                 </div>
-                <div class="col mt-5 text-center">
+                <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Send Us a message</h3>
                         </div>
-                        <div class="p-2 bd-highlight">
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
-                            <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
+                        <div class="p-2 bd-highlight text-center">
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-location-dot fa-xl" style="color: #ffffff;"></i>&nbsp;Cleckhuddersfax, UK </a>
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-phone fa-xl" style="color: #ffffff;"></i>&nbsp;01632 960315 </a>
+                            <a class="nav-link text-reset text-decoration-none" href="https://mail.google.com/?" target="_blank"><i class="fa-regular fa-envelope fa-xl" style="color: #ffffff;"></i>&nbsp;cleckcart@gmail.com </a>
                         </div>
                     </div>
                 </div>

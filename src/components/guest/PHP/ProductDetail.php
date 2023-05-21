@@ -20,36 +20,12 @@
   <?php
     include('./connect.php');
   ?>
-  <!--modal code-->
-  <!-- <div class="modal">
-    <div class="modal-content">
-      <h2 class="modal-title">Review</h2>
-      <div class="modal-description">
-        <span>Description:</span>
-        <textarea placeholder="Write your review here"></textarea>
-      </div>
-      <div class="modal-rating">
-        <span>Rating:</span>
-        <div class="stars">
-          
-        </div>
-      </div>
-      <div class="modal-buttons">
-        <button class="modal-cancel">Cancel</button>
-        <button class="modal-submit">Submit</button>
-      </div>
-    </div>
-  </div> -->
-
-  <?php
-            include('./connect.php');
-        ?>
         <!--NavBar-->
-        <div class = "topbar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
+        <div class="topbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
-                    <img src="./../../../dist/public/logo.png" class="img-fluid" width = "70" height="70" alt="logo">
+                    <img src="./../../../dist/public/logo.jpg" class="img-fluid rounded-circle img-thumbnail" width="80" height="70" alt="logo">
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,57 +35,61 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" aria-current="page" href="./HomePage.php">HOME</a>
+                            <a class="nav-link mr-3 text-light" aria-current="page" href="./HomePage.php">HOME</a>
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
-                            <a class="nav-link mr-3 dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link mr-3 dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./Categories.php">Category</a></li>
+                                <li><a class="dropdown-item text-success" href="./Categories.php">CATEGORY</a></li>
                             </ul>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./About.php">ABOUT</a>
+                            <a class="nav-link mr-3 text-light" href="./About.php">ABOUT</a>
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3" href="./Contact.php">CONTACT</a>
+                            <a class="nav-link mr-3 text-light" href="./Contact.php">CONTACT</a>
                         </li>
                     </ul>
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><img src="./../../../dist/public/search.svg" alt="search"></a>
+                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg text-white"></i></a>
                         </li>
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="./WishList.php"><img src="./../../../dist/public/heart.svg" alt="heart"></a>
+                            <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg text-white"></i></a>
                         </li>
-                        <li class="nav-item dropdown me-3"><!---->
+
+                        <li class="nav-item dropdown me-3">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="./../../../dist/public/person.svg" alt="person">
+                                <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="./CustomerLogin.php">Log In Customer</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php" >Log In Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider text-success">
+                                </li>
+                                <li><a class="dropdown-item text-success" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><img src="./../../../dist/public/cart.svg" alt="cart"></a>
+                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white" ></i></a>
                         </li>
                     </ul>
+
                 </div>
             </div>
         </nav>
-        </div>
+    </div>
         <?php
             $id = $_GET['id'];
             $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $id";

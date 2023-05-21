@@ -86,7 +86,7 @@
                 <div class = "d-flex flex-column justify-content-center text-center">
                     <h1 class = "display-1">Join us! Start Selling with CleckCart</h1>
                     <p class = "mt-5">Create an account in a few minutes and reach out to hundreds of customers!</p>
-                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php" class="text-success">Sign in</a></p>
+                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php" class="text-success text-decoration-none">&nbsp;Sign in</a></p>
                 </div>
             </div>
             <div class = "col bg-light border rounded p-5">

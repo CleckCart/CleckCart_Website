@@ -110,10 +110,10 @@
                     $OrderId=$row['ORDER_ID'];
                     $OrderDate=$row['ORDER_DATE'];
                     echo("
-                        <div class = 'container'>
+                        <div class = 'container bg-light border rounded'>
                             <div class = 'container'>
                                 <p class = 'mt-5'>Order Id : $OrderId </p>
-                                    <div class='row table-responsive'>
+                                    <div class='row table-responsive rounded'>
                                         <table class='table table-light table-striped text-center'>
                                             <thead class='table-success'>
                                                 <tr>
@@ -156,7 +156,7 @@
                                     <td>$ProductQuantity</td>
                                     <td>$OrderDate</td>
                                     <td>$CollectionDate</td>
-                                    <td><a class = 'btn btn-success' href = './ReviewProduct.php?user=$user&id=$ProductId'>Review</a></td>
+                                    <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
                                     </tr>");
                         }
                     echo("</tbody></table></div></div></div>");
