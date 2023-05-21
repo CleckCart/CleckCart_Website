@@ -14,6 +14,7 @@
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/product-detail.css" />
+    <link rel="stylesheet" href="../CSS/displayReview.css" />
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -153,18 +154,53 @@
           
           <div class="lower-section">
             <h2 class="review-heading">Customer Reviews</h2>
-            <div class="review">
-              <div class="review-left">
-                <h3 class="review-name">Customer Name</h3>
-                <span class="review-rating">Star rating</span>
-                <span class="review-date">01/01/2023</span>
-              </div>
-              <hr />
-              <div class="review-right">
-                  <h4 class="review-title">Review Title</h4>
-                  <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
-              </div>
-            </div>
+            <?php
+              $queryReview = "SELECT * FROM REVIEW WHERE PRODUCT_ID = '$productId'";
+              $resultReview = oci_parse($conn, $queryReview);
+              oci_execute($resultReview);
+
+              while ($row = oci_fetch_array($resultReview, OCI_ASSOC)) {
+                  $reviewId = $row['REVIEW_ID'];
+                  $userId = $row['USER_ID'];
+                  $reviewDescription = $row['PRODUCT_DESCRIPTION'];
+                  $reviewRating = $row['RATING'];
+                  $reviewDate = $row['REVIEW_DATE'];
+
+                  $queryCustomer = "SELECT * FROM USER_TABLE WHERE USER_ID = '$userId'";
+                  $resultCustomer = oci_parse($conn, $queryCustomer);
+                  oci_execute($resultCustomer);
+
+                  while ($row = oci_fetch_array($resultCustomer, OCI_ASSOC)) {
+                      $username = $row['USERNAME'];
+                  }
+
+                  echo ("
+                  <div class='review mt-5'>
+                      <div class='review-left'>
+                          <h3 class='review-name'>$username</h3>
+                          <span class='review-date'>$reviewDate</span>
+                      </div>
+                      <hr />
+                      <div class='review-right'>
+                          <div class='rating'>
+                  ");
+
+                  for ($i = 5; $i >= 1; $i--) {
+                      echo ("<input type='radio' id='star$i-$reviewId' name='rating-$reviewId' value='$i'");
+                      if ($reviewRating == $i) {
+                          echo (" checked");
+                      }
+                      echo (">
+                          <label for='star$i-$reviewId'>&#9733;</label>");
+                  }
+
+                  echo ("
+                          </div>
+                          <p class='review-description'>$reviewDescription</p>
+                      </div>
+                  </div>");
+              }
+              ?>
           </div>
         </section>
    <!--footer-->

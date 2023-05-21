@@ -14,6 +14,7 @@
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/product-detail.css" />
+    <link rel="stylesheet" href="../CSS/displayReview.css" />
   </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -23,26 +24,6 @@
         $user = $_GET['user'];
       }
   ?>
-  <!--modal code-->
-  <!-- <div class="modal">
-    <div class="modal-content">
-      <h2 class="modal-title">Review</h2>
-      <div class="modal-description">
-        <span>Description:</span>
-        <textarea placeholder="Write your review here"></textarea>
-      </div>
-      <div class="modal-rating">
-        <span>Rating:</span>
-        <div class="stars">
-          
-        </div>
-      </div>
-      <div class="modal-buttons">
-        <button class="modal-cancel">Cancel</button>
-        <button class="modal-submit">Submit</button>
-      </div>
-    </div>
-  </div> -->
         <!--NavBar-->
         <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color">
@@ -141,10 +122,7 @@
               <div class="product-info">
                   <div class="product-title-box">
                     <h2 class="product-title"><?php echo($productName)?></h2>
-                    <img src="" alt="Favourite icon">
-                  </div>
-                  <div class="star-rating-box">
-                    <p>Star rating <span>No of rating</span></p>
+                    <?php echo ("<a class='nav-link' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
                   </div>
                 <p class="product-description"><?php echo($productDescription) ?></p>
                 <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
@@ -187,21 +165,60 @@
                 })
               </script>
           </div>
-          <div class="lower-section">
-            <h2 class="review-heading">Customer Reviews</h2>
-            <div class="review">
-              <div class="review-left">
-                <h3 class="review-name">Customer Name</h3>
-                <span class="review-rating">Star rating</span>
-                <span class="review-date">01/01/2023</span>
-              </div>
-              <hr />
-              <div class="review-right">
-                  <h4 class="review-title">Review Title</h4>
-                  <p class="review-description">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis quia doloribus culpa esse rem labore nesciunt quas, numquam aperiam odio nobis obcaecati minus provident nam ab fugiat illo? Atque, enim!</p>
-              </div>
-            </div>
-          </div>
+
+            <?php
+              $queryReview = "SELECT * FROM REVIEW WHERE PRODUCT_ID = '$id'";
+              $resultReview = oci_parse($conn, $queryReview);
+              oci_execute($resultReview);
+
+              while ($row = oci_fetch_array($resultReview, OCI_ASSOC)) {
+                  $reviewId = $row['REVIEW_ID'];
+                  $userId = $row['USER_ID'];
+                  $reviewDescription = $row['PRODUCT_DESCRIPTION'];
+                  $reviewRating = $row['RATING'];
+                  $reviewDate = $row['REVIEW_DATE'];
+                  $queryCustomer = "SELECT * FROM USER_TABLE WHERE USER_ID = '$userId'";
+                  $resultCustomer = oci_parse($conn, $queryCustomer);
+                  oci_execute($resultCustomer);
+
+                  while ($row = oci_fetch_array($resultCustomer, OCI_ASSOC)) {
+                      $username = $row['USERNAME'];
+                  }
+
+                  echo ("
+                  <div class='lower-section'>
+                    <h2 class='review-heading'>Customer Reviews</h2>
+                    <div class='review mt-5'>
+                        <div class='review-left'>
+                            <h3 class='review-name'>$username</h3>
+                            <span class='review-date'>$reviewDate</span>
+                        </div>
+                        <hr />
+                        <div class='review-right'>
+                            <div class='rating'>
+                    ");
+
+                    for ($i = 5; $i >= 1; $i--) {
+                        echo ("<input type='radio' id='star$i-$reviewId' name='rating-$reviewId' value='$i'");
+                        if ($reviewRating == $i) {
+                            echo (" checked");
+                        }
+                        echo (">
+                            <label for='star$i-$reviewId'>&#9733;</label>");
+                    }
+
+                    echo ("
+                            </div>
+                            <p class='review-description'>$reviewDescription</p>
+                        </div>
+                      </div>
+                  </div>");
+              }
+              ?>
+
+
+
+                  
         </section>
    <!--footer-->
    <footer>
