@@ -121,20 +121,41 @@
                     </thead>
 
                     <?php
-                    for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
-                        echo "<tr>
-                                <td ><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
-                                <td>link product name here</td>
-                                <td class = 'text-center'>$10</td>
-                                <td class = 'text-center'>10</td>
-                                <td class = 'text-center'>
-                                    <!-- Delete Button trigger modal -->
-                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
-                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
-                                    </button>
-                                </td>
-                            </tr>";
-                        }
+                   
+                    $queryGuestCart = "SELECT * FROM GUEST_CART";
+                    $resultGuestCart = oci_parse($conn, $queryGuestCart);
+                    oci_execute($resultGuestCart);
+                    while($rowCart = oci_fetch_array($resultGuestCart, OCI_ASSOC)){
+                        $guestCartId = $rowCart['GUEST_CART_ID'];
+                    }
+                    $queryGuestCartProduct = "SELECT * FROM GUEST_CART_PRODUCT";
+                    $resultGuestCartProduct = oci_parse($conn, $queryGuestCartProduct);
+                    oci_execute($resultGuestCartProduct);
+                    $productTotalPrice = 0;
+                    $productTotalQuantity = 0;
+                    while($rowGuestCartProduct = oci_fetch_array($resultGuestCartProduct, OCI_ASSOC)){
+                        $guestCartProductId = $rowGuestCartProduct['GUEST_CART_PRODUCT_ID'];
+                        $guestCartId = $rowGuestCartProduct['GUEST_CART_ID'];
+                        $productId = $rowGuestCartProduct['PRODUCT_ID'];
+                        $productImage = $rowGuestCartProduct['PRODUCT_IMAGE'];
+                        $productName = $rowGuestCartProduct['PRODUCT_NAME'];
+                        $productPrice = $rowGuestCartProduct['PRODUCT_PRICE'];
+                        $productQuantity = $rowGuestCartProduct['PRODUCT_QUANTITY'];
+                        $productTotalPrice += $productPrice * $productQuantity;
+                        $productTotalQuantity += $productQuantity;
+                        echo ("<tr>
+                        <td ><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='90'height='80' style='object-fit:contain;'></td>
+                        <td>$productName</td>
+                        <td >&pound;$productPrice</td>
+                        <td class = 'text-center'>$productQuantity</td>
+                        <td class = 'text-center'>
+                        <!-- Delete Button trigger modal -->
+                        <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$guestCartProductId' data-name='$productName'>
+                        <img src='./../../../dist/public/delete.svg' alt='delete'/>
+                        </button>
+                        </td>
+                        </tr>");
+                    }
                     ?>
                 </table>
             </div>
