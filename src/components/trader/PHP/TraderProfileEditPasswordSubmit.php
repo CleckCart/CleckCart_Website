@@ -18,12 +18,11 @@ if(isset($_GET['user']) && isset($_GET['id'])){
         $traderConfirmNewPassword = trim(filter_input(INPUT_POST, 'confirmnewPassword', FILTER_SANITIZE_STRING));
         if(strcmp($traderCurrentPassword,$traderNewPassword)!=0){
             $traderCurrentEnteredPassword = md5($traderCurrentPassword);
-            $query = "SELECT * FROM USER_TABLE WHERE USER_ID = $id AND PASSWORD = '$traderCurrentEnteredPassword'";
+            $query = "SELECT * FROM USER_TABLE WHERE USER_ID = '$id' AND PASSWORD = '$traderCurrentEnteredPassword'";
             $result = oci_parse($conn, $query);
             oci_execute($result);
-            while($row = oci_fetch_array($result, OCI_ASSOC)){
-                $password = $row['PASSWORD'];
-            }
+            $row = oci_fetch_assoc($result);
+            echo($password = $row['PASSWORD']);
 
             if($traderCurrentEnteredPassword == $password){
                 /*Check if password and confirm password matches*/
@@ -34,12 +33,12 @@ if(isset($_GET['user']) && isset($_GET['id'])){
                     if(preg_match($passwordPattern, $traderNewPassword))
                         {
                             $traderConfirmNewPassword = md5($traderConfirmNewPassword);
-                            $query = "UPDATE USER_TABLE SET PASSWORD = :password WHERE USER_ID = $id";
+                            $query = "UPDATE USER_TABLE SET PASSWORD = :password WHERE USER_ID = '$id' AND ROLE='trader'";
                             $result = oci_parse($conn, $query);
                             oci_bind_by_name($result, ":password", $traderConfirmNewPassword);
                             oci_execute($result);
                             header("Location:./TraderProfileEditPassword.php?user=$user&id=$id&success=Password successfully updated.");  
-                        /*For inserting into database*/
+                        
                         }
                     else
                         {
@@ -51,7 +50,7 @@ if(isset($_GET['user']) && isset($_GET['id'])){
                 }
             }
             else{
-                header("Location:./TraderProfileEditPassword.php?user=$user&id=$id&error=Password doesnot match with you original password.");
+                header("Location:./TraderProfileEditPassword.php?user=$user&id=$id&error=Password doesnot match with your original password.");
             }
         }
         else{
