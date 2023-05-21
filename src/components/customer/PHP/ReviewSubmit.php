@@ -28,7 +28,7 @@
                 oci_bind_by_name($result, ':rating', $selectedRating);
                 oci_bind_by_name($result, ':reviewDate', $reviewDate);
                 oci_execute($result);
-                //header("Location:./ReviewPage.php?&success=Review Submitted Successfully&user=$user&id=$productId");
+                header("Location:./ReviewPage.php?&success=Review Submitted Successfully&user=$user&id=$productId");
             }
             else{
                 header("Location:./ReviewPage.php?&error=Please select a rating&user=$user&id=$productId");
