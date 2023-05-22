@@ -192,56 +192,34 @@
                 <div class="row border pb-4">
                     <div class="col-sm-6 px-4 ">
                         <h6 class="py-2">Day</h6>
-                        <?php
-                        // Get the current day and time
-                        $currentDay = date('l');
-                        $currentHour = date('H');
+                            <?php
+                                // Get the current time
+                                $currentHour = date('H');
 
-                        // Define the available days and time slots
-                        $days = ['Wednesday', 'Thursday', 'Friday'];
-                        $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
+                                // Define the available time slots
+                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
 
-                        // Determine which day and time slot to disable
-                        $disabledDay = $currentDay;
-                        $disabledTimeSlots = [];
+                                // Determine which time slot to disable
+                                $disabledTimeSlots = [];
 
-                        if ($currentHour >= 19) {
-                            // If the current hour is 19 or later, disable all time slots
-                            $disabledTimeSlots = $timeSlots;
-                        } else {
-                            // Disable the time slots before the current time
-                            foreach ($timeSlots as $timeSlot) {
-                                $timeRange = explode('-', $timeSlot);
-                                $startTime = explode(':', $timeRange[0])[0];
+                                if ($currentHour >= 19) {
+                                    // If the current hour is 19 or later, disable all time slots
+                                    $disabledTimeSlots = $timeSlots;
+                                } else {
+                                    // Disable the time slots before the current time
+                                    foreach ($timeSlots as $timeSlot) {
+                                        $timeRange = explode('-', $timeSlot);
+                                        $startTime = explode(':', $timeRange[0])[0];
 
-                                if ($startTime <= $currentHour) {
-                                    $disabledTimeSlots[] = $timeSlot;
+                                        if ($startTime <= $currentHour) {
+                                            $disabledTimeSlots[] = $timeSlot;
+                                        }
+                                    }
                                 }
-                            }
-                        }
-                        ?>
+                                ?>
 
 
-                        <div class="form-check">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Wednesday" id="wed-check" <?php if ($disabledDay === 'Wednesday') echo ('disabled');?>>
-                                <label class="form-check-label" for="wed-check">
-                                    Wednesday
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Thursday" id="thurs-check" <?php if ($disabledDay === 'Thursday') echo ('disabled'); ?>>
-                                <label class="form-check-label" for="thurs-check">
-                                    Thursday
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name = "day" value = "Friday" id="fri-check" <?php if ($disabledDay === 'Friday') echo ('disabled'); ?>>
-                                <label class="form-check-label" for="fri-check">
-                                    Friday
-                                </label>
-                            </div>
-                        </div>
+                                <input type="date" class = "w-75" id="selected_date" name="day" required min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
 
                     </div>
                     <div class="col-sm-6 px-4 ">
