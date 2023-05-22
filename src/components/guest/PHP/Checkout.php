@@ -9,12 +9,10 @@
     <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <!-- <link rel="stylesheet" href="../CSS/categorypage.css"> -->
-    <style>
-    td{
-        text-align: center;
-        vertical-align: middle;
-    }
- </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -98,6 +96,14 @@
 
 
     <div class="container-fluid mt-5">
+    <?php
+        if(isset($_GET['error'])) {?>
+          <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+        if(isset($_GET['success'])) {?>
+          <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
         <div class="row px-5 ">
             <div class="col-sm-8 ">
                 <h3>My Cart</h3>
@@ -121,13 +127,13 @@
                     </thead>
 
                     <?php
-                   
                     $queryGuestCart = "SELECT * FROM GUEST_CART";
                     $resultGuestCart = oci_parse($conn, $queryGuestCart);
                     oci_execute($resultGuestCart);
                     while($rowCart = oci_fetch_array($resultGuestCart, OCI_ASSOC)){
                         $guestCartId = $rowCart['GUEST_CART_ID'];
                     }
+
                     $queryGuestCartProduct = "SELECT * FROM GUEST_CART_PRODUCT";
                     $resultGuestCartProduct = oci_parse($conn, $queryGuestCartProduct);
                     oci_execute($resultGuestCartProduct);
@@ -162,68 +168,100 @@
             </div>
             <div class="col-sm-1"></div>
             <div class="col-sm-4 ">
-                <div class="row text-center ">
-                    <h4>Collection Slot</h4>
-                </div>
-                <div class="row border pb-4">
-                    <div class="col-sm-6 px-4 ">
-                        <h6 class="py-2">Day</h6>
+                <?php 
+                echo("<form method = 'POST' action = './CheckoutVerify.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity'>");
+                ?>
+                    <div class="row text-center ">
+                        <h4>Collection Slot</h4>
+                    </div>
+                        <div class="row border pb-4">
+                            <div class="col-sm-6 px-4 ">
+                                <h6 class="py-2">Day</h6>
+                                <?php
+                                // Get the current day and time
+                                $currentDay = date('l');
+                                $currentHour = date('H');
+
+                                // Define the available days and time slots
+                                $days = ['Wednesday', 'Thursday', 'Friday'];
+                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
+
+                                // Determine which day and time slot to disable
+                                $disabledDay = $currentDay;
+                                $disabledTimeSlots = [];
+
+                                if ($currentHour >= 19) {
+                                    // If the current hour is 19 or later, disable all time slots
+                                    $disabledTimeSlots = $timeSlots;
+                                } else {
+                                    // Disable the time slots before the current time
+                                    foreach ($timeSlots as $timeSlot) {
+                                        $timeRange = explode('-', $timeSlot);
+                                        $startTime = explode(':', $timeRange[0])[0];
+
+                                        if ($startTime <= $currentHour) {
+                                            $disabledTimeSlots[] = $timeSlot;
+                                        }
+                                    }
+                                }
+                                ?>
 
 
-                        <div class="form-check">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="wed-check">
-                                <label class="form-check-label" for="wed-check">
-                                    Wednesday
-                                </label>
+                                <div class="form-check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name = "day" value = "Wednesday" id="wed-check" <?php if ($disabledDay === 'Wednesday') echo ('disabled');?>>
+                                        <label class="form-check-label" for="wed-check">
+                                            Wednesday
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name = "day" value = "Thursday" id="thurs-check" <?php if ($disabledDay === 'Thursday') echo ('disabled'); ?>>
+                                        <label class="form-check-label" for="thurs-check">
+                                            Thursday
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name = "day" value = "Friday" id="fri-check" <?php if ($disabledDay === 'Friday') echo ('disabled'); ?>>
+                                        <label class="form-check-label" for="fri-check">
+                                            Friday
+                                        </label>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="thurs-check">
-                                <label class="form-check-label" for="thurs-check">
-                                    Thursday
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="fri-check">
-                                <label class="form-check-label" for="fri-check">
-                                    Friday
-                                </label>
+                            <div class="col-sm-6 px-4 ">
+                                <h6 class="py-2">Time</h6>
+
+
+                                <div class="form-check">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check" <?php if (in_array("10:00-13:00", $disabledTimeSlots)) echo ('disabled'); ?>>
+                                            <label class="form-check-label" for="10-check">
+                                                10:00-13:00
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name = "time" value = "13:00-16:00" id="13-check" <?php if (in_array("13:00-16:00", $disabledTimeSlots)) echo ('disabled'); ?>>
+                                            <label class="form-check-label" for="13-check">
+                                                13:00-16:00
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name = "time" value = "16:00-19:00" id="16-check" <?php if (in_array("16:00-19:00", $disabledTimeSlots)) echo ('disabled'); ?>>
+                                            <label class="form-check-label" for="16-check">
+                                                16:00-19:00
+                                            </label>
+                                        </div>
+                                </div>
+
                             </div>
                         </div>
-
-                    </div>
-                    <div class="col-sm-6 px-4 ">
-                        <h6 class="py-2">Time</h6>
-
-
-                        <div class="form-check">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="10-check">
-                                <label class="form-check-label" for="10-check">
-                                    10:00-13:00
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="13-check">
-                                <label class="form-check-label" for="13-check">
-                                    13:00-16:00
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="16-check">
-                                <label class="form-check-label" for="16-check">
-                                    16:00-19:00
-                                </label>
-                            </div>
+                        <div class="row text-center py-4 border  my-4">
+                            <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
+                            <input type = "submit" class = "btn btn-primary w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                         </div>
-
-                    </div>
-                </div>
-                <div class="row text-center py-4 border  my-4">
-                    <h5>Sub Total: $40</h5>
-                    <a class="btn btn-primary w-50 d-block mx-auto" href="./CheckoutVerify.php" role="button">Checkout</a>
-                </div>
             </div>
+            </form>
         </div>
         <!-- Delete Modal -->
         <div class="modal fade" id="exampleModalDelete" tabindex="-1">
@@ -233,18 +271,29 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body text-center">
+                    <img src="../../../dist/public/remove.svg" alt="">
                     <h3 class="mt-3">Are You Sure?</h3>
-                    <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
+                    <p>You are about to remove <span id="productName"> </span> from your cart. This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer text-center">
                     <?php
-                        echo("<a href='#' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                        echo("<a href='./CartProductsDelete.php?&id=$guestCartProductId' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
                     ?>
                     <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </div>
                 </div>
         </div>
+        <script>
+        $('#exampleModalDelete').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id'); // Extract cart product id from data-id attribute
+            var name = button.data('name'); // Extract product name from data-name attribute
+            var modal = $(this);
+            modal.find('#productName').text(name); // Update the modal content
+            modal.find('#deleteLink').attr('href', './CartProductsDelete.php?&id=' + id + '&action=delete' + '&name=' + name); // Update the delete link
+        });
+        </script>
 </body>
 </div>
 </div>

@@ -191,7 +191,7 @@
                     <div class="modal-body text-center">
                     <img src="../../../dist/public/remove.svg" alt="">
                     <h3 class="mt-3">Are You Sure?</h3>
-                    <p>You are about to remove <span id="productName"> </span> from your cart. This process cannot be undone.</p>
+                    <p>You are about to remove <span id="productName"> </span> from your wishlist. This process cannot be undone.</p>
                     </div>
                     <div class="modal-footer text-center">
                     <?php

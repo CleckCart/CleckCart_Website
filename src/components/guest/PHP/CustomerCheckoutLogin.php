@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WishList</title>
-    <!--WebPage Icon-->
+    <title>CustomerLoginPage</title>
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
-    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/homepage.css">
-    <!--Jquery-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../dist/CSS/bootstrap.css">
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
+
     <?php
             include('./connect.php');
+            if(isset($_GET['cartId']) && isset($_GET['totalCartItems']) && isset($_GET['collectionDate']) && isset($_GET['collectionTime'])){
+                $guestCartId = $_GET['cartId'];
+                $productTotalQuantity = $_GET['totalCartItems'];
+                $collectionDate = $_GET['collectionDate'];
+                $collectionTime = $_GET['collectionTime'];
+            }
         ?>
         <!--NavBar-->
         <div class="topbar">
@@ -90,122 +92,55 @@
         </nav>
     </div>
 
-
-
-        <div class="container-fluid">
-            <?php
-            if(isset($_GET['error'])) {?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-            <?php }?>
-            <?php
-            if(isset($_GET['success'])) {?>
-                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-            <?php }?>
-            <div class="row table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th colspan="4" class = "text-center"><h1>My WishList</h1></th>
-                            <th colspan="4" class = "text-end"><h3>Price</h3></th>
-                            <th colspan="3" class = "text-center"><h3>Action</h3></th>
-                        </tr>
-                    </thead>
-
-                    <?php
-                    
-                    $queryWishList = "SELECT * FROM GUEST_WISHLIST";
-                    $resultWishList = oci_parse($conn, $queryWishList);
-                    oci_execute($resultWishList);
-                    while($rowCart = oci_fetch_array($resultWishList, OCI_ASSOC)){
-                        $guestwishlistId = $rowCart['GUEST_WISHLIST_ID'];
-                    }
-
-                    $queryWishListProduct = "SELECT * FROM GUEST_WISHLIST_PRODUCT WHERE GUEST_WISHLIST_ID = $guestwishlistId";
-                    $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
-                    oci_execute($resultWishListProduct);
-                    while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
-                        $productId = $rowWishListProduct['PRODUCT_ID'];
-                    }
-                    
-                    if(!empty($productId)){
-                        $queryProductTable = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $productId";
-                        $resultProductTable = oci_parse($conn, $queryProductTable);
-                        oci_execute($resultProductTable);
-                        while($rowProductTable = oci_fetch_array($resultProductTable, OCI_ASSOC)){
-                            $productDescription = $rowProductTable['PRODUCT_DESCRIPTION'];
-                        }
-    
-                        $queryWishListProduct = "SELECT * FROM GUEST_WISHLIST_PRODUCT WHERE GUEST_WISHLIST_ID = $guestwishlistId";
-                        $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
-                        oci_execute($resultWishListProduct);
-                        $productTotalPrice = 0;
-                        while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
-                            $guestwishlistId = $rowWishListProduct['GUEST_WISHLIST_ID'];
-                            $guestwishlistproductId = $rowWishListProduct['GUEST_WISHLIST_PRODUCT_ID'];
-                            $productId = $rowWishListProduct['PRODUCT_ID'];
-                            $productImage = $rowWishListProduct['PRODUCT_IMAGE'];
-                            $productName = $rowWishListProduct['PRODUCT_NAME'];
-                            $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
-                            echo "<tr>
-                            <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
-                            <td colspan = '2' >$productName</td>
-                            <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
-                            <td colspan = '3' class = 'text-center'>
-                                <!-- Delete Button trigger modal -->
-                                <a class='btn custom-btn' href = './CartProducts.php?id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
-                                    <img src='./../../../dist/public/cart2.svg' alt='delete' >
-                                </a>
-                                <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$guestwishlistproductId' data-name='$productName'>
-                                    <img src='./../../../dist/public/delete.svg' alt='delete'/>
-                                </button>
-                            </td>
-                            </tr>";
-                        }
-                    }
-                    else{
-                        echo("<div class='col-12 p-5'>");
-                        echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
-                        echo("</div>");
-                    }
-
-                    ?>
-                </table>
+    <div class = "container">
+        <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
+            <div class = "col bg-success">
+                    <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
             </div>
-                <!-- Delete Modal -->
-                <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header text-center">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body text-center">
-                            <img src="../../../dist/public/remove.svg" alt="">
-                            <h3 class="mt-3">Are You Sure?</h3>
-                            <p>You are about to remove <span id="productName"> </span> from your wishlist. This process cannot be undone.</p>
-                            </div>
-                            <div class="modal-footer text-center">
-                            <?php
-                                echo("<a href='./WishListProductsDelete.php?id=$guestwishlistproductId' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
-                            ?>
-                            <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
-                            </div>
-                        </div>
+            <div class = "col">
+                <?php echo("<form method = 'POST' action = './CustomerCheckoutLoginSubmit.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>")?>
+                    <div class = "mb-3">
+                        <h1 class = "text-center">Welcome to CleckCart</h1>
                     </div>
-                </div>
-        </div>
-        <div class = 'container'>&nbsp;</div>
-        <script>
-        $('#exampleModalDelete').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget); // Button that triggered the modal
-            var id = button.data('id'); // Extract cart product id from data-id attribute
-            var name = button.data('name'); // Extract product name from data-name attribute
-            var modal = $(this);
-            modal.find('#productName').text(name); // Update the modal content
-            modal.find('#deleteLink').attr('href', './WishListProductsDelete.php?&id=' + id + '&action=delete' + '&name=' + name); // Update the delete link
-        });
-        </script>
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
+                            
+                    <div class="mb-3 ">
+                        <label for="exampleInputText1" class="form-label">Username</label>
+                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "CustomerLoginUsername" value = "<?php
+                            if(isset($_POST['CustomerLoginUsername'])){
+                                echo(trim($_POST['CustomerLoginUsername']));
+                            }
+                        ?>">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "CustomerLoginPassword" value = "<?php
+                            if(isset($_POST['CustomerLoginPassword'])){
+                                echo(trim($_POST['CustomerLoginPassword']));
+                            }
+                        ?>">
+                        <p class = "text-end"><a href = "Forgotpassword.php">Forgot Password?</a></p>
+                    </div>
 
-    <!--footer-->
+                    <div class="mb-3">
+                        <input type="submit" class="btn btn-primary w-100" name = "CustomerLoginSubmit" value="Login">
+                    </div>
+                </form>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div>
+                    <div class = "mb-3">
+                        <?php echo("<p>New Here? <a href = './RegisterCheckout.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>Create an account</a></p>") ?>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
@@ -258,7 +193,5 @@
         </div>
 
     </footer>
-
-
 </body>
 </html>

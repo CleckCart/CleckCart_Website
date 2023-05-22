@@ -246,8 +246,6 @@
                     </div>
                     <div class="col-sm-6 px-4 ">
                         <h6 class="py-2">Time</h6>
-
-
                         <div class="form-check">
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check" <?php if (in_array("10:00-13:00", $disabledTimeSlots)) echo ('disabled'); ?>>
@@ -267,9 +265,8 @@
                                         16:00-19:00
                                     </label>
                                 </div>
-                            </div>
-                            
                         </div>
+                    </div>
                     </div>
                     <div class="row text-center py-4 border  my-4">
                         <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
@@ -298,8 +295,7 @@
                     </div>
                 </div>
                 </div>
-            </div>
-            </div>
+        </div>
         <script>
         $('#exampleModalDelete').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
