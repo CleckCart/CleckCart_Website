@@ -9,6 +9,9 @@
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <link rel="stylesheet" href="../CSS/homepage.css">
+    <!--Jquery-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -109,48 +112,98 @@
                     </thead>
 
                     <?php
-                    for ($i = 0; $i < 4; $i++) { //needs no of products added to cart
-                        echo "<tr>
-                                <td colspan = '3' class ='text-center'><img src='../../../dist/public/3.jpg' alt='image' width='80'height='60'></td>
-                                <td colspan = '2' >link product name here</td>
-                                <td colspan = '3' class = 'text-end'>$10</td>
-                                <td colspan = '3' class = 'text-center'>
-                                    <!-- Delete Button trigger modal -->
-                                    <button class='btn custom-btn'>
-                                        <img src='./../../../dist/public/cart2.svg' alt='delete' >
-                                    </button>
-                                    <button class='btn custom-btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete'>
-                                        <img src='./../../../dist/public/delete.svg' alt='delete' >
-                                    </button>
-                                </td>
+                    
+                    $queryWishList = "SELECT * FROM GUEST_WISHLIST";
+                    $resultWishList = oci_parse($conn, $queryWishList);
+                    oci_execute($resultWishList);
+                    while($rowCart = oci_fetch_array($resultWishList, OCI_ASSOC)){
+                        $guestwishlistId = $rowCart['GUEST_WISHLIST_ID'];
+                    }
+
+                    $queryWishListProduct = "SELECT * FROM GUEST_WISHLIST_PRODUCT WHERE GUEST_WISHLIST_ID = $guestwishlistId";
+                    $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
+                    oci_execute($resultWishListProduct);
+                    while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
+                        $productId = $rowWishListProduct['PRODUCT_ID'];
+                    }
+                    
+                    if(!empty($productId)){
+                        $queryProductTable = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = $productId";
+                        $resultProductTable = oci_parse($conn, $queryProductTable);
+                        oci_execute($resultProductTable);
+                        while($rowProductTable = oci_fetch_array($resultProductTable, OCI_ASSOC)){
+                            $productDescription = $rowProductTable['PRODUCT_DESCRIPTION'];
+                        }
+    
+                        $queryWishListProduct = "SELECT * FROM GUEST_WISHLIST_PRODUCT WHERE GUEST_WISHLIST_ID = $guestwishlistId";
+                        $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
+                        oci_execute($resultWishListProduct);
+                        $productTotalPrice = 0;
+                        while($rowWishListProduct = oci_fetch_array($resultWishListProduct, OCI_ASSOC)){
+                            $guestwishlistId = $rowWishListProduct['GUEST_WISHLIST_ID'];
+                            $guestwishlistproductId = $rowWishListProduct['GUEST_WISHLIST_PRODUCT_ID'];
+                            $productId = $rowWishListProduct['PRODUCT_ID'];
+                            $productImage = $rowWishListProduct['PRODUCT_IMAGE'];
+                            $productName = $rowWishListProduct['PRODUCT_NAME'];
+                            $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
+                            echo "<tr>
+                            <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
+                            <td colspan = '2' >$productName</td>
+                            <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
+                            <td colspan = '3' class = 'text-center'>
+                                <!-- Delete Button trigger modal -->
+                                <a class='btn custom-btn' href = './CartProducts.php?id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
+                                    <img src='./../../../dist/public/cart2.svg' alt='delete' >
+                                </a>
+                                <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$guestwishlistproductId' data-name='$productName'>
+                                    <img src='./../../../dist/public/delete.svg' alt='delete'/>
+                                </button>
+                            </td>
                             </tr>";
                         }
+                    }
+                    else{
+                        echo("<div class='col-12 p-5'>");
+                        echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
+                        echo("</div>");
+                    }
+
                     ?>
                 </table>
             </div>
-            <!-- Delete Modal -->
-            <div class="modal fade" id="exampleModalDelete" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header text-center">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                    <img src="../../../dist/public/remove.svg" alt="">
-                    <h3 class="mt-3">Are You Sure?</h3>
-                    <p>You are about to delete <span id="productName"></span>. This process cannot be undone.</p>
-                    </div>
-                    <div class="modal-footer text-center">
-                    <?php
-                        echo("<a href='#' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
-                    ?>
-                    <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
+                <!-- Delete Modal -->
+                <div class="modal fade" id="exampleModalDelete" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                            <img src="../../../dist/public/remove.svg" alt="">
+                            <h3 class="mt-3">Are You Sure?</h3>
+                            <p>You are about to remove <span id="productName"> </span> from your wishlist. This process cannot be undone.</p>
+                            </div>
+                            <div class="modal-footer text-center">
+                            <?php
+                                echo("<a href='./WishListProductsDelete.php?id=$guestwishlistproductId' id='deleteLink' class='btn btn-danger mx-auto w-100'>Delete</a>");
+                            ?>
+                            <button type="button" class="btn btn-secondary mx-auto w-100" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                </div>
-            </div>
         </div>
         <div class = 'container'>&nbsp;</div>
+        <script>
+        $('#exampleModalDelete').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // Button that triggered the modal
+            var id = button.data('id'); // Extract cart product id from data-id attribute
+            var name = button.data('name'); // Extract product name from data-name attribute
+            var modal = $(this);
+            modal.find('#productName').text(name); // Update the modal content
+            modal.find('#deleteLink').attr('href', './WishListProductsDelete.php?&id=' + id + '&action=delete' + '&name=' + name); // Update the delete link
+        });
+        </script>
 
     <!--footer-->
     <footer>

@@ -166,59 +166,56 @@
               </script>
           </div>
 
+          <div class='lower-section'>
+            <h2 class='review-heading'>Customer Reviews</h2>
             <?php
-              $queryReview = "SELECT * FROM REVIEW WHERE PRODUCT_ID = '$id'";
-              $resultReview = oci_parse($conn, $queryReview);
-              oci_execute($resultReview);
+                $queryReview = "SELECT * FROM REVIEW WHERE PRODUCT_ID = '$id'";
+                $resultReview = oci_parse($conn, $queryReview);
+                oci_execute($resultReview);
 
-              while ($row = oci_fetch_array($resultReview, OCI_ASSOC)) {
-                  $reviewId = $row['REVIEW_ID'];
-                  $userId = $row['USER_ID'];
-                  $reviewDescription = $row['PRODUCT_DESCRIPTION'];
-                  $reviewRating = $row['RATING'];
-                  $reviewDate = $row['REVIEW_DATE'];
-                  $queryCustomer = "SELECT * FROM USER_TABLE WHERE USER_ID = '$userId'";
-                  $resultCustomer = oci_parse($conn, $queryCustomer);
-                  oci_execute($resultCustomer);
+                while ($row = oci_fetch_array($resultReview, OCI_ASSOC)) {
+                    $reviewId = $row['REVIEW_ID'];
+                    $userId = $row['USER_ID'];
+                    $reviewDescription = $row['PRODUCT_DESCRIPTION'];
+                    $reviewRating = $row['RATING'];
+                    $reviewDate = $row['REVIEW_DATE'];
+                    $queryCustomer = "SELECT * FROM USER_TABLE WHERE USER_ID = '$userId'";
+                    $resultCustomer = oci_parse($conn, $queryCustomer);
+                    oci_execute($resultCustomer);
 
-                  while ($row = oci_fetch_array($resultCustomer, OCI_ASSOC)) {
-                      $username = $row['USERNAME'];
-                  }
-
-                  echo ("
-                  <div class='lower-section'>
-                    <h2 class='review-heading'>Customer Reviews</h2>
-                    <div class='review mt-5'>
-                        <div class='review-left'>
-                            <h3 class='review-name'>$username</h3>
-                            <span class='review-date'>$reviewDate</span>
-                        </div>
-                        <hr />
-                        <div class='review-right'>
-                            <div class='rating'>
-                    ");
-
-                    for ($i = 5; $i >= 1; $i--) {
-                        echo ("<input type='radio' id='star$i-$reviewId' name='rating-$reviewId' value='$i'");
-                        if ($reviewRating == $i) {
-                            echo (" checked");
-                        }
-                        echo (">
-                            <label for='star$i-$reviewId'>&#9733;</label>");
+                    while ($row = oci_fetch_array($resultCustomer, OCI_ASSOC)) {
+                        $username = $row['USERNAME'];
                     }
 
                     echo ("
-                            </div>
-                            <p class='review-description'>$reviewDescription</p>
+                      <div class='review mt-5'>
+                          <div class='review-left'>
+                              <h3 class='review-name'>$username</h3>
+                              <span class='review-date'>$reviewDate</span>
+                          </div>
+                          <hr />
+                          <div class='review-right'>
+                              <div class='rating'>
+                      ");
+
+                      for ($i = 5; $i >= 1; $i--) {
+                          echo ("<input type='radio' id='star$i-$reviewId' name='rating-$reviewId' value='$i'");
+                          if ($reviewRating == $i) {
+                              echo (" checked");
+                          }
+                          echo (">
+                              <label for='star$i-$reviewId'>&#9733;</label>");
+                      }
+
+                      echo ("
+                              </div>
+                              <p class='review-description'>$reviewDescription</p>
+                          </div>
                         </div>
-                      </div>
-                  </div>");
-              }
-              ?>
-
-
-
-                  
+                    ");
+                }
+                ?>
+          </div>
         </section>
    <!--footer-->
    <footer>
