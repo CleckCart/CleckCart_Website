@@ -44,7 +44,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -86,60 +86,58 @@
             </div>
         </nav>
     </div>
-    <div class = "container-fluid text-center mt-5">
-        <h1 >Our Categories</h1>
-    </div>
 
-    <div class = "container-fluid">
+    <div class = "container-fluid mt-5">
+        <h1 class="text-center mt-5">Our Categories</h1>
         <div class="row row-cols-2 row-cols-md-5 g-4">
             <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/bread.svg" alt="package">
+                            <img src="./../../../dist/public/bread.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">BAKERY</h1>
+                    <h3 class = "mt-5 text-success">BAKERY</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=dairy">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/icecream.svg" alt="package">
+                            <img src="./../../../dist/public/icecream.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">DAIRY</h1>
+                    <h3 class = "mt-5 text-success">DAIRY</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=fruit">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/fruits.svg" alt="package">
+                            <img src="./../../../dist/public/fruits.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">FRUIT</h1>
+                    <h3 class = "mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=meat">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/meat.svg" alt="package">
+                            <img src="./../../../dist/public/meat.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">MEAT</h1>
+                    <h3 class = "mt-5 text-success">MEAT</h1>
                 </div>
             </a>
             <a class="nav-link p-5" href="./CategoryView.php?category=vegetable">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="package">
+                            <img src="./../../../dist/public/carrot.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">VEGETABLE</h1>
+                    <h3 class = "mt-5 text-success">VEGETABLE</h1>
                 </div>
             </a>
         </div>
