@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -102,12 +102,14 @@
                 <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
             <?php }?>
             <div class="row table-responsive">
+                <h1 class="text-start">My WishList</h1>
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th colspan="4" class = "text-center"><h1>My WishList</h1></th>
-                            <th colspan="4" class = "text-end"><h3>Price</h3></th>
-                            <th colspan="3" class = "text-center"><h3>Action</h3></th>
+                            <th class = "text-center"><h3 class="h3">Image</h3></th>
+                            <th class = "text-center"><h3 class="h3">Product</h3></th>
+                            <th class = "text-end"><h3 class="h3">Price</h3></th>
+                            <th class = "text-center"><h3 class="h3">Action</h3></th>
                         </tr>
                     </thead>
 
@@ -147,10 +149,10 @@
                             $productName = $rowWishListProduct['PRODUCT_NAME'];
                             $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
                             echo "<tr>
-                            <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
-                            <td colspan = '2' >$productName</td>
-                            <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
-                            <td colspan = '3' class = 'text-center'>
+                            <td class ='text-center'><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='80'height='80' class='rounded'></td>
+                            <td>$productName</td>
+                            <td class = 'text-end'>&pound;$productPrice</td>
+                            <td class = 'text-center'>
                                 <!-- Delete Button trigger modal -->
                                 <a class='btn custom-btn' href = './CartProducts.php?id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
                                     <img src='./../../../dist/public/cart2.svg' alt='delete' >
@@ -179,7 +181,6 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-center">
-                            <img src="../../../dist/public/remove.svg" alt="">
                             <h3 class="mt-3">Are You Sure?</h3>
                             <p>You are about to remove <span id="productName"> </span> from your wishlist. This process cannot be undone.</p>
                             </div>

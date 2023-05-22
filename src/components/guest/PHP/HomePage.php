@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -135,8 +135,8 @@
         <div class="row row-cols-2 row-cols-md-4 g-4 pt-5 text-success">
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
-                    <div class="ellipse p-5">
-                        <img src="./../../../dist/public/package.svg" alt="package">
+                    <div class="ellipse p-5 border-5">
+                        <img src="./../../../dist/public/package.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                     </div>
                 </div>
                 <h3 class="mt-5">SELF-PICKUP</h1>
@@ -145,7 +145,7 @@
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
                     <div class="ellipse p-5">
-                        <img src="./../../../dist/public/carrot.svg" alt="carrot">
+                        <img src="./../../../dist/public/carrot.svg" alt="carrot" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                     </div>
                 </div>
                 <h3 class="mt-5">ALWAYS FRESH</h1>
@@ -154,7 +154,7 @@
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
                     <div class="ellipse p-5">
-                        <img src="./../../../dist/public/badge.svg" alt="badge">
+                        <img src="./../../../dist/public/badge.svg" alt="badge" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'> 
                     </div>
                 </div>
                 <h3 class="mt-5">SUPERIOR-QUALITY</h1>
@@ -163,7 +163,7 @@
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
                     <div class="ellipse p-5">
-                        <img src="./../../../dist/public/customersupport.svg" alt="ellipse">
+                        <img src="./../../../dist/public/customersupport.svg" alt="ellipse" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                     </div>
                 </div>
                 <h3 class="mt-5">SUPPORT</h1>
@@ -193,45 +193,43 @@
             oci_execute($result);
             while ($row = oci_fetch_array($result, OCI_ASSOC)) {
                 $id = $row['PRODUCT_ID'];
-                $name = $row['PRODUCT_NAME'];
+                $name = ucfirst($row['PRODUCT_NAME']);
                 $categoryId = $row['CATEGORY_ID'];
                 $shopId = $row['SHOP_ID'];
                 $categoryName = $row['CATEGORY_NAME'];
                 $productImage = $row['PRODUCT_IMAGE'];
                 $productName = $row['PRODUCT_NAME'];
-                $changecase = ucfirst($row['PRODUCT_NAME']);
                 $productDescription = $row['PRODUCT_DESCRIPTION'];
                 $productPrice = $row['PRODUCT_PRICE'];
                 $productStock = $row['PRODUCT_STOCK'];
                 echo ("<div class='col p-5'>");
-                echo ("<div class='card'>");
+                echo ("<div class='card bg-light'>");
                 echo ("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top' alt='...' 
+                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='...' 
                 style='width:100%;
                 height:17vw;
                 object-fit:cover;'>");//or use contain here
 
                 echo ("<div class='card-body'>");
                 echo ("<div class = 'row'>            
-                            <h3 class='card-title text-dark'>$name</h3>
+                            <h3 class='card-title text-success'>$name</h3>
                         </div>
                         <div class = 'row'>
-                            <h3 class='card-title'> &pound;$row[PRODUCT_PRICE]</h3>
+                            <h3 class='card-title text-success'> &pound;$row[PRODUCT_PRICE]</h3>
                         </div>
                     ");
-                // echo ("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");
                 echo ("</div></a>");
-                echo ("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                echo ("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100 bg-light'>");
                 echo ("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                echo ("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
+                echo ("<a class='btn btn-productsize btn-success border border-dark w-50' 
                 href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'>
                 <img src = './../../../dist/public/cart2.svg' 
-                style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'
                 alt = 'cart2'/></a>");
-                echo ("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' 
+                echo ("<a class='btn btn-productsize btn-success border-dark w-50' 
                 href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'>
                 <img src = './../../../dist/public/heart2.svg' 
-                style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'
                 alt = 'cart2'/></a>");
                 echo ("</div>");
                 echo ("</div>");
@@ -241,20 +239,17 @@
         </div>
     </div>
     <div class="custom-margin"></div>
-
-    <!--Category-->
-
-    <div class="container-fluid text-center mb-5">
-        <h1 class="text-success">CATEGORIES</h1>
+        
     </div>
     <div class="custom-margin"></div>
     <div class="container-fluid bg-light border rounded">
+    <h1 class="text-success text-center mt-5">CATEGORIES</h1>
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
             <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
-                            <img src="./../../../dist/public/bread.svg" alt="package">
+                            <img src="./../../../dist/public/bread.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class="mt-5 text-success">BAKERY</h1>
@@ -264,7 +259,7 @@
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
-                            <img src="./../../../dist/public/icecream.svg" alt="package">
+                            <img src="./../../../dist/public/icecream.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class="mt-5 text-success">DAIRY</h1>
@@ -274,17 +269,17 @@
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
-                            <img src="./../../../dist/public/fruits.svg" alt="package">
+                            <img src="./../../../dist/public/fruits.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class="mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=meat">
+            <a class="nav-link p-5" href="./CategoryView.php?category=meat" >
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
-                            <img src="./../../../dist/public/meat.svg" alt="package">
+                            <img src="./../../../dist/public/meat.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class="mt-5 text-success">MEAT</h1>
@@ -294,7 +289,7 @@
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="package">
+                            <img src="./../../../dist/public/carrot.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class="mt-5 text-success">VEGETABLE</h1>

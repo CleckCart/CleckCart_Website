@@ -48,7 +48,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -116,7 +116,7 @@
                     oci_execute($result);
                     while($row = oci_fetch_array($result, OCI_ASSOC)){
                         $id = $row['PRODUCT_ID'];
-                        $name = $row['PRODUCT_NAME'];
+                        $name = ucfirst($row['PRODUCT_NAME']);
                         $categoryId = $row['CATEGORY_ID'];
                         $shopId = $row['SHOP_ID'];
                         $categoryName = $row['CATEGORY_NAME'];
@@ -126,24 +126,29 @@
                         $productPrice = $row['PRODUCT_PRICE'];
                         $productStock = $row['PRODUCT_STOCK'];
                         echo("<div class='col p-5'>");
-                        echo("<div class='card'>");
+                        echo("<div class='card bg-light'>");
                         echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                            <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                        <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='...' 
+                        style='width:100%;
+                        height:17vw;
+                        object-fit:cover;'>");
                         echo("<div class='card-body'>");
                         echo("<div class = 'row'>
                                 <div class = 'col'>
-                                    <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
+                                    <h3 class='card-title text-success'>" . ucfirst($row['PRODUCT_NAME']) . "</h3>
                                 </div>
                                 <div class = 'col'>
-                                    <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
+                                    <h3 class='card-title text-end text-success'> &pound; $row[PRODUCT_PRICE]</h3>
                                 </div>
                             </div>");
-                        echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("<p class='card-text text-success'>$row[PRODUCT_DESCRIPTION]</p>");              
                         echo("</div></a>");            
-                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center bg-light w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
-                    echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("<a class='btn btn-productsize btn-success border-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'>
+                        <img src = './../../../dist/public/cart2.svg' alt = 'cart2' style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);' /></a>" );                
+                    echo("<a class='btn btn-productsize btn-success border-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'>
+                        <img src = './../../../dist/public/heart2.svg' alt = 'cart2'style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);' /></a>");               
                         echo("</div>");
                         echo("</div>");
                         echo("</div>");

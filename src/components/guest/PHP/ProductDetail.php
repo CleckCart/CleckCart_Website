@@ -49,7 +49,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -116,21 +116,21 @@
           <?php }?>
           <div class="upper-section">
               <div class="product-img-cnt">
-                <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
+                <img class='img-fluid img-thumbnail' src='./../../../dist/public/TraderItemImages/<?php echo($productImage)?>' alt='<?php echo($productImage)?>' width="500px" height="400px">
               </div>
               <div class="product-info">
                   <div class="product-title-box">
-                    <h2 class="product-title"><?php echo($productName)?></h2>
-                    <?php echo("<a href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                    <h2 class="display-4"><?php echo(ucfirst($productName))?></h2>
+                    <?php echo("<a href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
                   </div>
-                <p class="product-description"><?php echo($productDescription) ?></p>
-                <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
+                <p class="lead"><?php echo($productDescription) ?></p>
+                <span class="display-5"><?php echo('&pound;' . $productPrice);?></span>
                 <div class="product-quantity">
-                  <span>Quantity:</span>
-                  <div class="increment-decrement">
-                    <span class="decrement">-</span><hr/>
-                    <span class="quantity"><?php echo($productQuantity)?></span><hr/>
-                    <span class="increment">+</span>
+                  <span class="lead"><b>Quantity</b></span>
+                  <div class="increment-decrement rounded">
+                    <span class="decrement bg-success text-white">-</span>
+                    <span class="quantity bg-success text-white"><?php echo($productQuantity)?></span>
+                    <span class="increment bg-success text-white">+</span>
                     <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
                   </div>
                 </div>
@@ -217,53 +217,56 @@
         </section>
    <!--footer-->
    <footer>
-    <div class = "container-fluid bg-secondary">
+        <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Cleck Cart</h3>
-                                    <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
-                            </div>
-                            <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                                <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                                <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                                <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Cleck Cart</h3>
+                            <h5 class="mt-4">Satisfy your cravings, with local farm savings.</h5>
+                            <h6>&#169; 2023 CleckCart. All rights reserved.</h6>
                         </div>
+                        <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2xl" style="color: #ffffff;"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Join Us</h3>
-                                    <h5 class = "mt-5">Sell on CleckCart</h5>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Join Us</h3>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
+                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
                         </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Help</h3>
-                                    <h5 class = "mt-5">Pick Up Information</h5>
-                                    <h5 class = "mt-2">Lorem ipsum</h5>
-                                    <h5 class = "mt-2">Lorem ipsum</h5>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Help</h3>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
+                            <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
+                            <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
                         </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Send Us a message</h3>
-                            </div>
-                            <div class="p-2 bd-highlight">
-                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
-                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
-                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Send Us a message</h3>
                         </div>
+                        <div class="p-2 bd-highlight text-center">
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-location-dot fa-xl" style="color: #ffffff;"></i>&nbsp;Cleckhuddersfax, UK </a>
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-phone fa-xl" style="color: #ffffff;"></i>&nbsp;01632 960315 </a>
+                            <a class="nav-link text-reset text-decoration-none" href="https://mail.google.com/?" target="_blank"><i class="fa-regular fa-envelope fa-xl" style="color: #ffffff;"></i>&nbsp;cleckcart@gmail.com </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
+
     </footer>
 </body>
 </html>

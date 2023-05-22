@@ -50,7 +50,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
 
                         </li>
 
@@ -105,23 +105,23 @@
         <?php }?>
         <div class="row px-5 ">
             <div class="col-sm-8 ">
-                <h3>My Cart</h3>
+                <h1 class="h1 text-start">My Cart</h1>
             </div>
             <div class="col-sm-4 "></div>
         </div>
 
 
-        <div class="row px-5 ">
+        <div class="row px-5 mt-5">
             <div class="col-sm-7 ">
             <div class="row table-responsive">
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th></th>
-                            <th class = 'text-center'><h3>Name</h3></th>
-                            <th class = 'text-center'><h3>Price</h3></th>
-                            <th class = 'text-center'><h3>Quantity</h3></th>
-                            <th class = 'text-center'><h3>Action</h3></th>
+                            <th class = 'text-center'><h2 class="h4">Name</h4></th>
+                            <th class = 'text-center'><h2 class="h4">Price</h4></th>
+                            <th class = 'text-center'><h2 class="h4">Quantity</h4></th>
+                            <th class = 'text-center'><h2 class="h4">Action</h4></th>
                         </tr>
                     </thead>
 
@@ -149,7 +149,7 @@
                         $productTotalPrice += $productPrice * $productQuantity;
                         $productTotalQuantity += $productQuantity;
                         echo ("<tr>
-                        <td ><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='90'height='80' style='object-fit:contain;'></td>
+                        <td ><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='80' height='80' class='rounded'></td>
                         <td>$productName</td>
                         <td >&pound;$productPrice</td>
                         <td class = 'text-center'>$productQuantity</td>
@@ -173,7 +173,7 @@
                     <div class="row text-center ">
                         <h4>Collection Slot</h4>
                     </div>
-                        <div class="row border pb-4">
+                        <div class="row border pb-4 bg-light rounded pt-3">
                             <div class="col-sm-6 px-4 ">
                                 <h6 class="py-2">Day</h6>
                                 <?php
@@ -232,9 +232,9 @@
 
                             </div>
                         </div>
-                        <div class="row text-center py-4 border  my-4">
+                        <div class="row text-center py-4 border my-4 mb-5 bg-light rounded">
                             <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
-                            <input type = "submit" class = "btn btn-primary w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
+                            <input type = "submit" class = "btn btn-success w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                         </div>
             </div>
             </form>
@@ -275,7 +275,7 @@
 </div>
 
 <!-- footer -->
-<footer class="mt-auto">
+<footer class="mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">
