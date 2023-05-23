@@ -161,64 +161,82 @@
                                                     <th>Description</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>
+                                                    <th>Total Price</th>
                                                     <th>Order Date</th>
                                                     <th>Collection Date</th>
                                                     </tr>
                                                 </thead><tbody>");
-                        $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
-                        $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
-                        oci_execute($runOrderProductQuery);
-                        while($row2=oci_fetch_assoc($runOrderProductQuery))
-                            {
-                                
-                                $ProductId = $row2['PRODUCT_ID'];
-                                $ProductQuantity = $row2['ORDER_QUANTITY'];
+                                                $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
+                                                $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
+                                                oci_execute($runOrderProductQuery);
+                                                while($row2=oci_fetch_assoc($runOrderProductQuery))
+                                                    {
+                                                        
+                                                        $ProductId = $row2['PRODUCT_ID'];
+                                                        $ProductQuantity = $row2['ORDER_QUANTITY'];
 
-                                $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId' AND CATEGORY_NAME='$ShopName'";
-                                $runProductQuery=oci_parse($conn,$ProductQuery);
-                                oci_execute($runProductQuery);  
-                                $ProductRow = oci_fetch_assoc($runProductQuery); 
+                                                        $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId' AND CATEGORY_NAME='$ShopName'";
+                                                        $runProductQuery=oci_parse($conn,$ProductQuery);
+                                                        oci_execute($runProductQuery);  
+                                                        $ProductRow = oci_fetch_assoc($runProductQuery); 
 
-                                $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
-                                $runCollectionQuery=oci_parse($conn,$CollectionQuery);
-                                oci_execute($runCollectionQuery);  
-                                $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
-                                $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                                
-                                $slotStatus = $CollectionRow['SLOT_STATUS'];
+                                                        $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
+                                                        $runCollectionQuery=oci_parse($conn,$CollectionQuery);
+                                                        oci_execute($runCollectionQuery);  
+                                                        $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
+                                                        $CollectionDate=$CollectionRow['COLLECTION_DATE'];
+                                                        
+                                                        $slotStatus = $CollectionRow['SLOT_STATUS'];
+                                                        $totalPrice = $ProductRow['PRODUCT_PRICE']*$ProductQuantity;
 
-                                if($slotStatus=='Y'){
-                                    echo("<tr>
-                                            <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                            <td>$ProductRow[PRODUCT_NAME]</td>
-                                            <td>$ProductRow[CATEGORY_NAME]</td>
-                                            <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                            <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                            <td>$ProductQuantity</td>
-                                            <td>$OrderDate</td>
-                                            <td>$CollectionDate</td>
-                                            </tr>");
-                                }
-                                else{
-                                    echo("<tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td>No payment made for this order.</td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>");
-                                }
+                                                        if($slotStatus=='Y'){
+                                                            echo("<tr>
+                                                                    <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                                                    <td>$ProductRow[PRODUCT_NAME]</td>
+                                                                    <td>$ProductRow[CATEGORY_NAME]</td>
+                                                                    <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
+                                                                    
+                                                                    ");
+                                                                    if(empty($ProductRow['PRODUCT_IMAGE'])){
+                                                                      echo("
+                                                                      <td></td>
+                                                                      <td></td>
+                                                                      <td></td>
+                                                                      <td></td>
+                                                                      <td></td>"
+                                                                      );
+                                                                    }
+                                                                    else{
+                                                                      echo("
+                                                                      <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
+                                                                      <td>$ProductQuantity</td>
+                                                                      <td>&pound;$totalPrice</td>
+                                                                      <td>$OrderDate</td>
+                                                                      <td>$CollectionDate</td>"
+                                                                      );
+                                                                    }
+                                                                    echo("</tr>");
+                                                        }
+                                                        else{
+                                                            echo("<tr>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td>No payment made for this order.</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                </tr>");
+                                                        }
 
-                            }
-                        echo("</tbody></table></div></div></div>");
-                    }    
-              } 
-            }                                       
-        ?>        
+                                                    }
+                                                echo("</tbody></table></div></div></div>");
+                                            }
+              }
+            }
+        ?>
   </div>
 </div>
 
