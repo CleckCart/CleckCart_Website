@@ -69,6 +69,11 @@
         </a>
       ");?>
     </li>
+    <li class="nav-item">
+        <?php echo("<a href='./AdminOrderPage.php?user=$user' class='nav-link text-dark'>")?>
+        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Manage Orders
+      </a>
+    </li>
     
     <li class="nav-item">
       <?php
