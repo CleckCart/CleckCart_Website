@@ -51,7 +51,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -77,11 +77,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -106,12 +106,16 @@
                 <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
             <?php }?>
             <div class="row table-responsive">
-                <table class="table table-hover">
+            <h1 class="text-start mt-5">My WishList</h1>
+            <div class="container-fluid mt-5 px-5">
+
+                <table class="table table-hover mt-2">
                     <thead>
                         <tr>
-                            <th colspan="4" class = "text-center"><h1>My WishList</h1></th>
-                            <th colspan="4" class = "text-end"><h3>Price</h3></th>
-                            <th colspan="3" class = "text-center"><h3>Action</h3></th>
+                            <th class = "text-center"><h3 class="h3">Image</h3></th>
+                            <th class = "text-center"><h3 class="h3">Product</h3></th>
+                            <th class = "text-end"><h3 class="h3">Price</h3></th>
+                            <th class = "text-center"><h3 class="h3">Action</h3></th>
                         </tr>
                     </thead>
                     <?php
@@ -129,7 +133,7 @@
                     while($rowCart = oci_fetch_array($resultWishList, OCI_ASSOC)){
                         $wishlistId = $rowCart['WISHLIST_ID'];
                     }
-
+                    
                     if(!empty($wishlistId)){
                         $queryWishListProduct = "SELECT * FROM WISHLIST_PRODUCT WHERE WISHLIST_ID = $wishlistId";
                         $resultWishListProduct = oci_parse($conn, $queryWishListProduct);
@@ -154,17 +158,17 @@
                             $wishlistproductId = $rowWishListProduct['WISHLIST_PRODUCT_ID'];
                             $productId = $rowWishListProduct['PRODUCT_ID'];
                             $productImage = $rowWishListProduct['PRODUCT_IMAGE'];
-                            $productName = $rowWishListProduct['PRODUCT_NAME'];
+                            $productName = ucwords($rowWishListProduct['PRODUCT_NAME']);
                             $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
                             echo "<tr>
-                            <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
-                            <td colspan = '2' >$productName</td>
-                            <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
-                            <td colspan = '3' class = 'text-center'>
-                                <!-- Delete Button trigger modal -->
-                                <a class='btn custom-btn' href = './CartProducts.php?user=$user&id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
-                                    <img src='./../../../dist/public/cart2.svg' alt='delete' >
-                                </a>
+                            <td class ='text-center'><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='80'height='80' class='rounded'></td>
+                            <td class='text-center align-middle'>$productName</td>
+                            <td class = 'text-end align-middle'>&pound;$productPrice</td>
+                            <td class = 'text-center'>
+                            <!-- Delete Button trigger modal -->
+                            <a class='btn custom-btn' href = './CartProducts.php?id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
+                                <img src='./../../../dist/public/cart2.svg' alt='delete' >
+                            </a>
                                 <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$wishlistproductId' data-name='$productName' data-user='$user'>
                                     <img src='./../../../dist/public/delete.svg' alt='delete'/>
                                 </button>
@@ -180,6 +184,7 @@
 
                     ?>
                 </table>
+            </div>
             </div>
                 <!-- Delete Modal -->
                 <div class="modal fade" id="exampleModalDelete" tabindex="-1">

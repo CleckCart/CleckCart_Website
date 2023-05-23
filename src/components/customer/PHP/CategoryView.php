@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Our Products</title>
+    <title>Shop The Hudd</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -52,7 +52,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -78,11 +78,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -95,10 +95,10 @@
         </nav>
     </div>
   <section class="product_page">
-    <h2 class="product_page--title">OUR PRODUCTS</h2>
+    <h2 class="product_page--title mt-5">OUR PRODUCTS</h2>
+    
     <div class = "container-fluid p-5">
-    <div class = "container-fluid p-5">
-        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
+        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2 ">
             <?php
                 $queryCategory = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME = '$productCategory'";
                 $resultCategory = oci_parse($conn, $queryCategory);
@@ -115,7 +115,7 @@
                     oci_execute($result);
                     while($row = oci_fetch_array($result, OCI_ASSOC)){
                         $id = $row['PRODUCT_ID'];
-                        $name = $row['PRODUCT_NAME'];
+                        $name = ucwords($row['PRODUCT_NAME']);
                         $categoryId = $row['CATEGORY_ID'];
                         $shopId = $row['SHOP_ID'];
                         $categoryName = $row['CATEGORY_NAME'];
@@ -125,24 +125,38 @@
                         $productPrice = $row['PRODUCT_PRICE'];
                         $productStock = $row['PRODUCT_STOCK'];
                         echo("<div class='col p-5'>");
-                        echo("<div class='card'>");
+                        echo("<div class='card bg-light'>");
                         echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                            <img src='$row[PRODUCT_IMAGE]' class='card-img-top' alt='...''>");
+                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top' alt='...' 
+                            
+                            style='width:100%;
+                            height:17vw;
+                            object-fit:cover;'>");//or use contain here
                         echo("<div class='card-body'>");
-                        echo("<div class = 'row'>
-                                <div class = 'col'>
-                                    <h3 class='card-title'>$row[PRODUCT_NAME]</h3>
-                                </div>
-                                <div class = 'col'>
-                                    <h3 class='card-title text-end'> &pound; $row[PRODUCT_PRICE]</h3>
-                                </div>
-                            </div>");
-                        echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("<div class = 'row'>            
+                        <h3 class='card-title text-dark'>$name</h3>
+                    </div>
+                    <div class = 'row'>
+                        <h3 class='card-title text-success' > &pound;$row[PRODUCT_PRICE]</h3>
+                    </div>");
+                        // echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
                         echo("</div></a>");            
                         echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' alt = 'cart2'/></a>");                
-                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' alt = 'cart2'/></a>");               
+                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
+                        href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
+                        role='button'>
+                        <img src = './../../../dist/public/cart2.svg'
+                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                         alt = 'cart2'/></a>
+                        ");                
+                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
+                        href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
+                        role='button'>
+                        <img src = './../../../dist/public/heart2.svg' 
+                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                        alt = 'cart2'/></a>
+                        ");               
                         echo("</div>");
                         echo("</div>");
                         echo("</div>");
@@ -157,10 +171,10 @@
             ?>
         </div>
     </div>
-    </div>
+    
   </section>
        <!--footer-->
-       <footer>
+       <footer class="mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

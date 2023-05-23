@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invoice</title>
+    <title>Shop The Hudd</title>
     <!--WebPage Icon-->
+    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </head>
@@ -47,7 +48,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -73,11 +74,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -93,8 +94,8 @@
     <div class = "container bg-light p-5">
         <h1 class = "text-start">Invoice</h1>
         <div class = "row">
-            <div class = "col">
-                <p>Invoice to</p>
+            <div class = "col mt-4">
+                <p><b>Invoice to: </b></p>
                 <p><?php echo($user)?></p>
             </div>
             <?php
@@ -106,9 +107,9 @@
                     $invoiceDate = $row['INVOICE_DATE'];
                 }
             ?>
-            <div class = "col text-end">
-                <p>Invoice Number : <?php echo("$invoiceId");?></p>
-                <p>Invoice Date : <?php echo("$invoiceDate");?></p>
+            <div class = "col text-end mt-4">
+                <p><b>Invoice Number :</b> <?php echo("$invoiceId");?></p>
+                <p><b>Invoice Date :</b> <?php echo("$invoiceDate");?></p>
             </div>
         </div>
         <div class = "container">
@@ -176,12 +177,12 @@
             <h4 class = "text-end">Total <?php echo("&pound;$productTotalPrice")?></h4>
         </div>
         <div class = "container text-center mt-5">
-            <?php echo("<a href = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity&time=$collectionTime&date=$collectionDate' class = 'btn btn-primary w-100'>Continue</a>")?>
+            <?php echo("<a href = './PaymentGatewayProcess.php?user=$user&cartId=$cartId&totalCartItems=$productTotalQuantity&time=$collectionTime&date=$collectionDate' class = 'btn btn-success w-100' >Continue</a>")?>
         </div>
     </div>
 
 <!--footer-->
-<footer>
+<footer class='mt-4'>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

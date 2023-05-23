@@ -52,7 +52,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -78,11 +78,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -119,21 +119,21 @@
           <?php }?>
           <div class="upper-section">
               <div class="product-img-cnt">
-                <img class="<?php echo ($productImage)?>" src="src/assets/img/bakery.jpg" alt="">
+              <img class='img-fluid img-thumbnail' src='./../../../dist/public/TraderItemImages/<?php echo($productImage)?>' alt='<?php echo($productImage)?>' width="500px" height="400px">
               </div>
               <div class="product-info">
                   <div class="product-title-box">
-                    <h2 class="product-title"><?php echo($productName)?></h2>
-                    <?php echo ("<a class='nav-link' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'><img src='./../../../dist/public/heart.svg' alt='heart'></a>");?>
+                    <h2 class="display-4"><?php echo(ucwords($productName))?></h2>
+                    <?php echo ("<a href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
                   </div>
-                <p class="product-description"><?php echo($productDescription) ?></p>
-                <span class="product-price"><?php echo('&pound;' . $productPrice);?></span>
+                <p class="lead"><?php echo($productDescription) ?></p>
+                <span class="display-5"><?php echo('&pound;' . $productPrice);?></span>
                 <div class="product-quantity">
-                  <span>Quantity:</span>
-                  <div class="increment-decrement">
-                    <span class="decrement">-</span><hr/>
-                    <span class="quantity"><?php echo($productQuantity)?></span><hr/>
-                    <span class="increment">+</span>
+                <span class="lead"><b>Quantity</b></span>
+                  <div class="increment-decrement rounded">
+                    <span class="decrement bg-success text-white">-</span>
+                    <span class="quantity bg-success text-white"><?php echo($productQuantity)?></span>
+                    <span class="increment bg-success text-white">+</span>
                     <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
                   </div>
                 </div>
@@ -190,7 +190,7 @@
                     }
 
                     echo ("
-                      <div class='review mt-5'>
+                      <div class='review mt-5 ' style='background-color:#C0C49B;'>
                           <div class='review-left'>
                               <h3 class='review-name'>$username</h3>
                               <span class='review-date'>$reviewDate</span>
