@@ -67,7 +67,7 @@
                                                                                 header('Location:./Register.php?success=Registration Success!');
                                                                                 
                                                                             } else {
-                                                                                header('Location:./Register.php?error=Error');
+                                                                                header('Location:./Register.php?error=Username, Email or Phonenumber already exists');
                                                                                 
                                                                             }
 

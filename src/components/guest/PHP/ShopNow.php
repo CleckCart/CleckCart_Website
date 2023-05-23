@@ -1,18 +1,18 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact</title>
+    <title>CleckCart</title>
+    <!--WebPage Icon-->
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
-    <link rel="stylesheet" href="../CSS/contactpage.css">
+    <link rel="stylesheet" href="../CSS/homepage.css">
 </head>
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src = "../../service/passwordVisibility.js"></script>
-    <?php
+        <?php
             include('./connect.php');
         ?>
                 <!--NavBar-->
@@ -85,75 +85,107 @@
             </div>
         </nav>
     </div>
-
-    <div class="container-fluid mt-5 bg-light border rounded">
-        <div class="d-flex flex-column bd-highlight mb-3 text-center text-success">
-            <div class = "custom-margin"></div>
-            <div class="bd-highlight">
-                <h1 class = "custom-font-heading">Get In Touch</h1>
-            </div>
-            <div class="bd-highlight">
-                Satisfy your cravings, with local farm savings.
-            </div>
-            <div class = "custom-margin"></div>
-        </div>
+        <div class="container-fluid text-center mb-5">
+        <h1 >OUR PRODUCTS</h1>
     </div>
-
-    
-    <div class="container-fluid mt-5">
-        <div class="row">
-            <div class="col-3"></div>
-            <div class="col-6 border rounded bg-light p-5">
-            <form method = "POST" action = "ContactSubmit.php" class = "p-5">
-                <h1 class="mb-5">Send Message</h1>
-                <?php
-                if(isset($_GET['error'])) {?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-                <?php }?>
-                <?php
-                    if(isset($_GET['success'])) {?>
-                    <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-                <?php }?>
-                <div class="mb-3">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="exampleInputText1" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter Fullname" aria-label="Full name" name="ContactFullname">
-                        </div>
-                        <div class="col">
-                                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="ContactEmail">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" placeholder="Enter Phone Nubmer" aria-label="Phone Number" name="ContactPhone">
-                        </div>
-                        <div class="col">
-                            <label for="exampleInputText1" class="form-label">Subject</label>
-                            <input type="text" class="form-control" placeholder="Subject" aria-label="Subject" name="ContactSubject">
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label for="floatingTextarea2" class="form-label">Message</label>
-                            <textarea class="form-control" placeholder="Message" style="height: 100px" name="ContactMessage"></textarea>
-                        </div>
-                    </div>
+    <div class = "container-fluid p-5">
+        <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
+            <?php
+                $offerquery = "SELECT * FROM OFFER";
+                $offerqueryresult = oci_parse($conn,$offerquery);
+                oci_execute($offerqueryresult);
+                while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
+                    $discountProductID = $data['PRODUCT_ID'];
+                    $discountAmount = $data['DISCOUNT'];
                     
-                    <input type="submit" class="btn btn-success w-25 " value = "Send Message" name = "ContactSendMessage" >
+                    $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$discountProductID'";
+                    $result = oci_parse($conn, $query);
+                    oci_execute($result);
+
+                    while($row = oci_fetch_array($result, OCI_ASSOC)){
+                        $id = $row['PRODUCT_ID'];
+                        $name = ucwords($row['PRODUCT_NAME']);
+                        $categoryId = $row['CATEGORY_ID'];
+                        $shopId = $row['SHOP_ID'];
+                        $categoryName = $row['CATEGORY_NAME'];
+                        $productImage = $row['PRODUCT_IMAGE'];
+                        $productName = ucwords($row['PRODUCT_NAME']);
+                        $changecase=ucfirst($row['PRODUCT_NAME']);
+                        $productDescription = $row['PRODUCT_DESCRIPTION'];
+                        $productPrice = $row['PRODUCT_PRICE'];
+                        $productStock = $row['PRODUCT_STOCK'];
+                        $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
+                        $discountedPrice = number_format($discountedPrice, 2);
+                        echo("<div class='col p-5'>");
+                        echo("<div class='card'style='position:relative'>");
+                        
+                        if($discountAmount == 0){
+                            echo("<a class = 'text-decoration-none  ' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                style='width:100%;
+                                       height:17vw;
+                                       object-fit:contain;'
+                                       >");
+                            echo("<div class='card-body'>");
+                            echo("<div class = 'row'>
+                                        <h3 class='card-title text-dark'>$productName</h3>
+                                    </div>
+                                    <div class = 'row'>
+                                        <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
+                                    </div>");
+                            echo("</div></a>");
+                            echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                            echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("</div>");
+                            echo("</div>");
+                            echo("</div>");
+                        }
+                        else{
+                            echo("<div class='on-sale p-2'style='
+                            position:absolute;
+                            background-color:#C41E3A;
+                            color:#ffffff;'>
+                            <b>$discountAmount %</b>
+                            </div>");
+                            echo("<a class = 'text-decoration-none  ' href = './DiscountProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                style='width:100%;
+                                    height:17vw;
+                                    object-fit:contain;'
+                                    >");
+                            echo("<div class='card-body'>");
+                            echo("<div class = 'row'>
+                                    
+                                        <h3 class='card-title text-dark'>$productName</h3>
+                                    </div>
+                                    <div class = 'row'>
+                                        <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
+                                    </div>");           
+                            echo("</div></a>");            
+                            echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                            echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("</div>");
+                            echo("</div>");
+                            echo("</div>");
+                        }
+                    }
+                }
+
                 
-            </form>
-            </div>
+            ?>
         </div>
+        
     </div>
-    <div class = "custom-margin"></div>
+    
 
 
     <!--footer-->
     <footer>
-        <div class="container-fluid bg-success" style="color:white;">
+        <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">
@@ -202,7 +234,6 @@
                 </div>
             </div>
         </div>
-
     </footer>
 </body>
 </html>

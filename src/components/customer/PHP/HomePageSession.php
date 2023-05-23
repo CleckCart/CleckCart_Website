@@ -38,7 +38,7 @@
                         </li>
 
                         <li class="nav-item dropdown me-5"><!---->
-                            <a class='nav-link mr-3 dropdown-toggle text-light' href='#' id='navbarDropdown' role=button data-bs-toggle='dropdown' aria-expanded='false'>
+                            <a class='nav-link mr-3 dropdown-toggle text-light' href='#' id='navbarDropdown' role='button' data-bs-toggle='dropdown' aria-expanded='false'>
                                 SHOP
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -83,6 +83,7 @@
                         <li class="nav-item me-5">
                             <?php echo("<a class='nav-link' href='./Checkout.php?user=$user'><i class='fa-solid fa-cart-shopping fa-lg text-white' ></i></a>"); ?>
                         </li>
+                        
                     </ul>
 
                 </div>
@@ -132,143 +133,155 @@
 
 
     <!--Images-->
-    <div class = "container-fluid">
-            <div class="row row-cols-2 row-cols-md-4 g-4 pt-5">
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
-                        </div>
+    <div class="container-fluid">
+        <div class="row row-cols-2 row-cols-md-4 g-4 pt-5 text-success">
+            <div class="col mt-5 text-center">
+                <div class="d-flex justify-content-center">
+                    <div class="ellipse p-5 border-5">
+                        <img src="./../../../dist/public/package.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                     </div>
-                    <h3 class = "mt-5">SELF-PICKUP</h1>
-                    <h5 class = "mt-5 text-muted">WELL-PACKAGED</h1>
                 </div>
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="carrot">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">ALWAYS FRESH</h1>
-                    <h5 class = "mt-5 text-muted">LOCALLY MADE</h1>
-                </div>
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/badge.svg" alt="badge">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">SUPERIOR-QUALITY</h1>
-                    <h5 class = "mt-5 text-muted">QUALITY-PRODUCTS</h1>
-                </div>
-                <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/customersupport.svg" alt="ellipse">
-                        </div>
-                    </div>
-                    <h3 class = "mt-5">SUPPORT</h1>
-                    <h5 class = "mt-5 text-muted">24H-SUPPORT</h1>
-                </div>
+                <h3 class="mt-5">SELF-PICKUP</h1>
+                    <h5 class="mt-5 text-muted">WELL-PACKAGED</h1>
             </div>
+            <div class="col mt-5 text-center">
+                <div class="d-flex justify-content-center">
+                    <div class="ellipse p-5">
+                        <img src="./../../../dist/public/carrot.svg" alt="carrot" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
+                    </div>
+                </div>
+                <h3 class="mt-5">ALWAYS FRESH</h1>
+                    <h5 class="mt-5 text-muted">LOCALLY MADE</h1>
+            </div>
+            <div class="col mt-5 text-center">
+                <div class="d-flex justify-content-center">
+                    <div class="ellipse p-5">
+                        <img src="./../../../dist/public/badge.svg" alt="badge" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'> 
+                    </div>
+                </div>
+                <h3 class="mt-5">SUPERIOR-QUALITY</h1>
+                    <h5 class="mt-5 text-muted">QUALITY-PRODUCTS</h1>
+            </div>
+            <div class="col mt-5 text-center">
+                <div class="d-flex justify-content-center">
+                    <div class="ellipse p-5">
+                        <img src="./../../../dist/public/customersupport.svg" alt="ellipse" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
+                    </div>
+                </div>
+                <h3 class="mt-5">SUPPORT</h1>
+                    <h5 class="mt-5 text-muted">24H-SUPPORT</h1>
+            </div>
+        </div>
     </div>
     <div class = "custom-margin"></div>
 
 
     <!--Button and Text-->
-    <div class="container-fluid text-center mt-5">
-        <h1>Lorem ipsum dolor sit amet.</h1>
-        <a class="btn btn-size btn-primary btn-outline-dark mt-5" href="#" role="button">Shop Now</a>
+    <div class="container-fluid text-center mt-5 text-success">
+        <h1 class="display-5">Browse through our fresh and natural products.</h1>
+        <?php echo ("<a class='btn btn-size btn-success mt-5' href='./ShopNow.php?user=$user' role='button'>SHOP NOW</a>"); ?>
     </div>
     <div class = "custom-margin"></div>
 
     <!--Product Space-->
     <div class="container-fluid text-center mb-5">
-            <h1 >OUR PRODUCTS</h1>
+            <h1 class="text-success">OUR PRODUCTS</h1>
         </div>
         <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
-            <?php
-                $offerquery = "SELECT * FROM OFFER";
-                $offerqueryresult = oci_parse($conn,$offerquery);
-                oci_execute($offerqueryresult);
-                while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
-                    $discountProductID = $data['PRODUCT_ID'];
-                    $discountAmount = $data['DISCOUNT'];
-                    
-                    $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$discountProductID'";
-                    $result = oci_parse($conn, $query);
-                    oci_execute($result);
+        <?php
+            $offerquery = "SELECT * FROM OFFER";
+            $offerqueryresult = oci_parse($conn,$offerquery);
+            oci_execute($offerqueryresult);
+            
+            $productCount = 0; // Counter variable
+            
+            while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
+                $discountProductID = $data['PRODUCT_ID'];
+                $discountAmount = $data['DISCOUNT'];
+                
+                $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$discountProductID'";
+                $result = oci_parse($conn, $query);
+                oci_execute($result);
 
-                    while($row = oci_fetch_array($result, OCI_ASSOC)){
-                        $id = $row['PRODUCT_ID'];
-                        $name = ucwords($row['PRODUCT_NAME']);
-                        $categoryId = $row['CATEGORY_ID'];
-                        $shopId = $row['SHOP_ID'];
-                        $categoryName = $row['CATEGORY_NAME'];
-                        $productImage = $row['PRODUCT_IMAGE'];
-                        $productName = ucwords($row['PRODUCT_NAME']);
-                        $changecase=ucfirst($row['PRODUCT_NAME']);
-                        $productDescription = $row['PRODUCT_DESCRIPTION'];
-                        $productPrice = $row['PRODUCT_PRICE'];
-                        $productStock = $row['PRODUCT_STOCK'];
-                        $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
-                        echo("<div class='col p-5'>");
-                        echo("<div class='card'style='position:relative'>");
-                        
-                        if($discountAmount == 0){
-                            echo("<a class = 'text-decoration-none  ' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
-                                style='width:100%;
-                                       height:17vw;
-                                       object-fit:contain;'
-                                       >");
-                            echo("<div class='card-body'>");
-                            echo("<div class = 'row'>
-                                        <h3 class='card-title text-dark'>$name</h3>
-                                    </div>
-                                    <div class = 'row'>
-                                        <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
-                                    </div>");
-                            echo("</div></a>");
-                            echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
-                            echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
-                            echo("</div>");
-                            echo("</div>");
-                            echo("</div>");
-                        }
-                        else{
-                            echo("<div class='on-sale p-2'style='position:absolute;background-color:#C41E3A;color:#ffffff;'>
-                            <b>$discountAmount %</b>
+                while($row = oci_fetch_array($result, OCI_ASSOC)){
+                    $id = $row['PRODUCT_ID'];
+                    $categoryId = $row['CATEGORY_ID'];
+                    $shopId = $row['SHOP_ID'];
+                    $categoryName = $row['CATEGORY_NAME'];
+                    $productImage = $row['PRODUCT_IMAGE'];
+                    $productName = ucwords($row['PRODUCT_NAME']);
+                    $changecase=ucfirst($row['PRODUCT_NAME']);
+                    $productDescription = $row['PRODUCT_DESCRIPTION'];
+                    $productPrice = $row['PRODUCT_PRICE'];
+                    $productStock = $row['PRODUCT_STOCK'];
+                    $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
+                    $discountedPrice = number_format($discountedPrice, 2);
+                    
+                    echo("<div class='col p-5'>");
+                    echo("<div class='card' style='position:relative'>");
+                    
+                    if($discountAmount == 0){
+                        echo("<a class='text-decoration-none' href='./ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
+                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                            style='width:100%;
+                                height:17vw;
+                                object-fit:contain;'
+                        >");
+                        echo("<div class='card-body'>");
+                        echo("<div class='row'>
+                                    <h3 class='card-title text-dark'>$productName</h3>
+                                </div>
+                                <div class='row'>
+                                    <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
+                                </div>");
+                        echo("</div></a>");
+                        echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);' alt='cart2'/></a>");                
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt='cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                    } else {
+                        echo("<div class='on-sale p-2' style='position:absolute;background-color:#C41E3A;color:#ffffff;'>
+                                <b>$discountAmount %</b>
                             </div>");
-                            echo("<a class = 'text-decoration-none  ' href = './DiscountProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
-                                style='width:100%;
-                                    height:17vw;
-                                    object-fit:contain;'
-                                    >");
-                            echo("<div class='card-body'>");
-                            echo("<div class = 'row'>
-                                    
-                                        <h3 class='card-title text-dark'>$name</h3>
-                                    </div>
-                                    <div class = 'row'>
-                                        <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
-                                    </div>");           
-                            echo("</div></a>");            
-                            echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
-                            echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
-                            echo("</div>");
-                            echo("</div>");
-                            echo("</div>");
-                        }
+                        echo("<a class='text-decoration-none' href='./DiscountProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
+                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                            style='width:100%;
+                                height:17vw;
+                                object-fit:contain;'
+                        >");
+                        echo("<div class='card-body'>");
+                        echo("<div class='row'>
+                                <h3 class='card-title text-dark'>$productName</h3>
+                            </div>
+                            <div class='row'>
+                                <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
+                            </div>");           
+                        echo("</div></a>");            
+                        echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src='./../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);' alt='cart2'/></a>");                
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt='cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                    }
+                    
+                    $productCount++; // Increment the counter
+                    
+                    if ($productCount >= 8) {
+                        break; // Exit the loop once 8 products are displayed
                     }
                 }
-            ?>
+
+                if ($productCount >= 8) {
+                    break; // Exit the loop once 8 products are displayed
+                }
+            }
+        ?>
         </div>
     </div>
         <div class = "custom-margin"></div>
@@ -276,61 +289,58 @@
     <!--Category-->
 
     <!--Category-->
-
-    <div class="container-fluid text-center mb-5">
-        <h1 >CATEGORIES</h1>
-    </div>
     <div class = "custom-margin"></div>
-    <div class = "container-fluid bg-info">
+    <div class = "container-fluid bg-light border rounded">
+    <h1 class="text-success text-center mt-5">CATEGORIES</h1>
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
             <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=bakery'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/bread.svg" alt="package">
+                            <img src="./../../../dist/public/bread.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">BAKERY</h1>
+                    <h3 class = "mt-5 text-success">BAKERY</h1>
                 </div>
             </a>
                 <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=dairy'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/icecream.svg" alt="package">
+                            <img src="./../../../dist/public/icecream.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">DAIRY</h1>
+                    <h3 class = "mt-5 text-success">DAIRY</h1>
                 </div>
             </a>
                 <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=fruit'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/fruits.svg" alt="package">
+                            <img src="./../../../dist/public/fruits.svg" alt="package"style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">FRUIT</h1>
+                    <h3 class = "mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
                 <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=meat'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/meat.svg" alt="package">
+                            <img src="./../../../dist/public/meat.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">MEAT</h1>
+                    <h3 class = "mt-5 text-success">MEAT</h1>
                 </div>
             </a>
                 <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=vegetable'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="package">
+                            <img src="./../../../dist/public/carrot.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">VEGETABLE</h1>
+                    <h3 class = "mt-5 text-success">VEGETABLE</h1>
                 </div>
             </a>
         </div>

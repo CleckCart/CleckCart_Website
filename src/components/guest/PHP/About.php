@@ -43,7 +43,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 

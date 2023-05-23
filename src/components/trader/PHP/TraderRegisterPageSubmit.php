@@ -59,7 +59,11 @@
                                                                             oci_bind_by_name($result, ':TraderAddress', $TraderAddress);
                                                                             oci_bind_by_name($result, ':TraderPhoneNumber', $TraderPhoneNumber);
                                                                             oci_execute($result);
-                                                                            header('Location:./TraderRegisterPage.php?success=Form submitted successfully.');
+                                                                            if ($result) {
+                                                                                header('Location:./TraderRegisterPage.php?success=Form submitted successfully.');
+                                                                            } else {
+                                                                                header('Location:./TraderRegisterPage.php?error=Username, Email or Phonenumber already exists');
+                                                                            }
                                                                         }
                                                                     else
                                                                         {
