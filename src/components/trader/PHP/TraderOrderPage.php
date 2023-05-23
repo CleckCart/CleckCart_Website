@@ -92,6 +92,135 @@
 
   <!-- Demo content -->
   <!--Code -->
+  <div class="container">
+      <div class="row bg-success border rounded">
+        <div class="col-12 p-5">
+          <h1>Manage Orders</h1>
+        </div>
+      </div>
+        <?php
+            if(isset($_GET['error'])) {?>
+                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+        <?php }?>
+        <?php
+            if(isset($_GET['success'])) {?>
+                <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+        <?php }?>
+        <?php
+
+            $traderQuery = "SELECT * FROM USER_TABLE WHERE USERNAME='$user' AND ROLE='trader'";
+            $runTraderQuery =oci_parse($conn, $traderQuery);
+            oci_execute($runTraderQuery);
+            $TraderRow = oci_fetch_assoc($runTraderQuery);
+            $TraderId = $TraderRow['USER_ID'];
+
+            $ShopQuery = "SELECT * FROM SHOP WHERE USER_ID='$TraderId'";
+            $runShopQuery =oci_parse($conn, $ShopQuery);
+            oci_execute($runShopQuery);
+            $ShopRow = oci_fetch_assoc($runShopQuery);
+            $ShopName = $ShopRow['SHOP_NAME'];
+
+            $CartQuery = "SELECT * FROM CART";
+            $runCartQuery=oci_parse($conn,$CartQuery);
+            oci_execute($runCartQuery);
+            
+            while($CartRow=oci_fetch_assoc($runCartQuery))
+              {
+                $CartId = $CartRow['CART_ID'];
+                $UserId = $CartRow['USER_ID'];
+                $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId' AND EXISTS (SELECT * FROM ORDER_PRODUCT op JOIN PRODUCT p ON op.PRODUCT_ID = p.PRODUCT_ID WHERE op.ORDER_ID = ORDER_C.ORDER_ID AND p.CATEGORY_NAME = '$ShopName')";
+                $runOrderQuery=oci_parse($conn,$OrderQuery);
+                oci_execute($runOrderQuery);
+
+                $hasOrders = false;
+
+                while($row=oci_fetch_assoc($runOrderQuery))
+                {
+                  $hasOrders = true;
+                  $OrderId=$row['ORDER_ID'];
+                  $OrderDate=$row['ORDER_DATE'];
+                  
+                  $UserQuery = "SELECT * FROM USER_TABLE WHERE USER_ID = '$UserId'";
+                  $runUserQuery=oci_parse($conn,$UserQuery);
+                  oci_execute($runUserQuery);
+                  $row2=oci_fetch_assoc($runUserQuery);
+                  $Username = $row2['USERNAME'];
+                  if ($hasOrders) {
+                        echo("
+                            <div class = 'container bg-light border rounded mb-3 w-100 mt-3'>
+                                <div class = 'container mt-3'>
+                                    <p><b>Order Id : $OrderId<br>
+                                    Customer Username : $Username</b></p>
+                                        <div class='row table-responsive rounded'>
+                                            <table class='table table-striped text-center'>
+                                                <thead class='table-success'>
+                                                    <tr>
+                                                    <th>Image</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
+                                                    <th>Description</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity</th>
+                                                    <th>Order Date</th>
+                                                    <th>Collection Date</th>
+                                                    </tr>
+                                                </thead><tbody>");
+                        $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
+                        $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
+                        oci_execute($runOrderProductQuery);
+                        while($row2=oci_fetch_assoc($runOrderProductQuery))
+                            {
+                                
+                                $ProductId = $row2['PRODUCT_ID'];
+                                $ProductQuantity = $row2['ORDER_QUANTITY'];
+
+                                $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId' AND CATEGORY_NAME='$ShopName'";
+                                $runProductQuery=oci_parse($conn,$ProductQuery);
+                                oci_execute($runProductQuery);  
+                                $ProductRow = oci_fetch_assoc($runProductQuery); 
+
+                                $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
+                                $runCollectionQuery=oci_parse($conn,$CollectionQuery);
+                                oci_execute($runCollectionQuery);  
+                                $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
+                                $CollectionDate=$CollectionRow['COLLECTION_DATE'];
+                                
+                                $slotStatus = $CollectionRow['SLOT_STATUS'];
+
+                                if($slotStatus=='Y'){
+                                    echo("<tr>
+                                            <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                            <td>$ProductRow[PRODUCT_NAME]</td>
+                                            <td>$ProductRow[CATEGORY_NAME]</td>
+                                            <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
+                                            <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
+                                            <td>$ProductQuantity</td>
+                                            <td>$OrderDate</td>
+                                            <td>$CollectionDate</td>
+                                            </tr>");
+                                }
+                                else{
+                                    echo("<tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>No payment made for this order.</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>");
+                                }
+
+                            }
+                        echo("</tbody></table></div></div></div>");
+                    }    
+              } 
+            }                                       
+        ?>        
+  </div>
+</div>
 
 
 </div>
