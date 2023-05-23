@@ -53,7 +53,7 @@
                                                                     $row = oci_fetch_array($runCheckCategoryQuery, OCI_ASSOC);     
                                                                     if($row['CATEGORY_NAME']==$TraderItemEditCategory)
                                                                         {
-                                                                            if($TraderItemEditPrice > $TraderItemEditDiscount)
+                                                                            if($TraderItemEditDiscount < 100)
                                                                                 {                                                           
                                                                                     $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderItemEditId"; 
                                                                                     $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);
@@ -74,14 +74,14 @@
 
                                                                             else
                                                                                 {
-                                                                                    header('Location:./TraderViewItems.php?error=Discount amount cannot be greater than price.');
+                                                                                    header("Location:./TraderViewItems.php?user=$user&error=Discount amount cannot be greater than price.");
 
                                                                                 }
                                                                         }
 
                                                                     else
                                                                         {
-                                                                            header('Location:./TraderViewItems.php?error=Please enter a valid category.');
+                                                                            header("Location:./TraderViewItems.php?user=$user&error=Please enter a valid category.");
                                                                         }
                                                                     }
                                                                 else

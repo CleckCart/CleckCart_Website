@@ -39,7 +39,7 @@
                                                 {
                                                     if(move_uploaded_file($TraderEditItemImageTmpName, $TraderEditItemImageLocation))
                                                         {          
-                                                            if($TraderEditItemPrice > $TraderEditItemDiscount)
+                                                            if($TraderEditItemDiscount < 100)
                                                                 {                                                      
                                                                     $UpdateProductQuery = "UPDATE PRODUCT SET CATEGORY_NAME=:CategoryName, PRODUCT_IMAGE=:ProductImage, PRODUCT_NAME=:ProductName, PRODUCT_DESCRIPTION=:ProductDescription, PRODUCT_PRICE=:ProductPrice, PRODUCT_STOCK=:ProductStock WHERE PRODUCT_ID=$TraderEditItemId"; 
                                                                     $RunUpdateProductQuery = oci_parse($conn, $UpdateProductQuery);

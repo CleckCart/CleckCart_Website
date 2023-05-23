@@ -189,7 +189,7 @@
                   </div>
                   <div class="col">
                     <label for="exampleInputText1" class="form-label">Discount</label>
-                    <input type="number" class="form-control" aria-label="Discount" name="TraderEditItemDiscount" placeholder="Product discount" min="0" step="0.01" value="<?php               
+                    <input type="number" class="form-control" aria-label="Discount" name="TraderEditItemDiscount" placeholder="Product discount" min="0" max = "100" step="0.1" value="<?php               
                       echo("$Discount");?>">
                   </div>
                 </div>

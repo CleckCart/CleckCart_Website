@@ -125,7 +125,7 @@
               <div class="product-info">
                   <div class="product-title-box">
                     <h2 class="display-4"><?php echo(ucfirst($productName))?></h2>
-                    <?php echo("<a href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
+                    <?php echo("<a href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
                   </div>
                 <p class="lead"><?php echo($productDescription) ?></p>
                 <span class="display-5">&pound;<del style='color:red';><span style='color:black';><?php echo($productPrice)?></span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;<?php echo($discountedPrice)?></span>
