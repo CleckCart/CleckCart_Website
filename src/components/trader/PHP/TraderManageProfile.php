@@ -77,6 +77,11 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
       </a>
     </li>
     <li class="nav-item">
+        <?php echo("<a href='./TraderOrderPage.php?user=$user' class='nav-link text-dark'>")?>
+        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Orders
+      </a>
+    </li>
+    <li class="nav-item">
         <?php echo("<a href='#?user=$user' class='nav-link text-dark'>")?>
         <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
       </a>
@@ -88,9 +93,8 @@ while($rowShop = oci_fetch_array($resultShop, OCI_ASSOC)){
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off fa-lg m-3"></i>
-                Log Out
-            </a>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>Log Out
+      </a>
     </li>
   </ul>
 </div>

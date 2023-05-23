@@ -57,7 +57,12 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderManageProfile.php?user=$user' class='nav-link text-dark'>")?>
-      <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
+        <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
+      </a>
+    </li>
+    <li class="nav-item">
+        <?php echo("<a href='./TraderOrderPage.php?user=$user' class='nav-link text-dark'>")?>
+        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Orders
       </a>
     </li>
     <li class="nav-item">
@@ -72,9 +77,8 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off fa-lg m-3"></i>
-                Log Out
-            </a>
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>Log Out
+      </a>
     </li>
   </ul>
 </div>
