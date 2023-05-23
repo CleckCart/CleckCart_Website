@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderDashboard</title>
+    <title>AdminDashboard</title>
     <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
     <!--font awesome CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -18,74 +18,103 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <!--Custom-->
     <script src="../../service/sidebartoggle.js"></script>
+</head>
 <body>
   <?php
-    include('./connect.php');
+    include('connect.php');
     if(isset($_GET['user'])){
       $user = $_GET['user'];
     }
-
-    $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' and ROLE='trader'";
-    $result = oci_parse($conn, $query);
-    oci_execute($result);
-    while($row = oci_fetch_array($result, OCI_ASSOC)){
-        $image=$row['IMAGE']; 
-         
-    }
   ?>
-    <!-- Vertical navbar -->
-    <div class="vertical-nav bg-white" id="sidebar">
-      <div class="py-4 px-3 mb-4 bg-light">
-        <div class="media d-flex align-items-center">
-          <?php echo"<img src='./../../../dist/public/TraderImages/$image' alt='$image' class='m-3 rounded-circle img-responsive p-1 border border-grey' alt='$image' width='90' height='80'>"; ?>
-          <div class="media-body">
-            <?php echo("<h4 class='m-0'>$user</h4>")?>
-          </div>
+  <!-- Vertical navbar -->
+  <div class="vertical-nav bg-white" id="sidebar">
+    <div class="py-4 px-3 mb-4 bg-light">
+      <div class="media d-flex align-items-center mt-4 mb-4">
+        <img src='./../../../dist/public/logo.jpg' alt='logo.jpg' class='rounded-circle img-responsive p-1 border border-grey' width='80' height='70'>
+        <div class="media-body">
+          <?php echo("<h4 class='ms-3'>$user</h4>")?>
         </div>
       </div>
+    </div>
 
   <ul class="nav flex-column bg-white mb-0">
     <li class="nav-item">
-        <?php echo("<a href='./TraderDashboard.php?user=$user' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-house fa-lg m-3"></i> Dashboard
-      </a>
+      <?php echo("<a href='./AdminDashboard.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-house fa-lg m-3'></i> Dashboard
+      </a>");?>
     </li>
     <li class="nav-item">
-      <?php echo("<a href='./TraderViewItems.php?user=$user' class='nav-link text-dark'>")?>
-      <i class="fa-solid fa-cart-shopping fa-lg m-3"></i>Manage Products
-      </a>
+      <?php echo("<a href='./AdminViewTraderItemsPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-cart-shopping fa-lg m-3'></i></i>Manage Products
+      </a>");?>
     </li>
     <li class="nav-item">
-      <?php echo("<a href='./TraderManageProfile.php?user=$user' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-user fa-lg m-3"></i>Manage Profile
-      </a>
+      <?php
+      echo("<a href='./AdminViewTraderPage.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-user fa-lg m-3'></i>Manage Traders
+      </a>");?>
     </li>
     <li class="nav-item">
-        <?php echo("<a href='./TraderOrderPage.php?user=$user' class='nav-link text-dark'>")?>
+      <?php echo("<a href='./AdminViewTraderShop Page.php?user=$user' class='nav-link text-dark'>
+      <i class='fa-solid fa-shop fa-lg m-3'></i>Manage Shops
+      </a>");?>
+    </li>
+    <li class="nav-item">
+      <?php echo ("
+        <a href='./AdminViewCustomerPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-headset fa-lg m-3'></i>Manage Customers
+        </a>
+      ");?>
+    </li>
+    <li class="nav-item">
+        <?php echo("<a href='./AdminOrderPage.php?user=$user' class='nav-link text-dark'>")?>
         <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Manage Orders
       </a>
     </li>
     <li class="nav-item">
-        <?php echo("<a href='#?user=$user' class='nav-link text-dark'>")?>
-        <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
-      </a>
+      <?php
+        echo("<a href='#' class='nav-link text-dark'>
+        <i class='fa fa-line-chart m-3 fa-fw fa-lg m-3'></i>Sales Report
+      </a>")
+      ?>
     </li>
     <li class="nav-item">
-        <?php echo("<a href='../../guest/PHP/HomePage.php?' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-globe fa-lg m-3"></i>Go to Website
-      </a>
+        <a href='../../guest/PHP/HomePage.php' class='nav-link text-dark'>
+          <i class='fa-solid fa-globe fa-lg m-3'></i>Go to Website
+        </a>
     </li>
     <li class="nav-item">
-      <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off fa-lg m-3"></i>Log Out
-      </a>
+      <?php
+        echo("
+          <a href='./AdminApproveTrader.php?user=$user' class='nav-link text-dark'>
+          <i class='fa-solid fa-users fa-lg m-3'></i>Approve Traders
+          </a>
+        ");
+      ?>
+    </li>
+    <li class="nav-item">
+      <?php echo("
+        <a href='./AdminApproveTraderItemPage.php?user=$user' class='nav-link text-dark'>
+        <i class='fa-solid fa-square-check fa-lg m-3'></i>Approve Products
+        </a>
+      ")?>
+    </li>
+    <li class="nav-item">
+      <a href="./AdminLogout.php" class="nav-link text-dark">
+        <i class="fa-solid fa-power-off fa-lg m-3"></i></i>
+                Log Out
+            </a>
     </li>
   </ul>
-</div>
+  </div>
 <!-- End vertical navbar -->
 
 
+
+
 <!-- Page content holder -->
+
+
 <div class="page-content p-5" id="content">
   <!-- Toggle button -->
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i></button>
@@ -108,18 +137,6 @@
         <?php }?>
         <?php
 
-            $traderQuery = "SELECT * FROM USER_TABLE WHERE USERNAME='$user' AND ROLE='trader'";
-            $runTraderQuery =oci_parse($conn, $traderQuery);
-            oci_execute($runTraderQuery);
-            $TraderRow = oci_fetch_assoc($runTraderQuery);
-            $TraderId = $TraderRow['USER_ID'];
-
-            $ShopQuery = "SELECT * FROM SHOP WHERE USER_ID='$TraderId'";
-            $runShopQuery =oci_parse($conn, $ShopQuery);
-            oci_execute($runShopQuery);
-            $ShopRow = oci_fetch_assoc($runShopQuery);
-            $ShopName = $ShopRow['SHOP_NAME'];
-
             $CartQuery = "SELECT * FROM CART";
             $runCartQuery=oci_parse($conn,$CartQuery);
             oci_execute($runCartQuery);
@@ -128,15 +145,13 @@
               {
                 $CartId = $CartRow['CART_ID'];
                 $UserId = $CartRow['USER_ID'];
-                $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId' AND EXISTS (SELECT * FROM ORDER_PRODUCT op JOIN PRODUCT p ON op.PRODUCT_ID = p.PRODUCT_ID WHERE op.ORDER_ID = ORDER_C.ORDER_ID AND p.CATEGORY_NAME = '$ShopName')";
+                $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId'";
                 $runOrderQuery=oci_parse($conn,$OrderQuery);
                 oci_execute($runOrderQuery);
 
-                $hasOrders = false;
-
+                
                 while($row=oci_fetch_assoc($runOrderQuery))
                 {
-                  $hasOrders = true;
                   $OrderId=$row['ORDER_ID'];
                   $OrderDate=$row['ORDER_DATE'];
                   
@@ -145,7 +160,6 @@
                   oci_execute($runUserQuery);
                   $row2=oci_fetch_assoc($runUserQuery);
                   $Username = $row2['USERNAME'];
-                  if ($hasOrders) {
                         echo("
                             <div class = 'container bg-light border rounded mb-3 w-100 mt-3'>
                                 <div class = 'container mt-3'>
@@ -174,7 +188,7 @@
                                 $ProductId = $row2['PRODUCT_ID'];
                                 $ProductQuantity = $row2['ORDER_QUANTITY'];
 
-                                $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId' AND CATEGORY_NAME='$ShopName'";
+                                $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
                                 $runProductQuery=oci_parse($conn,$ProductQuery);
                                 oci_execute($runProductQuery);  
                                 $ProductRow = oci_fetch_assoc($runProductQuery); 
@@ -187,7 +201,7 @@
                                 
                                 $slotStatus = $CollectionRow['SLOT_STATUS'];
 
-                                if($slotStatus=='Y'){
+                                if(!empty($slotStatus)){
                                     echo("<tr>
                                             <td>$ProductRow[PRODUCT_IMAGE]</td>
                                             <td>$ProductRow[PRODUCT_NAME]</td>
@@ -216,15 +230,12 @@
                             }
                         echo("</tbody></table></div></div></div>");
                     }    
-              } 
-            }                                       
+              }                                        
         ?>        
   </div>
 </div>
 
 
-</div>
-<!-- End demo content -->
 
 </body>
 </html>

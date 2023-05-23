@@ -70,7 +70,7 @@
     </li>
     <li class="nav-item">
         <?php echo("<a href='./TraderOrderPage.php?user=$user' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Orders
+        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Manage Orders
       </a>
     </li>
     <li class="nav-item">
@@ -85,8 +85,7 @@
     </li>
     <li class="nav-item">
       <?php echo("<a href='./TraderLogout.php' class='nav-link text-dark'>")?>
-        <i class="fa-solid fa-power-off fa-lg m-3"></i>
-                Log Out
+        <i class="fa-solid fa-power-off fa-lg m-3"></i>Log Out
             </a>
     </li>
   </ul>
