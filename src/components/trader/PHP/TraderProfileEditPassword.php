@@ -64,6 +64,11 @@
       </a>
     </li>
     <li class="nav-item">
+        <?php echo("<a href='./TraderOrderPage.php?user=$user' class='nav-link text-dark'>")?>
+        <i class="fa-solid fa-cart-plus fa-lg m-3"></i>Orders
+      </a>
+    </li>
+    <li class="nav-item">
         <?php echo("<a href='#?user=$user' class='nav-link text-dark'>")?>
         <i class="fa fa-line-chart m-3 fa-fw fa-lg m-3"></i>Sales Report
       </a>
