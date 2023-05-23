@@ -215,50 +215,15 @@
                         $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
                         echo("<div class='col p-5'>");
 
-                        echo("<div class='card'>");
-                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top' alt='...' 
-                            
-                            style='width:100%;
-                            height:17vw;
-                            object-fit:cover;'>");//or use contain here
-                        echo("<div class='card-body'>");
-                        echo("<div class = 'row'>            
-                        <h3 class='card-title text-dark'>$name</h3>
-                    </div>
-                    <div class = 'row'>
-                        <h3 class='card-title text-success' > &pound;$row[PRODUCT_PRICE]</h3>
-                    </div>");
-                        // echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
-                        echo("</div></a>");            
-                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
-                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
-                        href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
-                        role='button'>
-                        <img src = './../../../dist/public/cart2.svg'
-                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
-                         alt = 'cart2'/></a>
-                        ");                
-                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
-                        href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
-                        role='button'>
-                        <img src = './../../../dist/public/heart2.svg' 
-                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
-                        alt = 'cart2'/></a>
-                        ");               
-                        echo("</div>");
-                        echo("</div>");
-                        echo("</div>");
-
+                        
                         echo("<div class='card'style='position:relative'>");
                         
                         if($discountAmount == 0){
                             echo("<a class = 'text-decoration-none  ' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='$row[PRODUCT_IMAGE]' 
                                 style='width:100%;
                                        height:17vw;
-                                       object-fit:contain;'
+                                       object-fit:cover;'
                                        >");
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
@@ -270,8 +235,8 @@
                             echo("</div></a>");
                             echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                             echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
                             echo("</div>");
                             echo("</div>");
                             echo("</div>");
@@ -281,10 +246,10 @@
                             <b>$discountAmount %</b>
                             </div>");
                             echo("<a class = 'text-decoration-none  ' href = './DiscountProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='$row[PRODUCT_IMAGE]' 
                                 style='width:100%;
                                     height:17vw;
-                                    object-fit:contain;'
+                                    object-fit:cover;'
                                     >");
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
@@ -297,8 +262,8 @@
                             echo("</div></a>");            
                             echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                             echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
                             echo("</div>");
                             echo("</div>");
                             echo("</div>");
@@ -314,7 +279,7 @@
 
     <!--Category-->
 
-    -->
+    
     <div class="custom-margin"></div>
     <div class="container-fluid bg-light border rounded">
         <h1 class="text-success text-center mt-5">CATEGORIES</h1>
