@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -73,11 +73,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -133,11 +133,11 @@
 
     <!--Images-->
     <div class = "container-fluid">
-            <div class="row row-cols-2 row-cols-md-4 g-4 pt-5">
+            <div class="row row-cols-2 row-cols-md-4 g-4 pt-5 text-success">
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/package.svg" alt="package">
+                            <img src="./../../../dist/public/package.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class = "mt-5">SELF-PICKUP</h1>
@@ -146,7 +146,7 @@
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="carrot">
+                            <img src="./../../../dist/public/carrot.svg" alt="carrot" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class = "mt-5">ALWAYS FRESH</h1>
@@ -155,7 +155,7 @@
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/badge.svg" alt="badge">
+                            <img src="./../../../dist/public/badge.svg" alt="badge" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class = "mt-5">SUPERIOR-QUALITY</h1>
@@ -164,7 +164,7 @@
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/customersupport.svg" alt="ellipse">
+                            <img src="./../../../dist/public/customersupport.svg" alt="ellipse" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
                     <h3 class = "mt-5">SUPPORT</h1>
@@ -176,14 +176,14 @@
 
 
     <!--Button and Text-->
-    <div class="container-fluid text-center mt-5">
-        <h1>Lorem ipsum dolor sit amet.</h1>
-        <a class="btn btn-size btn-primary btn-outline-dark mt-5" href="#" role="button">Shop Now</a>
+    <div class="container-fluid text-center mt-5 text-success">
+    <h1 class="display-5">Browse through our fresh and natural products.</h1>
+        <a class="btn btn-size btn-success mt-5" href="#" role="button">SHOP NOW</a>
     </div>
     <div class = "custom-margin"></div>
 
     <!--Product Space-->
-    <div class="container-fluid text-center mb-5">
+    <div class="container-fluid text-center mb-5 text-success">
             <h1 >OUR PRODUCTS</h1>
         </div>
         <div class = "container-fluid p-5">
@@ -214,6 +214,43 @@
                         $productStock = $row['PRODUCT_STOCK'];
                         $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
                         echo("<div class='col p-5'>");
+
+                        echo("<div class='card'>");
+                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
+                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top' alt='...' 
+                            
+                            style='width:100%;
+                            height:17vw;
+                            object-fit:cover;'>");//or use contain here
+                        echo("<div class='card-body'>");
+                        echo("<div class = 'row'>            
+                        <h3 class='card-title text-dark'>$name</h3>
+                    </div>
+                    <div class = 'row'>
+                        <h3 class='card-title text-success' > &pound;$row[PRODUCT_PRICE]</h3>
+                    </div>");
+                        // echo("<p class='card-text'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("</div></a>");            
+                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
+                        href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
+                        role='button'>
+                        <img src = './../../../dist/public/cart2.svg'
+                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                         alt = 'cart2'/></a>
+                        ");                
+                        echo("<a class='btn btn-productsize btn-success border border-dark w-50' 
+                        href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' 
+                        role='button'>
+                        <img src = './../../../dist/public/heart2.svg' 
+                        style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'
+                        alt = 'cart2'/></a>
+                        ");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+
                         echo("<div class='card'style='position:relative'>");
                         
                         if($discountAmount == 0){
@@ -266,77 +303,75 @@
                             echo("</div>");
                             echo("</div>");
                         }
+
                     }
                 }
             ?>
         </div>
-    </div>
-        <div class = "custom-margin"></div>
+
 
     <!--Category-->
 
     <!--Category-->
 
-    <div class="container-fluid text-center mb-5">
-        <h1 >CATEGORIES</h1>
-    </div>
-    <div class = "custom-margin"></div>
-    <div class = "container-fluid bg-info">
+    -->
+    <div class="custom-margin"></div>
+    <div class="container-fluid bg-light border rounded">
+        <h1 class="text-success text-center mt-5">CATEGORIES</h1>
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
-            <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=bakery'>")?>
+        <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=bakery'>")?>
                 <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/bread.svg" alt="package">
+                    <div class="d-flex justify-content-center">
+                        <div class="ellipse bg-success p-5">
+                            <img src="./../../../dist/public/bread.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">BAKERY</h1>
+                    <h3 class="mt-5 text-success">BAKERY</h1>
                 </div>
             </a>
-                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=dairy'>")?>
+            <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=dairy'>")?>
                 <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/icecream.svg" alt="package">
+                    <div class="d-flex justify-content-center">
+                        <div class="ellipse bg-success p-5">
+                            <img src="./../../../dist/public/icecream.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">DAIRY</h1>
+                    <h3 class="mt-5 text-success">DAIRY</h1>
                 </div>
             </a>
-                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=fruit'>")?>
+            <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=fruit'>")?>
                 <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/fruits.svg" alt="package">
+                    <div class="d-flex justify-content-center">
+                        <div class="ellipse bg-success p-5">
+                            <img src="./../../../dist/public/fruits.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">FRUIT</h1>
+                    <h3 class="mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
-                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=meat'>")?>
+            <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=meat'>")?>
                 <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/meat.svg" alt="package">
+                    <div class="d-flex justify-content-center">
+                        <div class="ellipse bg-success p-5">
+                            <img src="./../../../dist/public/meat.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">MEAT</h1>
+                    <h3 class="mt-5 text-success">MEAT</h1>
                 </div>
             </a>
-                <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=vegetable'>")?>
+            <?php echo("<a class='nav-link p-5 ' href='./CategoryView.php?user=$user&category=vegetable'>")?>
                 <div class="col mt-5 text-center">
-                    <div class= "d-flex justify-content-center">
-                        <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="package">
+                    <div class="d-flex justify-content-center">
+                        <div class="ellipse bg-success p-5">
+                            <img src="./../../../dist/public/carrot.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">VEGETABLE</h1>
+                    <h3 class="mt-5 text-success">VEGETABLE</h1>
                 </div>
             </a>
         </div>
     </div>
-    <div class = "custom-margin"></div>
-
+    <div class="custom-margin"></div>
 
     <!--footer-->
     <footer>

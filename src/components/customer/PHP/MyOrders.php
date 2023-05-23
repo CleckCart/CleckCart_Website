@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -71,11 +71,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -89,7 +89,7 @@
     </div>
 
     <div class = "container">
-            <h1 class="mb-4">My Orders</h1>
+            <h1 class="mb-4 mt-5">My Orders</h1>
     </div>
     
     <?php
@@ -114,10 +114,10 @@
                     $OrderDate=$row['ORDER_DATE'];
                     echo("
                         <div class = 'container bg-light border rounded mb-3'>
-                            <div class = 'container'>
-                                <p class = 'mt-5'>Order Id : $OrderId </p>
+                            <div class = 'container mb-3'>
+                                <p class = 'mt-5 '><b>Order Id : </b>$OrderId </p>
                                     <div class='row table-responsive rounded'>
-                                        <table class='table table-light table-striped text-center'>
+                                        <table class='table table-light table-striped text-center mb-5'>
                                             <thead class='table-success'>
                                                 <tr>
                                                 <th>Image</th>
@@ -190,7 +190,7 @@
     <div class = "container">&nbsp;</div>
     
     <!--footer-->
-    <footer>
+    <footer class="mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">
