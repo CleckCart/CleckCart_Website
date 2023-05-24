@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shop The Hudd</title>
+    <title>Categories</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,6 +19,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <?php
             include('./connect.php');
+            if(isset($_GET['category'])){
+                $productCategory = $_GET['category'];
+            }
         ?>
         <!--NavBar-->
         <div class="topbar">
@@ -91,15 +94,11 @@
         </nav>
     </div>
   <section class="product_page">
-    <h2 class="product_page--title mt-5">OUR PRODUCTS</h2>
+  <?php echo ("<h2 class='product_page--title mt-5'>"); echo(strtoupper($productCategory)); echo(" PRODUCTS</h2>") ?>
     <div class = "container-fluid p-5">
     
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
-            <?php
-
-                if(isset($_GET['category'])){
-                    $productCategory = $_GET['category'];
-                }
+        <?php
 
                 $queryCategory = "SELECT * FROM CATEGORY WHERE CATEGORY_NAME = '$productCategory'";
                 $resultCategory = oci_parse($conn, $queryCategory);
@@ -108,48 +107,90 @@
                 while($row = oci_fetch_array($resultCategory, OCI_ASSOC)){
                     $categoryid = $row['CATEGORY_ID'];
                 }
-                
-                
+
                 if(!empty($categoryid)){
-                    $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid'";
-                    $result = oci_parse($conn, $query);
-                    oci_execute($result);
-                    while($row = oci_fetch_array($result, OCI_ASSOC)){
-                        $id = $row['PRODUCT_ID'];
-                        $name = ucwords($row['PRODUCT_NAME']);
-                        $categoryId = $row['CATEGORY_ID'];
-                        $shopId = $row['SHOP_ID'];
-                        $categoryName = $row['CATEGORY_NAME'];
-                        $productImage = $row['PRODUCT_IMAGE'];
-                        $productName = $row['PRODUCT_NAME'];
-                        $productDescription = $row['PRODUCT_DESCRIPTION'];
-                        $productPrice = $row['PRODUCT_PRICE'];
-                        $productStock = $row['PRODUCT_STOCK'];
-                        echo("<div class='col p-5'>");
-                        echo("<div class='card bg-light'>");
-                        echo("<a class = 'text-decoration-none color-gray' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&stock=$productStock'>
-                        <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='...' 
-                        style='width:100%;
-                        height:17vw;
-                        object-fit:cover;'>");
-                        echo("<div class='card-body'>");
-                        echo("<div class = 'row'>            
-                        <h3 class='card-title text-dark'>$name</h3>
-                    </div>
-                    <div class = 'row'>
-                        <h3 class='card-title text-success' > &pound;$row[PRODUCT_PRICE]</h3>
-                    </div>");
-                        // echo("<p class='card-text text-success'>$row[PRODUCT_DESCRIPTION]</p>");              
-                        echo("</div></a>");            
-                        echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center bg-light w-100'>");
-                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                        echo("<a class='btn btn-productsize btn-success border-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1' role='button'>
-                        <img src = './../../../dist/public/cart2.svg' alt = 'cart2' style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);' /></a>" );                
-                    echo("<a class='btn btn-productsize btn-success border-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'>
-                        <img src = './../../../dist/public/heart2.svg' alt = 'cart2'style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);' /></a>");               
-                        echo("</div>");
-                        echo("</div>");
-                        echo("</div>");
+                    $offerquery = "SELECT * FROM OFFER";
+                    $offerqueryresult = oci_parse($conn,$offerquery);
+                    oci_execute($offerqueryresult);
+                    while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
+                        $discountProductID = $data['PRODUCT_ID'];
+                        $discountAmount = $data['DISCOUNT'];
+                        
+                        $query = "SELECT * FROM PRODUCT WHERE CATEGORY_ID = '$categoryid' AND PRODUCT_ID = '$discountProductID'";
+                        $result = oci_parse($conn, $query);
+                        oci_execute($result);
+
+                        while($row = oci_fetch_array($result, OCI_ASSOC)){
+                            $id = $row['PRODUCT_ID'];
+                            $name = ucwords($row['PRODUCT_NAME']);
+                            $categoryId = $row['CATEGORY_ID'];
+                            $shopId = $row['SHOP_ID'];
+                            $categoryName = $row['CATEGORY_NAME'];
+                            $productImage = $row['PRODUCT_IMAGE'];
+                            $productName = ucwords($row['PRODUCT_NAME']);
+                            $changecase=ucfirst($row['PRODUCT_NAME']);
+                            $productDescription = $row['PRODUCT_DESCRIPTION'];
+                            $productPrice = $row['PRODUCT_PRICE'];
+                            $productStock = $row['PRODUCT_STOCK'];
+                            $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
+                            $discountedPrice = number_format($discountedPrice, 2);
+                            echo("<div class='col p-5'>");
+                            echo("<div class='card'style='position:relative'>");
+                            
+                            if($discountAmount == 0){
+                                echo("<a class = 'text-decoration-none  ' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
+                                    <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                    style='width:100%;
+                                        height:17vw;
+                                        object-fit:contain;'
+                                        >");
+                                echo("<div class='card-body'>");
+                                echo("<div class = 'row'>
+                                            <h3 class='card-title text-dark'>$productName</h3>
+                                        </div>
+                                        <div class = 'row'>
+                                            <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
+                                        </div>");
+                                echo("</div></a>");
+                                echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                                echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                                echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                                echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                                echo("</div>");
+                                echo("</div>");
+                                echo("</div>");
+                            }
+                            else{
+                                echo("<div class='on-sale p-2'style='
+                                position:absolute;
+                                background-color:#C41E3A;
+                                color:#ffffff;'>
+                                <b>$discountAmount %</b>
+                                </div>");
+                                echo("<a class = 'text-decoration-none  ' href = './DiscountProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
+                                    <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                    style='width:100%;
+                                        height:17vw;
+                                        object-fit:contain;'
+                                        >");
+                                echo("<div class='card-body'>");
+                                echo("<div class = 'row'>
+                                        
+                                            <h3 class='card-title text-dark'>$productName</h3>
+                                        </div>
+                                        <div class = 'row'>
+                                            <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
+                                        </div>");           
+                                echo("</div></a>");            
+                                echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                                echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                                echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                                echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                                echo("</div>");
+                                echo("</div>");
+                                echo("</div>");
+                            }
+                        }
                     }
                 }
                 else{
@@ -157,8 +198,8 @@
                     echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
                     echo("</div>");
                 }
-
             ?>
+            
         </div>
     </div>
     

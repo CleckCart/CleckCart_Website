@@ -93,7 +93,7 @@
     
 
         <div class="container-fluid text-center mb-5">
-        <h1 >OUR PRODUCTS</h1>
+        <h1 class = "mt-5 text-success">OUR PRODUCTS</h1>
     </div>
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
