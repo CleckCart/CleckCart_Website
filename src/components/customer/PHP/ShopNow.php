@@ -47,7 +47,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
 
                         </li>
 
@@ -73,11 +73,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -92,8 +92,8 @@
     </div>
     
 
-        <div class="container-fluid text-center mb-5 mt-5">
-        <h1 >PRODUCTS ON SALE</h1>
+        <div class="container-fluid text-center mb-5">
+        <h1 >OUR PRODUCTS</h1>
     </div>
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
@@ -124,31 +124,57 @@
                         $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
                         $discountedPrice = number_format($discountedPrice, 2);
                         
-                        if($discountAmount == 0){
-
-                        }
-                        else{
-                            echo("<div class='col p-5'>");
-                            echo("<div class='card'style='position:relative'>");
-                            echo("<div class='on-sale p-2'style='position:absolute;background-color:#C41E3A;color:#ffffff;'><b>$discountAmount %</b></div>
-                                <a class = 'text-decoration-none' href = './DiscountProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' style='width:100%;height:17vw;object-fit:contain;'>
-                                    <div class='card-body'>
-                                        <div class = 'row'>
-                                            <h3 class='card-title text-dark'>$name</h3>
-                                        </div>
-                                        <div class = 'row'>
-                                            <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>
-                                    <a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>
-                                    <a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>
+                        echo("<div class='col p-5'>");
+                    echo("<div class='card' style='position:relative'>");
+                    
+                    if($discountAmount == 0){
+                        echo("<a class='text-decoration-none' href='./ProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
+                            <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                            style='width:100%;
+                                height:17vw;
+                                object-fit:contain;'
+                        >");
+                        echo("<div class='card-body'>");
+                        echo("<div class='row'>
+                                    <h3 class='card-title text-dark'>$productName</h3>
+                                </div>
+                                <div class='row'>
+                                    <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
                                 </div>");
-                                echo("</div>");
-                                echo("</div>");
-                            }
+                        echo("</div></a>");
+                        echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                        echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);' alt='cart2'/></a>");                
+                        echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt='cart2'/></a>");               
+                        echo("</div>");
+                        echo("</div>");
+                        echo("</div>");
+                        } else {
+                            echo("<div class='on-sale p-2' style='position:absolute;background-color:#C41E3A;color:#ffffff;'>
+                                    <b>$discountAmount %</b>
+                                </div>");
+                            echo("<a class='text-decoration-none' href='./DiscountProductDetail.php?user=$user&id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                style='width:100%;
+                                    height:17vw;
+                                    object-fit:contain;'
+                            >");
+                            echo("<div class='card-body'>");
+                            echo("<div class='row'>
+                                    <h3 class='card-title text-dark'>$productName</h3>
+                                </div>
+                                <div class='row'>
+                                    <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
+                                </div>");           
+                            echo("</div></a>");            
+                            echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
+                            echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src='./../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);' alt='cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?user=$user&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src='./../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt='cart2'/></a>");               
+                            echo("</div>");
+                            echo("</div>");
+                            echo("</div>");
+                        }
                     }
                 }
             ?>

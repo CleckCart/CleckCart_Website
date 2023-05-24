@@ -20,8 +20,8 @@ $otp = $_SESSION['otp'];
     <?php
             include('./connect.php');
         ?>
-        <!--NavBar-->
-        <div class="topbar">
+                <!--NavBar-->
+                <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -48,7 +48,7 @@ $otp = $_SESSION['otp'];
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 

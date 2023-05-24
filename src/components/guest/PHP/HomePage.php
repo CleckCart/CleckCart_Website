@@ -17,8 +17,8 @@
     <?php
     include('./connect.php');
     ?>
-    <!--NavBar-->
-    <div class="topbar">
+            <!--NavBar-->
+            <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -45,7 +45,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 
@@ -177,7 +177,7 @@
     <!--Button and Text-->
     <div class="container-fluid text-center mt-5 text-success">
         <h1 class="display-5">Browse through our fresh and natural products.</h1>
-        <a class="btn btn-size btn-success mt-5" href="#" role="button">SHOP NOW</a>
+        <a class="btn btn-size btn-success mt-5" href="./ShopNow.php" role="button">SHOP NOW</a>
     </div>
     <div class="custom-margin"></div>
 
@@ -191,6 +191,10 @@
                 $offerquery = "SELECT * FROM OFFER";
                 $offerqueryresult = oci_parse($conn,$offerquery);
                 oci_execute($offerqueryresult);
+
+                $productCount = 0; // Counter variable
+
+
                 while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
                     $discountProductID = $data['PRODUCT_ID'];
                     $discountAmount = $data['DISCOUNT'];
@@ -201,7 +205,6 @@
 
                     while($row = oci_fetch_array($result, OCI_ASSOC)){
                         $id = $row['PRODUCT_ID'];
-                        $name = ucwords($row['PRODUCT_NAME']);
                         $categoryId = $row['CATEGORY_ID'];
                         $shopId = $row['SHOP_ID'];
                         $categoryName = $row['CATEGORY_NAME'];
@@ -212,6 +215,7 @@
                         $productPrice = $row['PRODUCT_PRICE'];
                         $productStock = $row['PRODUCT_STOCK'];
                         $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
+                        $discountedPrice = number_format($discountedPrice, 2);
                         echo("<div class='col p-5'>");
                         echo("<div class='card'style='position:relative'>");
                         
@@ -224,7 +228,7 @@
                                        >");
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
-                                        <h3 class='card-title text-dark'>$name</h3>
+                                        <h3 class='card-title text-dark'>$productName</h3>
                                     </div>
                                     <div class = 'row'>
                                         <h3 class='card-title text-dark'> &pound;$row[PRODUCT_PRICE]</del></h3>
@@ -232,8 +236,8 @@
                             echo("</div></a>");
                             echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                             echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./CartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock&newPrice=&quantity=1' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
                             echo("</div>");
                             echo("</div>");
                             echo("</div>");
@@ -254,7 +258,7 @@
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
                                     
-                                        <h3 class='card-title text-dark'>$name</h3>
+                                        <h3 class='card-title text-dark'>$productName</h3>
                                     </div>
                                     <div class = 'row'>
                                         <h3 class='card-title text-dark'> &pound;<del style='color:red';><span style='color:black';>$row[PRODUCT_PRICE]</span></del>&nbsp;&nbsp;&nbsp;&nbsp;&pound;$discountedPrice</h3>
@@ -262,12 +266,19 @@
                             echo("</div></a>");            
                             echo("<div class='d-flex flex-row flex-wrap p-1 align-self-center w-100'>");
                             echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
-                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
-                            echo("<a class='btn btn-productsize btn-success border border-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=1' role='button'><img src = './../../../dist/public/cart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'alt = 'cart2'/></a>");                
+                            echo("<a class='btn btn-productsize btn-primary btn-outline-dark w-50' href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&stock=$productStock' role='button'><img src = './../../../dist/public/heart2.svg' style='filter: invert(100%) sepia(0%) saturate(7482%) hue-rotate(83deg) brightness(97%) contrast(109%);'  alt = 'cart2'/></a>");               
                             echo("</div>");
                             echo("</div>");
                             echo("</div>");
                         }
+                        $productCount++; // Increment the counter
+                        if ($productCount >= 8) {
+                            break; // Exit the loop once 8 products are displayed
+                        }
+                    }
+                    if ($productCount >= 8) {
+                        break; // Exit the loop once 8 products are displayed
                     }
                 }
 

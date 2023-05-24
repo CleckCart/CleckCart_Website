@@ -15,8 +15,8 @@
     <?php
             include('./connect.php');
         ?>
-        <!--NavBar-->
-        <div class="topbar">
+                <!--NavBar-->
+                <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -43,7 +43,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 
@@ -116,18 +116,18 @@
                                 echo(trim($_POST['CustomerLoginPassword']));
                             }
                         ?>">
-                        <p class = "text-end"><a href = "Forgotpassword.php">Forgot Password?</a></p>
+                        <p class = "text-end"><a href = "./Forgotpassword.php" class="text-success">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-primary w-100" name = "CustomerLoginSubmit" value="Login">
+                        <input type="submit" class="btn btn-success w-100" name = "CustomerLoginSubmit" value="Login">
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
                     <div class = "mb-3">
-                        <p>New Here? <a href = "./Register.php">Create an account</a></p>
+                        <p>New Here? <a href = "./Register.php" class="text-success">Create an account</a></p>
                     </div>
                     </div>
                 </form>

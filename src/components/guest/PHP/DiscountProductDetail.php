@@ -21,8 +21,8 @@
   <?php
     include('./connect.php');
   ?>
-        <!--NavBar-->
-        <div class="topbar">
+                <!--NavBar-->
+                <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -49,7 +49,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <a class="nav-link mr-3 text-light" href="./Sale.php">PRODUCT</a>
+                        <a class="nav-link mr-3 text-light" href="./Sale.php">SALE</a>
 
                         </li>
 
@@ -135,8 +135,8 @@
                     <p class = "stockValue"><?php echo($productStock)?></p><p>in stock</p>
                   </div>
                 </div>
-                <?php echo("<a href = './DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&quantity=$productQuantity' class='btn add-to-cart'>ADD TO CART</a>")?>
-                <?php echo("<a href = './BuyNow.php?&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$discountedPrice&quantity=$productQuantity' class='btn buy-now'>BUY NOW</a>")?>
+                <?php echo("<a href = './DiscountCartProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=$productQuantity' class='btn add-to-cart'>ADD TO CART</a>")?>
+                <?php echo("<a href = './BuyNow.php?&id=$id&image=$productImage&name=$productName&description=$productDescription&price=$discountedPrice&stock=$productStock&quantity=$productQuantity' class='btn buy-now'>BUY NOW</a>")?>
                 
                 </div>
               <script>
@@ -151,16 +151,16 @@
                   if(currentQuantity < (stockValue.innerText-1)){
                     currentQuantity++;
                     quantity.innerText = currentQuantity;
-                    addToCartBtn.href = `./DiscountCartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&newPrice=<?php echo ($discountedPrice)?>&quantity=${currentQuantity}`;
-                      buynowBtn.href = `./BuyNow.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($discountedPrice)?>&quantity=${currentQuantity}`;
+                    addToCartBtn.href = `./DiscountCartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&newPrice=<?php echo ($discountedPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./BuyNow.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($discountedPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
                   }
                 });
                 decrement.addEventListener("click", ()=>{
                   if(currentQuantity > 1){
                       currentQuantity--;
                       quantity.innerText = currentQuantity;
-                      addToCartBtn.href = `./DiscountCartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&newPrice=<?php echo ($discountedPrice)?>&quantity=${currentQuantity}`;
-                      buynowBtn.href = `./BuyNow.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($discountedPrice)?>&quantity=${currentQuantity}`;
+                      addToCartBtn.href = `./DiscountCartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&newPrice=<?php echo ($discountedPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
+                      buynowBtn.href = `./BuyNow.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($discountedPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
                   }
                 })
               </script>
