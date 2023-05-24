@@ -162,10 +162,10 @@
                                 $productName = $rowWishListProduct['PRODUCT_NAME'];
                                 $productPrice = $rowWishListProduct['PRODUCT_PRICE'];
                                 echo "<tr>
-                                <td colspan = '3' class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
-                                <td colspan = '2' >$productName</td>
-                                <td colspan = '3' class = 'text-end'>&pound;$productPrice</td>
-                                <td colspan = '3' class = 'text-center'>
+                                <td class ='text-center'><img src='$productImage' alt='image' width='80'height='60'></td>
+                                <td class ='text-center'>$productName</td>
+                                <td class = 'text-end align-middle'>&pound;$productPrice</td>
+                                <td class = 'text-center'>
                                     <!-- Delete Button trigger modal -->
                                     <a class='btn custom-btn' href = './CartProducts.php?user=$user&id=$productId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'>
                                         <img src='./../../../dist/public/cart2.svg' alt='delete' >

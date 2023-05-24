@@ -131,10 +131,7 @@
               <div class="product-info">
                   <div class="product-title-box">
                     <h2 class="display-4"><?php echo(ucwords($productName))?></h2>
-                    <?php echo ("<a href='./WishListProducts.php?user=$user&id=$userId&image=$productImage&name=$productName&description=$productDescription&price=$productPrice&quantity=1'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
-                  </div>
-                  <div class="star-rating-box">
-                    <p>Star rating <span>No of rating</span></p>
+                    
                   </div>
                 <p class="product-description"><?php echo($productDescription) ?></p>
                 <span class="display-5"><?php echo('&pound;' . $productPrice);?></span>
