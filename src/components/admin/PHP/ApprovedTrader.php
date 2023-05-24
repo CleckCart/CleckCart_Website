@@ -88,8 +88,15 @@ if(isset($_GET['user'])){
                         $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                         $mail->addAddress($Email); //reciever's email
                         $mail->isHTML(true);
-                        $mail->Subject = 'Congratulations! ' . $Firstname .', You can Start Selling with CleckCart'; //subject of the email for reciever
-                        $mail->Body = 'Dear, '. $Firstname .'<br>You have been approved to sell your products with CleckCart. Happy Trading!'; //message for the reciever
+                        $mail->Subject = 'Congratulations! ' . $Firstname .', You\'re Approved to Sell Your Products'; //subject of the email for reciever
+                        $mail->Body = 'Dear, '. $Firstname .'<br><br>
+                        We are thrilled to inform you that your request to sell your products on CleckCart has been approved! Congratulations on this exciting opportunity to expand your business and reach a wider audience.
+                        We believe that your unique products will be a valuable addition to our platform, and we are confident that our customers will appreciate the quality and innovation you bring. We can\'t wait to showcase your offerings and help you grow your brand.<br><br>
+                        Should you have any questions or require assistance along the way, please don\'t hesitate to reach out to our support team. We\'re here to help.<br><br>
+                        Thank you for choosing our platform to showcase your products. We look forward to a successful partnership and mutually beneficial results.<br><br>
+                        Best regards,<br><br>
+                        CleckCart
+                        '; //message for the reciever
                         $mail->send();
                         header("Location:AdminApproveTrader.php?user=$user&success=Trader has been approved.");
                     } 

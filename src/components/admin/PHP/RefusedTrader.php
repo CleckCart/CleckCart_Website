@@ -42,8 +42,11 @@ if(isset($_GET['user'])){
                     $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
-                    $mail->Subject = 'Sorry ' . $Firstname .', You have been refused.'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $Firstname .'<br>We regret to inform you that your request has been denied to be a trader in CleckCart.'; //message for the reciever
+                    $mail->Subject = 'Trading Rejection Notice'; //subject of the email for reciever
+                    $mail->Body = 'Dear '.$Username.',<br><br>We regret to inform you that we are unable to accommodate the sale of your products on our website as another seller already offers similar products.<br><br>
+                    Thank you for your interest in our platform. We apologize for any inconvenience caused.<br><br>
+                    Best regards,<br><br>
+                    CleckCart'; //message for the reciever
                     $mail->send();
                     header("Location:AdminApproveTrader.php?user=$user&error=Trader has been refused.");
                 }
