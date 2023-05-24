@@ -50,7 +50,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo("<a class='nav-link mr-3 text-light' href='./About.php?user=$user'>ABOUT</a>"); ?>
+                            <?php echo("<a class='nav-link mr-3 text-light' href='./About.php?user=$user'>SALE</a>"); ?>
                         </li>
 
                         <li class="nav-item me-5">

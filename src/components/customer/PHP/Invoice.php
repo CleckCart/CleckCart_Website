@@ -49,7 +49,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
 
                         </li>
 
