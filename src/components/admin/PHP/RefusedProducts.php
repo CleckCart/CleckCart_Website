@@ -56,8 +56,12 @@ if(isset($_GET['user'])){
                     $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
-                    $mail->Subject = 'Sorry ' . $ShopOwnerUsername .', Your product has been refused.'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been denied to be listed in CleckCart.<br>Please follow the trader guidelines.'; //message for the reciever
+                    $mail->Subject = 'Product Listing Rejection Notice'; //subject of the email for reciever
+                    $mail->Body = 'Dear '.$ShopOwnerUsername.',<br><br>
+                                We regret to inform you that your product listing request has been denied for inclusion on our website. It did not meet our required guidelines and standards.<br><br>
+                                We appreciate your interest in our platform and thank you for considering us. If you have any questions or would like further information regarding the reasons for the rejection, please feel free to reach out to us.<br><br>
+                                Best regards,<br><br>
+                                CleckCart'; //message for the reciever
                     $mail->send();
                     header("Location:AdminApproveTraderItemPage.php?user=$user&error=Product has been refused.");
                 }

@@ -113,8 +113,15 @@
                     $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
-                    $mail->Subject = 'CleckCleck! ' . $ShopOwnerUsername . ',' . ' Your product ' . $ProductName .' has been approved.'; //subject of the email for reciever
-                    $mail->Body = 'Dear, '. $ShopOwnerUsername .'<br>Your product has been approved to be listed in CleckCart.<br>Happy Trading!'; //message for the reciever
+                    $mail->Subject = 'Subject: Approval of Your Product Listing'; //subject of the email for reciever
+                    $mail->Body = 'Dear '.$ShopOwnerUsername.',<br><br>
+                    We are pleased to inform you that your product has been approved to be listed on our website. Congratulations!<br><br>
+                    Our team has carefully reviewed your product and determined that it meets our quality standards and aligns with our target audience\'s preferences. We believe that your product will be a valuable addition to our platform and will attract considerable interest from our customers.<br><br>
+                    We will proceed with the necessary steps to ensure your product is promptly listed on our website. Once live, it will be showcased prominently, giving it the visibility it deserves.<br><br>
+                    Thank you for choosing our platform to showcase your product. We look forward to a successful partnership and the opportunity to contribute to your business\'s growth.<br><br>
+                    If you have any further questions or require assistance, please do not hesitate to reach out to us. We are here to support you every step of the way.<br><br>
+                    Best regards,<br><br>
+                    CleckCart'; //message for the reciever
                     $mail->send();
                     header("Location:AdminApproveTraderItemPage.php?user=$user&success=Product has been approved.");       
                     }
