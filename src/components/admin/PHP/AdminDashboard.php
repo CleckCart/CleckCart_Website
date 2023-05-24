@@ -111,16 +111,56 @@
 
 
 
-
 <!-- Page content holder -->
+<?php
+  $TraderQuery = "SELECT COUNT(*) AS TRADER_NO FROM USER_TABLE WHERE ROLE='trader'";
+  $RunTraderQuery = oci_parse($conn,$TraderQuery);
+  oci_execute($RunTraderQuery);
+  $NumberOfTraders = oci_fetch_assoc($RunTraderQuery)['TRADER_NO'];
 
+  $CustomerQuery = "SELECT COUNT(*) AS CUSTOMER_NO FROM USER_TABLE WHERE ROLE='customer'";
+  $RunCustomerQuery = oci_parse($conn,$CustomerQuery);
+  oci_execute($RunCustomerQuery);
+  $NumberOfCustomers = oci_fetch_assoc($RunCustomerQuery)['CUSTOMER_NO'];
 
-<div class="page-content p-5" id="content">
+  $ProductQuery = "SELECT COUNT(*) AS PRODUCT_NO FROM PRODUCT";
+  $RunProductQuery = oci_parse($conn,$ProductQuery);
+  oci_execute($RunProductQuery);
+  $NumberOfProducts = oci_fetch_assoc($RunProductQuery)['PRODUCT_NO'];
+
+  $PaymentQuery = "SELECT COUNT(*) AS PAYMENT_NO FROM PAYMENT";
+  $RunPaymentQuery = oci_parse($conn,$PaymentQuery);
+  oci_execute($RunPaymentQuery);
+  $NumberOfPayments = oci_fetch_assoc($RunPaymentQuery)['PAYMENT_NO'];
+
+?>
+
+<div class="page-content p-3" id="content">
   <!-- Toggle button -->
   <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4"><i class="fa fa-bars mr-2"></i></button>
 
   <!-- Demo content -->
   <!--Code -->
+  <div class = "container bg-success border rounded p-3 text-light">
+      <div class="row text-center">
+        <div class="col-3">
+          <p class="lead"><b><?php echo($NumberOfTraders); ?></p>
+            <p class="lead">TRADERS</b></p>
+        </div>
+        <div class="col-3">
+          <p class="lead"><b><?php echo($NumberOfCustomers); ?></p>
+            <p class="lead">CUSTOMERS</b></p>
+        </div>
+        <div class="col-3">
+          <p class="lead"><b><?php echo($NumberOfProducts); ?></p>
+            <p class="lead">PRODUCTS</b></p>
+        </div>
+        <div class="col-3">
+         <p class="lead"><b><?php echo($NumberOfPayments); ?></p>
+            <p class="lead">PAYMENTS</b></p>
+        </div>
+      </div>
+  </div>
 
 
 </div>
