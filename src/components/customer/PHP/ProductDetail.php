@@ -160,10 +160,10 @@
                 });
                 decrement.addEventListener("click", ()=>{
                   if(currentQuantity > 1){
-                      currentQuantity--;
-                      quantity.innerText = currentQuantity;
-                      addToCartBtn.href = `./CartProducts.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
-                      buynowBtn.href = `./BuyNow.php?id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
+                    currentQuantity--;
+                    quantity.innerText = currentQuantity;
+                    addToCartBtn.href = `./CartProducts.php?user=<?php echo($user)?>&id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
+                    buynowBtn.href = `./BuyNow.php?user=<?php echo($user)?>&id=<?php echo ($id)?>&image=<?php echo ($productImage)?>&name=<?php echo ($productName)?>&description=<?php echo ($productDescription)?>&price=<?php echo ($productPrice)?>&stock=<?php echo ($productStock)?>&quantity=${currentQuantity}`;
                   }
                 })
               </script>
