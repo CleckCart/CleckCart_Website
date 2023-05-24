@@ -15,18 +15,17 @@
         $resultCustomer = oci_parse($conn, $queryCustomer);
         oci_execute($resultCustomer);
 
-        while($row = oci_fetch_array($resultCustomer, OCI_ASSOC)){
-            $userid = $row['USER_ID'];
-            $Email = $row['EMAIL'];
-        }
+        $row = oci_fetch_assoc($resultCustomer);
+        $userid = $row['USER_ID'];
+        $Email = $row['EMAIL'];
+    
 
-        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = $cartId";
+        $queryOrder = "SELECT * FROM ORDER_C WHERE CART_ID = '$cartId'";
         $resultOrder = oci_parse($conn, $queryOrder);
         oci_execute($resultOrder);
 
-        while($rowOrder = oci_fetch_array($resultOrder, OCI_ASSOC)){
-            $orderId = $rowOrder['ORDER_ID'];
-        }
+        $rowOrder = oci_fetch_array($resultOrder);
+        $orderId = $rowOrder['ORDER_ID'];
 
         $query = "INSERT INTO PAYMENT(PAYMENT_ID, USER_ID, ORDER_ID, PAYMENT_AMOUNT, PAYMENT_METHOD, PAYMENT_DATE) VALUES (PAYMENT_S.NEXTVAL, :userId, :orderId, :paymentAmount, :paymentMethod, :paymentDate)";
         $result = oci_parse($conn, $query);
@@ -74,18 +73,21 @@
         $mail->setFrom('cleckcart@gmail.com'); //sender's email address
         $mail->addAddress($Email); //receiver's email
         $mail->isHTML(true);
-        $mail->Subject = 'Dear ' . $user .', Your Order ID : ' . $orderId . ' Receipt.'; //subject of the email for the receiver
+        $mail->Subject = 'Order Confirmation #' . $orderId . ' : Purchase Successfully Made!'; //subject of the email for the receiver
 
-        $queryOrderProduct = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = $orderId";
+        $queryOrderProduct = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$orderId'";
         $resultOrderProduct = oci_parse($conn, $queryOrderProduct);
         oci_execute($resultOrderProduct);
 
-        $tableContent = '<table>';
-        $tableContent .= '<tr>';
-        $tableContent .= '<th>Product</th>';
-        $tableContent .= '<th>Price</th>';
-        $tableContent .= '<th>Quantity</th>';
+        $tableContent = '<table style="border-collapse: collapse; width: 100%;">';
+        $tableContent .= '<thead>';
+        $tableContent .= '<tr style="background-color: #f8f8f8; border-bottom: 1px solid #ddd;">';
+        $tableContent .= '<th style="padding: 10px;">Product</th>';
+        $tableContent .= '<th style="padding: 10px;">Price</th>';
+        $tableContent .= '<th style="padding: 10px;">Quantity</th>';
         $tableContent .= '</tr>';
+        $tableContent .= '</thead>';
+        $tableContent .= '<tbody>';
 
         while($rowOrderProduct = oci_fetch_array($resultOrderProduct, OCI_ASSOC)){
             $orderProductId = $rowOrderProduct['ORDER_PRODUCT_ID'];
@@ -101,9 +103,9 @@
                 $productPrice = $rowProduct['PRODUCT_PRICE'];
 
                 $tableContent .= '<tr>';
-                $tableContent .= '<td>' . $productName . '</td>';
-                $tableContent .= '<td>' . '&pound;'.$productPrice . '</td>';
-                $tableContent .= '<td>' . $orderProductQuantity . '</td>';
+                $tableContent .= '<td style="padding: 10px; border-bottom: 1px solid #ddd;">' . $productName . '</td>';
+                $tableContent .= '<td style="padding: 10px; border-bottom: 1px solid #ddd;">' . '&pound;' . $productPrice . '</td>';
+                $tableContent .= '<td style="padding: 10px; border-bottom: 1px solid #ddd;">' . $orderProductQuantity . '</td>';
                 $tableContent .= '</tr>';
             }
         }

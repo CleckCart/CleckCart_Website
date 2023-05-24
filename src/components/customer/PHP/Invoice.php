@@ -93,12 +93,11 @@
         </nav>
     </div>
 
-    <div class = "container bg-light p-5">
+    <div class = "container bg-light p-5 mt-5 mb-5 border rounded">
         <h1 class = "text-start">Invoice</h1>
         <div class = "row">
             <div class = "col mt-4">
-                <p><b>Invoice to: </b></p>
-                <p><?php echo($user)?></p>
+                <p><b>Invoice to: </b><?php echo($user)?></p>
             </div>
             <?php
                 $query = "SELECT * FROM INVOICE WHERE CUSTOMER_NAME = '$user'";

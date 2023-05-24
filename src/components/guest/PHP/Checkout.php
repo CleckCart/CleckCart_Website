@@ -204,7 +204,7 @@
                             <input type="date" class = "w-75" id="selected_date" name="day" required min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
 
                             </div>
-                            <div class="col-sm-6 px-4 ">
+                            <div class="col-sm-6 px-4 bg-light">
                                 <h6 class="py-2">Time</h6>
 
 

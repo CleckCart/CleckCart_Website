@@ -241,7 +241,7 @@
                         </div>
                     </div>
                     </div>
-                    <div class="row text-center py-4 border  my-4 mb-5">
+                    <div class="row text-center py-4 bg-light border my-4 mb-5">
                         <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
                         <input type = "submit" class = "btn btn-success w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                     </div>
