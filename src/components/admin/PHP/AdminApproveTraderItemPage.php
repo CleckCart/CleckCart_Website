@@ -172,7 +172,7 @@
               echo("<td>$row[PRODUCT_DESCRIPTION]</td>");
               echo("<td>$row[PRODUCT_DATE]</td>");
               echo("<td>&pound;$row[PRODUCT_PRICE]</td>");
-              echo("<td>&pound;$row[DISCOUNT]</td>");
+              echo("<td>$row[DISCOUNT]%</td>");
               echo("<td>$row[PRODUCT_STOCK]</td>");
               echo("<td><a href='ApprovedProducts.php?user=$user&id=$id&action=approved'><i class='fa-sharp fa-solid fa-circle-check' style='color:green;'></i></a></td>");
               echo("<td><a href='RefusedProducts.php?user=$user&id=$id&action=refused'><i class='fa-solid fa-circle-xmark' style='color:red;'></i></a></td>");
