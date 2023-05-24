@@ -105,7 +105,7 @@
             oci_execute($runCartQuery);
             $CartRow = oci_fetch_assoc($runCartQuery);
             $CartId = $CartRow['CART_ID'];
-            
+
             $OrderQuery = "SELECT * FROM ORDER_C WHERE CART_ID = '$CartId'";
             $runOrderQuery=oci_parse($conn,$OrderQuery);
             oci_execute($runOrderQuery);
@@ -132,54 +132,77 @@
                                                 <th>Action</th>
                                                 </tr>
                                             </thead><tbody>");
-                    $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
-                    $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
-                    oci_execute($runOrderProductQuery);
-                    while($row2=oci_fetch_assoc($runOrderProductQuery))
-                        {
-                            
-                            $ProductId = $row2['PRODUCT_ID'];
-                            $ProductQuantity = $row2['ORDER_QUANTITY'];
+                                        $OrderProductQuery = "SELECT * FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";
+                                        $runOrderProductQuery=oci_parse($conn,$OrderProductQuery);
+                                        oci_execute($runOrderProductQuery);
+                                        while($row2=oci_fetch_assoc($runOrderProductQuery)){
+                                            $ProductId = $row2['PRODUCT_ID'];
+                                            $ProductQuantity = $row2['ORDER_QUANTITY'];
 
-                            $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
-                            $runProductQuery=oci_parse($conn,$ProductQuery);
-                            oci_execute($runProductQuery);  
-                            $ProductRow = oci_fetch_assoc($runProductQuery); 
+                                            $ProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = '$ProductId'";
+                                            $runProductQuery=oci_parse($conn,$ProductQuery);
+                                            oci_execute($runProductQuery);  
+                                            $ProductRow = oci_fetch_assoc($runProductQuery); 
 
-                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
-                            $runCollectionQuery=oci_parse($conn,$CollectionQuery);
-                            oci_execute($runCollectionQuery);  
-                            $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
-                            $CollectionDate=$CollectionRow['COLLECTION_DATE'];
-                            
-                            $slotStatus = $CollectionRow['SLOT_STATUS'];
+                                            $CollectionQuery = "SELECT * FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId' AND SLOT_STATUS='Y'";
+                                            $runCollectionQuery=oci_parse($conn,$CollectionQuery);
+                                            oci_execute($runCollectionQuery);  
+                                            $CollectionRow = oci_fetch_assoc($runCollectionQuery); 
+                                            $CollectionDate=$CollectionRow['COLLECTION_DATE'];
+                                            
+                                            $slotStatus = $CollectionRow['SLOT_STATUS'];
 
-                            if(!empty($slotStatus)){
-                                echo("<tr>
-                                        <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                        <td>$ProductRow[PRODUCT_NAME]</td>
-                                        <td>$ProductRow[CATEGORY_NAME]</td>
-                                        <td>$ProductRow[PRODUCT_DESCRIPTION]</td>
-                                        <td>&pound;$ProductRow[PRODUCT_PRICE]</td>
-                                        <td>$ProductQuantity</td>
-                                        <td>$OrderDate</td>
-                                        <td>$CollectionDate</td>
-                                        <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
-                                        </tr>");
-                            }
-                            else{
-                                echo("<tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>No payment made for this order.</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>");
-                            }
+                                        if(!empty($slotStatus)){
+                                                echo("<tr>
+                                                <td>$ProductRow[PRODUCT_IMAGE]</td>
+                                                <td>$ProductRow[PRODUCT_NAME]</td>
+                                                <td>$ProductRow[CATEGORY_NAME]</td>
+                                                <td>$ProductRow[PRODUCT_DESCRIPTION]</td>");
+
+                                                $offerquery = "SELECT * FROM OFFER WHERE PRODUCT_ID = '$ProductId'";
+                                                $offerqueryresult = oci_parse($conn,$offerquery);
+                                                oci_execute($offerqueryresult);
+                                                while($data = oci_fetch_array($offerqueryresult, OCI_ASSOC)){
+                                                    $discountProductID = $data['PRODUCT_ID'];
+                                                    $discountAmount = $data['DISCOUNT'];
+                                                    
+                                                    $query = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$discountProductID'";
+                                                    $result = oci_parse($conn, $query);
+                                                    oci_execute($result);
+                                    
+                                                    while($row = oci_fetch_array($result, OCI_ASSOC)){
+                                                        $productPrice = $row['PRODUCT_PRICE'];
+                                                        $discountedPrice = $productPrice-($productPrice*($discountAmount/100));
+                                                        $discountedPrice = number_format($discountedPrice, 2);
+                                                        if($discountAmount == 0){
+                                                            echo("<td>&pound;$ProductRow[PRODUCT_PRICE]</td>");
+                                                        }
+                                                        else{
+                                                            echo("<td>&pound;$discountedPrice</td>");
+                                                        }
+                                                    }
+                                                }
+
+
+                                                echo("<td>$ProductQuantity</td>
+                                                <td>$OrderDate</td>
+                                                <td>$CollectionDate</td>
+                                                <td><a class = 'btn border rounded' href = './ReviewProduct.php?user=$user&id=$ProductId' style='background-color:#d1e7dd;'>Review</a></td>
+                                                </tr>");
+                                        }
+                                        else{
+                                            echo("<tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td>No payment made for this order.</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>");
+                                        }
 
                         }
                     echo("</tbody></table></div></div></div>");

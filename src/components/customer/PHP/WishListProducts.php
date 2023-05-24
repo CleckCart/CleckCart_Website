@@ -16,13 +16,12 @@
         while($rowCustomer = oci_fetch_array($resultCustomer, OCI_ASSOC)){
             $userId = $rowCustomer['USER_ID'];
         }
-
-        //Inserting UserId and Total Amount of Products of the user in WishList
-        $queryWishList = "INSERT INTO WISHLIST(WISHLIST_ID, USER_ID, WISHLIST_QUANTITY) VALUES (WISHLIST_S.NEXTVAL, :user_Id, :wishlistQuantity)";
-        $resultWishList = oci_parse($conn, $queryWishList);
-        oci_bind_by_name($resultWishList, ':user_id', $userId);
-        oci_bind_by_name($resultWishList, ':wishlistQuantity', $productQuantity);
-        oci_execute($resultWishList);
+            //Inserting UserId and Total Amount of Products of the user in WishList
+            $queryWishList = "INSERT INTO WISHLIST(WISHLIST_ID, USER_ID, WISHLIST_QUANTITY) VALUES (WISHLIST_S.NEXTVAL, :user_Id, :wishlistQuantity)";
+            $resultWishList = oci_parse($conn, $queryWishList);
+            oci_bind_by_name($resultWishList, ':user_id', $userId);
+            oci_bind_by_name($resultWishList, ':wishlistQuantity', $productQuantity);
+            oci_execute($resultWishList);
 
         //Selecting Wishlist Id from Wishlist
         $queryWishList = "SELECT * FROM WISHLIST WHERE USER_ID = $userId";
