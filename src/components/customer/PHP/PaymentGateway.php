@@ -55,7 +55,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -81,11 +81,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -108,24 +108,25 @@
             <div class =  "col text-center">
                 <div class = "row">
                     <div class = "col-8">
-                        <div class = "container-fluid">
-                            <h3><p class = "text-start">How Would you like to pay?</p></h3>
+                        <div class = "container-fluid ">
+                            <h3><p class = "text-start">How would you like to pay?</p></h3>
                         </div>
                     </div>
                 </div>
-                <div class = "container-fluid mb-5">
-                    <div class="row row-cols-1 row row-cols-lg-1 g-4">
+                <div class = "container-fluid mb-5 mt-5 ">
+                    <div class="row row-cols-1 row row-cols-lg-1 g-4 p-3">
                             <div id="paypal-payment-button">
                             </div>
                             <!-- <button type="button" class="btn btn-primary btn-lg btn-block border-0 " id = "paypal-payment-button" style = "background-color: #ffff33; height: 200px"><img src = "../../../dist/public/paypal.png" alt = "paypal"/></button> -->
-                            <button type="button" class="btn btn-primary border-0 w-50" id = "stripeButton" onclick = "showToast()" style = " background-image: url('../../../dist/public/stripe-background.png')"><img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
+                            <button type="button" class="btn btn-primary border-0 w-50 " id = "stripeButton" onclick = "showToast()" style = " background-image: url('../../../dist/public/stripe-background.png')">
+                            <img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
                     </div>
                 </div>
             </div>
             <!--second containers-->
             <div class =  "col text-center">
                 <h3><p>Your Order Summary</p></h3>
-                <div class = "container-fluid">
+                <div class = "container-fluid mt-5">
                     <div class = "row">
                         <div class = "col">
                             Item
@@ -186,8 +187,8 @@
                     }
                     ?>
                 </div>
-                <div class="d-flex flex-row-reverse bd-highlight">
-                    <div class="p-2 bd-highlight mt-5">
+                <div class="d-flex flex-row-reverse bd-highlight mt-3 mb-5">
+                    <div class="p-2 bd-highlight mt-5 mb-5">
                         <h5>Total : &pound;<?php echo("$productTotalPrice")?></h5>
                     </div>
                 </div>
@@ -221,7 +222,7 @@
 
 
         <!--footer-->
-        <footer>
+        <footer class='mt-5'>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

@@ -151,7 +151,7 @@
                         <td ><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='80' height='80' class='rounded'></td>
                         <td>$productName</td>
                         <td >&pound;$productPrice</td>
-                        <td class = 'text-center'>$productQuantity</td>
+                        <td class = 'text-center '>$productQuantity</td>
                         <td class = 'text-center'>
                         <!-- Delete Button trigger modal -->
                         <button class='btn' data-bs-toggle='modal' data-bs-target='#exampleModalDelete' data-id='$guestCartProductId' data-name='$productName'>
@@ -274,7 +274,7 @@
 </div>
 
 <!-- footer -->
-<footer class="mt-5">
+<footer class="mt-5" style = 'position:fixed;width:100%;bottom:0;'>>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

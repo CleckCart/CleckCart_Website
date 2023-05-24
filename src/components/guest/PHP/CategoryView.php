@@ -91,9 +91,9 @@
         </nav>
     </div>
   <section class="product_page">
-    <h2 class="product_page--title">OUR PRODUCTS</h2>
+    <h2 class="product_page--title mt-5">OUR PRODUCTS</h2>
     <div class = "container-fluid p-5">
-    <div class = "container-fluid p-5">
+    
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <?php
 
@@ -116,7 +116,7 @@
                     oci_execute($result);
                     while($row = oci_fetch_array($result, OCI_ASSOC)){
                         $id = $row['PRODUCT_ID'];
-                        $name = ucfirst($row['PRODUCT_NAME']);
+                        $name = ucwords($row['PRODUCT_NAME']);
                         $categoryId = $row['CATEGORY_ID'];
                         $shopId = $row['SHOP_ID'];
                         $categoryName = $row['CATEGORY_NAME'];
@@ -133,15 +133,13 @@
                         height:17vw;
                         object-fit:cover;'>");
                         echo("<div class='card-body'>");
-                        echo("<div class = 'row'>
-                                <div class = 'col'>
-                                    <h3 class='card-title text-success'>" . ucfirst($row['PRODUCT_NAME']) . "</h3>
-                                </div>
-                                <div class = 'col'>
-                                    <h3 class='card-title text-end text-success'> &pound; $row[PRODUCT_PRICE]</h3>
-                                </div>
-                            </div>");
-                        echo("<p class='card-text text-success'>$row[PRODUCT_DESCRIPTION]</p>");              
+                        echo("<div class = 'row'>            
+                        <h3 class='card-title text-dark'>$name</h3>
+                    </div>
+                    <div class = 'row'>
+                        <h3 class='card-title text-success' > &pound;$row[PRODUCT_PRICE]</h3>
+                    </div>");
+                        // echo("<p class='card-text text-success'>$row[PRODUCT_DESCRIPTION]</p>");              
                         echo("</div></a>");            
                         echo("<div class='d-flex flex-row flex-wrap p-2 align-self-center bg-light w-100'>");
                         echo("<a class='#add-to-cart'></a>");   //section of page to be redirected when header is passed            
@@ -163,10 +161,10 @@
             ?>
         </div>
     </div>
-    </div>
+    
   </section>
        <!--footer-->
-       <footer>
+       <footer class="mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

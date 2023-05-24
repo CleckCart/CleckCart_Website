@@ -53,7 +53,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -79,11 +79,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <li><hr class="dropdown-divider text-success"></li>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -98,7 +98,7 @@
     </div>
 
 
-    <div class="container-fluid">
+    <div class="container-fluid mt-5">
     <?php
         if(isset($_GET['error'])) {?>
           <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
@@ -109,13 +109,13 @@
         <?php }?>
         <div class="row px-5 ">
             <div class="col-sm-8 ">
-                <h3>My Cart</h3>
+                <h1 class="h1 text-start">My Cart</h1>
             </div>
             <div class="col-sm-4 "></div>
         </div>
 
 
-        <div class="row px-5 ">
+        <div class="row px-5 mt-5">
             <div class="col-sm-7 ">
             <div class="row table-responsive">
                 <table class="table table-hover">
@@ -184,7 +184,7 @@
                 <div class="row text-center ">
                     <h4>Collection Slot</h4>
                 </div>
-                <div class="row border pb-4">
+                <div class="row border pb-4 bg-light rounded pt-3">
                     <div class="col-sm-6 px-4 ">
                         <h6 class="py-2">Day</h6>
                             <?php
@@ -192,7 +192,7 @@
                                 $currentHour = date('H');
 
                                 // Define the available time slots
-                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-22:00'];
+                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
 
                                 // Determine which time slot to disable
                                 $disabledTimeSlots = [];
@@ -241,9 +241,9 @@
                         </div>
                     </div>
                     </div>
-                    <div class="row text-center py-4 border  my-4">
+                    <div class="row text-center py-4 border  my-4 mb-5">
                         <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
-                        <input type = "submit" class = "btn btn-primary w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
+                        <input type = "submit" class = "btn btn-success w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                     </div>
                 </div>
             </form>
@@ -290,7 +290,7 @@
 
 <!-- footer -->
 <!-- <footer> -->
-<footer>
+<footer class="mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

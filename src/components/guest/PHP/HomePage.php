@@ -71,7 +71,7 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php" >Log In Customer</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php">Log In Customer</a></li>
                                 <li>
                                     <hr class="dropdown-divider text-success">
                                 </li>
@@ -79,7 +79,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white" ></i></a>
+                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white"></i></a>
                         </li>
                     </ul>
 
@@ -154,7 +154,7 @@
             <div class="col mt-5 text-center">
                 <div class="d-flex justify-content-center">
                     <div class="ellipse p-5">
-                        <img src="./../../../dist/public/badge.svg" alt="badge" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'> 
+                        <img src="./../../../dist/public/badge.svg" alt="badge" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                     </div>
                 </div>
                 <h3 class="mt-5">SUPERIOR-QUALITY</h1>
@@ -221,10 +221,10 @@
                         
                         if($discountAmount == 0){
                             echo("<a class = 'text-decoration-none  ' href = './ProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='$row[PRODUCT_IMAGE]' 
                                 style='width:100%;
                                        height:17vw;
-                                       object-fit:contain;'
+                                       object-fit:cover;'
                                        >");
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
@@ -250,10 +250,10 @@
                             <b>$discountAmount %</b>
                             </div>");
                             echo("<a class = 'text-decoration-none  ' href = './DiscountProductDetail.php?id=$id&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock'>
-                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='img-thumbnail img-responsive' alt='$row[PRODUCT_IMAGE]' 
+                                <img src='./../../../dist/public/TraderItemImages/$row[PRODUCT_IMAGE]' class='card-img-top rounded' alt='$row[PRODUCT_IMAGE]' 
                                 style='width:100%;
                                     height:17vw;
-                                    object-fit:contain;'
+                                    object-fit:cover;'
                                     >");
                             echo("<div class='card-body'>");
                             echo("<div class = 'row'>
@@ -283,16 +283,17 @@
                 }
 
                 
+
             ?>
         </div>
         
     </div>
     <div class="custom-margin"></div>
-        
+
     </div>
     <div class="custom-margin"></div>
     <div class="container-fluid bg-light border rounded">
-    <h1 class="text-success text-center mt-5">CATEGORIES</h1>
+        <h1 class="text-success text-center mt-5">CATEGORIES</h1>
         <div class="row row-cols-2 row-cols-md-3 row-cols-xl-5 g-4">
             <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">
@@ -324,7 +325,7 @@
                     <h3 class="mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
-            <a class="nav-link p-5" href="./CategoryView.php?category=meat" >
+            <a class="nav-link p-5" href="./CategoryView.php?category=meat">
                 <div class="col mt-5 text-center">
                     <div class="d-flex justify-content-center">
                         <div class="ellipse bg-success p-5">
@@ -371,8 +372,12 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Join Us</h3>
-                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
-                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-5">Sell on CleckCart</h5>
+                            </a>
+                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-3">Buy from CleckCart</h5>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -380,9 +385,15 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Help</h3>
-                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
-                            <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
-                            <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-4 mb-3">Contact Us</h5>
+                            </a>
+                            <a href="#" class='text-decoration-none text-light'>
+                                <h5 class="mb-3">Back to top</h5>
+                            </a>
+                            <a class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5>
+                            </a>
                         </div>
                     </div>
                 </div>

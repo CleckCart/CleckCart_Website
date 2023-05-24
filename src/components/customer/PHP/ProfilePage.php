@@ -56,7 +56,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -82,11 +82,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -107,13 +107,13 @@
         while($row = oci_fetch_array($result, OCI_ASSOC)){
             $uid = $row['USER_ID'];
             $username = $row['USERNAME'];
-            $first_name = $row['FIRST_NAME'];
-            $last_name = $row['LAST_NAME'];
+            $first_name = ucwords($row['FIRST_NAME']);
+            $last_name = ucwords($row['LAST_NAME']);
             $email = $row['EMAIL'];
-            $address = $row['ADDRESS'];
+            $address =ucwords($row['ADDRESS']);
             $phone_number = $row['PHONE_NUMBER'];
             $date_of_birth = $row['DATE_OF_BIRTH'];
-            $gender = $row['GENDER'];
+            $gender = ucwords($row['GENDER']);
             $image = $row['IMAGE'];
         }
     ?>

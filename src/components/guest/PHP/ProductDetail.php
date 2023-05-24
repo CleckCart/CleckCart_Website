@@ -120,7 +120,7 @@
               </div>
               <div class="product-info">
                   <div class="product-title-box">
-                    <h2 class="display-4"><?php echo(ucfirst($productName))?></h2>
+                    <h2 class="display-4"><?php echo(ucwords($productName))?></h2>
                     <?php echo("<a href='./WishListProducts.php?id=$id&image=$productImage&name=$productName&description=$productDescription&price=$productPrice'><img src='./../../../dist/public/heart.svg' alt='heart' style='filter: invert(7%) sepia(100%) saturate(7361%) hue-rotate(347deg) brightness(117%) contrast(100%);'></a>");?>
                   </div>
                 <p class="lead"><?php echo($productDescription) ?></p>

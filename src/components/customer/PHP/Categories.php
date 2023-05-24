@@ -46,7 +46,7 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
 
                         </li>
 
@@ -72,11 +72,11 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <?php echo ("<li><a class='dropdown-item' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./ProfilePage.php?user=$user'>Manage Profile</a></li>")?>
                                 <li><hr class="dropdown-divider"></li>
-                                <?php echo ("<li><a class='dropdown-item' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
+                                <?php echo ("<li><a class='dropdown-item text-success' href='./MyOrders.php?user=$user'>My Orders</a></li>");?>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./CustomerLogout.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogout.php">Log Out</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -101,50 +101,50 @@
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/bread.svg" alt="package">
+                            <img src="./../../../dist/public/bread.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">BAKERY</h1>
+                    <h3 class = "mt-5 text-success">BAKERY</h1>
                 </div>
             </a>
             <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=dairy'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/icecream.svg" alt="package">
+                            <img src="./../../../dist/public/icecream.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">DAIRY</h1>
+                    <h3 class = "mt-5 text-success">DAIRY</h1>
                 </div>
             </a>
             <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=fruit'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/fruits.svg" alt="package">
+                            <img src="./../../../dist/public/fruits.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">FRUIT</h1>
+                    <h3 class = "mt-5 text-success">FRUIT</h1>
                 </div>
             </a>
             <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=meat'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/meat.svg" alt="package">
+                            <img src="./../../../dist/public/meat.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">MEAT</h1>
+                    <h3 class = "mt-5 text-success">MEAT</h1>
                 </div>
             </a>
             <?php echo("<a class='nav-link p-5' href='./CategoryView.php?user=$user&category=vegetable'>")?>
                 <div class="col mt-5 text-center">
                     <div class= "d-flex justify-content-center">
                         <div class="ellipse p-5">
-                            <img src="./../../../dist/public/carrot.svg" alt="package">
+                            <img src="./../../../dist/public/carrot.svg" alt="package" style='filter: invert(100%) sepia(0%) saturate(2%) hue-rotate(280deg) brightness(106%) contrast(101%);'>
                         </div>
                     </div>
-                    <h3 class = "mt-5">VEGETABLE</h1>
+                    <h3 class = "mt-5 text-success">VEGETABLE</h1>
                 </div>
             </a>
         </div>
