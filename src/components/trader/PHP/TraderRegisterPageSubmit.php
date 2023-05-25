@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
     include('connect.php');
         /*Check if form is submitted*/
         if (isset($_POST['TraderRegisterSubmit'])) {
@@ -11,6 +14,7 @@
                 }
             else
                 {
+                    $TraderOTP=rand(100000,999999);  
                     $TraderFirstName = strtolower(trim(filter_input(INPUT_POST, 'TraderFirstName', FILTER_SANITIZE_STRING)));
                     $TraderLastName = strtolower(trim(filter_input(INPUT_POST, 'TraderLastName', FILTER_SANITIZE_STRING)));
                     $TraderUserName = strtolower(trim(filter_input(INPUT_POST, 'TraderUserName', FILTER_SANITIZE_STRING)));
@@ -23,7 +27,6 @@
                     $TraderPassword = trim(filter_input(INPUT_POST, 'TraderPassword', FILTER_SANITIZE_STRING));
                     $TraderConfirmPassword = trim(filter_input(INPUT_POST, 'TraderConfirmPassword', FILTER_SANITIZE_STRING));
                     $TraderRole = 'trader';
-                    $TraderImage = $TraderFirstName . '.jpg';
                     
                     /*Check if username is of 5-30 characters*/
                     if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 30)
@@ -46,26 +49,93 @@
                                                                         {
                                                                             $TraderEncryptedPassword = md5($TraderPassword);
                                                                         /*For inserting into database*/
-                                                                            $query = "INSERT INTO APPLY_TRADER (APPLY_ID, IMAGE, USERNAME, FIRST_NAME, LAST_NAME, EMAIL, SHOP_CATEGORY, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                                    VALUES(APPLY_TRADER_S.NEXTVAL, :TraderImage, :TraderUserName, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderShopCategory, :TraderGender, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
-                                                                            $result = oci_parse($conn, $query);
-
-                                                                            oci_bind_by_name($result, ':TraderImage', $TraderImage);
-                                                                            oci_bind_by_name($result, ':TraderUserName', $TraderUserName);                           
-                                                                            oci_bind_by_name($result, ':TraderFirstName', $TraderFirstName);
-                                                                            oci_bind_by_name($result, ':TraderLastName', $TraderLastName);
-                                                                            oci_bind_by_name($result, ':TraderEmail', $TraderEmail);
-                                                                            oci_bind_by_name($result, ':TraderShopCategory', $TraderShopCategory);
-                                                                            oci_bind_by_name($result, ':TraderGender', $TraderGender);
-                                                                            oci_bind_by_name($result, ':TraderEncryptedPassword', $TraderEncryptedPassword);
-                                                                            oci_bind_by_name($result, ':TraderBirthDate', $TraderBirthDate);
-                                                                            oci_bind_by_name($result, ':TraderAddress', $TraderAddress);
-                                                                            oci_bind_by_name($result, ':TraderPhoneNumber', $TraderPhoneNumber);
-                                                                            oci_execute($result);
-                                                                            if ($result) {
-                                                                                header('Location:./TraderRegisterPage.php?success=Form submitted successfully.');
-                                                                            } else {
-                                                                                header('Location:./TraderRegisterPage.php?error=Username, Email or Phonenumber already exists');
+                                                                        $UsernameQuery = "SELECT * FROM USER_TABLE WHERE USERNAME='$TraderUserName'";
+                                                                        $RunUsernameQuery = oci_parse($conn, $UsernameQuery);
+                                                                        oci_execute($RunUsernameQuery);
+                                                                        if(oci_fetch_assoc($RunUsernameQuery))
+                                                                            {
+                                                                                header('Location: ./TraderRegisterPage.php?error=Username is taken.');
+                                                                            }
+                                                                            
+                                                                        else
+                                                                            {
+                                                                                    
+                                                                                $EmailQuery = "SELECT * FROM USER_TABLE WHERE EMAIL='$TraderEmail'";
+                                                                                $RunEmailQuery = oci_parse($conn, $EmailQuery);
+                                                                                oci_execute($RunEmailQuery);
+                                                                                if(oci_fetch_assoc($RunEmailQuery))
+                                                                                    {
+                                                                                        header('Location: ./TraderRegisterPage.php?error=Email is taken.');
+                                                                                    }
+                                                                                    
+                                                                                else
+                                                                                    {
+                                                                                        $PhoneQuery = "SELECT * FROM USER_TABLE WHERE PHONE_NUMBER='$TraderPhoneNumber'";
+                                                                                        $RunPhoneQuery = oci_parse($conn, $PhoneQuery);
+                                                                                        oci_execute($RunPhoneQuery);
+                                                                                        if(oci_fetch_assoc($RunPhoneQuery))
+                                                                                            {
+                                                                                                header('Location: ./TraderRegisterPage.php?error=Phonenumber is taken.');
+                                                                                            }
+                                                                                            
+                                                                                        else
+                                                                                            {   
+                                                                                                
+                                                                                                require '../../../mail/phpmailer/src/Exception.php';
+                                                                                                require '../../../mail/phpmailer/src/PHPMailer.php';
+                                                                                                require '../../../mail/phpmailer/src/SMTP.php';
+                                                                                                
+                                                                                                $mail = new PHPMailer(true);
+                                                                                                
+                                                                                                $mail->isSMTP();
+                                                                                                $mail->Host = 'smtp.gmail.com';
+                                                                                                $mail->SMTPAuth = true;
+                                                                                                $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                                                                                                $mail->Password = 'jqmuadhegtgyetci'; //app password
+                                                                                                $mail->SMTPSecure = 'ssl';
+                                                                                                $mail->Port = '465';
+                                                                                                
+                                                                                                $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                                                                                                $mail->addAddress($TraderEmail); //reciever's email
+                                                                                                $mail->isHTML(true);
+                                                                                                $mail->Subject = 'CleckCart, Verify Your Email!'; //subject of the email for reciever
+                                                                                                $mail->Body='<html>
+                                                                                                <head>
+                                                                                                    <style>
+                                                                                                        .container{padding: 5vh;}
+                                                                                                        .heading{text-align: center;color: rgb(129, 127, 127);}
+                                                                                                        .line{border: 1px solid rgb(68, 68, 68);}
+                                                                                                    </style>
+                                                                                                </head>
+                                                                                                <body>
+                                                                                                    <div class="container">
+                                                                                                        <div class="heading">
+                                                                                                            <h1>One Time Password</h1>
+                                                                                                        </div>
+                                                                                                        <hr class="line">
+                                                                                                        <div class="content">
+                                                                                                            <p>Dear User, Please use OTP:</p>
+                                                                                                            <h2>'.$TraderOTP.'</h2>
+                                                                                                            <br>Warm regards,<br>CleckCart
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                </body>
+                                                                                                </html>';
+                                                                                                $mail->send();
+                                                                                                $_SESSION['TraderVerifyOTP'] = $TraderOTP;
+                                                                                                $_SESSION['TraderUsername'] = $TraderUserName;
+                                                                                                $_SESSION['TraderFirstname'] = $TraderFirstName;
+                                                                                                $_SESSION['TraderLastname'] = $TraderLastName;
+                                                                                                $_SESSION['TraderBirthdate'] = $TraderBirthDate;
+                                                                                                $_SESSION['TraderEmail'] = $TraderEmail;
+                                                                                                $_SESSION['TraderGender']= $TraderGender;
+                                                                                                $_SESSION['TraderPhone']= $TraderPhoneNumber;
+                                                                                                $_SESSION['TraderAddress']= $TraderAddress;
+                                                                                                $_SESSION['TraderShopCategory']= $TraderShopCategory;
+                                                                                                $_SESSION['TraderPassword']= $TraderEncryptedPassword;
+                                                                                                header("Location: ./VerifyEmailOTP.php");
+                                                                                            }
+                                                                                    }
                                                                             }
                                                                         }
                                                                     else
