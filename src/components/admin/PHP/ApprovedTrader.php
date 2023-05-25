@@ -1,107 +1,235 @@
-<?php
-include('connect.php');
-if(isset($_GET['user'])){
-    $user = $_GET['user'];
-}
-?>
-<?php
-    use PHPMailer\PHPMailer\PHPMailer;
-    use PHPMailer\PHPMailer\Exception;
-    $approvedTraderId = $_GET['id'];
-    if(isset($_GET['id'])&&isset($_GET['action']))
-        {
-            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = '$approvedTraderId'";     
-            $RunFetchQuery = oci_parse($conn, $FetchTraderQuery);
-            oci_execute($RunFetchQuery);
-            if($RunFetchQuery)
-                {   
-                    while($row = oci_fetch_array($RunFetchQuery, OCI_ASSOC)){
-                    $Id=$row['APPLY_ID'];
-                    $Username=strtolower($row['USERNAME']);
-                    $Role='trader';
-                    $Image=$row['IMAGE'];
-                    $Firstname=strtolower($row['FIRST_NAME']);
-                    $Lastname=strtolower($row['LAST_NAME']);
-                    $Email=strtolower($row['EMAIL']);  
-                    $Category=strtolower($row['SHOP_CATEGORY']);
-                    $Gender=strtolower($row['GENDER']);
-                    $BirthDate=$row['DATE_OF_BIRTH'];
-                    $Address=strtolower($row['ADDRESS']);
-                    $PhoneNumber=$row['PHONE_NUMBER'];
-                    $Password=$row['PASSWORD'];
-                    $Status = "No";
-                    
-                    $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                    VALUES(USER_S.NEXTVAL, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
-                    $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);  
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderImage', $Image);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderUserName', $Username);   
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderRole', $Role);                         
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderFirstName', $Firstname);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderLastName', $Lastname);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderEmail', $Email);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderGender', $Gender);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderPassword', $Password);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderBirthDate', $BirthDate);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderAddress', $Address);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderPhoneNumber', $PhoneNumber);
-                    
-
-                    oci_execute($TraderRunInsertionQuery);                    
-
-                    $CategoryInsertionQuery = "INSERT INTO CATEGORY (CATEGORY_ID, CATEGORY_NAME) VALUES(CATEGORY_S.NEXTVAL,:TraderCategory)";
-                    $RunCategoryInsertionQuery = oci_parse($conn, $CategoryInsertionQuery);
-                    oci_bind_by_name($RunCategoryInsertionQuery, ':TraderCategory', $Category);
-                    oci_execute($RunCategoryInsertionQuery);                   
-
-                    $changeCase = strtolower($Category);
-                    $ShopDate=date("Y-m-d");
-                    $ShopDescription = "Welcome to ". $Username ."'s shop!\nWe offer a wide range of high-quality ". $changeCase . " products that are both affordable and fresh.";
-
-                    $ShopInsertionQuery = "INSERT INTO SHOP (SHOP_ID, USER_ID, SHOP_NAME, SHOP_DATE, SHOP_OWNER, SHOP_DESCRIPTION) VALUES(USER_S.NEXTVAL, :TraderUserId, :TraderShopName, :TraderShopDate, :TraderUsername, :ShopDescription)";
-                    $RunShopInsertionQuery = oci_parse($conn, $ShopInsertionQuery);
-                    oci_bind_by_name($RunShopInsertionQuery, ':TraderUserId', $Id);
-                    oci_bind_by_name($RunShopInsertionQuery, ':TraderShopName', $Category);
-                    oci_bind_by_name($RunShopInsertionQuery, ':TraderShopDate', $ShopDate);
-                    oci_bind_by_name($RunShopInsertionQuery, ':TraderUsername', $Username);   
-                    oci_bind_by_name($RunShopInsertionQuery, ':ShopDescription', $ShopDescription);
-                    if(oci_execute($RunShopInsertionQuery)){
-                        $DeleteAfterApproveQuery = "DELETE FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
-                        $RunDeleteQuery = oci_parse($conn, $DeleteAfterApproveQuery);
-                        oci_execute($RunDeleteQuery);
-
-                        require '../../../mail/phpmailer/src/Exception.php';
-                        require '../../../mail/phpmailer/src/PHPMailer.php';
-                        require '../../../mail/phpmailer/src/SMTP.php';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TraderRegisterPage</title>
+    <!--WebPage Icon-->
+    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
+    <link rel="stylesheet" href="../../../dist/CSS/bootstrap.css">
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src = "../../service/passwordVisibility.js"></script>
     
-                        $mail = new PHPMailer(true);
-                
-                        $mail->isSMTP();
-                        $mail->Host = 'smtp.gmail.com';
-                        $mail->SMTPAuth = true;
-                        $mail->Username = 'cleckcart@gmail.com'; //sender's email address
-                        $mail->Password = 'jqmuadhegtgyetci'; //app password
-                        $mail->SMTPSecure = 'ssl';
-                        $mail->Port = '465';
-                
-                        $mail->setFrom('cleckcart@gmail.com'); //sender's email address
-                        $mail->addAddress($Email); //reciever's email
-                        $mail->isHTML(true);
-                        $mail->Subject = 'Congratulations! ' . $Firstname .', You\'re Approved to Sell Your Products'; //subject of the email for reciever
-                        $mail->Body = 'Dear, '. $Firstname .'<br><br>
-                        We are thrilled to inform you that your request be a trader on CleckCart has been approved! Congratulations on this exciting opportunity to expand your business and reach a wider audience.
-                        We believe that your unique products will be a valuable addition to our platform, and we are confident that our customers will appreciate the quality and innovation you bring. We can\'t wait to showcase your offerings and help you grow your brand.<br><br>
-                        Should you have any questions or require assistance along the way, please don\'t hesitate to reach out to our support team. We\'re here to help.<br><br>
-                        Thank you for choosing our platform to showcase your products. We look forward to a successful partnership and mutually beneficial results.<br><br>
-                        Best regards,<br><br>
-                        CleckCart
-                        '; //message for the reciever
-                        $mail->send();
-                        header("Location:AdminApproveTrader.php?user=$user&success=Trader has been approved.");
-                    } 
+        <!--NavBar-->
+        <div class = "topbar">
+        <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="../../guest/PHP/HomePage.php">
+                    <img src="./../../../dist/public/logo.png" class="img-fluid rounded-circle img-thumbnail" width = "80" height="70" alt="logo">
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+                        <li class="nav-item me-5">
+                            <a class="nav-link mr-3 text-light" aria-current="page" href="../../guest/PHP/HomePage.php">HOME</a>
+                        </li>
+
+                        <li class="nav-item dropdown me-5"><!---->
+                            <a class="nav-link mr-3 dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                SHOP
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item text-success" href="../../guest/PHP/Categories.php">CATEGORY</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item me-5">
+                            <a class="nav-link text-light" href="../../guest/PHP/Sale.php">SALE</a>
+                        </li>
+
+                        <li class="nav-item me-5">
+                            <a class="nav-link mr-3 text-light" href="../../guest/PHP/About.php">ABOUT</a>
+                        </li>
+
+                        <li class="nav-item me-5">
+                            <a class="nav-link mr-3 text-light" href="../../guest/PHP/Contact.php">CONTACT</a>
+                        </li>
+                    </ul>
+
+                    <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
+                        <li class="nav-item me-3">
+                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg text-white"></i></a>
+                        </li>
+                        <li class="nav-item me-3">
+                            <a class="nav-link" href="../../guest/PHP/WishList.php"><i class="fa-regular fa-heart fa-lg text-white"></i></a>
+                        </li>
+                        <li class="nav-item dropdown me-3"><!---->
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-regular fa-user fa-lg text-white"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item text-success" href="../../guest/PHP/CustomerLogin.php">Log In Customer</a></li>
+                                <li>
+                                    <hr class="dropdown-divider text-success">
+                                </li>
+                                <li><a class="dropdown-item text-success" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item me-5">
+                            <a class="nav-link" href="../../guest/PHP/Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white" ></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        </div>
 
 
-                    }
-                }
-        }
-?>
+    <div class="container-fluid">
+        <div class = "row row-cols-1 row-cols-lg-2 m-5">
+            <div class = "col d-flex align-items-center">
+                <div class = "d-flex flex-column justify-content-center text-center">
+                    <h1 class = "display-1">Join us! Start Selling with CleckCart</h1>
+                    <p class = "mt-5">Create an account in a few minutes and reach out to hundreds of customers!</p>
+                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php" class="text-success text-decoration-none">&nbsp;Sign in</a></p>
+                </div>
+            </div>
+            <div class = "col bg-light border rounded p-5">
+            <form method = "POST" action = "./TraderRegisterPageSubmit.php">
+                    <?php
+                        if(isset($_GET['error'])) {?>
+                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                    <?php }?>
+                    <?php
+                        if(isset($_GET['success'])) {?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                    <?php }?>
+                    <div class="mb-3">
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="exampleInputText1" class="form-label">First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderFirstName" >
+                            </div>
+                            <div class="col">
+                                <label for="exampleInputText1" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderLastName" >
+                            </div>
+                        </div>
+                        <div class= "mb-3">
+                            <div class= "row mb-3">
+                                <div class="col">
+                                    <label for="exampleInputText1" class="form-label">Username</label>
+                                    <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
+                                </div>
+                                <div class="col">
+                                    <label for="date" class="form-label">Date of Birth</label>
+                                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderBirthDate">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class = "mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="TraderEmail" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Phone Number</label>
+                            <input type="number" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderPhoneNumber" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Enter Address" aria-label="Shop Name" name="TraderAddress">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Gender</label>
+                            <select class="form-select" aria-label="Default select example" name="TraderGender" >
+                                <option value="male" selected>Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputText1" class="form-label">Shop Category</label>
+                            <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="TraderShopCategory">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="TraderPassword">
+                                <span class = "input-group-text" id="togglePassword">
+                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="TraderConfirmPassword">
+                                <span class = "input-group-text" id="togglePassword">
+                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                        </div>
+                        <input type="submit" class="btn btn-success w-100 " value = "Register" name = "TraderRegisterSubmit" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <footer>
+        <div class="container-fluid bg-success" style="color: white;">
+            <div class="row row-cols-2 row-cols-md-4 g-4">
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Cleck Cart</h3>
+                            <h5 class="mt-4">Satisfy your cravings, with local farm savings.</h5>
+                            <h6>&#169; 2023 CleckCart. All rights reserved.</h6>
+                        </div>
+                        <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2xl" style="color: #ffffff;"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Join Us</h3>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
+                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Help</h3>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
+                            <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
+                            <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Send Us a message</h3>
+                        </div>
+                        <div class="p-2 bd-highlight text-center">
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-location-dot fa-xl" style="color: #ffffff;"></i>&nbsp;Cleckhuddersfax, UK </a>
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-phone fa-xl" style="color: #ffffff;"></i>&nbsp;01632 960315 </a>
+                            <a class="nav-link text-reset text-decoration-none" href="https://mail.google.com/?" target="_blank"><i class="fa-regular fa-envelope fa-xl" style="color: #ffffff;"></i>&nbsp;cleckcart@gmail.com </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+</body>
+</html>
