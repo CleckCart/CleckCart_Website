@@ -122,11 +122,11 @@
                                 echo(trim($_POST['CustomerLoginPassword']));
                             }
                         ?>">
-                        <p class = "text-end"><a href = "Forgotpassword.php">Forgot Password?</a></p>
+                        <p class = "text-end"><a href = "Forgotpassword.php" class="text-success">Forgot Password?</a></p>
                     </div>
 
                     <div class="mb-3">
-                        <input type="submit" class="btn btn-primary w-100" name = "CustomerLoginSubmit" value="Login">
+                        <input type="submit" class="btn btn-success w-100" name = "CustomerLoginSubmit" value="Login">
                     </div>
                 </form>
                     <div class="mb-3 form-check">
@@ -134,7 +134,7 @@
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
                     <div class = "mb-3">
-                        <?php echo("<p>New Here? <a href = './RegisterCheckout.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>Create an account</a></p>") ?>
+                        <?php echo("<p>New Here? <a href = './RegisterCheckout.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime' class='text-success'>Create an account</a></p>") ?>
                     </div>
                     </div>
             </div>
