@@ -1,20 +1,31 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderRegisterPage</title>
+    <title>Enter OTP</title>
     <!--WebPage Icon-->
-    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
-    <link rel="stylesheet" href="../../../dist/CSS/bootstrap.css">
+    <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
+    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/homepage.css">
 </head>
+
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src = "../../service/passwordVisibility.js"></script>
-    
-        <!--NavBar-->
-        <div class = "topbar">
+    <script src="../../service/passwordVisibility.js"></script>
+    <?php
+    include('./connect.php');
+    include('../../trader/PHP/connect.php');
+    if(isset($_GET['cartId']) && isset($_GET['totalCartItems']) && isset($_GET['collectionDate']) && isset($_GET['collectionTime'])){
+        $guestCartId = $_GET['cartId'];
+        $productTotalQuantity = $_GET['totalCartItems'];
+        $collectionDate = $_GET['collectionDate'];
+        $collectionTime = $_GET['collectionTime'];
+    }
+    ?>
+            <!--NavBar-->
+            <div class = "topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="../../guest/PHP/HomePage.php">
@@ -69,7 +80,7 @@
                                 <li>
                                     <hr class="dropdown-divider text-success">
                                 </li>
-                                <li><a class="dropdown-item text-success" href="./TraderLogin.php">Log In Trader</a></li>
+                                <li><a class="dropdown-item text-success" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -79,105 +90,44 @@
                 </div>
             </div>
         </nav>
+    </div>
+    <div class="container bg-light border rounded mt-5 mb-5">
+        <div class = "row m-4 p-4 g-4 text-center ">
+            <div class="row ">
+                <h1>Enter Your OTP</h1>
+            </div>
+            <div class="row p-3 ">
+                <h6 class="text-muted">Please enter the OTP you received in your mail.</h6>
+            </div>
         </div>
-
-    <div class="container-fluid">
-        <div class = "row row-cols-1 row-cols-lg-2 m-5">
-            <div class = "col d-flex align-items-center">
-                <div class = "d-flex flex-column justify-content-center text-center">
-                    <h1 class = "display-1">Join us! Start Selling with CleckCart</h1>
-                    <p class = "mt-5">Create an account in a few minutes and reach out to hundreds of customers!</p>
-                    <p class = "mt-5">Already have an account?<a href = "../../trader/PHP/TraderLogin.php" class="text-success text-decoration-none">&nbsp;Sign in</a></p>
+        <div class = "row">
+                <div class="col-sm-4 "></div>
+                <div class="col-sm-4">
+                    <form method = "POST" action = "./VerifyEmailOtpProcess.php">
+                        <?php
+                            if(isset($_GET['error'])) {?>
+                            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                        <?php }?>
+                        <?php
+                            if(isset($_GET['success'])) {?>
+                            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                        <?php }?>
+                        
+                            <div class="mb-3 col">
+                                <label for="exampleInputText1" class="form-label">Enter OTP</label>
+                                <input type="number" class="form-control" placeholder="123456" aria-label="OTP" name = "TraderOTP">
+                                
+                            </div>
+                            <div class="mb-3 col mt-4">
+                                <input type="submit" class="btn btn-success w-100" name = "TraderVerify" value="Verify">
+                            </div>             
+                    </form>
                 </div>
             </div>
-            <div class = "col bg-light border rounded p-5">
-            <form method = "POST" action = "./TraderRegisterPageSubmit.php">
-                    <?php
-                        if(isset($_GET['error'])) {?>
-                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-                    <?php }?>
-                    <?php
-                        if(isset($_GET['success'])) {?>
-                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
-                    <?php }?>
-                    <div class="mb-3">
-                        <div class="row mb-3">
-                            <div class="col">
-                                <label for="exampleInputText1" class="form-label">First Name</label>
-                                <input type="text" class="form-control" placeholder="Enter First Name" aria-label="First name" name="TraderFirstName" >
-                            </div>
-                            <div class="col">
-                                <label for="exampleInputText1" class="form-label">Last Name</label>
-                                <input type="text" class="form-control" placeholder="Enter Last Name" aria-label="Last name" name="TraderLastName" >
-                            </div>
-                        </div>
-                        <div class= "mb-3">
-                            <div class= "row mb-3">
-                                <div class="col">
-                                    <label for="exampleInputText1" class="form-label">Username</label>
-                                    <input type="text" class="form-control" placeholder="Enter Username" aria-label="User Name" name="TraderUserName">
-                                </div>
-                                <div class="col">
-                                    <label for="date" class="form-label">Date of Birth</label>
-                                    <input type="date" class="form-control" id="date" aria-label="Address" name="TraderBirthDate">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class = "mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder = "Enter Email Address" name="TraderEmail" >
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Phone Number</label>
-                            <input type="number" class="form-control" placeholder="Enter Phone Number" aria-label="PhoneNumber" name="TraderPhoneNumber" >
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Address</label>
-                            <input type="text" class="form-control" placeholder="Enter Address" aria-label="Shop Name" name="TraderAddress">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Gender</label>
-                            <select class="form-select" aria-label="Default select example" name="TraderGender" >
-                                <option value="male" selected>Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputText1" class="form-label">Shop Category</label>
-                            <input type="text" class="form-control" placeholder="Enter Shop Category" aria-label="Shop Category" name="TraderShopCategory">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Enter Password" id="password1" name="TraderPassword">
-                                <span class = "input-group-text" id="togglePassword">
-                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye1" onclick = "toggle1()"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" placeholder = "Re-enter Password" id="password2" name="TraderConfirmPassword">
-                                <span class = "input-group-text" id="togglePassword">
-                                    <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye2" onclick = "toggle2()"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                        </div>
-                        <input type="submit" class="btn btn-success w-100 " value = "Register" name = "TraderRegisterSubmit" >
-                    </div>
-                </form>
-            </div>
-        </div>
+            
     </div>
-
-    <!--footer-->
+    <div class="container mt-5">&nbsp;</div>
+    <div class="container mt-5">&nbsp;</div>
     <footer>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
@@ -199,7 +149,7 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Join Us</h3>
-                            <a href="./TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
                             <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
                         </div>
                     </div>
@@ -208,7 +158,7 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Help</h3>
-                            <a href="./../../guest/PHP/Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
                             <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
                             <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
                         </div>
@@ -228,6 +178,7 @@
                 </div>
             </div>
         </div>
+
     </footer>
 </body>
 </html>

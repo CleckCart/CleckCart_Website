@@ -21,7 +21,6 @@
                 {
                     if($CustomerEnteredOTP==$CustomerOTP)
                         {
-                            $customer_role = 'customer';
 
                             $sql = "INSERT INTO USER_TABLE(USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
                             VALUES(USER_S.NEXTVAL, :customerImage, :customerUsername, :customer_role, :customerFirstname, :customerLastname, :customerEmail, :customerGender, :customer_password, :customerBirthDate, :customerAddress, :customerPhone)";

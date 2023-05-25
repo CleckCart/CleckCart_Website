@@ -71,7 +71,7 @@
                                 <li>
                                     <hr class="dropdown-divider text-success">
                                 </li>
-                                <li><a class="dropdown-item text-success" href="../../trader/PHP/TraderLogin.php">Log In Trader</a></li>
+                                <li><a class="dropdown-item text-success" href="./TraderLogin.php">Log In Trader</a></li>
                             </ul>
                         </li>
                         <li class="nav-item me-5">
@@ -133,7 +133,7 @@
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
                     <div class = "mb-3">
-                        <p>New Here? <a href = "../../trader/PHP/TraderRegisterPage.php" class="text-success">Create an account</a></p>
+                        <p>New Here? <a href = "./TraderRegisterPage.php" class="text-success">Create an account</a></p>
                     </div>
                     </div>
                 </form>
@@ -163,7 +163,7 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Join Us</h3>
-                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
+                            <a href="./TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-5">Sell on CleckCart</h5></a>
                             <a href="./Register.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-3">Buy from CleckCart</h5></a>
                         </div>
                     </div>
@@ -172,7 +172,7 @@
                     <div class="d-flex flex-column bd-highlight mb-3">
                         <div class="p-2 bd-highlight">
                             <h3 class="mt-5">Help</h3>
-                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
+                            <a href="./../../guest/PHP/Contact.php" class='text-decoration-none text-light' target="_blank"><h5 class="mt-4 mb-3">Contact Us</h5></a>
                             <a href="#" class='text-decoration-none text-light'><h5 class="mb-3">Back to top</h5></a>
                             <a class='text-decoration-none text-light' target="_blank"><h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5></a>
                         </div>
