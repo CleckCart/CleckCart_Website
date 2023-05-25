@@ -22,7 +22,7 @@
                     $customerPhone = trim(filter_input(INPUT_POST, 'customerPhone', FILTER_SANITIZE_NUMBER_INT));
                     $customerAddress = strtolower(trim(filter_input(INPUT_POST, 'customerAddress', FILTER_SANITIZE_STRING)));
                     $customerPassword = trim(filter_input(INPUT_POST, 'customerPassword', FILTER_SANITIZE_STRING));
-                    $customerConfirmPassword = trim(filter_input(INPUT_POST, 'customerConfirmPassword', FILTER_SANITIZE_STRING));
+                    $customerConfirmPassword = trim(filter_input(INPUT_POST, 'customerConfirmPassword', FILTER_SANITIZE_STRING));                   
                     /*Check if username is of 5-30 characters*/
                     if(strlen($customerUsername) >= 5 && strlen($customerUsername) <= 30)
                         {      

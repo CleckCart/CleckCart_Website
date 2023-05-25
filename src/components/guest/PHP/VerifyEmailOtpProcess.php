@@ -15,6 +15,7 @@
             $customerPhone = $_SESSION['Phone'];
             $customerAddress= $_SESSION['Address'];
             $customerPassword = $_SESSION['Password'];
+            $customerImage = $_SESSION['Firstname'] . '.jpg';
 
             if(strlen($CustomerEnteredOTP)==6)
                 {
@@ -22,12 +23,13 @@
                         {
                             $customer_role = 'customer';
 
-                            $sql = "INSERT INTO USER_TABLE(USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                            VALUES(:customerUsername, :customer_role, :customerFirstname, :customerLastname, :customerEmail, :customerGender, :customer_password, :customerBirthDate, :customerAddress, :customerPhone)";
+                            $sql = "INSERT INTO USER_TABLE(USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                            VALUES(USER_S.NEXTVAL, :customerImage, :customerUsername, :customer_role, :customerFirstname, :customerLastname, :customerEmail, :customerGender, :customer_password, :customerBirthDate, :customerAddress, :customerPhone)";
                             
                             $check = oci_parse($conn, $sql);
                             
                             // bind parameters to statement
+                            oci_bind_by_name($check, ':customerImage', $customerImage);
                             oci_bind_by_name($check, ':customerUsername', $customerUsername);
                             oci_bind_by_name($check, ':customer_role', $customer_role);
                             oci_bind_by_name($check, ':customerFirstname', $customerFirstname);
