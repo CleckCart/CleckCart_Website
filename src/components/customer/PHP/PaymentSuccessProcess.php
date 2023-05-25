@@ -117,7 +117,7 @@
                         <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
                         <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
                     </tr>';
-                $queryTraderProduct = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$productShopId'";
+                $queryTraderProduct = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$productShopId' AND PRODUCT_ID = '$orderProductId'";
                 $resultTraderProduct = oci_parse($conn, $queryTraderProduct);
                 oci_execute($resultTraderProduct);
                 while($rowTraderProduct = oci_fetch_array($resultTraderProduct, OCI_ASSOC)){
@@ -183,6 +183,6 @@
         oci_bind_by_name($resultUpdateCollectionSlot, ":SlotStatus", $SlotStatus);
         oci_execute($resultUpdateCollectionSlot);
 
-        //header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
+        header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
     }
     ?>

@@ -86,8 +86,18 @@
         </nav>
     </div>
         <div class="container-fluid text-center mb-5">
-        <h1 class = "mt-5 text-success">OUR PRODUCTS</h1>
-    </div>
+            <h1 class = "mt-5 text-success">OUR PRODUCTS</h1>
+        </div>
+        <div class="container mb-5">
+            <form class="d-flex mt-5" role="search" method = 'POST' action = "./ShopNowSearch.php">
+                <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search" value="<?php
+              if (isset($_POST['searchProduct'])) {
+                   echo (trim($_POST['searchProduct']));
+                }
+              ?>">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">
             <?php
