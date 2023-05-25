@@ -101,7 +101,7 @@
                         <img src="./../../../dist/public/logo.png" alt="logo" style = "width:450px; height:450px;">
                         <div class = "row mt-5">
                             <div class = "col text-center">
-                                <?php echo("<h1 class = 'fs-6'>Returning Customer? <a class='text-reset text-decoration-none' href='./CustomerCheckoutLogin.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>Log In</a></h1>")?>
+                                <?php echo("<h1 class = 'fs-6'>Returning Customer? <a class='text-success' href='./CustomerCheckoutLogin.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>Log In</a></h1>")?>
                             </div>
                         </div>
                     </div>
@@ -214,7 +214,7 @@
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                         </div>
-                        <input type="submit" class="btn btn-primary w-100 " name="customerRegisterSubmit" value="Register">
+                        <input type="submit" class="btn btn-success w-100 " name="customerRegisterSubmit" value="Register">
                     </div>
                 </form>
             </div>
@@ -224,53 +224,65 @@
 
     <!--footer-->
     <footer>
-    <div class = "container-fluid bg-secondary">
+        <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Cleck Cart</h3>
-                                    <h5 class = "mt-5">Satisfy your cravings, with local farm savings</h5>
-                            </div>
-                            <div class="d-flex flex-row flex-wrap p-2 align-self-center">
-                                <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><img src="./../../../dist/public/twitter.svg" alt="twitter"></a>
-                                <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><img src="./../../../dist/public/facebook.svg" alt="facebook"></a>
-                                <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><img src="./../../../dist/public/instagram.svg" alt="instagram"></a>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Cleck Cart</h3>
+                            <h5 class="mt-4">Satisfy your cravings, with local farm savings.</h5>
+                            <h6>&#169; 2023 CleckCart. All rights reserved.</h6>
                         </div>
+                        <div class="d-flex flex-row flex-wrap p-2 align-self-center">
+                            <a class="nav-link p-3" href="https://twitter.com/" target="_blank"><i class="fa-brands fa-twitter fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.facebook.com/" target="_blank"><i class="fa-brands fa-facebook fa-2xl" style="color: #ffffff;"></i></a>
+                            <a class="nav-link p-3" href="https://www.instagram.com/" target="_blank"><i class="fa-brands fa-instagram fa-2xl" style="color: #ffffff;"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Join Us</h3>
-                                    <h5 class = "mt-5">Sell on CleckCart</h5>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Join Us</h3>
+                            <a href="./../../trader/PHP/TraderRegisterPage.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-5">Sell on CleckCart</h5>
+                            </a>
+                            <a href="./Register.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-3">Buy from CleckCart</h5>
+                            </a>
                         </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Help</h3>
-                                    <h5 class = "mt-5">Pick Up Information</h5>
-                                    <h5 class = "mt-2">Lorem ipsum</h5>
-                                    <h5 class = "mt-2">Lorem ipsum</h5>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Help</h3>
+                            <a href="./Contact.php" class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mt-4 mb-3">Contact Us</h5>
+                            </a>
+                            <a href="#" class='text-decoration-none text-light'>
+                                <h5 class="mb-3">Back to top</h5>
+                            </a>
+                            <a class='text-decoration-none text-light' target="_blank">
+                                <h5 class="mb-3">Opens From<br> 10:00 - 19:00</h5>
+                            </a>
                         </div>
+                    </div>
                 </div>
-                <div class="col mt-5 text-center">
-                        <div class="d-flex flex-column bd-highlight mb-3">
-                            <div class="p-2 bd-highlight">
-                                    <h3 class = "mt-5">Send Us a message</h3>
-                            </div>
-                            <div class="p-2 bd-highlight">
-                                <a class="nav-link text-reset text-decoration-none"  href="#"><img src="./../../../dist/public/location.svg" alt="twitter"> lorem ipsum </a>
-                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/call.svg" alt="call"> lorem ipsum </a>
-                                <a class="nav-link text-reset text-decoration-none" href="#"><img src="./../../../dist/public/message.svg" alt="instagram"> lorem ipsum </a>
-                            </div>
+                <div class="col mt-2 text-center">
+                    <div class="d-flex flex-column bd-highlight mb-3">
+                        <div class="p-2 bd-highlight">
+                            <h3 class="mt-5">Send Us a message</h3>
                         </div>
+                        <div class="p-2 bd-highlight text-center">
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-location-dot fa-xl" style="color: #ffffff;"></i>&nbsp;Cleckhuddersfax, UK </a>
+                            <a class="nav-link text-reset text-decoration-none"><i class="fa-solid fa-phone fa-xl" style="color: #ffffff;"></i>&nbsp;01632 960315 </a>
+                            <a class="nav-link text-reset text-decoration-none" href="https://mail.google.com/?" target="_blank"><i class="fa-regular fa-envelope fa-xl" style="color: #ffffff;"></i>&nbsp;cleckcart@gmail.com </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </div>
+        </div>
 
     </footer>
 </body>
