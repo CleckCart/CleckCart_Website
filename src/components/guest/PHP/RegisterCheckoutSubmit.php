@@ -127,23 +127,7 @@
                                                                                                     </body>
                                                                                                     </html>';
                                                                                                     $mail->send();
-                                                                                                    $_SESSION['VerifyOTP'] = $GenerateOTP;
-                                                                                                    $_SESSION['Username'] = $customerUsername;
-                                                                                                    $_SESSION['Firstname'] = $customerFirstname;
-                                                                                                    $_SESSION['Lastname'] = $customerLastname;
-                                                                                                    $_SESSION['Birthdate'] = $customerBirthDate;
-                                                                                                    $_SESSION['Email'] = $customerEmail;
-                                                                                                    $_SESSION['Gender']= $customerGender;
-                                                                                                    $_SESSION['Phone']= $customerPhone;
-                                                                                                    $_SESSION['Address']= $customerAddress;
-                                                                                                    $_SESSION['Password']= $customer_password;
-
-                                                                                                    $_SESSION['cartId']= $guestCartId;
-                                                                                                    $_SESSION['totalCartItems']= $productTotalQuantity;
-                                                                                                    $_SESSION['collectionDate']= $collectionDate;
-                                                                                                    $_SESSION['collectionTime']= $collectionTime;
-
-                                                                                                    header("Location: ./VerifyEmailOTP.php");
+                                                                                                    header("Location: ./VerifyEmailOTPCheckout.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime");
                                                                                                 }
                                                                                         }
                                                                                 }
