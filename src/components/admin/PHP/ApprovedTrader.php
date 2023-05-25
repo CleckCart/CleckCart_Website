@@ -10,7 +10,7 @@ if(isset($_GET['user'])){
     $approvedTraderId = $_GET['id'];
     if(isset($_GET['id'])&&isset($_GET['action']))
         {
-            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = $approvedTraderId";     
+            $FetchTraderQuery = "SELECT * FROM APPLY_TRADER WHERE APPLY_ID = '$approvedTraderId'";     
             $RunFetchQuery = oci_parse($conn, $FetchTraderQuery);
             oci_execute($RunFetchQuery);
             if($RunFetchQuery)
@@ -32,9 +32,8 @@ if(isset($_GET['user'])){
                     $Status = "No";
                     
                     $TraderInsertionQuery = "INSERT INTO USER_TABLE (USER_ID, IMAGE, USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                    VALUES(:TraderId, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
-                    $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);
-                    oci_bind_by_name($TraderRunInsertionQuery, ':TraderId', $Id);   
+                    VALUES(USER_S.NEXTVAL, :TraderImage, :TraderUserName, :TraderRole,:TraderFirstName, :TraderLastName, :TraderEmail, :TraderGender, :TraderPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                    $TraderRunInsertionQuery = oci_parse($conn, $TraderInsertionQuery);  
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderImage', $Image);
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderUserName', $Username);   
                     oci_bind_by_name($TraderRunInsertionQuery, ':TraderRole', $Role);                         

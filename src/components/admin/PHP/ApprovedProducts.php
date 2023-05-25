@@ -63,8 +63,7 @@
                     $StartDate = date('Y-m-d');
                     $EndDate = date('Y-m-d', strtotime($StartDate . ' +1 week'));
                     $OfferStatus = 'Y';
-                    // if($ProductDiscount!=0){
-                    // }
+
                         $DiscountInsertionQuery = "INSERT INTO OFFER (OFFER_ID, PRODUCT_ID, DISCOUNT, START_DATE, END_DATE, OFFER_STATUS)
                         VALUES(OFFER_S.NEXTVAL, $ProductId, $ProductDiscount, :StartDate, :EndDate, :OfferStatus)";
                         $RunDiscountInsertionQuery = oci_parse($conn, $DiscountInsertionQuery);
@@ -86,7 +85,7 @@
                         $ShopOwnerUsername= $ShopRow['SHOP_OWNER'];
             
                         //here error not taking the username and not executing
-                        $FetchEmailQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$ShopOwnerUsername' AND WHERE ROLE = 'trader'";
+                        $FetchEmailQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$ShopOwnerUsername' AND ROLE = 'trader'";
                         $RunFetchEmailQuery = oci_parse($conn, $FetchEmailQuery);
                         //not executing
                         oci_execute($RunFetchEmailQuery);
