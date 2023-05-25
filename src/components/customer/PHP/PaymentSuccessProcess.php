@@ -51,7 +51,7 @@
         $mail->Subject = 'Order Confirmation #' . $orderId . ' : Purchase Successfully Made!'; //subject of the email for the receiver
         $mail->Body = 'Dear '. $user .',<br><br>I hope this email finds you well. 
                         This is to confirm you that the total amount paid for your recent order with us. We greatly appreciate your business and want to ensure that all payment details are accurate.
-                        The total amount paid for your ORDER ID : '. $orderId .' , is &pound;' .$productTotalPrice. '.<br><br>
+                        The total amount paid for your <b>ORDER ID : '. $orderId .'</b> , is <b>&pound;' .$productTotalPrice. '</b>.<br><br>
                         Please review the payment information provided and feel free to contact us if you have any questions or concerns. We are committed to providing you with excellent service and want to ensure your complete satisfaction.<br><br>
                         Thank you for choosing CleckCart. We value your trust and look forward to serving you again in the future.<br><br>
                         Warm regards,<br><br>
@@ -71,6 +71,7 @@
             oci_execute($resultProductStock);
             while($rowProductStock = oci_fetch_array($resultProductStock, OCI_ASSOC)){
                 $productName = $rowProductStock['PRODUCT_NAME'];
+                $productPrice = $rowProductStock['PRODUCT_PRICE'];
                 $productStock = $rowProductStock['PRODUCT_STOCK'];
                 $productShopId = $rowProductStock['SHOP_ID'];
 
@@ -94,6 +95,47 @@
                 $resultUpdateProductStock = oci_parse($conn, $queryUpdateProductStock);
                 oci_bind_by_name($resultUpdateProductStock, ":productStock", $newProductStock);
                 oci_execute($resultUpdateProductStock);
+
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                $mail->Password = 'jqmuadhegtgyetci'; //app password
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = '465';
+                $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                $mail->addAddress($traderEmail); //reciever's email
+                $mail->isHTML(true);
+                $mail->Subject = 'Product Sold Notification and Receipt'; //subject of the email for reciever
+                $tableContent = 'Dear ' . ucfirst($traderFirstName) . ',<br><br>
+                Great news! Your products ordered by ORDER ID #' . $orderId . ' has been sold on our website. Congratulations!<br><br>
+                Thank you for choosing our platform to showcase and sell your product. We have successfully processed the order and will handle the fulfillment process promptly.<br><br>
+                <table style="border-collapse: collapse; width: 100%;">
+                    <tr>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Product</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
+                        <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+                    </tr>';
+                $queryTraderProduct = "SELECT * FROM PRODUCT WHERE SHOP_ID = '$productShopId'";
+                $resultTraderProduct = oci_parse($conn, $queryTraderProduct);
+                oci_execute($resultTraderProduct);
+                while($rowTraderProduct = oci_fetch_array($resultTraderProduct, OCI_ASSOC)){
+                $productName = $rowTraderProduct['PRODUCT_NAME'];
+                $productPrice = $rowTraderProduct['PRODUCT_PRICE'];
+                $tableContent .= '<tr>
+                        <td style="border: 1px solid #ddd; padding: 8px;">' . $productName . '</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">&pound;' . $productPrice . '</td>
+                        <td style="border: 1px solid #ddd; padding: 8px;">' . $orderProductQuantity . '</td>
+                        </tr>';
+                }
+                $tableContent .= '</table><br><br>
+                If you have any questions or require further assistance, please don\'t hesitate to contact us. We are here to support you.<br><br>
+                Best regards,<br><br>
+                CleckCart';
+                $mail->Body = $tableContent;
+                $mail->send();
+
 
                 //send notification if product level is low to the respected trader
                 if($newProductStock <= 1){
@@ -141,6 +183,6 @@
         oci_bind_by_name($resultUpdateCollectionSlot, ":SlotStatus", $SlotStatus);
         oci_execute($resultUpdateCollectionSlot);
 
-        header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
+        //header("Location:./PaymentSuccess.php?user=$user&orderId=$orderId&amount=$productTotalPrice");
     }
     ?>
