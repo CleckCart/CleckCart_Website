@@ -57,7 +57,7 @@
                                                                             
                                                                             else
                                                                                 {
-
+                                                                                    header("Location:./ProfilePage.php?user=$user&error=Failed to upload an image.");
                                                                                 }    
                                                                         }
                                                                     else

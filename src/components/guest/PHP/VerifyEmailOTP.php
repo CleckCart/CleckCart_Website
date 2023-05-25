@@ -1,22 +1,24 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CustomerLoginPage</title>
-    <link rel = "icon" href = "./../../../dist/public/logo.png" sizes = "16x16 32x32" type = "image/png">
-    <link rel="stylesheet" href="../../../dist/CSS/bootstrap.css">
+    <title>Enter OTP</title>
+    <!--WebPage Icon-->
+    <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
+    <link rel="stylesheet" href="./../../../dist/CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/homepage.css">
 </head>
+
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src = "../../service/passwordVisibility.js"></script>
-
+    <script src="../../service/passwordVisibility.js"></script>
     <?php
-            include('./connect.php');
-        ?>
-                <!--NavBar-->
-                <div class="topbar">
+    include('./connect.php');
+    ?>
+            <!--NavBar-->
+    <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -69,7 +71,7 @@
                                 <i class="fa-regular fa-user fa-lg text-white"></i>
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php" >Log In Customer</a></li>
+                                <li><a class="dropdown-item text-success" href="./CustomerLogin.php">Log In Customer</a></li>
                                 <li>
                                     <hr class="dropdown-divider text-success">
                                 </li>
@@ -77,7 +79,7 @@
                             </ul>
                         </li>
                         <li class="nav-item me-5">
-                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white" ></i></a>
+                            <a class="nav-link" href="./Checkout.php"><i class="fa-solid fa-cart-shopping fa-lg text-white"></i></a>
                         </li>
                     </ul>
 
@@ -85,60 +87,43 @@
             </div>
         </nav>
     </div>
-
-    <div class = "container">
-        <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
-            <div class = "col bg-success">
-                    <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
+    <div class="container bg-light border rounded mt-5 mb-5">
+        <div class = "row m-4 p-4 g-4 text-center ">
+            <div class="row ">
+                <h1>Enter Your OTP</h1>
             </div>
-            <div class = "col">
-                <form method = "POST" action = "./CustomerLoginSubmit.php">
-                    <div class = "mb-3">
-                        <h1 class = "text-center">Welcome to CleckCart</h1>
-                    </div>
-                    <?php
-                        if(isset($_GET['error'])) {?>
-                        <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
-                    <?php }?>
-                    <?php
-                        if(isset($_GET['success'])) {?>
-                        <div class='alert alert-success text-center' role='success'><?php echo($_GET['success']);?></div>
-                    <?php }?>
-                            
-                    <div class="mb-3 ">
-                        <label for="exampleInputText1" class="form-label">Username</label>
-                        <input type="text" class="form-control" placeholder="Enter Username" aria-label="Username" name = "CustomerLoginUsername" value = "<?php
-                            if(isset($_POST['CustomerLoginUsername'])){
-                                echo(trim($_POST['CustomerLoginUsername']));
-                            }
-                        ?>">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="text" class="form-control" placeholder="Enter Password" aria-label="Password" name = "CustomerLoginPassword" value = "<?php
-                            if(isset($_POST['CustomerLoginPassword'])){
-                                echo(trim($_POST['CustomerLoginPassword']));
-                            }
-                        ?>">
-                        <p class = "text-end"><a href = "./Forgotpassword.php" class="text-success">Forgot Password?</a></p>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-success w-100" name = "CustomerLoginSubmit" value="Login">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                    </div>
-                    <div class = "mb-3">
-                        <p>New Here? <a href = "./Register.php" class="text-success">Create an account</a></p>
-                    </div>
-                    </div>
-                </form>
+            <div class="row p-3 ">
+                <h6 class="text-muted">Please enter the OTP you received in your mail.</h6>
             </div>
         </div>
+        <div class = "row">
+                <div class="col-sm-4 "></div>
+                <div class="col-sm-4">
+                    <form method = "POST" action = "./VerifyEmailOtpProcess.php">
+                        <?php
+                            if(isset($_GET['error'])) {?>
+                            <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                        <?php }?>
+                        <?php
+                            if(isset($_GET['success'])) {?>
+                            <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                        <?php }?>
+                        
+                            <div class="mb-3 col">
+                                <label for="exampleInputText1" class="form-label">Enter OTP</label>
+                                <input type="number" class="form-control" placeholder="123456" aria-label="OTP" name = "CustomerOTP">
+                                
+                            </div>
+                            <div class="mb-3 col mt-4">
+                                <input type="submit" class="btn btn-success w-100" name = "CustomerVerify" value="Verify">
+                            </div>             
+                    </form>
+                </div>
+            </div>
+            
     </div>
-
+    <div class="container mt-5">&nbsp;</div>
+    <div class="container mt-5">&nbsp;</div>
     <footer>
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
