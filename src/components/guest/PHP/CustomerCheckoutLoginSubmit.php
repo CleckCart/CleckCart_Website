@@ -1,4 +1,5 @@
 <?php
+    session_start();
     if(isset($_GET['cartId']) && isset($_GET['totalCartItems']) && isset($_GET['collectionDate']) && isset($_GET['collectionTime'])){
         $guestCartId = $_GET['cartId'];
         $productTotalQuantity = $_GET['totalCartItems'];
@@ -10,6 +11,12 @@
 include('./connectSession.php');
  /*Check if form is submitted*/
  if(isset($_POST['CustomerLoginSubmit'])){
+
+    $guestCartId = $_SESSION['cartId'];
+    $productTotalQuantity = $_SESSION['totalCartItems'];
+    $collectionDate = $_SESSION['collectionDate'];
+    $collectionTime = $_SESSION['collectionTime'];
+
     /*Check if all fields are filled*/ 
     if (empty($_POST['CustomerLoginUsername']) || empty($_POST['CustomerLoginPassword'])){
         header("Location:./CustomerCheckoutLogin.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime&error=Please make sure all text fields are not empty.");

@@ -118,7 +118,7 @@
                                                                                                     </body>
                                                                                                     </html>';
                                                                                                     $mail->send();
-                                                                                                    header("Location: ./VerifyEmailOtp.php");
+                                                                                                    header("Location: ./VerifyEmailOTP.php");
                                                                                                     $_SESSION['VerifyOTP'] = $GenerateOTP;
                                                                                                     $_SESSION['Username'] = $customerUsername;
                                                                                                     $_SESSION['Firstname'] = $customerFirstname;

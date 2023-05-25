@@ -16,6 +16,13 @@
     <script src="../../service/passwordVisibility.js"></script>
     <?php
     include('./connect.php');
+    include('../../trader/PHP/connect.php');
+    if(isset($_GET['cartId']) && isset($_GET['totalCartItems']) && isset($_GET['collectionDate']) && isset($_GET['collectionTime'])){
+        $guestCartId = $_GET['cartId'];
+        $productTotalQuantity = $_GET['totalCartItems'];
+        $collectionDate = $_GET['collectionDate'];
+        $collectionTime = $_GET['collectionTime'];
+    }
     ?>
             <!--NavBar-->
     <div class="topbar">
