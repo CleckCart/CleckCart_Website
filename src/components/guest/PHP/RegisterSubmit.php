@@ -1,4 +1,7 @@
 <?php
+        session_start();
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
         /*Check if form is submitted*/
         if (isset($_POST['customerRegisterSubmit'])) {
             include('../../trader/PHP/connect.php');
@@ -31,8 +34,7 @@
                                             if (!empty($_POST['customerBirthDate']))
                                                 {
                                                     if(strlen($customerPhone)>=10 && strlen($customerPhone) < 12) 
-                                                        {
-                                                            
+                                                        {                                                           
                                                             /*Check if password and confirm password matches*/
                                                             if(strcmp($customerPassword,$customerConfirmPassword)==0)
                                                                 {
@@ -40,36 +42,96 @@
                                                                     /*Check if password has 6 - 10 characters, 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character.*/
                                                                     if(preg_match($passwordPattern, $customerPassword))
                                                                         {
-                                                                        /*For inserting into database*/
-                                                                            $customer_role = 'customer';
+                                                                            $GenerateOTP=rand(100000,999999);  
+                                                                            /*For inserting into database*/
                                                                             $customer_password = md5($customerPassword);
                                             
-                                                                            $sql = "INSERT INTO USER_TABLE(USERNAME, ROLE, FIRST_NAME, LAST_NAME, EMAIL, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                            VALUES(:customerUsername, :customer_role, :customerFirstname, :customerLastname, :customerEmail, :customerGender, :customer_password, :customerBirthDate, :customerAddress, :customerPhone)";
-                                                                            
-                                                                            $check = oci_parse($conn, $sql);
-                                            
-                                                                            // bind parameters to statement
-                                                                            oci_bind_by_name($check, ':customerUsername', $customerUsername);
-                                                                            oci_bind_by_name($check, ':customer_role', $customer_role);
-                                                                            oci_bind_by_name($check, ':customerFirstname', $customerFirstname);
-                                                                            oci_bind_by_name($check, ':customerLastname', $customerLastname);
-                                                                            oci_bind_by_name($check, ':customerEmail', $customerEmail);
-                                                                            oci_bind_by_name($check, ':customerGender', $customerGender);
-                                                                            oci_bind_by_name($check, ':customer_password', $customer_password);
-                                                                            oci_bind_by_name($check, ':customerBirthDate', $customerBirthDate);
-                                                                            oci_bind_by_name($check, ':customerAddress', $customerAddress);
-                                                                            oci_bind_by_name($check, ':customerPhone', $customerPhone);
-                                            
-                                                                            // execute statement
-                                                                            $result = oci_execute($check);
-                                                                            if ($result) {
-                                                                                header('Location:./Register.php?success=Registration Success!');
+                                                                            $UsernameQuery = "SELECT * FROM USER_TABLE WHERE USERNAME='$customerUsername'";
+                                                                            $RunUsernameQuery = oci_parse($conn, $UsernameQuery);
+                                                                            oci_execute($RunUsernameQuery);
+                                                                            if(oci_fetch_assoc($RunUsernameQuery))
+                                                                                {
+                                                                                    header('Location: ./Register.php?error=Username is taken.');
+                                                                                }
                                                                                 
-                                                                            } else {
-                                                                                header('Location:./Register.php?error=Username, Email or Phonenumber already exists');
-                                                                                
-                                                                            }
+                                                                            else
+                                                                                {
+                                                                                        
+                                                                                    $EmailQuery = "SELECT * FROM USER_TABLE WHERE EMAIL='$customerEmail'";
+                                                                                    $RunEmailQuery = oci_parse($conn, $EmailQuery);
+                                                                                    oci_execute($RunEmailQuery);
+                                                                                    if(oci_fetch_assoc($RunEmailQuery))
+                                                                                        {
+                                                                                            header('Location: ./Register.php?error=Email is taken.');
+                                                                                        }
+                                                                                        
+                                                                                    else
+                                                                                        {
+                                                                                            $PhoneQuery = "SELECT * FROM USER_TABLE WHERE PHONE_NUMBER='$customerPhone'";
+                                                                                            $RunPhoneQuery = oci_parse($conn, $PhoneQuery);
+                                                                                            oci_execute($RunPhoneQuery);
+                                                                                            if(oci_fetch_assoc($RunPhoneQuery))
+                                                                                                {
+                                                                                                    header('Location: ./Register.php?error=Phonenumber is taken.');
+                                                                                                }
+                                                                                                
+                                                                                            else
+                                                                                                {
+                                                                                                    require '../../../mail/phpmailer/src/Exception.php';
+                                                                                                    require '../../../mail/phpmailer/src/PHPMailer.php';
+                                                                                                    require '../../../mail/phpmailer/src/SMTP.php';
+                                                                                                    
+                                                                                                    $mail = new PHPMailer(true);
+                                                                                                    
+                                                                                                    $mail->isSMTP();
+                                                                                                    $mail->Host = 'smtp.gmail.com';
+                                                                                                    $mail->SMTPAuth = true;
+                                                                                                    $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                                                                                                    $mail->Password = 'jqmuadhegtgyetci'; //app password
+                                                                                                    $mail->SMTPSecure = 'ssl';
+                                                                                                    $mail->Port = '465';
+                                                                                                    
+                                                                                                    $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                                                                                                    $mail->addAddress($customerEmail); //reciever's email
+                                                                                                    $mail->isHTML(true);
+                                                                                                    $mail->Subject = 'CleckCart, Verify Your Email!'; //subject of the email for reciever
+                                                                                                    $mail->Body='<html>
+                                                                                                    <head>
+                                                                                                        <style>
+                                                                                                            .container{padding: 5vh;}
+                                                                                                            .heading{text-align: center;color: rgb(129, 127, 127);}
+                                                                                                            .line{border: 1px solid rgb(68, 68, 68);}
+                                                                                                        </style>
+                                                                                                    </head>
+                                                                                                    <body>
+                                                                                                        <div class="container">
+                                                                                                            <div class="heading">
+                                                                                                                <h1>One Time Password</h1>
+                                                                                                            </div>
+                                                                                                            <hr class="line">
+                                                                                                            <div class="content">
+                                                                                                                <p>Dear User, Please use OTP:</p>
+                                                                                                                <h2>'.$GenerateOTP.'</h2>
+                                                                                                                <br>Warm regards,<br>CleckCart
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </body>
+                                                                                                    </html>';
+                                                                                                    $mail->send();
+                                                                                                    header("Location: ./VerifyEmailOtp.php");
+                                                                                                    $_SESSION['VerifyOTP'] = $GenerateOTP;
+                                                                                                    $_SESSION['Username'] = $customerUsername;
+                                                                                                    $_SESSION['Firstname'] = $customerFirstname;
+                                                                                                    $_SESSION['Lastname'] = $customerLastname;
+                                                                                                    $_SESSION['Birthdate'] = $customerBirthDate;
+                                                                                                    $_SESSION['Email'] = $customerEmail;
+                                                                                                    $_SESSION['Gender']= $customerGender;
+                                                                                                    $_SESSION['Phone']= $customerPhone;
+                                                                                                    $_SESSION['Address']= $customerAddress;
+                                                                                                    $_SESSION['Password']= $customer_password;
+                                                                                                }
+                                                                                        }
+                                                                                }
 
                                                                         }
                                                                     else
