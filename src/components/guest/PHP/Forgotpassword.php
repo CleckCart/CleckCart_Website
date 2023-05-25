@@ -55,7 +55,7 @@
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fa-lg text-white"></i></a>
+                            <a class="nav-link" href="./ShopNow.php"><i class="fa-solid fa-magnifying-glass fa-lg text-white"></i></a>
                         </li>
                         <li class="nav-item me-3">
                             <a class="nav-link" href="./WishList.php"><i class="fa-regular fa-heart fa-lg text-white"></i></a>
@@ -112,12 +112,12 @@
                         
                         
                             <div class="mb-3 col mt-4">
-                                <input type="submit" class="btn btn-primary w-100" name = "CustomerEmailSubmit" value="Reset Password">
+                                <input type="submit" class="btn btn-success w-100" name = "CustomerEmailSubmit" value="Reset Password">
                             </div>
                        
                         
                             <div class="mb-3 col mt-3">
-                            <p class = "text-muted mb-5">Back to Login? <a href = "./CustomerLogin.php" class="link-dark">Customer Login</a> Or <a href="../../trader/PHP/TraderLogin.php" class="link-dark">Trader Login</a></p>
+                            <p class = "text-muted mb-5">Back to Login? <a href = "./CustomerLogin.php" class="link-dark text-success">Customer Login</a> Or <a href="../../trader/PHP/TraderLogin.php" class="link-dark text-success">Trader Login</a></p>
                             </div>
                         
         
