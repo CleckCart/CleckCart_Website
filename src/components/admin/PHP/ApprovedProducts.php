@@ -113,7 +113,7 @@
                     $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
-                    $mail->Subject = 'Subject: Approval of Your Product Listing'; //subject of the email for reciever
+                    $mail->Subject = 'Approval of Your Product Listing'; //subject of the email for reciever
                     $mail->Body = 'Dear '.$ShopOwnerUsername.',<br><br>
                     We are pleased to inform you that your product has been approved to be listed on our website. Congratulations!<br><br>
                     Our team has carefully reviewed your product and determined that it meets our quality standards and aligns with our target audience\'s preferences. We believe that your product will be a valuable addition to our platform and will attract considerable interest from our customers.<br><br>

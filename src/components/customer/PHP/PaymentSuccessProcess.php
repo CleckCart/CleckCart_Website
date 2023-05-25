@@ -108,9 +108,9 @@
                         $mail->setFrom('cleckcart@gmail.com'); //sender's email address
                         $mail->addAddress($traderEmail); //reciever's email
                         $mail->isHTML(true);
-                        $mail->Subject = 'Urgent: Low Product Inventory Alert'; //subject of the email for reciever
-                        $mail->Body = 'Dear ' . $traderFirstName.',
-                        We hope this email finds you well. We wanted to bring to your attention that the inventory level of your Product : '. $productName .' on our website is currently low. It is essential to ensure an adequate stock level to meet the demands of our customers and maximize sales opportunities.<br><br>
+                        $mail->Subject = 'Urgent: Low Product Stock Alert'; //subject of the email for reciever
+                        $mail->Body = 'Dear ' . ucfirst($traderFirstName).',<br><br>
+                        We hope this email finds you well. We wanted to bring to your attention that the inventory level of your Product : <b>'. ucfirst($productName) .'</b> on our website is currently low. It is essential to ensure an adequate stock level to meet the demands of our customers and maximize sales opportunities.<br><br>
                         We highly recommend reviewing and replenishing your product inventory as soon as possible to avoid any potential loss of sales. This will help maintain a positive customer experience and ensure that your products remain available for purchase.<br><br>
                         Should you require any assistance or have any questions regarding inventory management or restocking, please do not hesitate to contact our support team. We are here to support you and provide guidance throughout the process.<br><br>
                         Thank you for your attention to this matter. We appreciate your partnership and look forward to your prompt action in restocking your products.<br><br>

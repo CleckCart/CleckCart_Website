@@ -43,7 +43,7 @@ if(isset($_GET['user'])){
                     $mail->addAddress($Email); //reciever's email
                     $mail->isHTML(true);
                     $mail->Subject = 'Trading Rejection Notice'; //subject of the email for reciever
-                    $mail->Body = 'Dear '.$Username.',<br><br>We regret to inform you that we are unable to accommodate the sale of your products on our website as another seller already offers similar products.<br><br>
+                    $mail->Body = 'Dear '.$Username.',<br><br>We regret to inform you that we are unable to accept your request to be a trader on our website as another trader already offers similar products.<br><br>
                     Thank you for your interest in our platform. We apologize for any inconvenience caused.<br><br>
                     Best regards,<br><br>
                     CleckCart'; //message for the reciever

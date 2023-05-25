@@ -20,6 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <!--Custom-->
     <script src="../../service/sidebartoggle.js"></script>
+    <script src="../../service/passwordVisibility.js"></script>
 </head>
 <body>
 <?php
@@ -111,11 +112,11 @@
         <div class="row pt-5 ps-5 pe-5">
           <label for="current-password">Current Password</label>
           <div class="input-group mt-3">
-            <input type="password" id="current-password" name="currentPassword" placeholder="Enter Current Password" value="<?php
+            <input type="password" name="currentPassword" placeholder="Enter Current Password" value="<?php
               if (isset($_POST['currentPassword'])) {
                   echo (trim($_POST['currentPassword']));
                 }
-            ?>" class="form-control" id="password3"><br >
+            ?>" class="form-control" id="password3"><br>
             <span class = "input-group-text" id="togglePassword">
                   <i class="fa-solid fa-eye" aria-hidden = "true" id = "eye3" onclick = "toggle3()"></i>
               </span>
@@ -125,7 +126,7 @@
         <div class="row pt-5 ps-5 pe-5">
           <label for="new-password">New Password</label>
           <div class="input-group mt-3">
-            <input type="password" id="new-password" name="newPassword" placeholder = "Enter New Password" value="<?php
+            <input type="password" name="newPassword" placeholder = "Enter New Password" value="<?php
               if (isset($_POST['newPassword'])) {
                 echo (trim($_POST['newPassword']));
               }
@@ -139,7 +140,7 @@
         <div class="row pt-5 ps-5 pe-5">
           <label for="confirm-new-password">Confirm New Password</label>
           <div class="input-group mt-3">
-            <input type="password" id="confirm-new-password" name="confirmnewPassword" placeholder = "Re-enter New Password" value="<?php
+            <input type="password" name="confirmnewPassword" placeholder = "Re-enter New Password" value="<?php
               if (isset($_POST['confirmnewPassword'])) {
                 echo (trim($_POST['confirmnewPassword']));
               }
