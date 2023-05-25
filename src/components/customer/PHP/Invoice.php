@@ -64,7 +64,7 @@
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <?php echo("<a class='nav-link' href='#'><i class='fa-solid fa-magnifying-glass fa-lg text-white'></i></a>"); ?>
+                        <?php echo("<a class='nav-link' href='./ShopNow.php?user=$user'><i class='fa-solid fa-magnifying-glass fa-lg text-white'></i></a>"); ?>
                         </li>
                         <li class="nav-item me-3">
                             <?php echo("<a class='nav-link' href='./WishList.php?user=$user'><i class='fa-regular fa-heart fa-lg text-white'></i></a>"); ?>
@@ -159,7 +159,7 @@
                     echo ("
                     <tr>
                     <td>$productId</td>
-                    <td>$productImage</td>
+                    <td><img src='./../../../dist/public/TraderItemImages/$productImage' alt='image' width='90'height='80' style='object-fit:contain;'></td>
                     <td>$productName</td>
                     <td>$productQuantity</td>
                     <td>&pound;$productPrice</td>
