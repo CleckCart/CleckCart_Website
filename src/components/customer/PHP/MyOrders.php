@@ -60,7 +60,7 @@
 
                     <ul class="d-flex mb-2 mb-lg-0 list-unstyled">
                         <li class="nav-item me-3">
-                            <?php echo("<a class='nav-link' href='#'><i class='fa-solid fa-magnifying-glass fa-lg text-white'></i></a>"); ?>
+                        <?php echo("<a class='nav-link' href='./ShopNow.php?user=$user'><i class='fa-solid fa-magnifying-glass fa-lg text-white'></i></a>"); ?>
                         </li>
                         <li class="nav-item me-3">
                             <?php echo("<a class='nav-link' href='./WishList.php?user=$user'><i class='fa-regular fa-heart fa-lg text-white'></i></a>"); ?>
@@ -155,7 +155,7 @@
                                         if(!empty($slotStatus)){
                                                 echo("<tr>
                                                 <td>$ProductRow[PRODUCT_IMAGE]</td>
-                                                <td>$ProductRow[PRODUCT_NAME]</td>
+                                                <td><img src='./../../../dist/public/TraderItemImages/$ProductRow[PRODUCT_IMAGE]' alt='image' width='90'height='80' style='object-fit:contain;'></td>
                                                 <td>$ProductRow[CATEGORY_NAME]</td>
                                                 <td>$ProductRow[PRODUCT_DESCRIPTION]</td>");
 
