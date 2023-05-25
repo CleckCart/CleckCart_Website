@@ -90,12 +90,12 @@
         </div>
         <div class="container mb-5">
             <form class="d-flex mt-5" role="search" method = 'POST' action = "./ShopNowSearch.php">
-                <input class="form-control me-2 text-center" type="search" placeholder="Search" aria-label="Search" value="<?php
+                <input class="form-control me-2 text-center" type="search" name="SearchProduct" placeholder="Search" aria-label="Search" value="<?php
               if (isset($_POST['searchProduct'])) {
                    echo (trim($_POST['searchProduct']));
                 }
               ?>">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+                <button class="btn btn-success" type="submit">Search</button>
             </form>
         </div>
     <div class = "container-fluid p-5">
