@@ -23,6 +23,7 @@
                     $TraderPassword = trim(filter_input(INPUT_POST, 'TraderPassword', FILTER_SANITIZE_STRING));
                     $TraderConfirmPassword = trim(filter_input(INPUT_POST, 'TraderConfirmPassword', FILTER_SANITIZE_STRING));
                     $TraderRole = 'trader';
+                    $TraderImage = $TraderFirstName . '.jpg';
                     
                     /*Check if username is of 5-30 characters*/
                     if(strlen($TraderUserName) >= 5 && strlen($TraderUserName) <= 30)
@@ -45,9 +46,11 @@
                                                                         {
                                                                             $TraderEncryptedPassword = md5($TraderPassword);
                                                                         /*For inserting into database*/
-                                                                            $query = "INSERT INTO APPLY_TRADER (APPLY_ID, USERNAME, FIRST_NAME, LAST_NAME, EMAIL, SHOP_CATEGORY, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
-                                                                                    VALUES(APPLY_TRADER_S.NEXTVAL, :TraderUserName, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderShopCategory, :TraderGender, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
+                                                                            $query = "INSERT INTO APPLY_TRADER (APPLY_ID, IMAGE, USERNAME, FIRST_NAME, LAST_NAME, EMAIL, SHOP_CATEGORY, GENDER, PASSWORD, DATE_OF_BIRTH, ADDRESS, PHONE_NUMBER)
+                                                                                    VALUES(APPLY_TRADER_S.NEXTVAL, :TraderImage, :TraderUserName, :TraderFirstName, :TraderLastName, :TraderEmail, :TraderShopCategory, :TraderGender, :TraderEncryptedPassword, :TraderBirthDate, :TraderAddress , :TraderPhoneNumber)";
                                                                             $result = oci_parse($conn, $query);
+
+                                                                            oci_bind_by_name($result, ':TraderImage', $TraderImage);
                                                                             oci_bind_by_name($result, ':TraderUserName', $TraderUserName);                           
                                                                             oci_bind_by_name($result, ':TraderFirstName', $TraderFirstName);
                                                                             oci_bind_by_name($result, ':TraderLastName', $TraderLastName);
