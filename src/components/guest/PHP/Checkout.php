@@ -180,7 +180,7 @@
                                 $currentHour = date('H');
 
                                 // Define the available time slots
-                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-19:00'];
+                                $timeSlots = ['10:00-13:00', '13:00-16:00', '16:00-22:00'];
 
                                 // Determine which time slot to disable
                                 $disabledTimeSlots = [];
