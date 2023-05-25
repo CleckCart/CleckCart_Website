@@ -73,57 +73,58 @@
                         oci_bind_by_name($RunDiscountInsertionQuery, ':OfferStatus', $OfferStatus);
                         oci_execute($RunDiscountInsertionQuery);
    
-                    $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$approvedProductId'";     
-                    $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
-                    oci_execute($RunFetchProductQuery);
-                    $ProductRow = oci_fetch_array($RunFetchProductQuery, OCI_ASSOC);
-                    $ShopId = $ProductRow['SHOP_ID'];
-        
-                    $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_ID='$ShopId'";     
-                    $RunFetchShopQuery = oci_parse($conn, $FetchShopQuery);
-                    oci_execute($RunFetchShopQuery);
-                    $ShopRow = oci_fetch_array($RunFetchShopQuery, OCI_ASSOC);
-                    $ShopOwnerUsername= $ShopRow['SHOP_OWNER'];
-        
-                    $FetchEmailQuery = "SELECT * FROM USER_TABLE WHERE USERNAME=:ShopOwnerUsername";     
-                    $RunFetchEmailQuery = oci_parse($conn, $FetchEmailQuery);
-                    oci_bind_by_name($RunFetchEmailQuery, ':ShopOwnerUsername', $ShopOwnerUsername);
-                    oci_execute($RunFetchEmailQuery);
-                    $EmailRow = oci_fetch_array($RunFetchEmailQuery, OCI_ASSOC);
-                    $Email= $EmailRow['EMAIL'];
-
-                    $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
-                    $DeleteQuery = oci_parse($conn, $sql);
-                    oci_execute($DeleteQuery);                   
-
-                    require '../../../mail/phpmailer/src/Exception.php';
-                    require '../../../mail/phpmailer/src/PHPMailer.php';
-                    require '../../../mail/phpmailer/src/SMTP.php';
-
-                    $mail = new PHPMailer(true);
+                        $FetchProductQuery = "SELECT * FROM PRODUCT WHERE PRODUCT_ID='$approvedProductId'";     
+                        $RunFetchProductQuery = oci_parse($conn, $FetchProductQuery);
+                        oci_execute($RunFetchProductQuery);
+                        $ProductRow = oci_fetch_assoc($RunFetchProductQuery);
+                        $ShopId = $ProductRow['SHOP_ID'];
             
-                    $mail->isSMTP();
-                    $mail->Host = 'smtp.gmail.com';
-                    $mail->SMTPAuth = true;
-                    $mail->Username = 'cleckcart@gmail.com'; //sender's email address
-                    $mail->Password = 'jqmuadhegtgyetci'; //app password
-                    $mail->SMTPSecure = 'ssl';
-                    $mail->Port = '465';
+                        $FetchShopQuery = "SELECT * FROM SHOP WHERE SHOP_ID='$ShopId'";     
+                        $RunFetchShopQuery = oci_parse($conn, $FetchShopQuery);
+                        oci_execute($RunFetchShopQuery);
+                        $ShopRow = oci_fetch_assoc($RunFetchShopQuery);
+                        $ShopOwnerUsername= $ShopRow['SHOP_OWNER'];
             
-                    $mail->setFrom('cleckcart@gmail.com'); //sender's email address
-                    $mail->addAddress($Email); //reciever's email
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Approval of Your Product Listing'; //subject of the email for reciever
-                    $mail->Body = 'Dear '.$ShopOwnerUsername.',<br><br>
-                    We are pleased to inform you that your product has been approved to be listed on our website. Congratulations!<br><br>
-                    Our team has carefully reviewed your product and determined that it meets our quality standards and aligns with our target audience\'s preferences. We believe that your product will be a valuable addition to our platform and will attract considerable interest from our customers.<br><br>
-                    We will proceed with the necessary steps to ensure your product is promptly listed on our website. Once live, it will be showcased prominently, giving it the visibility it deserves.<br><br>
-                    Thank you for choosing our platform to showcase your product. We look forward to a successful partnership and the opportunity to contribute to your business\'s growth.<br><br>
-                    If you have any further questions or require assistance, please do not hesitate to reach out to us. We are here to support you every step of the way.<br><br>
-                    Best regards,<br><br>
-                    CleckCart'; //message for the reciever
-                    $mail->send();
-                    header("Location:AdminApproveTraderItemPage.php?user=$user&success=Product has been approved.");       
+                        //here error not taking the username and not executing
+                        $FetchEmailQuery = "SELECT * FROM USER_TABLE WHERE USERNAME = '$ShopOwnerUsername' AND WHERE ROLE = 'trader'";
+                        $RunFetchEmailQuery = oci_parse($conn, $FetchEmailQuery);
+                        //not executing
+                        oci_execute($RunFetchEmailQuery);
+                        $EmailRow = oci_fetch_assoc($RunFetchEmailQuery);
+                        $Email= $EmailRow['EMAIL'];
+
+                        $sql = "DELETE FROM APPLY_PRODUCT WHERE APPLY_PRODUCT_ID = $approvedProductId";     
+                        $DeleteQuery = oci_parse($conn, $sql);
+                        oci_execute($DeleteQuery);                   
+
+                        require '../../../mail/phpmailer/src/Exception.php';
+                        require '../../../mail/phpmailer/src/PHPMailer.php';
+                        require '../../../mail/phpmailer/src/SMTP.php';
+
+                        $mail = new PHPMailer(true);
+                
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.gmail.com';
+                        $mail->SMTPAuth = true;
+                        $mail->Username = 'cleckcart@gmail.com'; //sender's email address
+                        $mail->Password = 'jqmuadhegtgyetci'; //app password
+                        $mail->SMTPSecure = 'ssl';
+                        $mail->Port = '465';
+                
+                        $mail->setFrom('cleckcart@gmail.com'); //sender's email address
+                        $mail->addAddress($Email); //reciever's email
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Approval of Your Product Listing'; //subject of the email for reciever
+                        $mail->Body = 'Dear '.$ShopOwnerUsername.',<br><br>
+                        We are pleased to inform you that your product has been approved to be listed on our website. Congratulations!<br><br>
+                        Our team has carefully reviewed your product and determined that it meets our quality standards and aligns with our target audience\'s preferences. We believe that your product will be a valuable addition to our platform and will attract considerable interest from our customers.<br><br>
+                        We will proceed with the necessary steps to ensure your product is promptly listed on our website. Once live, it will be showcased prominently, giving it the visibility it deserves.<br><br>
+                        Thank you for choosing our platform to showcase your product. We look forward to a successful partnership and the opportunity to contribute to your business\'s growth.<br><br>
+                        If you have any further questions or require assistance, please do not hesitate to reach out to us. We are here to support you every step of the way.<br><br>
+                        Best regards,<br><br>
+                        CleckCart'; //message for the reciever
+                        $mail->send();
+                        header("Location:AdminApproveTraderItemPage.php?user=$user&success=Product has been approved.");       
                     }
                 }
         }
