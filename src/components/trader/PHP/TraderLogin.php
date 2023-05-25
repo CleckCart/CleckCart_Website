@@ -96,6 +96,10 @@
                         if(isset($_GET['error'])) {?>
                         <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
                     <?php }?>
+                    <?php
+                        if(isset($_GET['success'])) {?>
+                        <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
+                    <?php }?>
                     <div class = "mb-3">
                         <h1 class = "text-center">Welcome to CleckCart</h1>
                     </div>
