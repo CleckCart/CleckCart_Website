@@ -7,8 +7,7 @@
     }
 ?>
 <?php
-    session_start();
-    include('connect.php');
+    include('connectSession.php');
     if(isset($_POST['CustomerVerify']))
         {
             $CustomerEnteredOTP = $_POST['CustomerOTP'];
@@ -50,24 +49,8 @@
                             oci_bind_by_name($check, ':customerPhone', $customerPhone);
                             oci_execute($check);
                             //  session need to be started here //
+                            
                             header("Location:./LoginToInvoice.php?user=$customerUsername&cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime&error=Invalid Credentials");
-                            // header("Location:./CustomerCheckoutSession.php?user=$customerUsername&cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime");
-                            // execute statement
-                            // $result = oci_execute($check);
-                            // if ($result) {
-                            //     $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$customerUsername' AND PASSWORD = '$customerPassword' AND ROLE ='$customer_role'";
-                            //     $result = oci_parse($conn, $query);
-                            //     oci_execute($result);
-                            //     // Fetch the result
-                            //     $row = oci_fetch_array($result, OCI_ASSOC);
-                            //     if ($row) {
-                            //         // If the user is found, create a session
-                            //         $_SESSION['UserRole'] = $customerRole;
-                            //     }
-                            //     else{
-                            //         $_SESSION['error'] = 'Invalid Credentials!';
-                            //     }
-                            // }
                         }
                     else
                         {
