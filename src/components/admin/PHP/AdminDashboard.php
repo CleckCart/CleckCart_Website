@@ -186,6 +186,7 @@
           </div>
         </div>
         <div class="col-sm-2"></div>
+        
         <div class="col-sm-4">
           <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
           <i class="fa-solid fa-cart-plus fa-lg m-3"></i>
