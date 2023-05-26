@@ -178,7 +178,7 @@
             $id = $row['PRODUCT_ID'];
             $name = $row['PRODUCT_NAME'];
 
-            $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
+            $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id ORDER BY PRODUCT_ID";
             $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
             oci_execute($RunDiscountQuery);
             if($Row = oci_fetch_assoc($RunDiscountQuery))
@@ -248,5 +248,4 @@
 
 
 </body>
-
 </html>
