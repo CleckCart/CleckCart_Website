@@ -104,7 +104,7 @@
         <?php }?>
         <div class="row px-5 ">
             <div class="col-sm-8 ">
-                <h1 class="h1 text-start">My Cart</h1>
+                <h1 class="h1 text-start text-success display-4">My Cart</h1>
             </div>
             <div class="col-sm-4 "></div>
         </div>
@@ -116,11 +116,11 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th class = 'text-center'><h2 class="h4">Name</h4></th>
-                            <th class = 'text-center'><h2 class="h4">Price</h4></th>
-                            <th class = 'text-center'><h2 class="h4">Quantity</h4></th>
-                            <th class = 'text-center'><h2 class="h4">Action</h4></th>
+                            <th class = 'text-start text-success'><h2 class="h4">Image</h4></th>
+                            <th class = 'text-start text-success'><h2 class="h4">Name</h4></th>
+                            <th class = 'text-start text-success'><h2 class="h4">Price</h4></th>
+                            <th class = 'text-center text-success'><h2 class="h4">Quantity</h4></th>
+                            <th class = 'text-center text-success'><h2 class="h4">Action</h4></th>
                         </tr>
                     </thead>
 
@@ -170,7 +170,7 @@
                 echo("<form method = 'POST' action = './CheckoutVerify.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity'>");
                 ?>
                     <div class="row text-center ">
-                        <h4>Collection Slot</h4>
+                        <h4 class = "text-success">Collection Slot</h4>
                     </div>
                         <div class="row border pb-4 bg-light rounded pt-3">
                             <div class="col-sm-6 px-4 ">
@@ -201,14 +201,14 @@
                                 }
                                 ?>
 
-                            <input type="date" class = "w-75" id="selected_date" name="day" required min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
+                            <input type="date" class = "w-75 text-success" id="selected_date" name="day" required min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
 
                             </div>
                             <div class="col-sm-6 px-4 bg-light">
-                                <h6 class="py-2">Time</h6>
+                                <h6 class="py-2 text-success">Time</h6>
 
 
-                                <div class="form-check">
+                                <div class="form-check text-success">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name = "time" value = "10:00-13:00" id="10-check" <?php if (in_array("10:00-13:00", $disabledTimeSlots)) echo ('disabled'); ?>>
                                             <label class="form-check-label" for="10-check">
@@ -232,7 +232,7 @@
                             </div>
                         </div>
                         <div class="row text-center py-4 border my-4 mb-5 bg-light rounded">
-                            <h5>Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
+                            <h5 class = "text-success">Sub Total: &pound;<?php echo($productTotalPrice) ?></h5>
                             <input type = "submit" class = "btn btn-success w-50 d-block mx-auto" value = "Checkout" name = "CollectionDateSubmit"/>
                         </div>
             </div>

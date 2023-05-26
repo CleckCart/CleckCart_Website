@@ -92,6 +92,8 @@
         <div class="container-fluid text-center mb-5">
             <h1 class = "mt-5 text-success">OUR PRODUCTS</h1>
         </div>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
         <div class="container mb-5">
             <?php echo("<form class='d-flex mt-5' role='search' method = 'POST' action = './ShopNowSearch.php?user=$user'>") ?>
                 <input class="form-control me-2 text-center" type="search" name="SearchProduct" placeholder="Search" aria-label="Search" value="<?php
@@ -194,14 +196,14 @@
                 
             ?>
         </div>
-        
+        <div class = "container mt-5">&nbsp;</div>
     </div>
     
 
 
     <!--footer-->
     <footer>
-        <div class="container-fluid bg-success" style="color: white;">
+        <div class="container-fluid bg-success " style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">
                     <div class="d-flex flex-column bd-highlight mb-3">

@@ -115,10 +115,12 @@
                 </div>
                 <div class = "container-fluid mb-5 mt-5 ">
                     <div class="row row-cols-1 row row-cols-lg-1 g-4 p-3">
-                            <div id="paypal-payment-button">
+                            <div class = "m-5 w-75" id="paypal-payment-button">
+                            </div>
+                            <div class = "m-3 w-75">
                             </div>
                             <!-- <button type="button" class="btn btn-primary btn-lg btn-block border-0 " id = "paypal-payment-button" style = "background-color: #ffff33; height: 200px"><img src = "../../../dist/public/paypal.png" alt = "paypal"/></button> -->
-                            <button type="button" class="btn btn-primary border-0 w-50 " id = "stripeButton" onclick = "showToast()" style = " background-image: url('../../../dist/public/stripe-background.png')">
+                            <button type="button" class="btn btn-primary w-75 m-5" id = "stripeButton" onclick = "showToast()" style = " background-image: url('../../../dist/public/stripe-background.png')">
                             <img src = "../../../dist/public/stripe.png" alt = "stripe"/></button>
                     </div>
                 </div>

@@ -88,7 +88,7 @@
     </div>
 
     <div class = "container-fluid mt-5">
-        <h1 class="text-center mt-5">Our Categories</h1>
+        <h1 class="text-center mt-5 text-success">OUR CATEGORIES</h1>
         <div class="row row-cols-2 row-cols-md-5 g-4">
             <a class="nav-link p-5" href="./CategoryView.php?category=bakery">
                 <div class="col mt-5 text-center">

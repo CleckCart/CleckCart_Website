@@ -16,7 +16,7 @@
             include('./connect.php');
         ?>
                 <!--NavBar-->
-                <div class="topbar">
+    <div class="topbar">
         <nav class="navbar navbar-expand-lg navbar-light bg-my-custom-color bg-success">
             <div class="container-fluid">
                 <a class="navbar-brand" href="./HomePage.php">
@@ -202,7 +202,6 @@
                 </div>
             </div>
         </div>
-
     </footer>
 </body>
 </html>

@@ -8,7 +8,7 @@
         $collectionDate = $_GET['date'];
         $collectionTime = $_GET['time'];
 
-        $todayDate = date("m/d/Y");
+        $todayDate = date("m-d-Y");
 
         $query = "SELECT * FROM CART_PRODUCT WHERE CART_ID = $cartId";
         $result = oci_parse($conn, $query);
