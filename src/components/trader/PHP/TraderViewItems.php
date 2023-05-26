@@ -134,7 +134,7 @@
           }
 
 
-          $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID";
+          $query = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID ORDER BY PRODUCT_ID";
           $result = oci_parse($conn, $query);
           oci_execute($result);
           echo("<thead class=table-success>

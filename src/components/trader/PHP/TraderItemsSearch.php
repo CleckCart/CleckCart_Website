@@ -134,7 +134,7 @@
           }
           
           $ProductName=strtolower(trim(filter_input(INPUT_POST, 'searchProduct', FILTER_SANITIZE_STRING)));
-          $SearchProductQuery = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID AND PRODUCT_NAME LIKE '%' || :ProductName || '%'";
+          $SearchProductQuery = "SELECT * FROM PRODUCT WHERE SHOP_ID = $shopID AND PRODUCT_NAME LIKE '%' || :ProductName || '%' ORDER BY PRODUCT_ID";
           $RunSearchProductQuery = oci_parse($conn, $SearchProductQuery);
           oci_bind_by_name($RunSearchProductQuery,':ProductName', $ProductName);
           oci_execute($RunSearchProductQuery);
@@ -159,7 +159,7 @@
           
             do {
               $id = $row['PRODUCT_ID'];
-              $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id";
+              $DiscountQuery = "SELECT * FROM OFFER WHERE PRODUCT_ID=$id ";
               $RunDiscountQuery = oci_parse($conn, $DiscountQuery);
               oci_execute($RunDiscountQuery);
               if($Row = oci_fetch_assoc($RunDiscountQuery))
