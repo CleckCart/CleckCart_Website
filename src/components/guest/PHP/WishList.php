@@ -102,16 +102,16 @@
                 <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
             <?php }?>
             <div class="row table-responsive">
-                <h1 class="text-start mt-5">My WishList</h1>
+                <h1 class="text-start mt-5 display-4 text-success">My WishList</h1>
                 <div class="container-fluid px-5 mt-5">
 
                     <table class="table table-hover mt-2">
                         <thead>
                             <tr>
-                                <th class = "text-center"><h3 class="h3">Image</h3></th>
-                                <th class = "text-center"><h3 class="h3">Product</h3></th>
-                                <th class = "text-end"><h3 class="h3">Price</h3></th>
-                                <th class = "text-center"><h3 class="h3">Action</h3></th>
+                                <th class = "text-center text-success"><h3 class="h3">Image</h3></th>
+                                <th class = "text-center text-success"><h3 class="h3">Product</h3></th>
+                                <th class = "text-end text-success"><h3 class="h3">Price</h3></th>
+                                <th class = "text-center text-success"><h3 class="h3">Action</h3></th>
                             </tr>
                         </thead>
     
@@ -174,6 +174,8 @@
     
                         ?>
                     </table>
+                    <div class = "container mt-5">&nbsp;</div>
+                    <div class = "container mt-5">&nbsp;</div>
                 </div>
             </div>
                 <!-- Delete Modal -->
