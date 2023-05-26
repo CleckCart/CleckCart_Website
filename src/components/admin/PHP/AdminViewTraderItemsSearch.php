@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdminViewTrader'sItems</title>
+  <title>Search Items</title>
   <link rel="icon" href="./../../../dist/public/logo.png" sizes="16x16 32x32" type="image/png">
   <!--font awesome CSS-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -75,7 +75,7 @@
     </li>
     <li class="nav-item">
       <?php
-        echo("<a href='#' class='nav-link text-dark'>
+        echo("<a href='http://localhost:8080/apex/f?p=108:LOGIN_DESKTOP:6262924551559:::::' class='nav-link text-dark'>
         <i class='fa fa-line-chart m-3 fa-fw fa-lg m-3'></i>Sales Report
       </a>")
       ?>
