@@ -95,7 +95,7 @@
     <div class = "container">
         <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
             <div class = "col bg-success">
-                    <img src = "../../../dist/public/2.jpg" class = "w-100 h-100"/>
+                <img src = "../../../dist/public/welcomeCustomer.jpg" class = "w-100 h-100 img-thumbnail"/>
             </div>
             <div class = "col">
                 <?php echo("<form method = 'POST' action = './CustomerCheckoutLoginSubmit.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime'>")?>
