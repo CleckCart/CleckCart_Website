@@ -30,17 +30,34 @@
             oci_execute($resultGuestFetchCart);
             while($rowGuestFetchCart = oci_fetch_assoc($resultGuestFetchCart)){
                 $guestCartId = $rowGuestFetchCart['GUEST_CART_ID'];
-                //Inserting Cart items in Cart Product
-                $queryCartProduct = "INSERT INTO GUEST_CART_PRODUCT(GUEST_CART_PRODUCT_ID, GUEST_CART_ID, PRODUCT_ID, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QUANTITY) 
-                VALUES (GUEST_CART_PRODUCT_S.NEXTVAL, :guestCartId, :productId, :productImage, :productName, :productPrice, :productQuantity)";
-                $resultCartProduct = oci_parse($conn, $queryCartProduct);
-                oci_bind_by_name($resultCartProduct, ':guestCartId', $guestCartId);
-                oci_bind_by_name($resultCartProduct, ':productId', $productId);
-                oci_bind_by_name($resultCartProduct, ':productImage', $productImage);
-                oci_bind_by_name($resultCartProduct, ':productName', $productName);
-                oci_bind_by_name($resultCartProduct, ':productPrice', $discountedPrice);
-                oci_bind_by_name($resultCartProduct, ':productQuantity', $productQuantity);
-                oci_execute($resultCartProduct);
+
+                $queryGuestFetchCartProduct = "SELECT * FROM GUEST_CART_PRODUCT WHERE PRODUCT_ID = '$productId' AND GUEST_CART_ID = '$guestCartId'";
+                $resultGuestFetchCartProduct = oci_parse($conn, $queryGuestFetchCartProduct);
+                oci_execute($resultGuestFetchCartProduct);
+                while($rowGuestFetchCartProduct = oci_fetch_assoc($resultGuestFetchCartProduct)){
+                    $guestCarProducttId = $rowGuestFetchCartProduct['GUEST_CART_ID'];
+                }
+
+                if(empty($guestCarProducttId)){
+                    //Inserting Cart items in Cart Product
+                    $queryCartProduct = "INSERT INTO GUEST_CART_PRODUCT(GUEST_CART_PRODUCT_ID, GUEST_CART_ID, PRODUCT_ID, PRODUCT_IMAGE, PRODUCT_NAME, PRODUCT_PRICE, PRODUCT_QUANTITY) 
+                    VALUES (GUEST_CART_PRODUCT_S.NEXTVAL, :guestCartId, :productId, :productImage, :productName, :productPrice, :productQuantity)";
+                    $resultCartProduct = oci_parse($conn, $queryCartProduct);
+                    oci_bind_by_name($resultCartProduct, ':guestCartId', $guestCartId);
+                    oci_bind_by_name($resultCartProduct, ':productId', $productId);
+                    oci_bind_by_name($resultCartProduct, ':productImage', $productImage);
+                    oci_bind_by_name($resultCartProduct, ':productName', $productName);
+                    oci_bind_by_name($resultCartProduct, ':productPrice', $discountedPrice);
+                    oci_bind_by_name($resultCartProduct, ':productQuantity', $productQuantity);
+                    oci_execute($resultCartProduct);
+                }
+                else{
+                    $queryCartProduct = "UPDATE GUEST_CART_PRODUCT SET PRODUCT_QUANTITY=:productQuantity WHERE PRODUCT_ID = '$productId' AND GUEST_CART_ID = '$guestCarProducttId'";
+                    $resultCartProduct = oci_parse($conn, $queryCartProduct);
+                    oci_bind_by_name($resultCartProduct, ":productQuantity", $productQuantity);
+                    oci_execute($resultCartProduct);
+                    echo($productQuantity);
+                }
             }
             header("Location:./DiscountProductDetail.php?id=$productId&name=$productName&description=$productDescription&image=$productImage&price=$productPrice&newPrice=$discountedPrice&stock=$productStock&quantity=$productQuantity&success=Added to Cart");
         }
