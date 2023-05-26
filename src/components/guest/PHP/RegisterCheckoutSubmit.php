@@ -1,5 +1,4 @@
 <?php
-    include('../../trader/PHP/connect.php');
     if(isset($_GET['cartId']) && isset($_GET['totalCartItems']) && isset($_GET['collectionDate']) && isset($_GET['collectionTime'])){
         $guestCartId = $_GET['cartId'];
         $productTotalQuantity = $_GET['totalCartItems'];
@@ -18,7 +17,7 @@
             if (empty($_POST['customerUsername']) || empty($_POST['customerFirstname']) || empty($_POST['customerLastname']) || empty($_POST['customerEmail']) 
             || empty($_POST['customerPhone']) || empty($_POST['customerAddress']) || empty($_POST['customerPassword']) || empty($_POST['customerConfirmPassword'])) 
                 {
-                    header('Location:./Register.php?error=Please make sure all text fields are not empty.');
+                    header("Location:./Register.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime&error=Please make sure all text fields are not empty.");
                 }
             else
                 {
@@ -127,6 +126,16 @@
                                                                                                     </body>
                                                                                                     </html>';
                                                                                                     $mail->send();
+                                                                                                    $_SESSION['VerifyOTP'] = $GenerateOTP;
+                                                                                                    $_SESSION['Username'] = $customerUsername;
+                                                                                                    $_SESSION['Firstname'] = $customerFirstname;
+                                                                                                    $_SESSION['Lastname'] = $customerLastname;
+                                                                                                    $_SESSION['Birthdate'] = $customerBirthDate;
+                                                                                                    $_SESSION['Email'] = $customerEmail;
+                                                                                                    $_SESSION['Gender']= $customerGender;
+                                                                                                    $_SESSION['Phone']= $customerPhone;
+                                                                                                    $_SESSION['Address']= $customerAddress;
+                                                                                                    $_SESSION['Password']= $customer_password;
                                                                                                     header("Location: ./VerifyEmailOTPCheckout.php?cartId=$guestCartId&totalCartItems=$productTotalQuantity&collectionDate=$collectionDate&collectionTime=$collectionTime");
                                                                                                 }
                                                                                         }
