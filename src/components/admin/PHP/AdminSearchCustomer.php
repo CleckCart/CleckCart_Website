@@ -76,7 +76,7 @@
     </li>
     <li class="nav-item">
       <?php
-        echo("<a href='#' class='nav-link text-dark'>
+        echo("<a href='http://localhost:8080/apex/f?p=108:LOGIN_DESKTOP:6262924551559:::::' class='nav-link text-dark'>
         <i class='fa fa-line-chart m-3 fa-fw fa-lg m-3'></i>Sales Report
       </a>")
       ?>
