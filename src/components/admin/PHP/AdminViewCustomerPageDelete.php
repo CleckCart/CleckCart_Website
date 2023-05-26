@@ -6,6 +6,7 @@
 ?>
 <?php
   $deleteCustomerId = $_GET['id'];
+  echo($deleteCustomerId);
   if(isset($_GET['id'])&&isset($_GET['action']))
     {
 
@@ -14,7 +15,6 @@
       oci_execute($resultCartId);
       $rowCartId = oci_fetch_assoc($resultCartId);
       $cartId = $rowCartId['CART_ID'];
-
       if($cartId){
         $queryCartProductId = "SELECT * FROM CART_PRODUCT WHERE CART_ID =  '$cartId'";
         $resultCartProductId = oci_parse($conn, $queryCartProductId);
@@ -29,16 +29,26 @@
         }
 
 
-        $queryOrderId = "SELECT * FROM ORDER_C WHERE ORDER_ID =  '$cartId'";
+        $queryOrderId = "SELECT * FROM ORDER_C WHERE CART_ID =  '$cartId'";
         $resultOrderId = oci_parse($conn, $queryOrderId);
         oci_execute($resultOrderId);
         $rowOrderId = oci_fetch_assoc($resultOrderId);
         $OrderId = $rowOrderId['ORDER_ID'];
 
         if($OrderId){
-          $DeletePayment = "DELETE FROM PAYMENT WHERE USER_ID = '$deleteCustomerId'";     
-          $RunPayment = oci_parse($conn, $DeletePayment);
-          oci_execute($RunPayment);
+
+          $queryPayement = "SELECT * FROM PAYMENT WHERE USER_ID =  '$deleteCustomerId'";
+          $resultPayement = oci_parse($conn, $queryPayement);
+          oci_execute($resultPayement);
+
+          while($rowPayement = oci_fetch_array($resultPayement, OCI_ASSOC)){
+            $paymentId = $rowPayement['PAYMENT_ID'];
+            if($paymentId){
+              $DeletePayment = "DELETE FROM PAYMENT WHERE PAYMENT_ID = '$paymentId'";     
+              $RunPayment = oci_parse($conn, $DeletePayment);
+              oci_execute($RunPayment);
+            }
+          };
 
           $DeleteCollectionSlot = "DELETE FROM COLLECTION_SLOT WHERE ORDER_ID = '$OrderId'";     
           $RunCollectionSlot = oci_parse($conn, $DeleteCollectionSlot);
@@ -47,6 +57,8 @@
           $DeleteOrderProduct = "DELETE FROM ORDER_PRODUCT WHERE ORDER_ID = '$OrderId'";     
           $RunOrderProduct = oci_parse($conn, $DeleteOrderProduct);
           oci_execute($RunOrderProduct);
+
+          echo($cartId);
 
           $DeleteOrder = "DELETE FROM ORDER_C WHERE CART_ID = '$cartId'";
           $RunOrder = oci_parse($conn, $DeleteOrder);
@@ -59,7 +71,7 @@
 
       }
 
-      $DeleteUserQuery = "DELETE FROM USER_TABLE WHERE USER_ID = '$deleteCustomerId'";     
+      $DeleteUserQuery = "DELETE FROM USER_TABLE WHERE USER_ID = '$deleteCustomerId' AND ROLE = 'customer' ";     
       $RunDeleteUserQuery = oci_parse($conn, $DeleteUserQuery);
       oci_execute($RunDeleteUserQuery);
       //header("Location:./AdminViewCustomerPage.php?user=$user&success= Customer has been deleted.");
