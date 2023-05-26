@@ -1,5 +1,5 @@
 <?php 
-session_start();
+include('./connectSession.php');
 $otp = rand(100000,999999);
 $_SESSION['otp'] = $otp;
 
@@ -17,7 +17,7 @@ use PHPMailer\PHPMailer\Exception;
 
 include('../../customer/PHP/connect.php');
 if (isset($_POST['CustomerEmailSubmit'])) {
-    include('./connectSession.php');
+    
 
     if (empty($_POST['CustomerRegisteredEmail'])) { {
             header('Location:./Forgotpassword.php?error=Please enter your email address before submitting ');
