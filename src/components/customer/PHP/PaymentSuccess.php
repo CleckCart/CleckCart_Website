@@ -112,7 +112,7 @@
                 <p>Paid By : <?php echo($user)?></p>
             </div>
             <div class = "col text-center">
-                <img src = "../../../dist/public/2.jpg" alt = "image"/>
+                <img src = "../../../dist/public/success.png" alt = "image"/>
             </div>
         </div>
         <div class = "container mt-5">&nbsp;</div>
