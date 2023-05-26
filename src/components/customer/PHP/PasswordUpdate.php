@@ -98,12 +98,19 @@
             </div>
         </nav>
     </div>
+    <?php
+    $query = "SELECT * FROM USER_TABLE WHERE USERNAME = '$user' AND ROLE='customer'";
+    $result = oci_parse($conn, $query);
+    oci_execute($result);
+        while($row = oci_fetch_array($result, OCI_ASSOC)){
+            $image = $row['IMAGE'];
+        }
+   ?>
     <div class="container bg-light border rounded mt-5 mb-5">
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-sm-3" style="margin-top:8vh">
-                <img src="../../../dist/public/3.jpg" class="rounded-circle pull-right" alt="profile pic" width="200" height="200">
-
+            <?php echo"<img src='./../../../dist/public/CustomerImages/$image' class='img-circle img-responsive img-thumbnail' alt='$image'>";?>
             </div>
             <div class="col-sm-4">
                 <div class="row " style="margin-top:3vh;margin-bottom:1vh;">

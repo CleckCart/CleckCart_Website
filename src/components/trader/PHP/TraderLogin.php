@@ -88,7 +88,7 @@
     <div class = "container">
         <div class = "row row-cols-1 row-cols-lg-2 m-5 p-5 g-4">
             <div class = "col">
-                    <img src = "../../../dist/public/scene.jpg" class = "w-100 h-100 img-thumbnail"/>
+                <img src = "../../../dist/public/welcomeTrader.jpg" class = "w-100 h-100 img-thumbnail"/>
             </div>
             <div class = "col">
                 <form method = "POST" action = "./TraderLoginSubmit.php">
