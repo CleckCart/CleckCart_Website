@@ -93,26 +93,10 @@
 </div>
 <!-- End vertical navbar -->
 <?php
-  // $TraderQuery = "SELECT COUNT(*) AS TRADER_NO FROM USER_TABLE WHERE ROLE='trader'";
-  // $RunTraderQuery = oci_parse($conn, $TraderQuery);
-  // oci_execute($RunTraderQuery);
-  // $NumberOfTraders = oci_fetch_assoc($RunTraderQuery)['TRADER_NO'];
-
-  // $CustomerQuery = "SELECT COUNT(*) AS CUSTOMER_NO FROM USER_TABLE WHERE ROLE='customer'";
-  // $RunCustomerQuery = oci_parse($conn, $CustomerQuery);
-  // oci_execute($RunCustomerQuery);
-  // $NumberOfCustomers = oci_fetch_assoc($RunCustomerQuery)['CUSTOMER_NO'];
-
   $ProductQuery = "SELECT COUNT(*) AS PRODUCT_NO FROM PRODUCT WHERE SHOP_ID='$shopID'";
   $RunProductQuery = oci_parse($conn, $ProductQuery);
   oci_execute($RunProductQuery);
   $NumberOfProducts = oci_fetch_assoc($RunProductQuery)['PRODUCT_NO'];
-
-  // $PaymentQuery = "SELECT COUNT(*) AS PAYMENT_NO FROM PAYMENT";
-  // $RunPaymentQuery = oci_parse($conn, $PaymentQuery);
-  // oci_execute($RunPaymentQuery);
-  // $NumberOfPayments = oci_fetch_assoc($RunPaymentQuery)['PAYMENT_NO'];
-
   ?>
 
 
@@ -124,18 +108,18 @@
   <!-- Demo content -->
   <!--Code -->
   <div class="container p-3">
-  <h2>Welcome! <?php echo $user ?></h2>
+  <h2 class="display-4"><b>Welcome! <?php echo $user ?></b></h2>
 
 <div class="container px-5 ">
   
 </div>
 <div class="container p-5 px-5 text-center ">
-  <h3>Current stats</h3>
+  <h3 class="display-6">Current stats</h3>
 </div>
 <div class="row">
   <div class="col-sm-1"></div>
   <div class="col-sm-4 ">
-    <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+    <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
     <i class='fa-solid fa-user fa-lg m-3'></i>
       <div class="card-body">
         <h5 class="card-title">REGISTERED PRODUCTS</h5>
@@ -146,7 +130,7 @@
   <div class="col-sm-2"></div>
   <div class="col-sm-4">
     
-    <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+    <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
     <i class='fa-solid fa-user fa-lg m-3'></i>
       <div class="card-body">
       <h5 class="card-title">APPROVED PRODUCTS</h5>

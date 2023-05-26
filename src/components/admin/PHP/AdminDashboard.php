@@ -146,15 +146,15 @@
     <div class="container p-3">
 
       <div class="container  pt-3 px-5 ">
-        <h2>Welcome! <?php echo $user ?></h2>
+        <h2 class="display-4"><b>Welcome! <?php echo $user ?></b></h2>
       </div>
       <div class="container p-5 px-5 text-center ">
-        <h3>Current stats</h3>
+        <h3 class="display-6">Current stats</h3>
       </div>
       <div class="row">
         <div class="col-sm-1"></div>
         <div class="col-sm-4 ">
-          <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+          <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
           <i class='fa-solid fa-user fa-lg m-3'></i>
             <div class="card-body">
               <h5 class="card-title">REGISTERED TRADERS</h5>
@@ -164,7 +164,7 @@
         </div>
         <div class="col-sm-2"></div>
         <div class="col-sm-4 ">
-          <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+          <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
           <i class='fa-solid fa-user fa-lg m-3'></i>
             <div class="card-body">
               <h5 class="card-title">REGISTERED CUSTOMERS</h5>
@@ -177,7 +177,7 @@
       <div class="row pt-5">
         <div class="col-sm-1"></div>
         <div class="col-sm-4">
-          <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+          <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
           <i class='fa-solid fa-square-check fa-lg m-3'></i>
             <div class="card-body">
               <h5 class="card-title">APPROVED PRODUCTS</h5>
@@ -188,7 +188,7 @@
         <div class="col-sm-2"></div>
         
         <div class="col-sm-4">
-          <div class="card text-center p-4" style="width: 20rem;background-color:#436e57;color:#f0f7f3;">
+          <div class="card text-center p-4 bg-success" style="width: 20rem;color:#f0f7f3;">
           <i class="fa-solid fa-cart-plus fa-lg m-3"></i>
             <div class="card-body">
               <h5 class="card-title">PAYMENTS</h5>
