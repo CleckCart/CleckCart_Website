@@ -92,7 +92,7 @@
     
     </div>
     <div class = "container-fluid text-center mt-5">
-        <h1 >Our Categories</h1>
+        <h1 class = "text-success">OUR CATEGORIES</h1>
     </div>
 
     <div class = "container-fluid">

@@ -100,23 +100,23 @@
         <div class="container-fluid">
             <?php
             if(isset($_GET['error'])) {?>
-                <div class='alert alert-danger text-center' role='alert'><?php echo($_GET['error']);?></div>
+                <div class='alert alert-danger text-center mt-5' role='alert'><?php echo($_GET['error']);?></div>
             <?php }?>
             <?php
             if(isset($_GET['success'])) {?>
                 <div class='alert alert-success text-center' role='alert'><?php echo($_GET['success']);?></div>
             <?php }?>
             <div class="row table-responsive">
-            <h1 class="text-start mt-5">My WishList</h1>
+            <h1 class="text-start mt-5 text-success display-4">My WishList</h1>
             <div class="container-fluid mt-5 px-5">
 
                 <table class="table table-hover mt-2">
                     <thead>
                         <tr>
-                            <th class = "text-center"><h3 class="h3">Image</h3></th>
-                            <th class = "text-center"><h3 class="h3">Product</h3></th>
-                            <th class = "text-end"><h3 class="h3">Price</h3></th>
-                            <th class = "text-center"><h3 class="h3">Action</h3></th>
+                            <th class = "text-center text-success"><h3 class="h3">Image</h3></th>
+                            <th class = "text-center text-success"><h3 class="h3">Product</h3></th>
+                            <th class = "text-end text-success"><h3 class="h3">Price</h3></th>
+                            <th class = "text-center text-success"><h3 class="h3">Action</h3></th>
                         </tr>
                     </thead>
                     <?php
@@ -187,6 +187,7 @@
                             echo("<div class='col-12 p-5'>");
                             echo("<div class='alert alert-danger text-center' role='alert'>No Products Found</div>");
                             echo("</div>");
+                            
                         }
                     }
                     else{
@@ -221,7 +222,8 @@
                 </div>
             </div>
         </div>
-        <div class = 'container'>&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
         <script>
         $('#exampleModalDelete').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal

@@ -92,9 +92,11 @@
     </div>
     
 
-    <div class="container-fluid text-center mb-5">
+        <div class="container-fluid text-center mb-5">
             <h1 class = "mt-5 text-success">OUR PRODUCTS</h1>
         </div>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
         <div class="container mb-5">
             <?php echo("<form class='d-flex mt-5' role='search' method = 'POST' action = './ShopNowSearch.php?user=$user'>") ?>
                 <input class="form-control me-2 text-center" type="search" name="SearchProduct" placeholder="Search" aria-label="Search" value="<?php
@@ -189,6 +191,7 @@
                 }
             ?>
         </div>
+        <div class = "container mt-5">&nbsp;</div>
     </div>
 
 

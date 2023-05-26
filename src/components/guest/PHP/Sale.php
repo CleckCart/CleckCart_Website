@@ -86,7 +86,12 @@
         </nav>
     </div>
         <div class="container-fluid text-center mb-5">
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
         <h1 class = "mt-5 text-success">PRODUCTS ON SALE</h1>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
     </div>
     <div class = "container-fluid p-5">
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">

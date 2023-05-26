@@ -94,7 +94,12 @@
         </nav>
     </div>
   <section class="product_page">
-  <?php echo ("<h2 class='product_page--title mt-5'>"); echo(strtoupper($productCategory)); echo(" PRODUCTS</h2>") ?>
+  <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
+  <?php echo ("<h2 class='product_page--title mt-5 text-success'>"); echo(strtoupper($productCategory)); echo(" PRODUCTS</h2>") ?>
+  <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
     <div class = "container-fluid p-5">
     
         <div class="row row-cols-1 row row-cols-md-2 row-cols-xl-4 g-2">

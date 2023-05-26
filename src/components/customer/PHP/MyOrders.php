@@ -45,12 +45,12 @@
                         </li>
 
                         <li class="nav-item me-5">
-                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>PRODUCT</a>"); ?>
+                        <?php echo("<a class='nav-link mr-3 text-light' href='./Sale.php?user=$user'>SALE</a>"); ?>
 
                         </li>
 
                         <li class="nav-item me-5">
-                            <?php echo("<a class='nav-link mr-3 text-light' href='./About.php?user=$user'>SALE</a>"); ?>
+                            <?php echo("<a class='nav-link mr-3 text-light' href='./About.php?user=$user'>ABOUT</a>"); ?>
                         </li>
 
                         <li class="nav-item me-5">
@@ -90,7 +90,10 @@
     </div>
 
     <div class = "container">
-            <h1 class="mb-4 mt-5">My Orders</h1>
+            <div class = "container mt-5">&nbsp;</div>
+            <h1 class="mb-4 mt-5 text-success">MY ORDERS</h1>
+            <div class = "container mt-5">&nbsp;</div>
+            <div class = "container mt-5">&nbsp;</div>
     </div>
     
     <?php
@@ -212,9 +215,13 @@
 
     ?>
     <div class = "container">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
+    <div class = "container mt-5">&nbsp;</div>
     
     <!--footer-->
-    <footer class="mt-5">
+    <footer class = "mt-5">
         <div class="container-fluid bg-success" style="color: white;">
             <div class="row row-cols-2 row-cols-md-4 g-4">
                 <div class="col mt-2 text-center">

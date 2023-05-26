@@ -115,6 +115,8 @@
                 <img src = "../../../dist/public/2.jpg" alt = "image"/>
             </div>
         </div>
+        <div class = "container mt-5">&nbsp;</div>
+        <div class = "container mt-5">&nbsp;</div>
         <?php echo("<a href = './HomePageSession.php?user=$user' class = 'btn btn-success w-100'>Continue Shopping</a>")?>
     </div>
 
