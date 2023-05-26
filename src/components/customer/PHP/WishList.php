@@ -182,6 +182,7 @@
                                 </td>
                                 </tr>";
                             }
+                            
                         }
                         else{
                             echo("<div class='col-12 p-5'>");
@@ -198,6 +199,7 @@
 
                     ?>
                 </table>
+                
             </div>
             </div>
                 <!-- Delete Modal -->
